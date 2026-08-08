@@ -1,5 +1,17 @@
 import { readFileSync } from "node:fs";
 
+function deepFreeze(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
+  Object.freeze(obj);
+  for (const key of Object.getOwnPropertyNames(obj)) {
+    const val = obj[key];
+    if (val !== null && typeof val === 'object' && !Object.isFrozen(val)) {
+      deepFreeze(val);
+    }
+  }
+  return obj;
+}
+
 /**
  * Frozen stable error codes for Contracts v1.
  *
@@ -8,9 +20,9 @@ import { readFileSync } from "node:fs";
  * SFC2xxx covers kernel-operation failures.
  */
 
-const ERROR_REGISTRY = JSON.parse(
+const ERROR_REGISTRY = deepFreeze(JSON.parse(
   readFileSync(new URL("./error-codes.json", import.meta.url), "utf8"),
-);
+));
 
 const CODE_INDEX = new Map(ERROR_REGISTRY.codes.map((entry) => [entry.code, entry]));
 

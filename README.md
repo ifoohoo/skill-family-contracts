@@ -5,7 +5,7 @@
 
 机器可执行工程结构和机制协议的唯一权威包（Contracts v1，冻结）。
 
-本包拥有：五类顶层对象的 JSON Schema、Kernel Protocol（内核协议）、稳定错误码、
+本包拥有：六类顶层对象的 JSON Schema、Kernel Protocol（内核协议）、稳定错误码、
 协议名/`$id` 登记表，以及九种有限机械检查类型与受限强制规则集。
 本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，
 工程命令由 Kit 承担，二者单向消费本包。
@@ -13,7 +13,7 @@
 Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.json`），
 按方言路由到对应 Ajv 类；不实现任何手写 Schema 子集解释器。
 
-## 五类顶层对象
+## 六类顶层对象
 
 | 对象 | `$id` | Schema 文件 |
 | --- | --- | --- |
@@ -22,6 +22,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 | `managed-file-lock` | `https://contracts.skill-family.example/v1/managed-file-lock.json` | `src/schemas/managed-file-lock.schema.json` |
 | `operation-request` | `https://contracts.skill-family.example/v1/operation-request.json` | `src/schemas/operation-request.schema.json` |
 | `operation-result` | `https://contracts.skill-family.example/v1/operation-result.json` | `src/schemas/operation-result.schema.json` |
+| `migration-manifest` | `https://contracts.skill-family.example/v1/migration-manifest.json` | `src/schemas/migration-manifest.schema.json` |
 
 所有 v1 Schema 使用 draft 2020-12 方言；实例信封统一为
 `schemaVersion: 1` + 唯一 `kind` 常量 + 各层 `additionalProperties: false`。
@@ -90,7 +91,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 ## Fixture
 
 `src/fixtures/<contract>/` 为每类合同提供正例（positive）、反例（negative）
-与方言边界（dialect-boundary）样例，共 23 个。每个 fixture 声明目标 Schema、
+与方言边界（dialect-boundary）样例，共 32 个。每个 fixture 声明目标 Schema、
 方言、策略与期望；反例期望携带稳定失败码。`verifyAllFixtures()` 机械重放全部期望，
 行为不符报 `SFC1010`。fixture 是完全虚构数据，不是审计 oracle。
 
@@ -125,14 +126,28 @@ import {
 
 ```sh
 npm install skill-family-contracts
+npm info skill-family-contracts --help
 ```
 
 ## 最小示例
 
 ```js
-// release-skill: validate a document against its registered schema
+// 从空目录运行：npm install skill-family-contracts
 import { validateDocument } from "skill-family-contracts";
-const result = validateDocument(doc, { schemaId: "project-manifest" });
+
+const document = {
+  schemaVersion: 1,
+  kind: "skill-family.project-manifest",
+  project: { id: "my-project", name: "My Project", description: "Example" },
+  contracts: { version: "1.0.0", profile: "generic" },
+  managedFiles: ["package.json"],
+  updatedAt: "2026-01-01T00:00:00Z",
+};
+
+const result = validateDocument(document, {
+  schemaId: "https://contracts.skill-family.example/v1/project-manifest.json",
+  dialect: "2020-12",
+});
 if (!result.valid) console.error(result.errorCode);
 ```
 

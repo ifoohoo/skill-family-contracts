@@ -110,10 +110,10 @@ function deepFreeze(value) {
  * - validationPolicies, supportedDialects: frozen engine parameters.
  */
 export function describeAuditSurface() {
-  const registry = loadRegistry();
-  const errorCodes = errorCodeRegistry();
+  const registry = structuredClone(loadRegistry());
+  const errorCodes = structuredClone(errorCodeRegistry());
   const rules = loadPackageJson("src/rules.json");
-  const kernelProtocol = loadKernelProtocol();
+  const kernelProtocol = structuredClone(loadKernelProtocol());
 
   const schemas = registry.schemas.map((entry) => {
     const document = loadPackageJson(entry.file);

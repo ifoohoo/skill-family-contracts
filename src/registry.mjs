@@ -1,6 +1,18 @@
 import { readFileSync } from "node:fs";
 import { ContractsError } from "./errors.mjs";
 
+function deepFreeze(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
+  Object.freeze(obj);
+  for (const key of Object.getOwnPropertyNames(obj)) {
+    const val = obj[key];
+    if (val !== null && typeof val === 'object' && !Object.isFrozen(val)) {
+      deepFreeze(val);
+    }
+  }
+  return obj;
+}
+
 /**
  * Protocol-name and schema-$id registry.
  *
@@ -10,9 +22,9 @@ import { ContractsError } from "./errors.mjs";
  * register* functions never mutate their input; they return an updated copy.
  */
 
-const REGISTRY = JSON.parse(
+const REGISTRY = deepFreeze(JSON.parse(
   readFileSync(new URL("./registry.json", import.meta.url), "utf8"),
-);
+));
 
 /** The frozen registry document as shipped. */
 export function loadRegistry() {

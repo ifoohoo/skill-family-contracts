@@ -1,6 +1,18 @@
 import { readFileSync } from "node:fs";
 import Ajv from "ajv";
 
+function deepFreeze(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
+  Object.freeze(obj);
+  for (const key of Object.getOwnPropertyNames(obj)) {
+    const val = obj[key];
+    if (val !== null && typeof val === 'object' && !Object.isFrozen(val)) {
+      deepFreeze(val);
+    }
+  }
+  return obj;
+}
+
 /**
  * Frozen v1 kernel protocol access: states, transitions, and the operation
  * vocabulary with per-operation params contracts.
@@ -10,9 +22,9 @@ import Ajv from "ajv";
  * -> SFC2003. Envelope validation itself is the operation-request schema's job.
  */
 
-const KERNEL = JSON.parse(
+const KERNEL = deepFreeze(JSON.parse(
   readFileSync(new URL("./kernel-protocol.json", import.meta.url), "utf8"),
-);
+));
 
 const paramsAjv = new Ajv({ allErrors: true, strict: true });
 const paramsValidators = new Map();
