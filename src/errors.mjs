@@ -17,7 +17,8 @@ function deepFreeze(obj) {
  *
  * The registry file (error-codes.json) is the single source of truth; codes are
  * append-only and never reused. SFC1xxx covers contracts-authority failures,
- * SFC2xxx covers kernel-operation failures.
+ * SFC2xxx covers kernel-operation failures, SFC3xxx covers report-contract
+ * failures (digest binding, mandatory elements, fact drift).
  */
 
 const ERROR_REGISTRY = deepFreeze(JSON.parse(

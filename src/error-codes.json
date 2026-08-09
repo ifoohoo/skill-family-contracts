@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "skill-family.contracts.error-codes",
-  "contractsVersion": "1.1.1",
+  "contractsVersion": "1.4.0",
   "policy": {
     "format": "^SFC[0-9]{4}$",
     "ranges": [
@@ -14,6 +14,11 @@
         "prefix": "SFC2",
         "category": "kernel",
         "note": "Kernel protocol operation errors."
+      },
+      {
+        "prefix": "SFC3",
+        "category": "report",
+        "note": "Report contract errors: digest binding, mandatory elements, fact drift. Style findings are never coded here; they are advisory output of the report check, not errors."
       }
     ],
     "stability": "Codes are append-only. A frozen code is never reused for a different meaning; a deprecated code stays reserved. New codes require a contracts change."
@@ -123,6 +128,27 @@
       "category": "kernel",
       "stableSince": "1.0.0",
       "meaning": "The mechanism runtime failed while executing a well-formed operation; details carry the mechanism evidence. Demonstrable only by a mechanism runtime, not by static contracts checks."
+    },
+    {
+      "code": "SFC3001",
+      "name": "REPORT_DIGEST_MISMATCH",
+      "category": "report",
+      "stableSince": "1.2.0",
+      "meaning": "A report binding digest (model, result, or report digest) does not match the recomputed sha256 digest, or the report is not the canonical render of its model; the binding is stale or tampered and is never trusted."
+    },
+    {
+      "code": "SFC3002",
+      "name": "REPORT_ELEMENT_MISSING",
+      "category": "report",
+      "stableSince": "1.2.0",
+      "meaning": "A mandatory report element is absent, empty where it must not be, or declared in an unsupported form: the conclusion, non-empty evidence, risks/next-action sections, a supported locale, or a coded outcome for failed/blocked runs. No half report is issued for a missing element."
+    },
+    {
+      "code": "SFC3003",
+      "name": "REPORT_FACT_DRIFT",
+      "category": "report",
+      "stableSince": "1.2.0",
+      "meaning": "A report model misstates the bound operation result's terminal state/errors, or rendered report bytes diverge from the deterministic re-render of the bound report model: fact fields rewritten, sections deleted, duplicated, or injected."
     }
   ]
 }

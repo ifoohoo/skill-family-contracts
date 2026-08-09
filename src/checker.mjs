@@ -117,22 +117,26 @@ function schemaEntries(ctx) {
 
 const HANDLERS = {
   "schema.compile": (rule, ctx) => {
-    const registration = ctx.registry.schemas.find(
-      (entry) => entry.object === rule.target.object,
-    );
-    if (!registration) {
-      return fail(rule, "SFC1002", `no registered schema for object: ${rule.target.object}`);
+    const registrations = rule.target.registry === "schemas"
+      ? ctx.registry.schemas
+      : ctx.registry.schemas.filter((entry) => entry.object === rule.target.object);
+    if (registrations.length === 0) {
+      return fail(rule, "SFC1002", `no registered schema for target: ${rule.target.object ?? rule.target.registry}`);
     }
-    try {
-      compileSchema(
-        { schema: ctx.loadSchema(registration) },
-        { dialect: registration.dialect, policy: "strict" },
-      );
-      return pass(rule);
-    } catch (cause) {
-      if (cause instanceof ContractsError) return fail(rule, cause.code, cause.message);
-      throw cause;
+    for (const registration of registrations) {
+      try {
+        compileSchema(
+          { schema: ctx.loadSchema(registration) },
+          { dialect: registration.dialect, policy: "strict" },
+        );
+      } catch (cause) {
+        if (cause instanceof ContractsError) {
+          return fail(rule, cause.code, `${registration.object}: ${cause.message}`);
+        }
+        throw cause;
+      }
     }
+    return pass(rule);
   },
 
   "schema.unique-id": (rule, ctx) => {

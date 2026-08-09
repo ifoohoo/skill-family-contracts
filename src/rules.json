@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "skill-family.contracts.rules",
-  "contractsVersion": "1.1.1",
+  "contractsVersion": "1.4.0",
   "budget": {
     "firstVersionMax": 20,
     "absoluteMax": 30,
@@ -50,31 +50,7 @@
       "ruleId": "CR-001",
       "severity": "mandatory",
       "checkType": "schema.compile",
-      "target": { "object": "project-manifest" }
-    },
-    {
-      "ruleId": "CR-002",
-      "severity": "mandatory",
-      "checkType": "schema.compile",
-      "target": { "object": "profile-descriptor" }
-    },
-    {
-      "ruleId": "CR-003",
-      "severity": "mandatory",
-      "checkType": "schema.compile",
-      "target": { "object": "managed-file-lock" }
-    },
-    {
-      "ruleId": "CR-004",
-      "severity": "mandatory",
-      "checkType": "schema.compile",
-      "target": { "object": "operation-request" }
-    },
-    {
-      "ruleId": "CR-005",
-      "severity": "mandatory",
-      "checkType": "schema.compile",
-      "target": { "object": "operation-result" }
+      "target": { "registry": "schemas" }
     },
     {
       "ruleId": "CR-006",

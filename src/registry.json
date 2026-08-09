@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "skill-family.contracts.registry",
-  "contractsVersion": "1.1.1",
+  "contractsVersion": "1.4.0",
   "note": "Protocol-name and schema-$id registry. Registration mechanically rejects duplicate protocol name/version (SFC1004) and duplicate $id (SFC1003). This file is the single registration surface; adding an entry is a contracts change.",
   "protocols": [
     {
@@ -54,6 +54,90 @@
       "dialect": "2020-12",
       "status": "stable",
       "file": "src/schemas/migration-manifest.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/report-model.json",
+      "object": "report-model",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/report-model.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/report-binding.json",
+      "object": "report-binding",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/report-binding.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/host-descriptor.json",
+      "object": "host-descriptor",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/host-descriptor.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/host-registry.json",
+      "object": "host-registry",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/host-registry.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/adapter-source.json",
+      "object": "adapter-source",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/adapter-source.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/host-capability-fact.json",
+      "object": "host-capability-fact",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/host-capability-fact.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/host-probe-result.json",
+      "object": "host-probe-result",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/host-probe-result.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/adapter-build-manifest.json",
+      "object": "adapter-build-manifest",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/adapter-build-manifest.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/host-operation-plan.json",
+      "object": "host-operation-plan",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/host-operation-plan.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/host-operation-receipt.json",
+      "object": "host-operation-receipt",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/host-operation-receipt.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/state-event-envelope.json",
+      "object": "state-event-envelope",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/state-event-envelope.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/state-snapshot-metadata.json",
+      "object": "state-snapshot-metadata",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/state-snapshot-metadata.schema.json"
     }
   ],
   "dialects": {

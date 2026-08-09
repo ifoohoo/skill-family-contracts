@@ -3,9 +3,9 @@
 
 # skill-family-contracts
 
-机器可执行工程结构和机制协议的唯一权威包（Contracts v1，冻结）。
+机器可执行工程结构和机制协议的唯一权威包（Contracts 1.4.0，冻结）。
 
-本包拥有：六类顶层对象的 JSON Schema、Kernel Protocol（内核协议）、稳定错误码、
+本包拥有：十八类顶层对象的 JSON Schema、Kernel Protocol（内核协议）、稳定错误码、
 协议名/`$id` 登记表，以及九种有限机械检查类型与受限强制规则集。
 本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，
 工程命令由 Kit 承担，二者单向消费本包。
@@ -13,7 +13,7 @@
 Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.json`），
 按方言路由到对应 Ajv 类；不实现任何手写 Schema 子集解释器。
 
-## 六类顶层对象
+## 十八类顶层对象
 
 | 对象 | `$id` | Schema 文件 |
 | --- | --- | --- |
@@ -23,6 +23,18 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 | `operation-request` | `https://contracts.skill-family.example/v1/operation-request.json` | `src/schemas/operation-request.schema.json` |
 | `operation-result` | `https://contracts.skill-family.example/v1/operation-result.json` | `src/schemas/operation-result.schema.json` |
 | `migration-manifest` | `https://contracts.skill-family.example/v1/migration-manifest.json` | `src/schemas/migration-manifest.schema.json` |
+| `report-model` | `https://contracts.skill-family.example/v1/report-model.json` | `src/schemas/report-model.schema.json` |
+| `report-binding` | `https://contracts.skill-family.example/v1/report-binding.json` | `src/schemas/report-binding.schema.json` |
+| `host-descriptor` | `https://contracts.skill-family.example/v1/host-descriptor.json` | `src/schemas/host-descriptor.schema.json` |
+| `host-capability-fact` | `https://contracts.skill-family.example/v1/host-capability-fact.json` | `src/schemas/host-capability-fact.schema.json` |
+| `adapter-build-manifest` | `https://contracts.skill-family.example/v1/adapter-build-manifest.json` | `src/schemas/adapter-build-manifest.schema.json` |
+| `host-operation-plan` | `https://contracts.skill-family.example/v1/host-operation-plan.json` | `src/schemas/host-operation-plan.schema.json` |
+| `host-operation-receipt` | `https://contracts.skill-family.example/v1/host-operation-receipt.json` | `src/schemas/host-operation-receipt.schema.json` |
+| `adapter-source` | `https://contracts.skill-family.example/v1/adapter-source.json` | `src/schemas/adapter-source.schema.json` |
+| `host-registry` | `https://contracts.skill-family.example/v1/host-registry.json` | `src/schemas/host-registry.schema.json` |
+| `host-probe-result` | `https://contracts.skill-family.example/v1/host-probe-result.json` | `src/schemas/host-probe-result.schema.json` |
+| `state-event-envelope` | `https://contracts.skill-family.example/v1/state-event-envelope.json` | `src/schemas/state-event-envelope.schema.json` |
+| `state-snapshot-metadata` | `https://contracts.skill-family.example/v1/state-snapshot-metadata.json` | `src/schemas/state-snapshot-metadata.schema.json` |
 
 所有 v1 Schema 使用 draft 2020-12 方言；实例信封统一为
 `schemaVersion: 1` + 唯一 `kind` 常量 + 各层 `additionalProperties: false`。
@@ -48,7 +60,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 ## 稳定错误码
 
 冻结登记表：`src/error-codes.json`。`SFC1xxx` 为合同权威层错误，
-`SFC2xxx` 为内核操作错误。码只增不改、不复用。v1 冻结：
+`SFC2xxx` 为内核操作错误，`SFC3xxx` 为报告绑定错误。码只增不改、不复用。v1 冻结：
 
 | 码 | 名称 | 含义摘要 |
 | --- | --- | --- |
@@ -67,6 +79,9 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 | SFC2002 | UNKNOWN_OPERATION | 操作名不在冻结词汇表 |
 | SFC2003 | INVALID_PARAMS | 参数不满足操作的冻结 params 合同 |
 | SFC2004 | EXECUTION_FAILED | 机制运行时执行失败（仅运行时可演示） |
+| SFC3001 | REPORT_DIGEST_MISMATCH | 报告或结果摘要与绑定不一致 |
+| SFC3002 | REPORT_ELEMENT_MISSING | 报告缺少强制元素 |
+| SFC3003 | REPORT_FACT_DRIFT | 报告字节偏离确定性重渲染结果 |
 
 ## 方言与验证策略（Ajv）
 
@@ -85,13 +100,14 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 `schema.ref-resolves`、`schema.dialect-declared`、`fixture.positive-passes`、
 `fixture.negative-coded`、`error-code.registered`、`rules.budget`。
 
-首版强制规则 **13 条**（CR-001…CR-013），预算上限 20 条、绝对上限 30 条；
+当前强制规则 **9 条**（CR-001、CR-006…CR-013）。其中 CR-001 对登记表内全部 Schema 做统一编译，
+不再为每个对象重复占用一条规则；预算上限 20 条、绝对上限 30 条；
 `rules.budget` 是机械门禁，超限即 `runChecks` 失败并报 `SFC1008`。
 
 ## Fixture
 
 `src/fixtures/<contract>/` 为每类合同提供正例（positive）、反例（negative）
-与方言边界（dialect-boundary）样例，共 32 个。每个 fixture 声明目标 Schema、
+与方言边界（dialect-boundary）样例，共 76 个。每个 fixture 声明目标 Schema、
 方言、策略与期望；反例期望携带稳定失败码。`verifyAllFixtures()` 机械重放全部期望，
 行为不符报 `SFC1010`。fixture 是完全虚构数据，不是审计 oracle。
 
@@ -125,14 +141,14 @@ import {
 ## 安装
 
 ```sh
-npm install skill-family-contracts@0.1.3
+npm install skill-family-contracts@0.2.0
 npm info skill-family-contracts --help
 ```
 
 ## 最小示例
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.1.3
+// 从空目录运行：npm install skill-family-contracts@0.2.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
