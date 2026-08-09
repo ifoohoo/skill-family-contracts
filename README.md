@@ -125,14 +125,14 @@ import {
 ## 安装
 
 ```sh
-npm install skill-family-contracts
+npm install skill-family-contracts@0.1.3
 npm info skill-family-contracts --help
 ```
 
 ## 最小示例
 
 ```js
-// 从空目录运行：npm install skill-family-contracts
+// 从空目录运行：npm install skill-family-contracts@0.1.3
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -153,4 +153,4 @@ if (!result.valid) console.error(result.errorCode);
 
 ## 故障诊断
 
-验证失败时 `errorCode` 为 `SCHEMA_VALIDATION_FAILED`（SFC1001）；未知 Schema 报 `UNKNOWN_SCHEMA_ID`（SFC1002）。如失败，检查文档是否满足目标 Schema 的必填字段与类型约束。
+验证失败时 `errorCode` 为 `SFC1001`（SCHEMA_VALIDATION_FAILED，文档未通过目标 Schema 验证）；`$id` 未注册时报 `SFC1002`（UNKNOWN_SCHEMA_ID）。如失败，检查文档是否满足目标 Schema 的必填字段与类型约束。
