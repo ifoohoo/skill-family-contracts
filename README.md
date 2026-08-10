@@ -1,154 +1,54 @@
 <!-- release-skill:safe-first-command -->
 <!-- release-skill:external-write-boundary -->
+> 简体中文版：[README.zh-CN.md](./README.zh-CN.md)
 
 # skill-family-contracts
 
-机器可执行工程结构和机制协议的唯一权威包（Contracts 1.4.0，冻结）。
+<!-- release-skill:release-version: 0.2.1 -->
 
-本包拥有：十八类顶层对象的 JSON Schema、Kernel Protocol（内核协议）、稳定错误码、
-协议名/`$id` 登记表，以及九种有限机械检查类型与受限强制规则集。
-本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，
-工程命令由 Kit 承担，二者单向消费本包。
+The single authoritative package of machine-executable engineering structure and mechanism protocols (Contracts 1.4.0, frozen).
 
-Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.json`），
-按方言路由到对应 Ajv 类；不实现任何手写 Schema 子集解释器。
+<!-- release-skill:managed:start id=latest-release -->
+**0.2.1** (2026-08-10)
 
-## 十八类顶层对象
+This release adds a candidate Quickstart Profile contract surface and makes the package release documentation available in English and Simplified Chinese.
 
-| 对象 | `$id` | Schema 文件 |
-| --- | --- | --- |
-| `project-manifest` | `https://contracts.skill-family.example/v1/project-manifest.json` | `src/schemas/project-manifest.schema.json` |
-| `profile-descriptor` | `https://contracts.skill-family.example/v1/profile-descriptor.json` | `src/schemas/profile-descriptor.schema.json` |
-| `managed-file-lock` | `https://contracts.skill-family.example/v1/managed-file-lock.json` | `src/schemas/managed-file-lock.schema.json` |
-| `operation-request` | `https://contracts.skill-family.example/v1/operation-request.json` | `src/schemas/operation-request.schema.json` |
-| `operation-result` | `https://contracts.skill-family.example/v1/operation-result.json` | `src/schemas/operation-result.schema.json` |
-| `migration-manifest` | `https://contracts.skill-family.example/v1/migration-manifest.json` | `src/schemas/migration-manifest.schema.json` |
-| `report-model` | `https://contracts.skill-family.example/v1/report-model.json` | `src/schemas/report-model.schema.json` |
-| `report-binding` | `https://contracts.skill-family.example/v1/report-binding.json` | `src/schemas/report-binding.schema.json` |
-| `host-descriptor` | `https://contracts.skill-family.example/v1/host-descriptor.json` | `src/schemas/host-descriptor.schema.json` |
-| `host-capability-fact` | `https://contracts.skill-family.example/v1/host-capability-fact.json` | `src/schemas/host-capability-fact.schema.json` |
-| `adapter-build-manifest` | `https://contracts.skill-family.example/v1/adapter-build-manifest.json` | `src/schemas/adapter-build-manifest.schema.json` |
-| `host-operation-plan` | `https://contracts.skill-family.example/v1/host-operation-plan.json` | `src/schemas/host-operation-plan.schema.json` |
-| `host-operation-receipt` | `https://contracts.skill-family.example/v1/host-operation-receipt.json` | `src/schemas/host-operation-receipt.schema.json` |
-| `adapter-source` | `https://contracts.skill-family.example/v1/adapter-source.json` | `src/schemas/adapter-source.schema.json` |
-| `host-registry` | `https://contracts.skill-family.example/v1/host-registry.json` | `src/schemas/host-registry.schema.json` |
-| `host-probe-result` | `https://contracts.skill-family.example/v1/host-probe-result.json` | `src/schemas/host-probe-result.schema.json` |
-| `state-event-envelope` | `https://contracts.skill-family.example/v1/state-event-envelope.json` | `src/schemas/state-event-envelope.schema.json` |
-| `state-snapshot-metadata` | `https://contracts.skill-family.example/v1/state-snapshot-metadata.json` | `src/schemas/state-snapshot-metadata.schema.json` |
+**Added**
 
-所有 v1 Schema 使用 draft 2020-12 方言；实例信封统一为
-`schemaVersion: 1` + 唯一 `kind` 常量 + 各层 `additionalProperties: false`。
-`$id` 命名空间 `contracts.skill-family.example` 使用保留示例域，永不解析到真实站点。
+- Adds candidate Resource, Task, and Result schemas with strict validation helpers. The candidate schemas remain outside the stable Contracts registry.
+- Adds complete English and Simplified Chinese package documentation, including an agent quick-reference section.
 
-## Kernel Protocol（内核协议）
+**Changed**
 
-登记表：`src/registry.json`；冻结定义：`src/kernel-protocol.json`。
+- Manages the current README and CHANGELOG release sections from one bilingual, versioned notes source.
+- Distributes the project NOTICE separately from the Apache-2.0 LICENSE.
 
-- 协议名：`skill-family.kernel.operation`，版本 `1`，状态 `stable`。
-- 状态集：`accepted`、`running`、`succeeded`、`failed`、`rejected`；
-  终态为 `succeeded`、`failed`、`rejected`；`operation-result` 只携带终态。
-- 转移：`accepted → running → succeeded|failed`，另允许 `accepted → failed`；
-  入口可直接 `rejected`。
-- v1 操作词汇表只冻结 `validate`，其 params 合同在
-  `kernel-protocol.json` 内定义（`schemaId` + `document` 必填）。
-  新增操作名属于合同变更，需新版本登记。
+**Upgrade Notes**
 
-重名协议与重复 `$id` 被机械拒绝：`registerProtocol` 抛出 `SFC1004`，
-`registerSchema` 抛出 `SFC1003`；检查类型 `protocol.unique-name` 与
-`schema.unique-id` 对登记表做同样判定。
+Stable registry consumers do not need to change. Import the Quickstart Profile only through its candidate subpath and do not treat it as a frozen Contracts object.
+<!-- release-skill:managed:end id=latest-release -->
 
-## 稳定错误码
+## Problem It Solves
 
-冻结登记表：`src/error-codes.json`。`SFC1xxx` 为合同权威层错误，
-`SFC2xxx` 为内核操作错误，`SFC3xxx` 为报告绑定错误。码只增不改、不复用。v1 冻结：
+When every skill-family project writes its own set of structural contracts, you get schema drift, inconsistent error codes, and protocol-name collisions. Contracts consolidates the structure, protocols, error codes, and protocol-name registry into one frozen machine-readable authority, so that the Harness and Kit consume it unidirectionally instead of each interpreting it independently.
 
-| 码 | 名称 | 含义摘要 |
-| --- | --- | --- |
-| SFC1001 | SCHEMA_VALIDATION_FAILED | 文档未通过目标 Schema 验证 |
-| SFC1002 | UNKNOWN_SCHEMA_ID | `$id` 未在登记表注册 |
-| SFC1003 | DUPLICATE_SCHEMA_ID | 重复 `$id` 注册被拒绝 |
-| SFC1004 | DUPLICATE_PROTOCOL_NAME | 重复协议名/版本注册被拒绝 |
-| SFC1005 | UNRESOLVED_REF | `$ref` 目标无法解析 |
-| SFC1006 | UNSUPPORTED_DIALECT | 方言不在冻结支持集 |
-| SFC1007 | UNKNOWN_CHECK_TYPE | 规则使用九类之外的检查类型 |
-| SFC1008 | RULE_BUDGET_EXCEEDED | 强制规则数超出预算/上限 |
-| SFC1009 | UNKNOWN_ERROR_CODE | 引用了未登记的错误码 |
-| SFC1010 | FIXTURE_EXPECTATION_MISMATCH | fixture 行为与声明期望不符 |
-| SFC1011 | UNKNOWN_PROTOCOL | 请求引用未登记的协议名/版本 |
-| SFC1012 | SCHEMA_COMPILE_FAILED | Schema 本身无法编译 |
-| SFC2002 | UNKNOWN_OPERATION | 操作名不在冻结词汇表 |
-| SFC2003 | INVALID_PARAMS | 参数不满足操作的冻结 params 合同 |
-| SFC2004 | EXECUTION_FAILED | 机制运行时执行失败（仅运行时可演示） |
-| SFC3001 | REPORT_DIGEST_MISMATCH | 报告或结果摘要与绑定不一致 |
-| SFC3002 | REPORT_ELEMENT_MISSING | 报告缺少强制元素 |
-| SFC3003 | REPORT_FACT_DRIFT | 报告字节偏离确定性重渲染结果 |
+## Core Mental Model
 
-## 方言与验证策略（Ajv）
+Contracts is the "definition and registry" layer, not the "execution" layer. It owns the JSON Schemas for the eighteen top-level object classes, the Kernel Protocol, the stable error codes, the protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
 
-- 支持方言：`draft-07`、`2020-12`。draft 识别通过 `$schema` URI 映射
-  （`detectDialect`），验证按方言路由到对应 Ajv 类。
-- 验证策略（`VALIDATION_POLICIES`）：
-  - `strict`（默认）：不做类型强制、不注入默认值，Ajv 严格模式全开；
-  - `tolerant`：开启 Ajv `coerceTypes: "array"` 与 `useDefaults`，用于采纳场景。
-- 格式：`date-time`（RFC 3339，含日历合法性检查）经 Ajv `addFormat` 登记。
-- `validateDocument` 永不修改调用者输入；规范化后的副本在结果的 `data` 字段返回。
+Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version in `package.json`), routing by dialect to the corresponding Ajv class; no hand-written schema-subset interpreter is implemented.
 
-## 九类机械检查与规则预算
-
-登记表：`src/rules.json`。检查类型集合封闭，共九种：
-`schema.compile`、`schema.unique-id`、`protocol.unique-name`、
-`schema.ref-resolves`、`schema.dialect-declared`、`fixture.positive-passes`、
-`fixture.negative-coded`、`error-code.registered`、`rules.budget`。
-
-当前强制规则 **9 条**（CR-001、CR-006…CR-013）。其中 CR-001 对登记表内全部 Schema 做统一编译，
-不再为每个对象重复占用一条规则；预算上限 20 条、绝对上限 30 条；
-`rules.budget` 是机械门禁，超限即 `runChecks` 失败并报 `SFC1008`。
-
-## Fixture
-
-`src/fixtures/<contract>/` 为每类合同提供正例（positive）、反例（negative）
-与方言边界（dialect-boundary）样例，共 76 个。每个 fixture 声明目标 Schema、
-方言、策略与期望；反例期望携带稳定失败码。`verifyAllFixtures()` 机械重放全部期望，
-行为不符报 `SFC1010`。fixture 是完全虚构数据，不是审计 oracle。
-
-## API 概览
-
-```js
-import {
-  CONTRACT_OBJECTS, CONTRACTS_VERSION,
-  validateDocument, SUPPORTED_DIALECTS, VALIDATION_POLICIES, detectDialect,
-  loadRegistry, registerSchema, registerProtocol,
-  loadKernelProtocol, checkOperation,
-  runChecks, CHECK_TYPES, MANDATORY_RULES, RULE_BUDGET,
-  listFixtures, verifyAllFixtures,
-  ERROR_CODES, ContractsError, stableError,
-} from "skill-family-contracts";
-```
-
-- `validateDocument(document, { schemaId | schema, dialect, policy })` →
-  `{ valid, errorCode, errors, data }`；
-- `runChecks({ rules?, registry?, fixtures?, loadSchema? })` →
-  `{ ok, mandatoryCount, budget, results }`；
-- `registerSchema` / `registerProtocol` 返回新登记表副本，重复项分别以
-  `SFC1003` / `SFC1004` 抛出 `ContractsError`。
-
-## 边界与非目标
-
-不拥有生成、语义审计、发布状态与远端写入；不定义清理计划、发布快照、
-消费者冒烟结果、领域审计报告或自由文本规则语言；不建通用 DSL。
-冻结内容的变更只能作为新的合同版本任务进行。
-
-## 安装
+## Installation and Minimal Example
 
 ```sh
-npm install skill-family-contracts@0.2.0
+npm install skill-family-contracts@0.2.1
 npm info skill-family-contracts --help
 ```
 
-## 最小示例
+The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.2.0
+// Run from an empty directory: npm install skill-family-contracts@0.2.1
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -167,6 +67,198 @@ const result = validateDocument(document, {
 if (!result.valid) console.error(result.errorCode);
 ```
 
-## 故障诊断
+The code above shows the basic `validateDocument` call: pass the document and the target Schema's `$id`, and it returns `{ valid, errorCode, errors, data }`, where `data` is a normalized copy and the original input is not modified.
 
-验证失败时 `errorCode` 为 `SFC1001`（SCHEMA_VALIDATION_FAILED，文档未通过目标 Schema 验证）；`$id` 未注册时报 `SFC1002`（UNKNOWN_SCHEMA_ID）。如失败，检查文档是否满足目标 Schema 的必填字段与类型约束。
+## Candidate Quickstart Profile
+
+Use the candidate Quickstart Profile to evaluate an early Resource → Task → Result exchange before proposing it for the frozen registry:
+
+```js
+import {
+  QUICKSTART_PROTOCOL,
+  quickstartProfileSchemas,
+  validateQuickstartProfileDocument,
+} from "skill-family-contracts/candidate/quickstart-profile";
+```
+
+The subpath is public but **not stable**. Its schemas are deliberately absent from `src/registry.json`, do not expand the eighteen stable object classes, and may change or be removed in a later minor release. Consumers should pin the exact package version and keep candidate imports outside their stable public API. Use the root package export for production contracts that require frozen registry and compatibility guarantees.
+
+## Typical Use Cases
+
+- Need to validate whether a contract document conforms to a registered Schema: use `validateDocument`.
+- Need to look up a Schema by object name or `$id`, or look up a Kernel Protocol by protocol name: use `loadRegistry` / `findSchemaByObject` / `findProtocol`.
+- Need to run mandatory mechanical rules and collect unresolved references: use `runChecks` / `collectUnresolvedRefs`.
+- Need to enumerate and validate the public fixtures: use `verifyAllFixtures`.
+
+## Eighteen Top-Level Object Classes
+
+| Object | `$id` | Schema File |
+| --- | --- | --- |
+| `project-manifest` | `https://contracts.skill-family.example/v1/project-manifest.json` | `src/schemas/project-manifest.schema.json` |
+| `profile-descriptor` | `https://contracts.skill-family.example/v1/profile-descriptor.json` | `src/schemas/profile-descriptor.schema.json` |
+| `managed-file-lock` | `https://contracts.skill-family.example/v1/managed-file-lock.json` | `src/schemas/managed-file-lock.schema.json` |
+| `operation-request` | `https://contracts.skill-family.example/v1/operation-request.json` | `src/schemas/operation-request.schema.json` |
+| `operation-result` | `https://contracts.skill-family.example/v1/operation-result.json` | `src/schemas/operation-result.schema.json` |
+| `migration-manifest` | `https://contracts.skill-family.example/v1/migration-manifest.json` | `src/schemas/migration-manifest.schema.json` |
+| `report-model` | `https://contracts.skill-family.example/v1/report-model.json` | `src/schemas/report-model.schema.json` |
+| `report-binding` | `https://contracts.skill-family.example/v1/report-binding.json` | `src/schemas/report-binding.schema.json` |
+| `host-descriptor` | `https://contracts.skill-family.example/v1/host-descriptor.json` | `src/schemas/host-descriptor.schema.json` |
+| `host-capability-fact` | `https://contracts.skill-family.example/v1/host-capability-fact.json` | `src/schemas/host-capability-fact.schema.json` |
+| `adapter-build-manifest` | `https://contracts.skill-family.example/v1/adapter-build-manifest.json` | `src/schemas/adapter-build-manifest.schema.json` |
+| `host-operation-plan` | `https://contracts.skill-family.example/v1/host-operation-plan.json` | `src/schemas/host-operation-plan.schema.json` |
+| `host-operation-receipt` | `https://contracts.skill-family.example/v1/host-operation-receipt.json` | `src/schemas/host-operation-receipt.schema.json` |
+| `adapter-source` | `https://contracts.skill-family.example/v1/adapter-source.json` | `src/schemas/adapter-source.schema.json` |
+| `host-registry` | `https://contracts.skill-family.example/v1/host-registry.json` | `src/schemas/host-registry.schema.json` |
+| `host-probe-result` | `https://contracts.skill-family.example/v1/host-probe-result.json` | `src/schemas/host-probe-result.schema.json` |
+| `state-event-envelope` | `https://contracts.skill-family.example/v1/state-event-envelope.json` | `src/schemas/state-event-envelope.schema.json` |
+| `state-snapshot-metadata` | `https://contracts.skill-family.example/v1/state-snapshot-metadata.json` | `src/schemas/state-snapshot-metadata.json` |
+
+All v1 Schemas use the draft 2020-12 dialect; instance envelopes are uniformly `schemaVersion: 1` + a unique `kind` constant + `additionalProperties: false` at each layer. The `$id` namespace `contracts.skill-family.example` uses a reserved example domain and never resolves to a real site.
+
+## Kernel Protocol
+
+Registry: `src/registry.json`; frozen definition: `src/kernel-protocol.json`.
+
+- Protocol name: `skill-family.kernel.operation`, version `1`, status `stable`.
+- State set: `accepted`, `running`, `succeeded`, `failed`, `rejected`; terminal states are `succeeded`, `failed`, `rejected`; `operation-result` carries only terminal states.
+- Transitions: `accepted → running → succeeded|failed`, with `accepted → failed` also allowed; the entry may directly `rejected`.
+- The v1 operation vocabulary freezes only `validate`, whose params contract is defined inside `kernel-protocol.json` (`schemaId` + `document` required). Adding a new operation name is a contract change and requires a new version registration.
+
+Duplicate-name protocols and duplicate `$id`s are machine-rejected: `registerProtocol` throws `SFC1004`, `registerSchema` throws `SFC1003`; the check types `protocol.unique-name` and `schema.unique-id` make the same determination against the registry.
+
+## Stable Error Codes
+
+Frozen registry: `src/error-codes.json`. `SFC1xxx` are contract-authority-layer errors, `SFC2xxx` are kernel-operation errors, `SFC3xxx` are report-binding errors. Codes are only added, never modified or reused. Frozen in v1:
+
+| Code | Name | Summary |
+| --- | --- | --- |
+| SFC1001 | SCHEMA_VALIDATION_FAILED | Document failed target Schema validation |
+| SFC1002 | UNKNOWN_SCHEMA_ID | `$id` not registered in the registry |
+| SFC1003 | DUPLICATE_SCHEMA_ID | Duplicate `$id` registration rejected |
+| SFC1004 | DUPLICATE_PROTOCOL_NAME | Duplicate protocol name/version registration rejected |
+| SFC1005 | UNRESOLVED_REF | `$ref` target cannot be resolved |
+| SFC1006 | UNSUPPORTED_DIALECT | Dialect not in the frozen support set |
+| SFC1007 | UNKNOWN_CHECK_TYPE | Rule uses a check type outside the nine categories |
+| SFC1008 | RULE_BUDGET_EXCEEDED | Mandatory rule count exceeds budget/limit |
+| SFC1009 | UNKNOWN_ERROR_CODE | References an unregistered error code |
+| SFC1010 | FIXTURE_EXPECTATION_MISMATCH | Fixture behavior does not match declared expectation |
+| SFC1011 | UNKNOWN_PROTOCOL | Request references an unregistered protocol name/version |
+| SFC1012 | SCHEMA_COMPILE_FAILED | Schema itself cannot be compiled |
+| SFC2002 | UNKNOWN_OPERATION | Operation name not in the frozen vocabulary |
+| SFC2003 | INVALID_PARAMS | Parameters do not satisfy the operation's frozen params contract |
+| SFC2004 | EXECUTION_FAILED | Mechanism runtime execution failed (only demonstrable at runtime) |
+| SFC3001 | REPORT_DIGEST_MISMATCH | Report or result digest inconsistent with binding |
+| SFC3002 | REPORT_ELEMENT_MISSING | Report missing a mandatory element |
+| SFC3003 | REPORT_FACT_DRIFT | Report bytes deviate from deterministic re-render result |
+
+## Dialects and Validation Strategy (Ajv)
+
+- Supported dialects: `draft-07`, `2020-12`. Draft detection uses `$schema` URI mapping (`detectDialect`), and validation routes by dialect to the corresponding Ajv class.
+- Validation strategy (`VALIDATION_POLICIES`):
+  - `strict` (default): no type coercion, no injected defaults; Ajv strict mode fully enabled;
+  - `tolerant`: enables Ajv `coerceTypes: "array"` and `useDefaults`, for adoption scenarios.
+- Format: `date-time` (RFC 3339, including calendar-validity checks) registered via Ajv `addFormat`.
+- `validateDocument` never modifies the caller's input; the normalized copy is returned in the result's `data` field.
+
+## Nine Mechanical Check Types and the Rule Budget
+
+Registry: `src/rules.json`. The check-type set is closed, with nine types total: `schema.compile`, `schema.unique-id`, `protocol.unique-name`, `schema.ref-resolves`, `schema.dialect-declared`, `fixture.positive-passes`, `fixture.negative-coded`, `error-code.registered`, `rules.budget`.
+
+There are currently **9** mandatory rules (CR-001, CR-006…CR-013). Among them, CR-001 performs uniform compilation of all Schemas in the registry, instead of occupying one rule per object; the budget cap is 20 rules, absolute cap 30 rules; `rules.budget` is a mechanical gate, and exceeding it fails `runChecks` with `SFC1008`.
+
+## Fixtures
+
+`src/fixtures/<contract>/` provides positive, negative, and dialect-boundary samples for each contract class. Each fixture declares the target Schema, dialect, policy, and expectation; negative expectations carry a stable failure code. `verifyAllFixtures()` mechanically replays all expectations, and reports `SFC1010` on mismatch. Fixtures are entirely fictional data, not an audit oracle.
+
+## API Overview
+
+```js
+import {
+  CONTRACT_OBJECTS, CONTRACTS_VERSION,
+  validateDocument, SUPPORTED_DIALECTS, VALIDATION_POLICIES, detectDialect,
+  loadRegistry, registerSchema, registerProtocol,
+  loadKernelProtocol, checkOperation,
+  runChecks, CHECK_TYPES, MANDATORY_RULES, RULE_BUDGET,
+  listFixtures, verifyAllFixtures,
+  ERROR_CODES, ContractsError, stableError,
+} from "skill-family-contracts";
+```
+
+The imports above list the stable public surface of this package; `validateDocument` and `runChecks` are the most commonly used entry points. `validateDocument(document, { schemaId | schema, dialect, policy })` returns `{ valid, errorCode, errors, data }`; `runChecks({ rules?, registry?, fixtures?, loadSchema? })` returns `{ ok, mandatoryCount, budget, results }`; `registerSchema` / `registerProtocol` return a new registry copy, throwing `ContractsError` with `SFC1003` / `SFC1004` respectively on duplicates.
+
+## Security Boundaries and Non-Goals
+
+It does not own generation, semantic auditing, publishing state, or remote writing; it does not define cleanup plans, publish snapshots, consumer smoke results, domain audit reports, or a free-text rule language; it does not build a general DSL. Changes to frozen content can only be carried out as a new contract-version task.
+
+## Troubleshooting
+
+On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, document failed target Schema validation); when `$id` is unregistered it reports `SFC1002` (UNKNOWN_SCHEMA_ID). If it fails, check whether the document satisfies the target Schema's required fields and type constraints.
+
+## Further Documentation
+
+- Architecture boundaries and routing: [Architecture](https://ifoohoo.github.io/skill-family-engineering-kit/architecture/), [Agent architecture routing](https://ifoohoo.github.io/skill-family-engineering-kit/agents/architecture-routing/)
+- Capability catalog: [capability-catalog.json](https://ifoohoo.github.io/skill-family-engineering-kit/agents/capability-catalog.json)
+- Current product status: [Public status](https://ifoohoo.github.io/skill-family-engineering-kit/public/status/)
+
+<!-- agent-quick-reference:start -->
+## Agent Quick Reference
+
+### Use when
+
+- You need to validate a registered contract object, look up a Schema/protocol, or run mandatory mechanical rules.
+- You need to enumerate and validate public fixtures, or deterministically serialize the contract surface.
+- You need to evaluate the non-stable Quickstart Resource/Task/Result profile with an exact package-version pin.
+
+### Do not use when
+
+- You need to validate a consumer's own business Schema (the consumer should own it; Foundation does not replace it).
+- You need to mix domain semantic validation into the general contract.
+- You need a compatibility-frozen Quickstart profile; the candidate subpath is not registered as stable.
+
+### Capability selection
+
+- `foundation.contracts.object-validation`: Ajv dual-dialect validation of the 18 object classes.
+- `foundation.contracts.registry-protocol`: Schema `$id` and protocol-name registry query.
+- `foundation.contracts.kernel-protocol`: operation-request/result protocol.
+- `foundation.contracts.mandatory-checks`: nine mandatory rules and unresolved references.
+- `foundation.contracts.fixture-verification`: full fixture replay.
+- `foundation.contracts.error-codes`: stable error-code system.
+- `foundation.contracts.audit-surface`: canonical JSON + sha256 digest.
+- `foundation.contracts.quickstart-profile-candidate`: candidate-only Resource/Task/Result schemas and validation through the exact-version subpath.
+
+### Required inputs
+
+- The document to validate (carrying a registered `$id`), or the target contract object name.
+- The validation policy `strict` (default) or `tolerant`.
+
+### Outputs and evidence
+
+- `validateDocument` returns `{ valid, errorCode, errors, data }`.
+- Evidence: `packages/skill-family-contracts/test/validator.test.mjs`, `registry.test.mjs`, `checker.test.mjs`, `fixtures.test.mjs`.
+
+### Side effects
+
+- Pure functions; no filesystem, Git, network, or process side effects (the compile cache lives only in memory).
+
+### Failure semantics
+
+- Stable error codes such as `SFC1001/1002/1006`; the error object carries `stableError` and `details.kind`.
+- Frozen error codes are only added, never modified; no drift.
+
+### Architectural invariants
+
+- The set of 18 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift.
+- The validator is exclusively Ajv 8.20.0 (exact pin); no other implementation is accepted.
+
+### Route elsewhere when
+
+- Consumer business Schema validation: stays with the caller.
+- Remote publish writing: route to release-skill.
+- Domain audit semantics: route to a standalone audit consumer.
+
+### Machine-readable sources
+
+- Public capability catalog: [`capability-catalog.json`](https://ifoohoo.github.io/skill-family-engineering-kit/agents/capability-catalog.json) (`foundation.contracts.*` entries).
+- Package-local structural contract: `src/registry.json`, `src/schemas/*`.
+- Package-local candidate source: `candidate/quickstart-profile/*`; public import: `skill-family-contracts/candidate/quickstart-profile`.
+<!-- agent-quick-reference:end -->

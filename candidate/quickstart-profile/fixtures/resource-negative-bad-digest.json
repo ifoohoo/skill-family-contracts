@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "kind": "skill-family.resource",
+  "id": "observation-main",
+  "location": {
+    "path": "inputs/observation.json"
+  },
+  "role": "observation",
+  "digest": {
+    "algorithm": "sha256",
+    "value": "not-a-digest"
+  }
+}

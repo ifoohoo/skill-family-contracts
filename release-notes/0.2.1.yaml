@@ -1,0 +1,23 @@
+version: 0.2.1
+date: 2026-08-10
+locales:
+  en:
+    summary: This release adds a candidate Quickstart Profile contract surface and makes the package release documentation available in English and Simplified Chinese.
+    changes:
+      added:
+        - Adds candidate Resource, Task, and Result schemas with strict validation helpers. The candidate schemas remain outside the stable Contracts registry.
+        - Adds complete English and Simplified Chinese package documentation, including an agent quick-reference section.
+      changed:
+        - Manages the current README and CHANGELOG release sections from one bilingual, versioned notes source.
+        - Distributes the project NOTICE separately from the Apache-2.0 LICENSE.
+    upgradeNotes: Stable registry consumers do not need to change. Import the Quickstart Profile only through its candidate subpath and do not treat it as a frozen Contracts object.
+  zh-CN:
+    summary: 本版新增 Quickstart Profile 候选契约面，并为包发布文档提供完整英文版与简体中文版。
+    changes:
+      added:
+        - 新增候选 Resource、Task、Result Schema 及其严格校验辅助函数。这组候选 Schema 不进入稳定 Contracts 登记表。
+        - 新增完整的英文与简体中文包文档，并补充智能体快速参考章节。
+      changed:
+        - 使用同一份双语版本化说明源管理当前 README 与 CHANGELOG 的发布区域。
+        - 项目 NOTICE 与 Apache-2.0 LICENSE 分开分发。
+    upgradeNotes: 稳定登记表的消费者无需修改。Quickstart Profile 只能通过 candidate 子路径导入，不得把它当作已冻结的 Contracts 对象。
