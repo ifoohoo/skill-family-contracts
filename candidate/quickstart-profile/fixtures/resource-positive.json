@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "kind": "skill-family.resource",
-  "id": "observation-main",
+  "id": "acme-review-observation",
   "location": {
-    "path": "inputs/observation.json"
+    "path": "inputs/acme-review-observation.json"
   },
   "role": "observation",
   "digest": {

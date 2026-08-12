@@ -4,28 +4,28 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.2.1 -->
+<!-- release-skill:release-version: 0.3.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols (Contracts 1.4.0, frozen).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.2.1** (2026-08-10)
+**0.3.0** (2026-08-12)
 
-This release adds a candidate Quickstart Profile contract surface and makes the package release documentation available in English and Simplified Chinese.
+This source candidate replaces the Quickstart Profile candidate with v2 while preserving the stable Contracts registry and kernel protocol.
 
 **Added**
 
-- Adds candidate Resource, Task, and Result schemas with strict validation helpers. The candidate schemas remain outside the stable Contracts registry.
-- Adds complete English and Simplified Chinese package documentation, including an agent quick-reference section.
+- Adds the v2 protocol definition with the business-neutral execute-method operation and a real $id-indexed Resource, Task, and Result schema collection.
+- Enforces JSON-safe Task and Result boundaries, one path-backed observation, terminal output shapes, and exact evidence bindings.
 
 **Changed**
 
-- Manages the current README and CHANGELOG release sections from one bilingual, versioned notes source.
-- Distributes the project NOTICE separately from the Apache-2.0 LICENSE.
+- Replaces the incompatible 0.2.1 candidate surface; consumers that still require v1 must remain pinned to exactly 0.2.1.
+- Keeps method identifiers, parameter schemas, and domain result semantics under consumer ownership.
 
 **Upgrade Notes**
 
-Stable registry consumers do not need to change. Import the Quickstart Profile only through its candidate subpath and do not treat it as a frozen Contracts object.
+Version 0.3.0 is a local, unpublished source candidate. Pin all candidate imports to an exact package version and migrate v1 integrations before selecting this version.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -41,14 +41,14 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 ## Installation and Minimal Example
 
 ```sh
-npm install skill-family-contracts@0.2.1
+npm install skill-family-contracts@0.3.0
 npm info skill-family-contracts --help
 ```
 
 The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// Run from an empty directory: npm install skill-family-contracts@0.2.1
+// Run from an empty directory: npm install skill-family-contracts@0.3.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -81,7 +81,9 @@ import {
 } from "skill-family-contracts/candidate/quickstart-profile";
 ```
 
-The subpath is public but **not stable**. Its schemas are deliberately absent from `src/registry.json`, do not expand the eighteen stable object classes, and may change or be removed in a later minor release. Consumers should pin the exact package version and keep candidate imports outside their stable public API. Use the root package export for production contracts that require frozen registry and compatibility guarantees.
+Version 0.3.0 carries Quickstart Profile v2. Its protocol fixes the business-neutral operation to `execute-method`; Resource, Task, and Result schemas resolve one another through their real v2 `$id` values. Foundation validates the JSON-safe exchange shape, while the consumer owns method identifiers, parameter schemas, and domain results.
+
+The subpath is public but **not stable**. Its schemas remain absent from `src/registry.json`, do not expand the eighteen stable object classes, and may change or be removed in a later minor release. Pin exactly `0.3.0` when evaluating v2. Integrations that still require candidate v1 must stay pinned to exactly `0.2.1`.
 
 ## Typical Use Cases
 

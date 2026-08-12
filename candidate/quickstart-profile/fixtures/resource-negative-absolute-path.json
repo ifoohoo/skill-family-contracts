@@ -3,11 +3,11 @@
   "kind": "skill-family.resource",
   "id": "acme-review-observation",
   "location": {
-    "path": "inputs/acme-review-observation.json"
+    "path": "/etc/acme-review-observation.json"
   },
   "role": "observation",
   "digest": {
     "algorithm": "sha256",
-    "value": "not-a-digest"
+    "value": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
   }
 }
