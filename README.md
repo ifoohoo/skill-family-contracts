@@ -4,31 +4,30 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.4.0 -->
+<!-- release-skill:release-version: 0.5.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols (Contracts 1.4.0, frozen).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.4.0** (2026-08-16)
+**0.5.0** (2026-08-16)
 
-This release extends the stable Contracts registry to 20 top-level object classes under the unchanged contract-spec version 1.4.0, adds finite-closed-semantics fixtures and schemas (FND-ADR-009), and ships new fixed-set-publication and schema-inventory candidates.
+This release grows the stable Contracts registry from 20 to 22 top-level object classes under contract-spec version 1.5.0 (FND-ADR-010 and FND-ADR-011), adding the declared-read-surface result and the structured-scan policy documents.
 
 **Added**
 
-- Registers two new stable top-level objects, token-estimate-result (deterministic UTF-8 byte-count estimation result with a closed guarantee enumeration) and surface-scan-policy (path/content patterns plus carried-only allowedUses), raising the object registry from 18 to 20 classes under contract-spec version 1.4.0 (FND-ADR-009).
-- Extends the migration-manifest schema with legacy reference support and adds the matching fixtures (negative-06, negative-07, negative-08, positive-03).
-- Adds the fixed-set-publication candidate (manifest and receipt schemas, fixtures, and a capability-fit declaration covering native-prebuild runtimes) outside the stable registry.
-- Extends the Quickstart Profile candidate with consumer-schema-inventory and harness-surface-inventory schemas plus inventory fixtures.
-- Applies the FND-ADR-001 gate-1 relaxation (one existing plus one structurally identical foreseeable consumer) and introduces gate 8 for finite closed semantics (FND-ADR-009).
+- Registers declared-read-surface-result, the result envelope of the harness assertDeclaredReadSurface mechanism (FND-ADR-010), with a closed three-rule violation vocabulary and a closed five-guarantee enumeration.
+- Registers structured-scan-policy, the declarative policy of the harness structured surface scanner (FND-ADR-011), carrying allowedNetworks, approvedRegistries, approvedCoordinates, formatAdapters, symlinkPolicy, binaryPolicy and an optional hostKeyPattern.
+- Adds error-code kinds structured-scan-violation and structured-scan-invalid alongside the existing declared-read-surface kinds under the stable SFC2004 mechanism error; rule categories travel in details.rule and do not each get a code.
+- Bumps contract-spec to 1.5.0 with a new append-only audit baseline pin (contracts-1.5.0.pin.json); the 1.4.0 pin stays as a read-only archive.
 
 **Changed**
 
-- Keeps CONTRACTS_VERSION at 1.4.0; the same contract-spec line now covers the 20-object set, while the published 0.3.0 bytes carry the 18-object set of that version.
+- The surface-scan-policy and structured-scan-policy schema descriptions now state the relationship between the public policy documents and workspace-private leak policies explicitly: a workspace-private leak-policy.json instance document is not a subset, not isomorphic and not a migration target of these schemas — the documents share rule vocabulary and fail-closed semantics by design, but their byte-level shapes are independent and must not be compared for compatibility. scanSurface is the execution-core generalization projection: the public, consumer-parameterized form of the same mechanism family, without any private identity, path, or approval-list interpretation of its own.
 - Keeps method identifiers, parameter schemas, and domain result semantics under consumer ownership.
 
 **Upgrade Notes**
 
-Version 0.4.0 is released on npm and the public mirror. Candidate subpaths are public but not stable; pin candidate imports to exactly 0.4.0 and validate stable objects against the 20-class registry contract.
+Version 0.5.0 is the FND-ADR-010/011 contracts line. Consumers validating declared-read-surface-result or structured-scan-policy must pin contract-spec 1.5.0 and validate against the 22-class registry.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -44,14 +43,14 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 ## Installation and Minimal Example
 
 ```sh
-npm install skill-family-contracts@0.4.0
+npm install skill-family-contracts@0.5.0
 npm info skill-family-contracts --help
 ```
 
 The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// Run from an empty directory: npm install skill-family-contracts@0.4.0
+// Run from an empty directory: npm install skill-family-contracts@0.5.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {

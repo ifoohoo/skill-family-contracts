@@ -1,5 +1,28 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.5.0 locale=en baseline=sha256:5315d7c427d017dcc274a89ccba86e7406affb309ad4d30989c770e6e2973a0c -->
+## [0.5.0] - 2026-08-16
+
+This release grows the stable Contracts registry from 20 to 22 top-level object classes under contract-spec version 1.5.0 (FND-ADR-010 and FND-ADR-011), adding the declared-read-surface result and the structured-scan policy documents.
+
+### Added
+
+- Registers declared-read-surface-result, the result envelope of the harness assertDeclaredReadSurface mechanism (FND-ADR-010), with a closed three-rule violation vocabulary and a closed five-guarantee enumeration.
+- Registers structured-scan-policy, the declarative policy of the harness structured surface scanner (FND-ADR-011), carrying allowedNetworks, approvedRegistries, approvedCoordinates, formatAdapters, symlinkPolicy, binaryPolicy and an optional hostKeyPattern.
+- Adds error-code kinds structured-scan-violation and structured-scan-invalid alongside the existing declared-read-surface kinds under the stable SFC2004 mechanism error; rule categories travel in details.rule and do not each get a code.
+- Bumps contract-spec to 1.5.0 with a new append-only audit baseline pin (contracts-1.5.0.pin.json); the 1.4.0 pin stays as a read-only archive.
+
+### Changed
+
+- The surface-scan-policy and structured-scan-policy schema descriptions now state the relationship between the public policy documents and workspace-private leak policies explicitly: a workspace-private leak-policy.json instance document is not a subset, not isomorphic and not a migration target of these schemas — the documents share rule vocabulary and fail-closed semantics by design, but their byte-level shapes are independent and must not be compared for compatibility. scanSurface is the execution-core generalization projection: the public, consumer-parameterized form of the same mechanism family, without any private identity, path, or approval-list interpretation of its own.
+- Keeps method identifiers, parameter schemas, and domain result semantics under consumer ownership.
+
+### Upgrade Notes
+
+Version 0.5.0 is the FND-ADR-010/011 contracts line. Consumers validating declared-read-surface-result or structured-scan-policy must pin contract-spec 1.5.0 and validate against the 22-class registry.
+<!-- release-skill:changelog:end version=0.5.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.4.0 locale=en baseline=sha256:813375a1145b9de729fa5d128a34b1f9a12b5942ab6f06da92486aa72df7a297 -->
 ## [0.4.0] - 2026-08-16
 

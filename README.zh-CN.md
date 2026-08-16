@@ -5,31 +5,30 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.4.0 -->
+<!-- release-skill:release-version: 0.5.0 -->
 
 机器可执行工程结构和机制协议的唯一权威包（Contracts 1.4.0，冻结）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.4.0** (2026-08-16)
+**0.5.0** (2026-08-16)
 
-本版在契约规格版本 1.4.0 不变的前提下把稳定 Contracts 登记表扩到 20 类顶层对象，补齐有限封闭语义（FND-ADR-009）的 fixtures 与 schema，并新增 fixed-set-publication 与 schema 清单候选。
+本版把稳定 Contracts 登记表从 20 类扩到 22 类顶层对象，契约规格版本升到 1.5.0（FND-ADR-010 与 FND-ADR-011），新增 declared-read-surface-result 与 structured-scan-policy 两个契约文档。
 
 **新增**
 
-- 新增两个 stable 顶层对象：token-estimate-result（确定性 UTF-8 字节计数估算结果，封闭 guarantees 枚举）与 surface-scan-policy（路径/内容模式 + 只携带不解释的 allowedUses），对象登记从 18 类增至 20 类，契约规格版本保持 1.4.0（FND-ADR-009）。
-- migration-manifest schema 增加遗留引用支持，并补齐对应 fixtures（negative-06、negative-07、negative-08、positive-03）。
-- 新增 fixed-set-publication 候选（manifest/receipt schema、fixtures 与覆盖 native-prebuild 运行时的能力适配声明），不进入稳定登记表。
-- Quickstart Profile 候选扩展 consumer-schema-inventory 与 harness-surface-inventory schema 及 inventory fixtures。
-- 落地 FND-ADR-001 门 1 放宽（一个现有 + 一个结构同型可预见消费者）与门 8「有限封闭语义」（FND-ADR-009）。
+- 新增 declared-read-surface-result：harness assertDeclaredReadSurface 机制的结果信封（FND-ADR-010），违规词汇表为闭集三值，guarantees 为闭集五值枚举。
+- 新增 structured-scan-policy：harness 结构化表面扫描器的声明式策略（FND-ADR-011），携带 allowedNetworks、approvedRegistries、approvedCoordinates、formatAdapters、symlinkPolicy、binaryPolicy 与可选 hostKeyPattern。
+- 在稳定 SFC2004 机制错误下新增 structured-scan-violation 与 structured-scan-invalid 错误码种类，与既有 declared-read-surface 种类并列；规则类别经 details.rule 承载，不逐类别造码。
+- 契约规格升到 1.5.0，新增 append-only 审计基线 pin（contracts-1.5.0.pin.json）；1.4.0 pin 保留为只读存档。
 
 **变更**
 
-- CONTRACTS_VERSION 保持 1.4.0：同一契约规格版本线现在覆盖 20 类对象集，而已发布的 0.3.0 字节携带的是该版本的 18 类对象集。
+- surface-scan-policy 与 structured-scan-policy 的 schema description 现在显式说明公开策略文档与工作区私有 leak 策略的关系：工作区私有的 leak-policy.json 实例文档既不是这些 schema 的子集、也不同构、更不是迁移目标——两类文档按设计共享规则词汇与失败关闭语义，但字节级形状相互独立，不得比较兼容性。scanSurface 是执行内核通用化投影：同一机制族的公开、消费者参数化形态，自身不解释任何私有身份、路径或批准清单。
 - 方法标识、参数 Schema 与领域结果语义继续归消费者所有。
 
 **升级说明**
 
-0.4.0 已发布到 npm 与 public 镜像仓。candidate 子路径公开但不稳定；candidate 导入必须精确锁定 0.4.0，稳定对象按 20 类登记表契约校验。
+0.5.0 是 FND-ADR-010/011 契约线。校验 declared-read-surface-result 或 structured-scan-policy 的消费者必须锁定契约规格 1.5.0，并按 22 类登记表校验。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -45,14 +44,14 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 ## 安装和最小示例
 
 ```sh
-npm install skill-family-contracts@0.4.0
+npm install skill-family-contracts@0.5.0
 npm info skill-family-contracts --help
 ```
 
 最小示例从空目录开始，演示如何校验一份已登记契约对象：
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.4.0
+// 从空目录运行：npm install skill-family-contracts@0.5.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {

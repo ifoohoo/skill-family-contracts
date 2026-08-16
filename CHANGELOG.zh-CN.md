@@ -1,5 +1,28 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.5.0 locale=zh-CN baseline=sha256:864f205c202a7261c33ba8ac26fadd22b30d8f10c9659ec3c5c893284f67eb79 -->
+## [0.5.0] - 2026-08-16
+
+本版把稳定 Contracts 登记表从 20 类扩到 22 类顶层对象，契约规格版本升到 1.5.0（FND-ADR-010 与 FND-ADR-011），新增 declared-read-surface-result 与 structured-scan-policy 两个契约文档。
+
+### 新增
+
+- 新增 declared-read-surface-result：harness assertDeclaredReadSurface 机制的结果信封（FND-ADR-010），违规词汇表为闭集三值，guarantees 为闭集五值枚举。
+- 新增 structured-scan-policy：harness 结构化表面扫描器的声明式策略（FND-ADR-011），携带 allowedNetworks、approvedRegistries、approvedCoordinates、formatAdapters、symlinkPolicy、binaryPolicy 与可选 hostKeyPattern。
+- 在稳定 SFC2004 机制错误下新增 structured-scan-violation 与 structured-scan-invalid 错误码种类，与既有 declared-read-surface 种类并列；规则类别经 details.rule 承载，不逐类别造码。
+- 契约规格升到 1.5.0，新增 append-only 审计基线 pin（contracts-1.5.0.pin.json）；1.4.0 pin 保留为只读存档。
+
+### 变更
+
+- surface-scan-policy 与 structured-scan-policy 的 schema description 现在显式说明公开策略文档与工作区私有 leak 策略的关系：工作区私有的 leak-policy.json 实例文档既不是这些 schema 的子集、也不同构、更不是迁移目标——两类文档按设计共享规则词汇与失败关闭语义，但字节级形状相互独立，不得比较兼容性。scanSurface 是执行内核通用化投影：同一机制族的公开、消费者参数化形态，自身不解释任何私有身份、路径或批准清单。
+- 方法标识、参数 Schema 与领域结果语义继续归消费者所有。
+
+### 升级说明
+
+0.5.0 是 FND-ADR-010/011 契约线。校验 declared-read-surface-result 或 structured-scan-policy 的消费者必须锁定契约规格 1.5.0，并按 22 类登记表校验。
+<!-- release-skill:changelog:end version=0.5.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.4.0 locale=zh-CN baseline=sha256:99c7f1d548dff69c87156f903efe5b05fa214299c01c9db4d79b0a322fe8ee5d -->
 ## [0.4.0] - 2026-08-16
 
