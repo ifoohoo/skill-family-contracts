@@ -1,5 +1,29 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.4.0 locale=zh-CN baseline=sha256:99c7f1d548dff69c87156f903efe5b05fa214299c01c9db4d79b0a322fe8ee5d -->
+## [0.4.0] - 2026-08-16
+
+本版在契约规格版本 1.4.0 不变的前提下把稳定 Contracts 登记表扩到 20 类顶层对象，补齐有限封闭语义（FND-ADR-009）的 fixtures 与 schema，并新增 fixed-set-publication 与 schema 清单候选。
+
+### 新增
+
+- 新增两个 stable 顶层对象：token-estimate-result（确定性 UTF-8 字节计数估算结果，封闭 guarantees 枚举）与 surface-scan-policy（路径/内容模式 + 只携带不解释的 allowedUses），对象登记从 18 类增至 20 类，契约规格版本保持 1.4.0（FND-ADR-009）。
+- migration-manifest schema 增加遗留引用支持，并补齐对应 fixtures（negative-06、negative-07、negative-08、positive-03）。
+- 新增 fixed-set-publication 候选（manifest/receipt schema、fixtures 与覆盖 native-prebuild 运行时的能力适配声明），不进入稳定登记表。
+- Quickstart Profile 候选扩展 consumer-schema-inventory 与 harness-surface-inventory schema 及 inventory fixtures。
+- 落地 FND-ADR-001 门 1 放宽（一个现有 + 一个结构同型可预见消费者）与门 8「有限封闭语义」（FND-ADR-009）。
+
+### 变更
+
+- CONTRACTS_VERSION 保持 1.4.0：同一契约规格版本线现在覆盖 20 类对象集，而已发布的 0.3.0 字节携带的是该版本的 18 类对象集。
+- 方法标识、参数 Schema 与领域结果语义继续归消费者所有。
+
+### 升级说明
+
+0.4.0 已发布到 npm 与 public 镜像仓。candidate 子路径公开但不稳定；candidate 导入必须精确锁定 0.4.0，稳定对象按 20 类登记表契约校验。
+<!-- release-skill:changelog:end version=0.4.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.3.0 locale=zh-CN baseline=sha256:5f1c4cf56cc336279cbc6f11bc6cf8ce0a7524f454ff6589e067e828707a7cc7 -->
 ## [0.3.0] - 2026-08-12
 

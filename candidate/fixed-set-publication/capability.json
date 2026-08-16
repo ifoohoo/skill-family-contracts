@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "kind": "skill-family.fixed-set-publication-capability-fit",
+  "status": "stable",
+  "runtimeSupport": "native-prebuild",
+  "stableRegistry": true,
+  "implementationExported": true,
+  "supportedPlatforms": [
+    "darwin-arm64",
+    "darwin-x64",
+    "linux-arm64-gnu",
+    "linux-x64-gnu"
+  ],
+  "requiredPrimitives": [
+    "darwin.renameatx_np(RENAME_EXCL)",
+    "linux.renameat2(RENAME_NOREPLACE)"
+  ],
+  "blockingReason": "Stable for the four supported platform keys (darwin-arm64, darwin-x64, linux-arm64-gnu, linux-x64-gnu). Windows, Linux musl, and unknown OS/architecture/libc combinations remain unsupported and fail closed."
+}

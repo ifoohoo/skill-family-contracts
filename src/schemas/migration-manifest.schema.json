@@ -38,6 +38,32 @@
         }
       }
     },
+    "legacyReferences": {
+      "type": "array",
+      "description": "Legacy text references that must exit from retained files: each entry declares a file that is kept for other purposes, a literal text that must no longer appear in it, and the facility that replaces the old usage. The file itself is never deleted by this mechanism — only the old text must be absent.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "text", "replacedBy"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._-]+(/[A-Za-z0-9._-]+)*$",
+            "description": "Relative POSIX path of a retained file. Shape only: containment is enforced at assessment time."
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Exact literal text that must be absent from the file. No regex; byte-exact UTF-8 match."
+          },
+          "replacedBy": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The replacement facility that supersedes this old reference. Empty is never valid."
+          }
+        }
+      }
+    },
     "exceptions": {
       "type": "array",
       "items": {

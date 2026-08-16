@@ -1,0 +1,38 @@
+{
+  "fixtureId": "fixed-set.manifest.negative.directory-mode",
+  "schema": "manifest",
+  "expectValid": false,
+  "data": {
+    "schemaVersion": 1,
+    "kind": "skill-family.fixed-set-publication-manifest",
+    "source": {
+      "rootBinding": {
+        "kind": "trusted-filesystem-root-binding",
+        "digestAlgorithm": "sha256",
+        "basis": "canonical-realpath-device-inode-type-mode-v1",
+        "digest": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "root": { "type": "directory", "mode": 493, "device": "1", "inode": "1" },
+      "directories": [
+        { "path": "nested", "type": "directory", "mode": 512, "device": "1", "inode": "2" }
+      ],
+      "closureDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "target": {
+      "rootBinding": {
+        "kind": "trusted-filesystem-root-binding",
+        "digestAlgorithm": "sha256",
+        "basis": "canonical-realpath-device-inode-type-mode-v1",
+        "digest": "3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      "root": { "type": "directory", "mode": 493, "device": "3", "inode": "3" },
+      "directories": [],
+      "closureDigest": "4444444444444444444444444444444444444444444444444444444444444444",
+      "expectation": "absent"
+    },
+    "members": [
+      { "path": "nested/file", "type": "regular", "mode": 420, "bytes": 1, "sha256": "5555555555555555555555555555555555555555555555555555555555555555" }
+    ],
+    "digest": "6666666666666666666666666666666666666666666666666666666666666666"
+  }
+}

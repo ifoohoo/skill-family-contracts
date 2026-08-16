@@ -138,6 +138,20 @@
       "dialect": "2020-12",
       "status": "stable",
       "file": "src/schemas/state-snapshot-metadata.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/token-estimate-result.json",
+      "object": "token-estimate-result",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/token-estimate-result.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/surface-scan-policy.json",
+      "object": "surface-scan-policy",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/surface-scan-policy.schema.json"
     }
   ],
   "dialects": {

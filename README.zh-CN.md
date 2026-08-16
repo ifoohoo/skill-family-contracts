@@ -5,28 +5,31 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.3.0 -->
+<!-- release-skill:release-version: 0.4.0 -->
 
 机器可执行工程结构和机制协议的唯一权威包（Contracts 1.4.0，冻结）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.3.0** (2026-08-12)
+**0.4.0** (2026-08-16)
 
-本源码候选版以 Quickstart Profile v2 替换原 candidate，同时保持稳定 Contracts 登记表和内核协议不变。
+本版在契约规格版本 1.4.0 不变的前提下把稳定 Contracts 登记表扩到 20 类顶层对象，补齐有限封闭语义（FND-ADR-009）的 fixtures 与 schema，并新增 fixed-set-publication 与 schema 清单候选。
 
 **新增**
 
-- 新增 v2 协议定义，以业务中立的 execute-method 作为唯一操作，并按真实 $id 登记 Resource、Task、Result Schema 集合。
-- 收紧 Task 与 Result 的 JSON-safe 边界、单一 path-backed observation、终态输出形状及 evidence 精确回指。
+- 新增两个 stable 顶层对象：token-estimate-result（确定性 UTF-8 字节计数估算结果，封闭 guarantees 枚举）与 surface-scan-policy（路径/内容模式 + 只携带不解释的 allowedUses），对象登记从 18 类增至 20 类，契约规格版本保持 1.4.0（FND-ADR-009）。
+- migration-manifest schema 增加遗留引用支持，并补齐对应 fixtures（negative-06、negative-07、negative-08、positive-03）。
+- 新增 fixed-set-publication 候选（manifest/receipt schema、fixtures 与覆盖 native-prebuild 运行时的能力适配声明），不进入稳定登记表。
+- Quickstart Profile 候选扩展 consumer-schema-inventory 与 harness-surface-inventory schema 及 inventory fixtures。
+- 落地 FND-ADR-001 门 1 放宽（一个现有 + 一个结构同型可预见消费者）与门 8「有限封闭语义」（FND-ADR-009）。
 
 **变更**
 
-- 替换与 0.2.1 不兼容的 candidate 面；仍依赖 v1 的消费者必须继续精确锁定 0.2.1。
+- CONTRACTS_VERSION 保持 1.4.0：同一契约规格版本线现在覆盖 20 类对象集，而已发布的 0.3.0 字节携带的是该版本的 18 类对象集。
 - 方法标识、参数 Schema 与领域结果语义继续归消费者所有。
 
 **升级说明**
 
-0.3.0 当前只是本地、未发布的源码候选。candidate 导入必须精确锁定包版本，v1 接入完成迁移后才能选用本版本。
+0.4.0 已发布到 npm 与 public 镜像仓。candidate 子路径公开但不稳定；candidate 导入必须精确锁定 0.4.0，稳定对象按 20 类登记表契约校验。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -42,14 +45,14 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 ## 安装和最小示例
 
 ```sh
-npm install skill-family-contracts@0.3.0
+npm install skill-family-contracts@0.4.0
 npm info skill-family-contracts --help
 ```
 
 最小示例从空目录开始，演示如何校验一份已登记契约对象：
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.3.0
+// 从空目录运行：npm install skill-family-contracts@0.4.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -82,9 +85,9 @@ import {
 } from "skill-family-contracts/candidate/quickstart-profile";
 ```
 
-0.3.0 携带 Quickstart Profile v2。协议把业务中立的操作固定为 `execute-method`，Resource、Task、Result Schema 通过真实的 v2 `$id` 互相解析。Foundation 只校验 JSON-safe 交换结构；方法标识、参数 Schema 与领域结果继续归消费者所有。
+0.4.0 携带 Quickstart Profile v2。协议把业务中立的操作固定为 `execute-method`，Resource、Task、Result Schema 通过真实的 v2 `$id` 互相解析。Foundation 只校验 JSON-safe 交换结构；方法标识、参数 Schema 与领域结果继续归消费者所有。
 
-以上子路径公开但**不稳定**。这些 Schema 不进入 `src/registry.json`，也不扩张十八类稳定对象，后续小版本可以修改或移除。评估 v2 时应精确锁定 `0.3.0`；仍依赖 candidate v1 的接入必须继续精确锁定 `0.2.1`。
+以上子路径公开但**不稳定**。这些 Schema 不进入 `src/registry.json`，也不扩张十八类稳定对象，后续小版本可以修改或移除。评估 v2 时应精确锁定 `0.4.0`；仍依赖 candidate v1 的接入必须继续精确锁定 `0.2.1`。
 
 ## 典型使用场景
 
@@ -220,7 +223,7 @@ import {
 
 ### Capability selection
 
-- `foundation.contracts.object-validation`：Ajv 双方言校验 18 类对象。
+- `foundation.contracts.object-validation`：Ajv 双方言校验 20 类对象。
 - `foundation.contracts.registry-protocol`：Schema `$id` 与协议名登记查询。
 - `foundation.contracts.kernel-protocol`：operation-request/result 协议。
 - `foundation.contracts.mandatory-checks`：九类强制规则与未解析引用。
@@ -250,7 +253,7 @@ import {
 
 ### Architectural invariants
 
-- 18 类顶层对象集合固定，新增需 ADR；错误码冻结不漂移。
+- 20 类顶层对象集合固定，新增需 ADR；错误码冻结不漂移。
 - 校验器仅 Ajv 8.20.0（精确 pin），不接受其他实现。
 
 ### Route elsewhere when

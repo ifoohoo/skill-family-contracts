@@ -1,0 +1,42 @@
+{
+  "fixtureId": "fixed-set.manifest.negative.path-escape",
+  "schema": "manifest",
+  "expectValid": false,
+  "data": {
+    "schemaVersion": 1,
+    "kind": "skill-family.fixed-set-publication-manifest",
+    "source": {
+      "rootBinding": {
+        "kind": "trusted-filesystem-root-binding",
+        "digestAlgorithm": "sha256",
+        "basis": "canonical-realpath-device-inode-type-mode-v1",
+        "digest": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "root": { "type": "directory", "mode": 493, "device": "1", "inode": "101" },
+      "directories": [],
+      "closureDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "target": {
+      "rootBinding": {
+        "kind": "trusted-filesystem-root-binding",
+        "digestAlgorithm": "sha256",
+        "basis": "canonical-realpath-device-inode-type-mode-v1",
+        "digest": "3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      "root": { "type": "directory", "mode": 493, "device": "3", "inode": "301" },
+      "directories": [],
+      "closureDigest": "6666666666666666666666666666666666666666666666666666666666666666",
+      "expectation": "absent"
+    },
+    "members": [
+      {
+        "path": "../outside.txt",
+        "type": "regular",
+        "mode": 420,
+        "bytes": 1,
+        "sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+      }
+    ],
+    "digest": "5555555555555555555555555555555555555555555555555555555555555555"
+  }
+}

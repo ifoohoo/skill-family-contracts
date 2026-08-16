@@ -1,0 +1,53 @@
+{
+  "fixtureId": "fixed-set.manifest.positive.versioned-candidate",
+  "schema": "manifest",
+  "expectValid": true,
+  "data": {
+    "schemaVersion": 1,
+    "kind": "skill-family.fixed-set-publication-manifest",
+    "source": {
+      "rootBinding": {
+        "kind": "trusted-filesystem-root-binding",
+        "digestAlgorithm": "sha256",
+        "basis": "canonical-realpath-device-inode-type-mode-v1",
+        "digest": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "root": { "type": "directory", "mode": 448, "device": "7", "inode": "701" },
+      "directories": [
+        { "path": "versions", "type": "directory", "mode": 448, "device": "7", "inode": "702" },
+        { "path": "versions/v1", "type": "directory", "mode": 448, "device": "7", "inode": "703" },
+        { "path": "versions/v1/scripts", "type": "directory", "mode": 448, "device": "7", "inode": "704" }
+      ],
+      "closureDigest": "8888888888888888888888888888888888888888888888888888888888888888"
+    },
+    "target": {
+      "rootBinding": {
+        "kind": "trusted-filesystem-root-binding",
+        "digestAlgorithm": "sha256",
+        "basis": "canonical-realpath-device-inode-type-mode-v1",
+        "digest": "9999999999999999999999999999999999999999999999999999999999999999"
+      },
+      "root": { "type": "directory", "mode": 448, "device": "9", "inode": "901" },
+      "directories": [],
+      "closureDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "expectation": "absent"
+    },
+    "members": [
+      {
+        "path": "versions/v1/SKILL.md",
+        "type": "regular",
+        "mode": 420,
+        "bytes": 31,
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "path": "versions/v1/scripts/runner.py",
+        "type": "regular",
+        "mode": 493,
+        "bytes": 42,
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    ],
+    "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  }
+}

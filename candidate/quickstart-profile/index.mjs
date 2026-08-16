@@ -17,9 +17,16 @@ const documents = Object.freeze({
   resource: load("resource.schema.json"),
   task: load("task.schema.json"),
   result: load("result.schema.json"),
+  inventory: load("consumer-schema-inventory.schema.json"),
+  surfaceInventory: load("harness-surface-inventory.schema.json"),
 });
 
 const VALIDATE_KINDS = Object.freeze(["resource", "task", "result"]);
+const INVENTORY_KIND = "inventory";
+const SURFACE_INVENTORY_KIND = "surfaceInventory";
+const SURFACE_DETECTORS_KIND = "surfaceDetectors";
+const SURFACE_DETECTORS_SCHEMA_ID =
+  "https://contracts.skill-family.example/candidate/quickstart-profile/v2/harness-surface-detectors.json";
 
 const STABLE_ENVELOPE_IDS = Object.freeze([
   "https://contracts.skill-family.example/v1/operation-request.json",
@@ -41,6 +48,9 @@ export const QUICKSTART_PROTOCOL = Object.freeze({
 export const QUICKSTART_OPERATION = Object.freeze(
   documents.protocol.operations.map((operation) => operation.name),
 );
+export const CONSUMER_SCHEMA_INVENTORY_KIND = "skill-family.consumer-schema-inventory";
+export const HARNESS_SURFACE_INVENTORY_KIND = "skill-family.harness-surface-inventory";
+export const HARNESS_SURFACE_DETECTORS_KIND = "skill-family.harness-surface-detectors";
 
 /** The frozen candidate protocol definition document (not a JSON Schema). */
 export function loadQuickstartProtocol() {
@@ -63,6 +73,15 @@ export function listQuickstartProfileSchemas() {
     $id: documents[kind].$id,
     document: structuredClone(documents[kind]),
   }));
+}
+
+/** Candidate build-time contract; it is not a Quickstart runtime document. */
+export function loadConsumerSchemaInventorySchema() {
+  return structuredClone(documents.inventory);
+}
+
+export function loadHarnessSurfaceInventorySchema() {
+  return structuredClone(documents.surfaceInventory);
 }
 
 // The stable envelopes declare a date-time format; the candidate instance
@@ -106,10 +125,15 @@ function getCollection() {
   for (const kind of VALIDATE_KINDS) {
     ajv.addSchema(documents[kind]);
   }
+  ajv.addSchema(documents.inventory);
+  ajv.addSchema(documents.surfaceInventory);
   collection = Object.freeze(
-    Object.fromEntries(
-      VALIDATE_KINDS.map((kind) => [kind, ajv.getSchema(documents[kind].$id)]),
-    ),
+    {
+      ...Object.fromEntries(
+        [...VALIDATE_KINDS, INVENTORY_KIND, SURFACE_INVENTORY_KIND].map((kind) => [kind, ajv.getSchema(documents[kind].$id)]),
+      ),
+      [SURFACE_DETECTORS_KIND]: ajv.getSchema(SURFACE_DETECTORS_SCHEMA_ID),
+    },
   );
   return collection;
 }
@@ -255,4 +279,68 @@ export function validateQuickstartProfileDocument(kind, document) {
     errors: valid ? [] : normalizeErrors(validate.errors),
     data,
   };
+}
+
+/** Validate the complete consumer-side Schema ownership inventory. */
+export function validateConsumerSchemaInventoryDocument(document) {
+  const target = document === undefined ? null : document;
+  const jsonIssue = findNonJsonValue(target);
+  if (jsonIssue) {
+    return {
+      valid: false,
+      errorCode: "SFC1001",
+      errors: [{
+        keyword: "json-value",
+        instancePath: jsonIssue.instancePath,
+        schemaPath: "#",
+        message: `value is not representable as JSON: ${jsonIssue.reason}`,
+        params: { reason: jsonIssue.reason },
+      }],
+      data: null,
+    };
+  }
+  const data = structuredClone(target);
+  const validate = getCollection()[INVENTORY_KIND];
+  const valid = validate(data) === true;
+  return {
+    valid,
+    errorCode: valid ? null : "SFC1001",
+    errors: valid ? [] : normalizeErrors(validate.errors),
+    data,
+  };
+}
+
+export function validateHarnessSurfaceInventoryDocument(document) {
+  const target = document === undefined ? null : document;
+  const jsonIssue = findNonJsonValue(target);
+  if (jsonIssue) {
+    return {
+      valid: false,
+      errorCode: "SFC1001",
+      errors: [{ keyword: "json-value", instancePath: jsonIssue.instancePath, schemaPath: "#", message: jsonIssue.reason, params: { reason: jsonIssue.reason } }],
+      data: null,
+    };
+  }
+  const data = structuredClone(target);
+  const validate = getCollection()[SURFACE_INVENTORY_KIND];
+  const valid = validate(data) === true;
+  return { valid, errorCode: valid ? null : "SFC1001", errors: valid ? [] : normalizeErrors(validate.errors), data };
+}
+
+/** Validate explicit Harness detector clauses without changing receipt v1. */
+export function validateHarnessSurfaceDetectorDocument(document) {
+  const target = document === undefined ? null : document;
+  const jsonIssue = findNonJsonValue(target);
+  if (jsonIssue) {
+    return {
+      valid: false,
+      errorCode: "SFC1001",
+      errors: [{ keyword: "json-value", instancePath: jsonIssue.instancePath, schemaPath: "#", message: jsonIssue.reason, params: { reason: jsonIssue.reason } }],
+      data: null,
+    };
+  }
+  const data = structuredClone(target);
+  const validate = getCollection()[SURFACE_DETECTORS_KIND];
+  const valid = validate(data) === true;
+  return { valid, errorCode: valid ? null : "SFC1001", errors: valid ? [] : normalizeErrors(validate.errors), data };
 }

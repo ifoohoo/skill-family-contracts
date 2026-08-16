@@ -7,6 +7,7 @@ locales:
       added:
         - Adds the v2 protocol definition with the business-neutral execute-method operation and a real $id-indexed Resource, Task, and Result schema collection.
         - Enforces JSON-safe Task and Result boundaries, one path-backed observation, terminal output shapes, and exact evidence bindings.
+        - Registers the token-estimate-result schema (deterministic UTF-8 byte-count estimation result with a closed guarantee enumeration) and the surface-scan-policy schema (path/content patterns plus carried-only allowedUses) as stable top-level objects, raising the object registry from 18 to 20 classes (FND-ADR-009).
       changed:
         - Replaces the incompatible 0.2.1 candidate surface; consumers that still require v1 must remain pinned to exactly 0.2.1.
         - Keeps method identifiers, parameter schemas, and domain result semantics under consumer ownership.
@@ -17,6 +18,7 @@ locales:
       added:
         - 新增 v2 协议定义，以业务中立的 execute-method 作为唯一操作，并按真实 $id 登记 Resource、Task、Result Schema 集合。
         - 收紧 Task 与 Result 的 JSON-safe 边界、单一 path-backed observation、终态输出形状及 evidence 精确回指。
+        - 新增 token-estimate-result（确定性 UTF-8 字节计数估算结果，封闭 guarantees 枚举）与 surface-scan-policy（路径/内容模式 + 只携带不解释的 allowedUses）两个 stable 顶层对象，对象登记从 18 类增至 20 类（FND-ADR-009）。
       changed:
         - 替换与 0.2.1 不兼容的 candidate 面；仍依赖 v1 的消费者必须继续精确锁定 0.2.1。
         - 方法标识、参数 Schema 与领域结果语义继续归消费者所有。

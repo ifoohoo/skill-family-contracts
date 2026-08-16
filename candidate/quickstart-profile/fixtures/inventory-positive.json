@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "kind": "skill-family.consumer-schema-inventory",
+  "schemaRoots": ["schemas", "references"],
+  "schemas": [
+    {
+      "path": "schemas/widget.schema.json",
+      "$id": "https://consumer.example/widget.schema.json",
+      "disposition": "foundation-bundle",
+      "owner": "foundation-bundle"
+    },
+    {
+      "path": "references/domain-note.schema.json",
+      "$id": "https://consumer.example/domain-note.schema.json",
+      "disposition": "consumer-retained",
+      "owner": "fictional-domain-team",
+      "retention": {
+        "reason": "The schema defines consumer-owned domain meaning.",
+        "exitCriterion": "Remove only when the consumer removes the domain document."
+      }
+    }
+  ]
+}

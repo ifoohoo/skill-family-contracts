@@ -4,28 +4,31 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.3.0 -->
+<!-- release-skill:release-version: 0.4.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols (Contracts 1.4.0, frozen).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.3.0** (2026-08-12)
+**0.4.0** (2026-08-16)
 
-This source candidate replaces the Quickstart Profile candidate with v2 while preserving the stable Contracts registry and kernel protocol.
+This release extends the stable Contracts registry to 20 top-level object classes under the unchanged contract-spec version 1.4.0, adds finite-closed-semantics fixtures and schemas (FND-ADR-009), and ships new fixed-set-publication and schema-inventory candidates.
 
 **Added**
 
-- Adds the v2 protocol definition with the business-neutral execute-method operation and a real $id-indexed Resource, Task, and Result schema collection.
-- Enforces JSON-safe Task and Result boundaries, one path-backed observation, terminal output shapes, and exact evidence bindings.
+- Registers two new stable top-level objects, token-estimate-result (deterministic UTF-8 byte-count estimation result with a closed guarantee enumeration) and surface-scan-policy (path/content patterns plus carried-only allowedUses), raising the object registry from 18 to 20 classes under contract-spec version 1.4.0 (FND-ADR-009).
+- Extends the migration-manifest schema with legacy reference support and adds the matching fixtures (negative-06, negative-07, negative-08, positive-03).
+- Adds the fixed-set-publication candidate (manifest and receipt schemas, fixtures, and a capability-fit declaration covering native-prebuild runtimes) outside the stable registry.
+- Extends the Quickstart Profile candidate with consumer-schema-inventory and harness-surface-inventory schemas plus inventory fixtures.
+- Applies the FND-ADR-001 gate-1 relaxation (one existing plus one structurally identical foreseeable consumer) and introduces gate 8 for finite closed semantics (FND-ADR-009).
 
 **Changed**
 
-- Replaces the incompatible 0.2.1 candidate surface; consumers that still require v1 must remain pinned to exactly 0.2.1.
+- Keeps CONTRACTS_VERSION at 1.4.0; the same contract-spec line now covers the 20-object set, while the published 0.3.0 bytes carry the 18-object set of that version.
 - Keeps method identifiers, parameter schemas, and domain result semantics under consumer ownership.
 
 **Upgrade Notes**
 
-Version 0.3.0 is a local, unpublished source candidate. Pin all candidate imports to an exact package version and migrate v1 integrations before selecting this version.
+Version 0.4.0 is released on npm and the public mirror. Candidate subpaths are public but not stable; pin candidate imports to exactly 0.4.0 and validate stable objects against the 20-class registry contract.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -41,14 +44,14 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 ## Installation and Minimal Example
 
 ```sh
-npm install skill-family-contracts@0.3.0
+npm install skill-family-contracts@0.4.0
 npm info skill-family-contracts --help
 ```
 
 The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// Run from an empty directory: npm install skill-family-contracts@0.3.0
+// Run from an empty directory: npm install skill-family-contracts@0.4.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -81,9 +84,9 @@ import {
 } from "skill-family-contracts/candidate/quickstart-profile";
 ```
 
-Version 0.3.0 carries Quickstart Profile v2. Its protocol fixes the business-neutral operation to `execute-method`; Resource, Task, and Result schemas resolve one another through their real v2 `$id` values. Foundation validates the JSON-safe exchange shape, while the consumer owns method identifiers, parameter schemas, and domain results.
+Version 0.4.0 carries Quickstart Profile v2. Its protocol fixes the business-neutral operation to `execute-method`; Resource, Task, and Result schemas resolve one another through their real v2 `$id` values. Foundation validates the JSON-safe exchange shape, while the consumer owns method identifiers, parameter schemas, and domain results.
 
-The subpath is public but **not stable**. Its schemas remain absent from `src/registry.json`, do not expand the eighteen stable object classes, and may change or be removed in a later minor release. Pin exactly `0.3.0` when evaluating v2. Integrations that still require candidate v1 must stay pinned to exactly `0.2.1`.
+The subpath is public but **not stable**. Its schemas remain absent from `src/registry.json`, do not expand the eighteen stable object classes, and may change or be removed in a later minor release. Pin exactly `0.4.0` when evaluating v2. Integrations that still require candidate v1 must stay pinned to exactly `0.2.1`.
 
 ## Typical Use Cases
 
@@ -219,7 +222,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Capability selection
 
-- `foundation.contracts.object-validation`: Ajv dual-dialect validation of the 18 object classes.
+- `foundation.contracts.object-validation`: Ajv dual-dialect validation of the 20 object classes.
 - `foundation.contracts.registry-protocol`: Schema `$id` and protocol-name registry query.
 - `foundation.contracts.kernel-protocol`: operation-request/result protocol.
 - `foundation.contracts.mandatory-checks`: nine mandatory rules and unresolved references.
@@ -249,7 +252,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Architectural invariants
 
-- The set of 18 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift.
+- The set of 20 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift.
 - The validator is exclusively Ajv 8.20.0 (exact pin); no other implementation is accepted.
 
 ### Route elsewhere when

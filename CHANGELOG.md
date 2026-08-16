@@ -1,5 +1,29 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.4.0 locale=en baseline=sha256:813375a1145b9de729fa5d128a34b1f9a12b5942ab6f06da92486aa72df7a297 -->
+## [0.4.0] - 2026-08-16
+
+This release extends the stable Contracts registry to 20 top-level object classes under the unchanged contract-spec version 1.4.0, adds finite-closed-semantics fixtures and schemas (FND-ADR-009), and ships new fixed-set-publication and schema-inventory candidates.
+
+### Added
+
+- Registers two new stable top-level objects, token-estimate-result (deterministic UTF-8 byte-count estimation result with a closed guarantee enumeration) and surface-scan-policy (path/content patterns plus carried-only allowedUses), raising the object registry from 18 to 20 classes under contract-spec version 1.4.0 (FND-ADR-009).
+- Extends the migration-manifest schema with legacy reference support and adds the matching fixtures (negative-06, negative-07, negative-08, positive-03).
+- Adds the fixed-set-publication candidate (manifest and receipt schemas, fixtures, and a capability-fit declaration covering native-prebuild runtimes) outside the stable registry.
+- Extends the Quickstart Profile candidate with consumer-schema-inventory and harness-surface-inventory schemas plus inventory fixtures.
+- Applies the FND-ADR-001 gate-1 relaxation (one existing plus one structurally identical foreseeable consumer) and introduces gate 8 for finite closed semantics (FND-ADR-009).
+
+### Changed
+
+- Keeps CONTRACTS_VERSION at 1.4.0; the same contract-spec line now covers the 20-object set, while the published 0.3.0 bytes carry the 18-object set of that version.
+- Keeps method identifiers, parameter schemas, and domain result semantics under consumer ownership.
+
+### Upgrade Notes
+
+Version 0.4.0 is released on npm and the public mirror. Candidate subpaths are public but not stable; pin candidate imports to exactly 0.4.0 and validate stable objects against the 20-class registry contract.
+<!-- release-skill:changelog:end version=0.4.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.3.0 locale=en baseline=sha256:32a8df58662f9dbb64e142cb8a2b329556b4bd59872e48fcbc317cc971cbdd7c -->
 ## [0.3.0] - 2026-08-12
 

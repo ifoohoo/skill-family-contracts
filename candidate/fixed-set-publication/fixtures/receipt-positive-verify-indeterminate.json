@@ -1,0 +1,27 @@
+{
+  "fixtureId": "fixed-set.receipt.positive.verify-indeterminate",
+  "schema": "receipt",
+  "expectValid": true,
+  "data": {
+    "schemaVersion": 1,
+    "kind": "skill-family.fixed-set-publication-receipt",
+    "manifestDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "targetRootBinding": {
+      "kind": "trusted-filesystem-root-binding",
+      "digestAlgorithm": "sha256",
+      "basis": "canonical-realpath-device-inode-type-mode-v1",
+      "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "platform": "darwin",
+    "primitive": "darwin-renameatx-noreplace-v1",
+    "status": "indeterminate",
+    "targetState": "indeterminate",
+    "commitState": "rename-committed",
+    "verification": "failed",
+    "durability": "indeterminate",
+    "error": {
+      "code": "POST_VERIFY_FAILED",
+      "message": "Rename committed, but the target identity could not be verified."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "kind": "skill-family.consumer-schema-inventory",
+  "schemaRoots": ["schemas"],
+  "schemas": [
+    {
+      "path": "schemas/domain-note.schema.json",
+      "$id": "https://consumer.example/domain-note.schema.json",
+      "disposition": "consumer-retained",
+      "owner": "fictional-domain-team"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "fixtureId": "fixed-set.receipt.negative.partial",
+  "schema": "receipt",
+  "expectValid": false,
+  "data": {
+    "schemaVersion": 1,
+    "kind": "skill-family.fixed-set-publication-receipt",
+    "manifestDigest": "6666666666666666666666666666666666666666666666666666666666666666",
+    "targetRootBinding": {
+      "kind": "trusted-filesystem-root-binding",
+      "digestAlgorithm": "sha256",
+      "basis": "canonical-realpath-device-inode-type-mode-v1",
+      "digest": "7777777777777777777777777777777777777777777777777777777777777777"
+    },
+    "platform": "darwin",
+    "primitive": "darwin-renameatx-noreplace-v1",
+    "status": "partially_applied",
+    "targetState": "published",
+    "commitState": "rename-committed",
+    "verification": "verified",
+    "durability": "indeterminate",
+    "publishedClosureDigest": "8888888888888888888888888888888888888888888888888888888888888888",
+    "memberCount": 1
+  }
+}
