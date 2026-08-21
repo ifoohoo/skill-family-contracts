@@ -5,30 +5,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.5.0 -->
+<!-- release-skill:release-version: 0.7.0 -->
 
 机器可执行工程结构和机制协议的唯一权威包（Contracts 1.4.0，冻结）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.5.0** (2026-08-16)
+**0.7.0** (2026-08-21)
 
-本版把稳定 Contracts 登记表从 20 类扩到 22 类顶层对象，契约规格版本升到 1.5.0（FND-ADR-010 与 FND-ADR-011），新增 declared-read-surface-result 与 structured-scan-policy 两个契约文档。
-
-**新增**
-
-- 新增 declared-read-surface-result：harness assertDeclaredReadSurface 机制的结果信封（FND-ADR-010），违规词汇表为闭集三值，guarantees 为闭集五值枚举。
-- 新增 structured-scan-policy：harness 结构化表面扫描器的声明式策略（FND-ADR-011），携带 allowedNetworks、approvedRegistries、approvedCoordinates、formatAdapters、symlinkPolicy、binaryPolicy 与可选 hostKeyPattern。
-- 在稳定 SFC2004 机制错误下新增 structured-scan-violation 与 structured-scan-invalid 错误码种类，与既有 declared-read-surface 种类并列；规则类别经 details.rule 承载，不逐类别造码。
-- 契约规格升到 1.5.0，新增 append-only 审计基线 pin（contracts-1.5.0.pin.json）；1.4.0 pin 保留为只读存档。
+随 Foundation 0.7.0 线锁步升版；机器合同不变。
 
 **变更**
 
-- surface-scan-policy 与 structured-scan-policy 的 schema description 现在显式说明公开策略文档与工作区私有 leak 策略的关系：工作区私有的 leak-policy.json 实例文档既不是这些 schema 的子集、也不同构、更不是迁移目标——两类文档按设计共享规则词汇与失败关闭语义，但字节级形状相互独立，不得比较兼容性。scanSurface 是执行内核通用化投影：同一机制族的公开、消费者参数化形态，自身不解释任何私有身份、路径或批准清单。
-- 方法标识、参数 Schema 与领域结果语义继续归消费者所有。
+- 机器合同无变更——CONTRACTS_VERSION 保持 1.6.0，30 类顶层对象登记表、九条 mandatory rule 与已登记的错误码和协议名与 0.6.0 完全一致；包版本随 Foundation 线锁步，因为三个叶子包共用同一公开版本坐标。
 
 **升级说明**
 
-0.5.0 是 FND-ADR-010/011 契约线。校验 declared-read-surface-result 或 structured-scan-policy 的消费者必须锁定契约规格 1.5.0，并按 22 类登记表校验。
+0.7.0 不携带任何 contracts 表面变更。锁定契约规格 1.6.0 的消费者无需调整校验；审计基线 pin 仍为 contracts-1.6.0.pin.json。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -44,14 +36,14 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 ## 安装和最小示例
 
 ```sh
-npm install skill-family-contracts@0.5.0
+npm install skill-family-contracts@0.7.0
 npm info skill-family-contracts --help
 ```
 
 最小示例从空目录开始，演示如何校验一份已登记契约对象：
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.5.0
+// 从空目录运行：npm install skill-family-contracts@0.7.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {

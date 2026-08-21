@@ -160,3 +160,206 @@ export function describeAuditSurface() {
 export function digestAuditSurface(surface = describeAuditSurface()) {
   return digestDocument(surface);
 }
+
+/* -------------------------------------------------------------------------
+ * Baseline pin contract mechanics (GAP-5 / SG-28, FVD-005 lineage).
+ *
+ * A baseline pin is the frozen document an independent audit uses to verify
+ * the exact Contracts surface it consumes (see the audit-baseline-pin
+ * contract). The pin carries three compatibility coordinates —
+ * contractsVersion, auditSurfaceVersion and surfaceDigest — plus
+ * per-document digests and the frozen engine facts. Two audit-namespace
+ * finding codes classify any failure:
+ *
+ * - AUD-LOCK-001 (lock verification failed): the pin document itself is
+ *   unusable — wrong envelope, missing sections, or an unsupported digest
+ *   algorithm. The live surface is never compared against a malformed pin.
+ * - AUD-BASE-001 (baseline drift): the pin is well-formed but the live
+ *   surface no longer matches it — a coordinate, digest, or fact mismatch.
+ *
+ * Both functions below are pure projections of Contracts-owned artifacts;
+ * they accept no callbacks and never import audit-owned artifacts.
+ * ---------------------------------------------------------------------- */
+
+/** The audit-baseline-pin contract kind and its pre-1.6.0 legacy spelling. */
+export const BASELINE_PIN_KINDS = Object.freeze([
+  "skill-family.audit-baseline-pin",
+  "skill-family.audit.baseline-pin",
+]);
+
+/** Frozen $id namespace prefix of every registered schema. */
+export const SCHEMA_ID_NAMESPACE = "https://contracts.skill-family.example/v1/";
+
+const PIN_DATE_PATTERN = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+const PIN_HEX_64 = /^[0-9a-f]{64}$/;
+
+function isPlainObject(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+/**
+ * Derives the frozen engine facts of one audit surface in the exact shape
+ * the audit-baseline-pin contract freezes for the facts section.
+ */
+export function describeBaselinePinFacts(surface = describeAuditSurface()) {
+  return deepFreeze({
+    contractObjects: [...surface.contractObjects],
+    checkTypes: [...surface.checkTypes],
+    mandatoryRuleIds: [...surface.mandatoryRuleIds],
+    ruleBudget: { ...surface.ruleBudget },
+    errorCodes: surface.errorCodes.codes.map((entry) => entry.code),
+    kernelOperations: surface.kernelProtocol.operations.map((operation) => operation.name),
+    kernelTerminalStates: [...surface.kernelProtocol.terminalStates].sort(),
+    validationPolicies: structuredClone(surface.validationPolicies),
+    supportedDialects: [...surface.supportedDialects],
+    errorCodeStabilityPolicy: surface.errorCodes.policy.stability,
+    schemaIdNamespace: SCHEMA_ID_NAMESPACE,
+  });
+}
+
+/**
+ * Materializes a complete audit-baseline-pin document for one audit surface
+ * (default: the live surface). Pure and deterministic given its inputs:
+ *
+ * - frozenAt (mandatory): the calendar date (YYYY-MM-DD) of the freeze;
+ * - note (mandatory): the human provenance note;
+ * - supersedes (optional): file name of the predecessor pin (FVD-005 lineage);
+ * - provenance (default "product-compatibility-fixture"): authorship class;
+ * - surface (default describeAuditSurface()): the surface being pinned.
+ *
+ * Every digest and fact is derived mechanically from the surface; the result
+ * is deeply frozen and conforms to the registered audit-baseline-pin schema.
+ */
+export function describeBaselinePin({
+  frozenAt,
+  note,
+  supersedes = null,
+  provenance = "product-compatibility-fixture",
+  surface = describeAuditSurface(),
+} = {}) {
+  if (typeof frozenAt !== "string" || !PIN_DATE_PATTERN.test(frozenAt)) {
+    throw new TypeError("describeBaselinePin: frozenAt must be a YYYY-MM-DD date string");
+  }
+  if (typeof note !== "string" || note.length === 0) {
+    throw new TypeError("describeBaselinePin: note must be a non-empty string");
+  }
+  if (supersedes !== null && typeof supersedes !== "string") {
+    throw new TypeError("describeBaselinePin: supersedes must be null or a string");
+  }
+  const schemaDigests = {};
+  for (const entry of surface.schemas) {
+    schemaDigests[entry.$id] = entry.digest.value;
+  }
+  const pin = {
+    schemaVersion: 1,
+    kind: "skill-family.audit-baseline-pin",
+    provenance,
+    frozenAt,
+    contractsVersion: surface.contractsVersion,
+    auditSurfaceVersion: surface.auditSurfaceVersion,
+    digestAlgorithm: "sha256",
+    note,
+    surfaceDigest: digestAuditSurface(surface),
+    documentDigests: {
+      registry: surface.digests.registry.value,
+      errorCodes: surface.digests.errorCodes.value,
+      rules: surface.digests.rules.value,
+      kernelProtocol: surface.digests.kernelProtocol.value,
+    },
+    schemaDigests,
+    facts: describeBaselinePinFacts(surface),
+  };
+  if (supersedes !== null) pin.supersedes = supersedes;
+  return deepFreeze(pin);
+}
+
+/**
+ * Verifies one baseline pin document against one audit surface (default:
+ * the live surface). Pure function; returns a deeply frozen
+ * { ok, findings } where every finding is { code, field, message } and
+ * code is the audit-namespace AUD-LOCK-001 (pin unusable) or AUD-BASE-001
+ * (baseline drift). Findings preserve the deterministic check order:
+ * envelope, algorithm, sections, coordinates, digests, facts.
+ */
+export function verifyBaselinePin(pin, { surface = describeAuditSurface() } = {}) {
+  const findings = [];
+  const lock = (field, message) => findings.push({ code: "AUD-LOCK-001", field, message });
+  const drift = (field, message) => findings.push({ code: "AUD-BASE-001", field, message });
+
+  if (!isPlainObject(pin)) {
+    lock("pin", "baseline pin must be a JSON object");
+    return deepFreeze({ ok: false, findings });
+  }
+  if (!BASELINE_PIN_KINDS.includes(pin.kind)) {
+    lock("kind", `unexpected baseline pin kind: ${JSON.stringify(pin.kind)}`);
+  }
+  if (!AUDIT_DIGEST_ALGORITHMS.includes(pin.digestAlgorithm)) {
+    lock("digestAlgorithm", `unsupported digest algorithm: ${JSON.stringify(pin.digestAlgorithm)}`);
+    return deepFreeze({ ok: false, findings });
+  }
+  for (const section of ["surfaceDigest", "documentDigests", "schemaDigests", "facts"]) {
+    if (pin[section] === undefined) lock(section, `baseline pin is missing the ${section} section`);
+  }
+  if (findings.length > 0) return deepFreeze({ ok: false, findings });
+
+  if (pin.contractsVersion !== surface.contractsVersion) {
+    drift(
+      "contractsVersion",
+      `pin freezes contracts ${pin.contractsVersion} but the live surface is ${surface.contractsVersion}`,
+    );
+  }
+  if (pin.auditSurfaceVersion !== surface.auditSurfaceVersion) {
+    drift(
+      "auditSurfaceVersion",
+      `pin freezes audit surface v${pin.auditSurfaceVersion} but the live surface is v${surface.auditSurfaceVersion}`,
+    );
+  }
+  if (!PIN_HEX_64.test(pin.surfaceDigest ?? "")) {
+    lock("surfaceDigest", "surfaceDigest must be a 64-char lowercase sha256 hex string");
+    return deepFreeze({ ok: false, findings });
+  }
+  if (pin.surfaceDigest !== digestAuditSurface(surface)) {
+    drift("surfaceDigest", "audit surface digest does not match the pinned baseline");
+  }
+
+  for (const document of ["registry", "errorCodes", "rules", "kernelProtocol"]) {
+    const pinned = pin.documentDigests?.[document];
+    if (typeof pinned !== "string" || !PIN_HEX_64.test(pinned)) {
+      lock(`documentDigests.${document}`, "document digest must be a 64-char lowercase sha256 hex string");
+      continue;
+    }
+    if (pinned !== surface.digests[document].value) {
+      drift(`documentDigests.${document}`, `${document} digest does not match the pinned baseline`);
+    }
+  }
+
+  const liveSchemaDigests = Object.fromEntries(
+    surface.schemas.map((entry) => [entry.$id, entry.digest.value]),
+  );
+  const pinnedSchemaDigests = isPlainObject(pin.schemaDigests) ? pin.schemaDigests : {};
+  for (const [$id, value] of Object.entries(liveSchemaDigests)) {
+    if (pinnedSchemaDigests[$id] !== value) {
+      drift(`schemaDigests.${$id}`, "schema digest missing or drifted");
+    }
+  }
+  for (const $id of Object.keys(pinnedSchemaDigests)) {
+    if (!Object.hasOwn(liveSchemaDigests, $id)) {
+      drift(`schemaDigests.${$id}`, "pin carries a schema digest absent from the live registry");
+    }
+  }
+
+  const liveFacts = describeBaselinePinFacts(surface);
+  const pinnedFacts = isPlainObject(pin.facts) ? pin.facts : {};
+  for (const key of Object.keys(liveFacts)) {
+    if (canonicalJson(pinnedFacts[key] ?? null) !== canonicalJson(liveFacts[key])) {
+      drift(`facts.${key}`, "pinned engine fact does not match the live audit surface");
+    }
+  }
+  for (const key of Object.keys(pinnedFacts)) {
+    if (!Object.hasOwn(liveFacts, key)) {
+      drift(`facts.${key}`, "pin carries an engine fact unknown to the live audit surface");
+    }
+  }
+
+  return deepFreeze({ ok: findings.length === 0, findings });
+}

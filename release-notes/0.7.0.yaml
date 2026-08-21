@@ -1,0 +1,15 @@
+version: 0.7.0
+date: 2026-08-21
+locales:
+  en:
+    summary: Lockstep version bump with the Foundation 0.7.0 line; the machine contract is unchanged.
+    changes:
+      changed:
+        - No machine contract change - CONTRACTS_VERSION stays 1.6.0 with the 30-class top-level registry, nine mandatory rules, and the registered error codes and protocol names exactly as published in 0.6.0; the package version moves in lockstep with the Foundation line because the three leaf packages share one public version coordinate.
+    upgradeNotes: Version 0.7.0 carries no contracts surface change. Consumers pinned to contract-spec 1.6.0 keep their existing validation; the audit baseline pin remains contracts-1.6.0.pin.json.
+  zh-CN:
+    summary: 随 Foundation 0.7.0 线锁步升版；机器合同不变。
+    changes:
+      changed:
+        - 机器合同无变更——CONTRACTS_VERSION 保持 1.6.0，30 类顶层对象登记表、九条 mandatory rule 与已登记的错误码和协议名与 0.6.0 完全一致；包版本随 Foundation 线锁步，因为三个叶子包共用同一公开版本坐标。
+    upgradeNotes: 0.7.0 不携带任何 contracts 表面变更。锁定契约规格 1.6.0 的消费者无需调整校验；审计基线 pin 仍为 contracts-1.6.0.pin.json。

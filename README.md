@@ -4,30 +4,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.5.0 -->
+<!-- release-skill:release-version: 0.7.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols (Contracts 1.4.0, frozen).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.5.0** (2026-08-16)
+**0.7.0** (2026-08-21)
 
-This release grows the stable Contracts registry from 20 to 22 top-level object classes under contract-spec version 1.5.0 (FND-ADR-010 and FND-ADR-011), adding the declared-read-surface result and the structured-scan policy documents.
-
-**Added**
-
-- Registers declared-read-surface-result, the result envelope of the harness assertDeclaredReadSurface mechanism (FND-ADR-010), with a closed three-rule violation vocabulary and a closed five-guarantee enumeration.
-- Registers structured-scan-policy, the declarative policy of the harness structured surface scanner (FND-ADR-011), carrying allowedNetworks, approvedRegistries, approvedCoordinates, formatAdapters, symlinkPolicy, binaryPolicy and an optional hostKeyPattern.
-- Adds error-code kinds structured-scan-violation and structured-scan-invalid alongside the existing declared-read-surface kinds under the stable SFC2004 mechanism error; rule categories travel in details.rule and do not each get a code.
-- Bumps contract-spec to 1.5.0 with a new append-only audit baseline pin (contracts-1.5.0.pin.json); the 1.4.0 pin stays as a read-only archive.
+Lockstep version bump with the Foundation 0.7.0 line; the machine contract is unchanged.
 
 **Changed**
 
-- The surface-scan-policy and structured-scan-policy schema descriptions now state the relationship between the public policy documents and workspace-private leak policies explicitly: a workspace-private leak-policy.json instance document is not a subset, not isomorphic and not a migration target of these schemas — the documents share rule vocabulary and fail-closed semantics by design, but their byte-level shapes are independent and must not be compared for compatibility. scanSurface is the execution-core generalization projection: the public, consumer-parameterized form of the same mechanism family, without any private identity, path, or approval-list interpretation of its own.
-- Keeps method identifiers, parameter schemas, and domain result semantics under consumer ownership.
+- No machine contract change - CONTRACTS_VERSION stays 1.6.0 with the 30-class top-level registry, nine mandatory rules, and the registered error codes and protocol names exactly as published in 0.6.0; the package version moves in lockstep with the Foundation line because the three leaf packages share one public version coordinate.
 
 **Upgrade Notes**
 
-Version 0.5.0 is the FND-ADR-010/011 contracts line. Consumers validating declared-read-surface-result or structured-scan-policy must pin contract-spec 1.5.0 and validate against the 22-class registry.
+Version 0.7.0 carries no contracts surface change. Consumers pinned to contract-spec 1.6.0 keep their existing validation; the audit baseline pin remains contracts-1.6.0.pin.json.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -43,14 +35,14 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 ## Installation and Minimal Example
 
 ```sh
-npm install skill-family-contracts@0.5.0
+npm install skill-family-contracts@0.7.0
 npm info skill-family-contracts --help
 ```
 
 The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// Run from an empty directory: npm install skill-family-contracts@0.5.0
+// Run from an empty directory: npm install skill-family-contracts@0.7.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -251,7 +243,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Architectural invariants
 
-- The set of 20 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift.
+- The set of 30 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift. (Contracts 1.6.0 added the six classes for public boundary, platform difference, observation scope v2, profile adoption, audit baseline pin, and token estimate records.)
 - The validator is exclusively Ajv 8.20.0 (exact pin); no other implementation is accepted.
 
 ### Route elsewhere when

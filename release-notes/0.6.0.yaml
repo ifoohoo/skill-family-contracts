@@ -1,0 +1,25 @@
+version: 0.6.0
+date: 2026-08-21
+locales:
+  en:
+    summary: This release grows the stable Contracts registry from 24 to 30 top-level object classes under contract-spec version 1.6.0 (audit remediation C5), adds the append-only audit baseline pin contract with its consumption-side verification, and adds the minimal consumption contract of the token estimate record.
+    changes:
+      added:
+        - Registers six new top-level contract classes (24 to 30) - public-boundary-declaration, platform-difference-registry, observation-scope, profile-adoption-declaration, audit-baseline-pin and token-estimate-record - under contract-spec 1.6.0.
+        - Adds the append-only audit baseline pin contract and its consumption side - BASELINE_PIN_KINDS, describeBaselinePin and verifyBaselinePin (AUD-BASE-001 / AUD-LOCK-001); contracts-1.6.0.pin.json is the current pin and earlier pins stay as read-only archives.
+        - Adds the minimal consumption contract of the token estimate record (SG-33) - TOKEN_ESTIMATE_CONSUMPTION, TOKEN_ESTIMATE_CONSUMPTION_REASONS, TOKEN_ESTIMATE_CONSUMPTION_ERROR_KIND, consumeTokenEstimate and consumeTokenEstimateStrict, with the consumptionTarget integer field and fail-closed refusal semantics, plus negative-03/04 and positive-02 fixtures.
+      changed:
+        - Bumps CONTRACTS_VERSION to 1.6.0; the audit surface now projects the 30-class registry and the baseline pin machinery, and the integration audit verify-lock points at the 1.6.0 pin.
+        - Re-records the quickstart-profile stable baseline (F2) against the 1.6.0 registry; method identifiers, parameter schemas, and domain result semantics stay under consumer ownership.
+    upgradeNotes: Version 0.6.0 is the audit remediation contracts line. Consumers validating the six new object classes must pin contract-spec 1.6.0 and validate against the 30-class registry; audit consumers verify against contracts-1.6.0.pin.json.
+  zh-CN:
+    summary: 本版把稳定 Contracts 登记表从 24 类扩到 30 类顶层对象，契约规格版本升到 1.6.0（审计整改 C5），新增 append-only 审计基线 pin 合同及其消费侧校验，并新增 token 估算记录的最小消费合同。
+    changes:
+      added:
+        - 登记六个新顶层契约类（24 → 30）：public-boundary-declaration、platform-difference-registry、observation-scope、profile-adoption-declaration、audit-baseline-pin 与 token-estimate-record，契约规格 1.6.0。
+        - 新增 append-only 审计基线 pin 合同与消费面：BASELINE_PIN_KINDS、describeBaselinePin 与 verifyBaselinePin（AUD-BASE-001 / AUD-LOCK-001）；contracts-1.6.0.pin.json 为现行 pin，更早的 pin 保留为只读存档。
+        - 新增 token 估算记录的最小消费合同（SG-33）：TOKEN_ESTIMATE_CONSUMPTION、TOKEN_ESTIMATE_CONSUMPTION_REASONS、TOKEN_ESTIMATE_CONSUMPTION_ERROR_KIND、consumeTokenEstimate 与 consumeTokenEstimateStrict，携带 consumptionTarget 整数字段与失败关闭拒绝语义，并补齐 negative-03/04 与 positive-02 fixtures。
+      changed:
+        - CONTRACTS_VERSION 升到 1.6.0；审计表面现投影 30 类登记表与基线 pin 机制，集成审计 verify-lock 指向 1.6.0 pin。
+        - quickstart-profile 稳定基线按 1.6.0 登记表重录（F2）；方法标识、参数 Schema 与领域结果语义继续归消费者所有。
+    upgradeNotes: 0.6.0 是审计整改契约线。校验六个新对象类的消费者必须锁定契约规格 1.6.0，并按 30 类登记表校验；审计消费者按 contracts-1.6.0.pin.json 校验。

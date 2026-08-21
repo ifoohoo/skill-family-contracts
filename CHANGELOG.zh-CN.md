@@ -1,5 +1,42 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.7.0 locale=zh-CN baseline=sha256:eacdf2f80fce86c5e7ed165a676ba3b37d0216a7b94cbed2b2d03422167880a5 -->
+## [0.7.0] - 2026-08-21
+
+随 Foundation 0.7.0 线锁步升版；机器合同不变。
+
+### 变更
+
+- 机器合同无变更——CONTRACTS_VERSION 保持 1.6.0，30 类顶层对象登记表、九条 mandatory rule 与已登记的错误码和协议名与 0.6.0 完全一致；包版本随 Foundation 线锁步，因为三个叶子包共用同一公开版本坐标。
+
+### 升级说明
+
+0.7.0 不携带任何 contracts 表面变更。锁定契约规格 1.6.0 的消费者无需调整校验；审计基线 pin 仍为 contracts-1.6.0.pin.json。
+<!-- release-skill:changelog:end version=0.7.0 locale=zh-CN -->
+
+
+<!-- release-skill:changelog:start version=0.6.0 locale=zh-CN baseline=sha256:e86b06f1c37ba4849288bea4659150c0a08a4a514a0953a057ef22a2f2bbbcb8 -->
+## [0.6.0] - 2026-08-21
+
+本版把稳定 Contracts 登记表从 24 类扩到 30 类顶层对象，契约规格版本升到 1.6.0（审计整改 C5），新增 append-only 审计基线 pin 合同及其消费侧校验，并新增 token 估算记录的最小消费合同。
+
+### 新增
+
+- 登记六个新顶层契约类（24 → 30）：public-boundary-declaration、platform-difference-registry、observation-scope、profile-adoption-declaration、audit-baseline-pin 与 token-estimate-record，契约规格 1.6.0。
+- 新增 append-only 审计基线 pin 合同与消费面：BASELINE_PIN_KINDS、describeBaselinePin 与 verifyBaselinePin（AUD-BASE-001 / AUD-LOCK-001）；contracts-1.6.0.pin.json 为现行 pin，更早的 pin 保留为只读存档。
+- 新增 token 估算记录的最小消费合同（SG-33）：TOKEN_ESTIMATE_CONSUMPTION、TOKEN_ESTIMATE_CONSUMPTION_REASONS、TOKEN_ESTIMATE_CONSUMPTION_ERROR_KIND、consumeTokenEstimate 与 consumeTokenEstimateStrict，携带 consumptionTarget 整数字段与失败关闭拒绝语义，并补齐 negative-03/04 与 positive-02 fixtures。
+
+### 变更
+
+- CONTRACTS_VERSION 升到 1.6.0；审计表面现投影 30 类登记表与基线 pin 机制，集成审计 verify-lock 指向 1.6.0 pin。
+- quickstart-profile 稳定基线按 1.6.0 登记表重录（F2）；方法标识、参数 Schema 与领域结果语义继续归消费者所有。
+
+### 升级说明
+
+0.6.0 是审计整改契约线。校验六个新对象类的消费者必须锁定契约规格 1.6.0，并按 30 类登记表校验；审计消费者按 contracts-1.6.0.pin.json 校验。
+<!-- release-skill:changelog:end version=0.6.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.5.0 locale=zh-CN baseline=sha256:864f205c202a7261c33ba8ac26fadd22b30d8f10c9659ec3c5c893284f67eb79 -->
 ## [0.5.0] - 2026-08-16
 

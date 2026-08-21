@@ -1,5 +1,42 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.7.0 locale=en baseline=sha256:6146b7916b02e8e46de9d791567498d095ed2843f64cf906bcd6119dc6ae289f -->
+## [0.7.0] - 2026-08-21
+
+Lockstep version bump with the Foundation 0.7.0 line; the machine contract is unchanged.
+
+### Changed
+
+- No machine contract change - CONTRACTS_VERSION stays 1.6.0 with the 30-class top-level registry, nine mandatory rules, and the registered error codes and protocol names exactly as published in 0.6.0; the package version moves in lockstep with the Foundation line because the three leaf packages share one public version coordinate.
+
+### Upgrade Notes
+
+Version 0.7.0 carries no contracts surface change. Consumers pinned to contract-spec 1.6.0 keep their existing validation; the audit baseline pin remains contracts-1.6.0.pin.json.
+<!-- release-skill:changelog:end version=0.7.0 locale=en -->
+
+
+<!-- release-skill:changelog:start version=0.6.0 locale=en baseline=sha256:3c16158b9f7ded79eb1b3d4917da94a3c2ccdde20a3f20cf41f72ca5e0caa444 -->
+## [0.6.0] - 2026-08-21
+
+This release grows the stable Contracts registry from 24 to 30 top-level object classes under contract-spec version 1.6.0 (audit remediation C5), adds the append-only audit baseline pin contract with its consumption-side verification, and adds the minimal consumption contract of the token estimate record.
+
+### Added
+
+- Registers six new top-level contract classes (24 to 30) - public-boundary-declaration, platform-difference-registry, observation-scope, profile-adoption-declaration, audit-baseline-pin and token-estimate-record - under contract-spec 1.6.0.
+- Adds the append-only audit baseline pin contract and its consumption side - BASELINE_PIN_KINDS, describeBaselinePin and verifyBaselinePin (AUD-BASE-001 / AUD-LOCK-001); contracts-1.6.0.pin.json is the current pin and earlier pins stay as read-only archives.
+- Adds the minimal consumption contract of the token estimate record (SG-33) - TOKEN_ESTIMATE_CONSUMPTION, TOKEN_ESTIMATE_CONSUMPTION_REASONS, TOKEN_ESTIMATE_CONSUMPTION_ERROR_KIND, consumeTokenEstimate and consumeTokenEstimateStrict, with the consumptionTarget integer field and fail-closed refusal semantics, plus negative-03/04 and positive-02 fixtures.
+
+### Changed
+
+- Bumps CONTRACTS_VERSION to 1.6.0; the audit surface now projects the 30-class registry and the baseline pin machinery, and the integration audit verify-lock points at the 1.6.0 pin.
+- Re-records the quickstart-profile stable baseline (F2) against the 1.6.0 registry; method identifiers, parameter schemas, and domain result semantics stay under consumer ownership.
+
+### Upgrade Notes
+
+Version 0.6.0 is the audit remediation contracts line. Consumers validating the six new object classes must pin contract-spec 1.6.0 and validate against the 30-class registry; audit consumers verify against contracts-1.6.0.pin.json.
+<!-- release-skill:changelog:end version=0.6.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.5.0 locale=en baseline=sha256:5315d7c427d017dcc274a89ccba86e7406affb309ad4d30989c770e6e2973a0c -->
 ## [0.5.0] - 2026-08-16
 
