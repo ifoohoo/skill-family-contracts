@@ -5,22 +5,23 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.7.0 -->
+<!-- release-skill:release-version: 0.8.0 -->
 
-机器可执行工程结构和机制协议的唯一权威包（Contracts 1.4.0，冻结）。
+机器可执行工程结构和机制协议的唯一权威包（Contracts 1.7.0，冻结）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.7.0** (2026-08-21)
+**0.8.0** (2026-08-21)
 
-随 Foundation 0.7.0 线锁步升版；机器合同不变。
+Contracts 1.7.0 新增 Project Profile 合同，包版本随 Foundation 0.8.0 线锁步。
 
-**变更**
+**新增**
 
-- 机器合同无变更——CONTRACTS_VERSION 保持 1.6.0，30 类顶层对象登记表、九条 mandatory rule 与已登记的错误码和协议名与 0.6.0 完全一致；包版本随 Foundation 线锁步，因为三个叶子包共用同一公开版本坐标。
+- 新增 project-profile 合同，顶层对象登记表从 30 类增至 31 类。
+- 将 Contracts profile-adoption-declaration 的 $defs 确定为 adoption 与 overrides 的唯一字段形状权威；SPI 文件只保留为兼容转发表。
 
 **升级说明**
 
-0.7.0 不携带任何 contracts 表面变更。锁定契约规格 1.6.0 的消费者无需调整校验；审计基线 pin 仍为 contracts-1.6.0.pin.json。
+需要校验 scaffold 项目根的消费者必须采用 Contracts 1.7.0。foundation_pin 中的包版本仍填写 Foundation npm 包的精确版本 0.8.0，不填写 Contracts 规格版本。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -29,21 +30,21 @@
 
 ## 核心心智模型
 
-Contracts 是「定义与登记」层，不是「执行」层。它拥有十八类顶层对象的 JSON Schema、Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
+Contracts 是「定义与登记」层，不是「执行」层。它拥有 31 类顶层对象的 JSON Schema，其中包括 Project Profile 与共享的 profile-adoption 定义；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
 
 Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.json`），按方言路由到对应 Ajv 类；不实现任何手写 Schema 子集解释器。
 
 ## 安装和最小示例
 
 ```sh
-npm install skill-family-contracts@0.7.0
+npm install skill-family-contracts@0.8.0
 npm info skill-family-contracts --help
 ```
 
 最小示例从空目录开始，演示如何校验一份已登记契约对象：
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.7.0
+// 从空目录运行：npm install skill-family-contracts@0.8.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -78,7 +79,7 @@ import {
 
 0.4.0 携带 Quickstart Profile v2。协议把业务中立的操作固定为 `execute-method`，Resource、Task、Result Schema 通过真实的 v2 `$id` 互相解析。Foundation 只校验 JSON-safe 交换结构；方法标识、参数 Schema 与领域结果继续归消费者所有。
 
-以上子路径公开但**不稳定**。这些 Schema 不进入 `src/registry.json`，也不扩张十八类稳定对象，后续小版本可以修改或移除。评估 v2 时应精确锁定 `0.4.0`；仍依赖 candidate v1 的接入必须继续精确锁定 `0.2.1`。
+以上子路径公开但**不稳定**。这些 Schema 不进入 `src/registry.json`，也不扩张 31 类稳定对象，后续小版本可以修改或移除。评估 v2 时应精确锁定 `0.4.0`；仍依赖 candidate v1 的接入必须继续精确锁定 `0.2.1`。
 
 ## 典型使用场景
 
@@ -87,12 +88,13 @@ import {
 - 需要运行强制机械规则、收集未解析引用：用 `runChecks` / `collectUnresolvedRefs`。
 - 需要枚举并校验公开 fixture：用 `verifyAllFixtures`。
 
-## 十八类顶层对象
+## 三十一类顶层对象
 
 | 对象 | `$id` | Schema 文件 |
 | --- | --- | --- |
 | `project-manifest` | `https://contracts.skill-family.example/v1/project-manifest.json` | `src/schemas/project-manifest.schema.json` |
 | `profile-descriptor` | `https://contracts.skill-family.example/v1/profile-descriptor.json` | `src/schemas/profile-descriptor.schema.json` |
+| `project-profile` | `https://contracts.skill-family.example/v1/project-profile.json` | `src/schemas/project-profile.schema.json` |
 | `managed-file-lock` | `https://contracts.skill-family.example/v1/managed-file-lock.json` | `src/schemas/managed-file-lock.schema.json` |
 | `operation-request` | `https://contracts.skill-family.example/v1/operation-request.json` | `src/schemas/operation-request.schema.json` |
 | `operation-result` | `https://contracts.skill-family.example/v1/operation-result.json` | `src/schemas/operation-result.schema.json` |
@@ -108,7 +110,19 @@ import {
 | `host-registry` | `https://contracts.skill-family.example/v1/host-registry.json` | `src/schemas/host-registry.schema.json` |
 | `host-probe-result` | `https://contracts.skill-family.example/v1/host-probe-result.json` | `src/schemas/host-probe-result.schema.json` |
 | `state-event-envelope` | `https://contracts.skill-family.example/v1/state-event-envelope.json` | `src/schemas/state-event-envelope.schema.json` |
-| `state-snapshot-metadata` | `https://contracts.skill-family.example/v1/state-snapshot-metadata.json` | `src/schemas/state-snapshot-metadata.json` |
+| `state-snapshot-metadata` | `https://contracts.skill-family.example/v1/state-snapshot-metadata.json` | `src/schemas/state-snapshot-metadata.schema.json` |
+| `token-estimate-result` | `https://contracts.skill-family.example/v1/token-estimate-result.json` | `src/schemas/token-estimate-result.schema.json` |
+| `surface-scan-policy` | `https://contracts.skill-family.example/v1/surface-scan-policy.json` | `src/schemas/surface-scan-policy.schema.json` |
+| `declared-read-surface-result` | `https://contracts.skill-family.example/v1/declared-read-surface-result.json` | `src/schemas/declared-read-surface-result.schema.json` |
+| `structured-scan-policy` | `https://contracts.skill-family.example/v1/structured-scan-policy.json` | `src/schemas/structured-scan-policy.schema.json` |
+| `timeout-policy` | `https://contracts.skill-family.example/v1/timeout-policy.json` | `src/schemas/timeout-policy.schema.json` |
+| `watchdog-termination-envelope` | `https://contracts.skill-family.example/v1/watchdog-termination-envelope.json` | `src/schemas/watchdog-termination-envelope.schema.json` |
+| `public-boundary-declaration` | `https://contracts.skill-family.example/v1/public-boundary-declaration.json` | `src/schemas/public-boundary-declaration.schema.json` |
+| `platform-difference-registry` | `https://contracts.skill-family.example/v1/platform-difference-registry.json` | `src/schemas/platform-difference-registry.schema.json` |
+| `observation-scope` | `https://contracts.skill-family.example/v1/observation-scope.json` | `src/schemas/observation-scope.schema.json` |
+| `profile-adoption-declaration` | `https://contracts.skill-family.example/v1/profile-adoption-declaration.json` | `src/schemas/profile-adoption-declaration.schema.json` |
+| `audit-baseline-pin` | `https://contracts.skill-family.example/v1/audit-baseline-pin.json` | `src/schemas/audit-baseline-pin.schema.json` |
+| `token-estimate-record` | `https://contracts.skill-family.example/v1/token-estimate-record.json` | `src/schemas/token-estimate-record.schema.json` |
 
 所有 v1 Schema 使用 draft 2020-12 方言；实例信封统一为 `schemaVersion: 1` + 唯一 `kind` 常量 + 各层 `additionalProperties: false`。`$id` 命名空间 `contracts.skill-family.example` 使用保留示例域，永不解析到真实站点。
 
@@ -244,7 +258,7 @@ import {
 
 ### Architectural invariants
 
-- 20 类顶层对象集合固定，新增需 ADR；错误码冻结不漂移。
+- 31 类顶层对象集合固定，新增需 ADR；Contracts 1.7.0 通过 FND-ADR-013 新增 Project Profile，错误码冻结不漂移。
 - 校验器仅 Ajv 8.20.0（精确 pin），不接受其他实现。
 
 ### Route elsewhere when

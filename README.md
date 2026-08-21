@@ -4,22 +4,23 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.7.0 -->
+<!-- release-skill:release-version: 0.8.0 -->
 
-The single authoritative package of machine-executable engineering structure and mechanism protocols (Contracts 1.4.0, frozen).
+The single authoritative package of machine-executable engineering structure and mechanism protocols (Contracts 1.7.0, frozen).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.7.0** (2026-08-21)
+**0.8.0** (2026-08-21)
 
-Lockstep version bump with the Foundation 0.7.0 line; the machine contract is unchanged.
+Contracts 1.7.0 adds the Project Profile contract while the package follows the Foundation 0.8.0 lockstep line.
 
-**Changed**
+**Added**
 
-- No machine contract change - CONTRACTS_VERSION stays 1.6.0 with the 30-class top-level registry, nine mandatory rules, and the registered error codes and protocol names exactly as published in 0.6.0; the package version moves in lockstep with the Foundation line because the three leaf packages share one public version coordinate.
+- Adds the project-profile contract and grows the registry from 30 to 31 top-level objects.
+- Makes the Contracts profile-adoption-declaration $defs the only field-shape authority for adoption and overrides; the SPI file remains a compatibility forwarding path.
 
 **Upgrade Notes**
 
-Version 0.7.0 carries no contracts surface change. Consumers pinned to contract-spec 1.6.0 keep their existing validation; the audit baseline pin remains contracts-1.6.0.pin.json.
+Consumers validating scaffolded project roots must adopt Contracts 1.7.0. The foundation_pin package versions remain the exact Foundation npm package version 0.8.0, not the Contracts specification version.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -28,21 +29,21 @@ When every skill-family project writes its own set of structural contracts, you 
 
 ## Core Mental Model
 
-Contracts is the "definition and registry" layer, not the "execution" layer. It owns the JSON Schemas for the eighteen top-level object classes, the Kernel Protocol, the stable error codes, the protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
+Contracts is the "definition and registry" layer, not the "execution" layer. It owns the JSON Schemas for the 31 top-level object classes, including the Project Profile and the shared profile-adoption definitions, the Kernel Protocol, the stable error codes, the protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
 
 Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version in `package.json`), routing by dialect to the corresponding Ajv class; no hand-written schema-subset interpreter is implemented.
 
 ## Installation and Minimal Example
 
 ```sh
-npm install skill-family-contracts@0.7.0
+npm install skill-family-contracts@0.8.0
 npm info skill-family-contracts --help
 ```
 
 The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// Run from an empty directory: npm install skill-family-contracts@0.7.0
+// Run from an empty directory: npm install skill-family-contracts@0.8.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -77,7 +78,7 @@ import {
 
 Version 0.4.0 carries Quickstart Profile v2. Its protocol fixes the business-neutral operation to `execute-method`; Resource, Task, and Result schemas resolve one another through their real v2 `$id` values. Foundation validates the JSON-safe exchange shape, while the consumer owns method identifiers, parameter schemas, and domain results.
 
-The subpath is public but **not stable**. Its schemas remain absent from `src/registry.json`, do not expand the eighteen stable object classes, and may change or be removed in a later minor release. Pin exactly `0.4.0` when evaluating v2. Integrations that still require candidate v1 must stay pinned to exactly `0.2.1`.
+The subpath is public but **not stable**. Its schemas remain absent from `src/registry.json`, do not expand the 31 stable object classes, and may change or be removed in a later minor release. Pin exactly `0.4.0` when evaluating v2. Integrations that still require candidate v1 must stay pinned to exactly `0.2.1`.
 
 ## Typical Use Cases
 
@@ -86,12 +87,13 @@ The subpath is public but **not stable**. Its schemas remain absent from `src/re
 - Need to run mandatory mechanical rules and collect unresolved references: use `runChecks` / `collectUnresolvedRefs`.
 - Need to enumerate and validate the public fixtures: use `verifyAllFixtures`.
 
-## Eighteen Top-Level Object Classes
+## Thirty-One Top-Level Object Classes
 
 | Object | `$id` | Schema File |
 | --- | --- | --- |
 | `project-manifest` | `https://contracts.skill-family.example/v1/project-manifest.json` | `src/schemas/project-manifest.schema.json` |
 | `profile-descriptor` | `https://contracts.skill-family.example/v1/profile-descriptor.json` | `src/schemas/profile-descriptor.schema.json` |
+| `project-profile` | `https://contracts.skill-family.example/v1/project-profile.json` | `src/schemas/project-profile.schema.json` |
 | `managed-file-lock` | `https://contracts.skill-family.example/v1/managed-file-lock.json` | `src/schemas/managed-file-lock.schema.json` |
 | `operation-request` | `https://contracts.skill-family.example/v1/operation-request.json` | `src/schemas/operation-request.schema.json` |
 | `operation-result` | `https://contracts.skill-family.example/v1/operation-result.json` | `src/schemas/operation-result.schema.json` |
@@ -107,7 +109,19 @@ The subpath is public but **not stable**. Its schemas remain absent from `src/re
 | `host-registry` | `https://contracts.skill-family.example/v1/host-registry.json` | `src/schemas/host-registry.schema.json` |
 | `host-probe-result` | `https://contracts.skill-family.example/v1/host-probe-result.json` | `src/schemas/host-probe-result.schema.json` |
 | `state-event-envelope` | `https://contracts.skill-family.example/v1/state-event-envelope.json` | `src/schemas/state-event-envelope.schema.json` |
-| `state-snapshot-metadata` | `https://contracts.skill-family.example/v1/state-snapshot-metadata.json` | `src/schemas/state-snapshot-metadata.json` |
+| `state-snapshot-metadata` | `https://contracts.skill-family.example/v1/state-snapshot-metadata.json` | `src/schemas/state-snapshot-metadata.schema.json` |
+| `token-estimate-result` | `https://contracts.skill-family.example/v1/token-estimate-result.json` | `src/schemas/token-estimate-result.schema.json` |
+| `surface-scan-policy` | `https://contracts.skill-family.example/v1/surface-scan-policy.json` | `src/schemas/surface-scan-policy.schema.json` |
+| `declared-read-surface-result` | `https://contracts.skill-family.example/v1/declared-read-surface-result.json` | `src/schemas/declared-read-surface-result.schema.json` |
+| `structured-scan-policy` | `https://contracts.skill-family.example/v1/structured-scan-policy.json` | `src/schemas/structured-scan-policy.schema.json` |
+| `timeout-policy` | `https://contracts.skill-family.example/v1/timeout-policy.json` | `src/schemas/timeout-policy.schema.json` |
+| `watchdog-termination-envelope` | `https://contracts.skill-family.example/v1/watchdog-termination-envelope.json` | `src/schemas/watchdog-termination-envelope.schema.json` |
+| `public-boundary-declaration` | `https://contracts.skill-family.example/v1/public-boundary-declaration.json` | `src/schemas/public-boundary-declaration.schema.json` |
+| `platform-difference-registry` | `https://contracts.skill-family.example/v1/platform-difference-registry.json` | `src/schemas/platform-difference-registry.schema.json` |
+| `observation-scope` | `https://contracts.skill-family.example/v1/observation-scope.json` | `src/schemas/observation-scope.schema.json` |
+| `profile-adoption-declaration` | `https://contracts.skill-family.example/v1/profile-adoption-declaration.json` | `src/schemas/profile-adoption-declaration.schema.json` |
+| `audit-baseline-pin` | `https://contracts.skill-family.example/v1/audit-baseline-pin.json` | `src/schemas/audit-baseline-pin.schema.json` |
+| `token-estimate-record` | `https://contracts.skill-family.example/v1/token-estimate-record.json` | `src/schemas/token-estimate-record.schema.json` |
 
 All v1 Schemas use the draft 2020-12 dialect; instance envelopes are uniformly `schemaVersion: 1` + a unique `kind` constant + `additionalProperties: false` at each layer. The `$id` namespace `contracts.skill-family.example` uses a reserved example domain and never resolves to a real site.
 
@@ -243,7 +257,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Architectural invariants
 
-- The set of 30 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift. (Contracts 1.6.0 added the six classes for public boundary, platform difference, observation scope v2, profile adoption, audit baseline pin, and token estimate records.)
+- The set of 31 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift. Contracts 1.7.0 adds Project Profile through FND-ADR-013.
 - The validator is exclusively Ajv 8.20.0 (exact pin); no other implementation is accepted.
 
 ### Route elsewhere when

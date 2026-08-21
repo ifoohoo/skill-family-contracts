@@ -1,5 +1,21 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.8.0 locale=en baseline=sha256:ae12fc054a9dc2dd4a2e949ddf9edafa86dead8fbde7de24a69bd7a15c33cc22 -->
+## [0.8.0] - 2026-08-21
+
+Contracts 1.7.0 adds the Project Profile contract while the package follows the Foundation 0.8.0 lockstep line.
+
+### Added
+
+- Adds the project-profile contract and grows the registry from 30 to 31 top-level objects.
+- Makes the Contracts profile-adoption-declaration $defs the only field-shape authority for adoption and overrides; the SPI file remains a compatibility forwarding path.
+
+### Upgrade Notes
+
+Consumers validating scaffolded project roots must adopt Contracts 1.7.0. The foundation_pin package versions remain the exact Foundation npm package version 0.8.0, not the Contracts specification version.
+<!-- release-skill:changelog:end version=0.8.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.7.0 locale=en baseline=sha256:6146b7916b02e8e46de9d791567498d095ed2843f64cf906bcd6119dc6ae289f -->
 ## [0.7.0] - 2026-08-21
 

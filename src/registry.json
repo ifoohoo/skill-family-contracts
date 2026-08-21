@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "skill-family.contracts.registry",
-  "contractsVersion": "1.6.0",
+  "contractsVersion": "1.7.0",
   "note": "Protocol-name and schema-$id registry. Registration mechanically rejects duplicate protocol name/version (SFC1004) and duplicate $id (SFC1003). This file is the single registration surface; adding an entry is a contracts change.",
   "protocols": [
     {
@@ -26,6 +26,13 @@
       "dialect": "2020-12",
       "status": "stable",
       "file": "src/schemas/profile-descriptor.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/project-profile.json",
+      "object": "project-profile",
+      "dialect": "2020-12",
+      "status": "stable",
+      "file": "src/schemas/project-profile.schema.json"
     },
     {
       "$id": "https://contracts.skill-family.example/v1/managed-file-lock.json",

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://contracts.skill-family.example/v1/profile-adoption-declaration.json",
   "title": "ProfileAdoptionDeclaration",
-  "description": "Profile adoption and override declaration (audit remediation D-6/D-8, SPI v2). Stand-alone contract form of the optional adoption and overrides sections of a profile descriptor: the adoption block carries the lightweight adoption proof (adopted Foundation profile identity plus the three-package Foundation pin with real-file sha256 digests), and the overrides block carries self-tightening rule declarations that reuse existing rule ids with project-level numeric values. Field shapes are aligned one-to-one with profiles/spi/profile-adoption.schema.json ($defs.adoption / $defs.overrides); tightening direction of overrides is verified against the frozen rule baseline catalog by the SPI layer, not by this schema.",
+  "description": "Profile adoption and override declaration (audit remediation D-6/D-8, SPI v3). Stand-alone contract form of the optional adoption and overrides sections of a provider descriptor and the required sections of a project profile: the adoption block carries the lightweight adoption proof (adopted Foundation profile identity plus the three-package Foundation pin with real-file sha256 digests), and the overrides block carries self-tightening rule declarations that reuse existing rule ids with project-level numeric values. The SPI layer forwards to these definitions and verifies tightening direction against the frozen rule baseline catalog.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schemaVersion", "kind", "adoption"],

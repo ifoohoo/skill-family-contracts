@@ -1,0 +1,17 @@
+version: 0.8.0
+date: 2026-08-21
+locales:
+  en:
+    summary: Contracts 1.7.0 adds the Project Profile contract while the package follows the Foundation 0.8.0 lockstep line.
+    changes:
+      added:
+        - Adds the project-profile contract and grows the registry from 30 to 31 top-level objects.
+        - Makes the Contracts profile-adoption-declaration $defs the only field-shape authority for adoption and overrides; the SPI file remains a compatibility forwarding path.
+    upgradeNotes: Consumers validating scaffolded project roots must adopt Contracts 1.7.0. The foundation_pin package versions remain the exact Foundation npm package version 0.8.0, not the Contracts specification version.
+  zh-CN:
+    summary: Contracts 1.7.0 新增 Project Profile 合同，包版本随 Foundation 0.8.0 线锁步。
+    changes:
+      added:
+        - 新增 project-profile 合同，顶层对象登记表从 30 类增至 31 类。
+        - 将 Contracts profile-adoption-declaration 的 $defs 确定为 adoption 与 overrides 的唯一字段形状权威；SPI 文件只保留为兼容转发表。
+    upgradeNotes: 需要校验 scaffold 项目根的消费者必须采用 Contracts 1.7.0。foundation_pin 中的包版本仍填写 Foundation npm 包的精确版本 0.8.0，不填写 Contracts 规格版本。

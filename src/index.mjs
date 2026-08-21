@@ -2,7 +2,7 @@
  * skill-family-contracts: the single authority for machine-readable structures,
  * protocols, stable error codes, and the protocol-name registry.
  *
- * v1 is frozen: thirty top-level object schemas (the migration-manifest
+ * v1 is frozen: thirty-one top-level object schemas (the migration-manifest
  * contract was added in 1.1.0; the report-model and report-binding contracts
  * were added in 1.2.0; eight host-integration contracts were added in 1.3.0;
  * two durable-state contracts were added in 1.4.0; the token-estimate-result
@@ -14,7 +14,8 @@
  * public-boundary-declaration, platform-difference-registry,
  * observation-scope, profile-adoption-declaration, audit-baseline-pin and
  * token-estimate-record contracts were added in 1.6.0 per the audit
- * remediation C5 delivery), one kernel protocol, a closed set of nine
+ * remediation C5 delivery; the project-profile contract was added in 1.7.0
+ * per FND-ADR-013), one kernel protocol, a closed set of nine
  * mechanical check types, and a bounded mandatory rule set. Validation is
  * implemented entirely on Ajv (dialect-aware), never on a hand-written
  * schema-subset interpreter.
@@ -23,6 +24,7 @@
 export const CONTRACT_OBJECTS = Object.freeze([
   "project-manifest",
   "profile-descriptor",
+  "project-profile",
   "managed-file-lock",
   "operation-request",
   "operation-result",
@@ -58,8 +60,8 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Contracts package version: 1.6.0 adds the audit-remediation C5 objects — public-boundary-declaration (SG-17), platform-difference-registry (SG-08), observation-scope (observation v2 vocabulary alignment), profile-adoption-declaration (SPI v2 D-6/D-8), audit-baseline-pin (GAP-5/SG-28 baseline pin carrier), and token-estimate-record (C1 estimator promotion). */
-export const CONTRACTS_VERSION = "1.6.0";
+/** Contracts package version: 1.7.0 adds the Project Profile contract from FND-ADR-013 to the 30-object 1.6.0 registry. */
+export const CONTRACTS_VERSION = "1.7.0";
 
 export {
   ContractsError,
