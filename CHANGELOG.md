@@ -1,5 +1,21 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.8.1 locale=en baseline=sha256:85bbc54b318942072db6809e89b5b90c2a9cdb8c78773ef7d39d0cdc10d3fd10 -->
+## [0.8.1] - 2026-08-22
+
+Lockstep patch release for the Foundation 0.8 line; the Contracts 1.7.0 machine contract is unchanged.
+
+### Changed
+
+- Moves the package version to 0.8.1 together with Harness and Engineering Kit.
+- Keeps Contracts 1.7.0, all 31 registered top-level object classes, schemas, error codes, and public exports unchanged.
+
+### Upgrade Notes
+
+Consumers may pin 0.8.1 to stay on the lockstep Foundation patch line. No Contracts API or specification migration is required from 0.8.0.
+<!-- release-skill:changelog:end version=0.8.1 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.8.0 locale=en baseline=sha256:ae12fc054a9dc2dd4a2e949ddf9edafa86dead8fbde7de24a69bd7a15c33cc22 -->
 ## [0.8.0] - 2026-08-21
 

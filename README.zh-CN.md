@@ -5,23 +5,23 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.8.0 -->
+<!-- release-skill:release-version: 0.8.1 -->
 
 机器可执行工程结构和机制协议的唯一权威包（Contracts 1.7.0，冻结）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.8.0** (2026-08-21)
+**0.8.1** (2026-08-22)
 
-Contracts 1.7.0 新增 Project Profile 合同，包版本随 Foundation 0.8.0 线锁步。
+随 Foundation 0.8 补丁线锁步升版；Contracts 1.7.0 机器合同保持不变。
 
-**新增**
+**变更**
 
-- 新增 project-profile 合同，顶层对象登记表从 30 类增至 31 类。
-- 将 Contracts profile-adoption-declaration 的 $defs 确定为 adoption 与 overrides 的唯一字段形状权威；SPI 文件只保留为兼容转发表。
+- 包版本与 Harness、Engineering Kit 一同升至 0.8.1。
+- Contracts 1.7.0、31 类顶层对象登记、Schema、错误码和公共导出均保持不变。
 
 **升级说明**
 
-需要校验 scaffold 项目根的消费者必须采用 Contracts 1.7.0。foundation_pin 中的包版本仍填写 Foundation npm 包的精确版本 0.8.0，不填写 Contracts 规格版本。
+消费者可精确锁定 0.8.1，继续使用 Foundation 锁步补丁线；从 0.8.0 升级不需要迁移 Contracts API 或规格。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -37,14 +37,14 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 ## 安装和最小示例
 
 ```sh
-npm install skill-family-contracts@0.8.0
+npm install skill-family-contracts@0.8.1
 npm info skill-family-contracts --help
 ```
 
 最小示例从空目录开始，演示如何校验一份已登记契约对象：
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.8.0
+// 从空目录运行：npm install skill-family-contracts@0.8.1
 import { validateDocument } from "skill-family-contracts";
 
 const document = {

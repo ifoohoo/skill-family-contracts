@@ -4,23 +4,23 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.8.0 -->
+<!-- release-skill:release-version: 0.8.1 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols (Contracts 1.7.0, frozen).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.8.0** (2026-08-21)
+**0.8.1** (2026-08-22)
 
-Contracts 1.7.0 adds the Project Profile contract while the package follows the Foundation 0.8.0 lockstep line.
+Lockstep patch release for the Foundation 0.8 line; the Contracts 1.7.0 machine contract is unchanged.
 
-**Added**
+**Changed**
 
-- Adds the project-profile contract and grows the registry from 30 to 31 top-level objects.
-- Makes the Contracts profile-adoption-declaration $defs the only field-shape authority for adoption and overrides; the SPI file remains a compatibility forwarding path.
+- Moves the package version to 0.8.1 together with Harness and Engineering Kit.
+- Keeps Contracts 1.7.0, all 31 registered top-level object classes, schemas, error codes, and public exports unchanged.
 
 **Upgrade Notes**
 
-Consumers validating scaffolded project roots must adopt Contracts 1.7.0. The foundation_pin package versions remain the exact Foundation npm package version 0.8.0, not the Contracts specification version.
+Consumers may pin 0.8.1 to stay on the lockstep Foundation patch line. No Contracts API or specification migration is required from 0.8.0.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -36,14 +36,14 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 ## Installation and Minimal Example
 
 ```sh
-npm install skill-family-contracts@0.8.0
+npm install skill-family-contracts@0.8.1
 npm info skill-family-contracts --help
 ```
 
 The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// Run from an empty directory: npm install skill-family-contracts@0.8.0
+// Run from an empty directory: npm install skill-family-contracts@0.8.1
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
