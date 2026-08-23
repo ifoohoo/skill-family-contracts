@@ -1,0 +1,21 @@
+version: 0.8.4
+date: 2026-08-24
+locales:
+  en:
+    summary: Contracts 1.8.0 adds a business-neutral external source-authority receipt and pure validation APIs.
+    changes:
+      added:
+        - Registers the closed source-authority-receipt Schema as the thirty-second stable top-level contract object.
+        - Adds validateSourceAuthorityReceipt and parseSourceAuthorityReceipt for canonical receipt validation and exact caller-observed subject matching.
+      changed:
+        - Moves the package version to 0.8.4 together with Harness and Engineering Kit.
+    upgradeNotes: Consumers that need source authority must validate the external receipt against actual package subjects, then pass the returned sourceRepository and sourceBaseCommit through their existing source fields. Existing Contracts consumers need no migration.
+  zh-CN:
+    summary: Contracts 1.8.0 新增业务中立的外置 source-authority receipt 及纯校验 API。
+    changes:
+      added:
+        - 登记闭合的 source-authority-receipt Schema，稳定顶层契约对象增至 32 类。
+        - 新增 validateSourceAuthorityReceipt 与 parseSourceAuthorityReceipt，用于校验收据规范形态并精确核对调用方实际观测的 subjects。
+      changed:
+        - 包版本与 Harness、Engineering Kit 一同升至 0.8.4。
+    upgradeNotes: 需要 source authority 的消费者先用实际包 subjects 校验外置 receipt，再把返回的 sourceRepository 与 sourceBaseCommit 传入既有 source 字段；其他 Contracts 消费者无需迁移。

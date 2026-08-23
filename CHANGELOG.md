@@ -1,5 +1,25 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.8.4 locale=en baseline=sha256:0fa2a928cd163594584b41398db0546b816f30028c6d4f565ad07187d40589da -->
+## [0.8.4] - 2026-08-24
+
+Contracts 1.8.0 adds a business-neutral external source-authority receipt and pure validation APIs.
+
+### Added
+
+- Registers the closed source-authority-receipt Schema as the thirty-second stable top-level contract object.
+- Adds validateSourceAuthorityReceipt and parseSourceAuthorityReceipt for canonical receipt validation and exact caller-observed subject matching.
+
+### Changed
+
+- Moves the package version to 0.8.4 together with Harness and Engineering Kit.
+
+### Upgrade Notes
+
+Consumers that need source authority must validate the external receipt against actual package subjects, then pass the returned sourceRepository and sourceBaseCommit through their existing source fields. Existing Contracts consumers need no migration.
+<!-- release-skill:changelog:end version=0.8.4 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.8.3 locale=en baseline=sha256:6bd6b0b96981be77e1cdc0e46e9ff6e68b29a57ccb5182ae5ace1c2d9814cbd4 -->
 ## [0.8.3] - 2026-08-23
 

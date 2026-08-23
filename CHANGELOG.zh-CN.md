@@ -1,5 +1,25 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.8.4 locale=zh-CN baseline=sha256:b53db664b96371ac7e0cd86b16258da3a2beb76d13d7ef015860376cb93e07f0 -->
+## [0.8.4] - 2026-08-24
+
+Contracts 1.8.0 新增业务中立的外置 source-authority receipt 及纯校验 API。
+
+### 新增
+
+- 登记闭合的 source-authority-receipt Schema，稳定顶层契约对象增至 32 类。
+- 新增 validateSourceAuthorityReceipt 与 parseSourceAuthorityReceipt，用于校验收据规范形态并精确核对调用方实际观测的 subjects。
+
+### 变更
+
+- 包版本与 Harness、Engineering Kit 一同升至 0.8.4。
+
+### 升级说明
+
+需要 source authority 的消费者先用实际包 subjects 校验外置 receipt，再把返回的 sourceRepository 与 sourceBaseCommit 传入既有 source 字段；其他 Contracts 消费者无需迁移。
+<!-- release-skill:changelog:end version=0.8.4 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.8.3 locale=zh-CN baseline=sha256:bb7cfbdd852384a2344ccf8c0a28ee87cc13477cb2439ad878c76d921d3ddcb6 -->
 ## [0.8.3] - 2026-08-23
 

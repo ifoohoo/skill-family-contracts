@@ -4,23 +4,27 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.8.3 -->
+<!-- release-skill:release-version: 0.8.4 -->
 
-The single authoritative package of machine-executable engineering structure and mechanism protocols (Contracts 1.7.0, frozen).
+The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.8.0).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.8.3** (2026-08-23)
+**0.8.4** (2026-08-24)
 
-Lockstep patch release for Foundation 0.8.3; the Contracts 1.7.0 machine contract is unchanged.
+Contracts 1.8.0 adds a business-neutral external source-authority receipt and pure validation APIs.
+
+**Added**
+
+- Registers the closed source-authority-receipt Schema as the thirty-second stable top-level contract object.
+- Adds validateSourceAuthorityReceipt and parseSourceAuthorityReceipt for canonical receipt validation and exact caller-observed subject matching.
 
 **Changed**
 
-- Moves the package version to 0.8.3 together with Harness and Engineering Kit.
-- Keeps Contracts 1.7.0, all 31 registered top-level object classes, schemas, error codes, and public exports unchanged.
+- Moves the package version to 0.8.4 together with Harness and Engineering Kit.
 
 **Upgrade Notes**
 
-Consumers must pin all three Foundation packages to exactly 0.8.3 before rebuilding a managed Bundle. No Contracts API or specification migration is required from 0.8.2.
+Consumers that need source authority must validate the external receipt against actual package subjects, then pass the returned sourceRepository and sourceBaseCommit through their existing source fields. Existing Contracts consumers need no migration.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -29,21 +33,21 @@ When every skill-family project writes its own set of structural contracts, you 
 
 ## Core Mental Model
 
-Contracts is the "definition and registry" layer, not the "execution" layer. It owns the JSON Schemas for the 31 top-level object classes, including the Project Profile and the shared profile-adoption definitions, the Kernel Protocol, the stable error codes, the protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
+Contracts is the "definition and registry" layer, not the "execution" layer. It owns the JSON Schemas for the 32 top-level object classes, including the Project Profile, shared profile-adoption definitions, and the external source-authority receipt. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
 
 Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version in `package.json`), routing by dialect to the corresponding Ajv class; no hand-written schema-subset interpreter is implemented.
 
 ## Installation and Minimal Example
 
 ```sh
-npm install skill-family-contracts@0.8.3
+npm install skill-family-contracts@0.8.4
 npm info skill-family-contracts --help
 ```
 
 The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// Run from an empty directory: npm install skill-family-contracts@0.8.3
+// Run from an empty directory: npm install skill-family-contracts@0.8.4
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -64,6 +68,10 @@ if (!result.valid) console.error(result.errorCode);
 
 The code above shows the basic `validateDocument` call: pass the document and the target Schema's `$id`, and it returns `{ valid, errorCode, errors, data }`, where `data` is a normalized copy and the original input is not modified.
 
+## External Source Authority
+
+`parseSourceAuthorityReceipt(receipt, actualSubjects)` validates a caller-supplied receipt and compares every package name, version, filename, and SHA-256 against the caller's actual subjects. Receipt subjects must be unique and sorted by `packageName`; actual subjects may arrive in any order. A successful result exposes only `{ sourceRepository, sourceBaseCommit }` through `data`. Contracts does not discover packages, execute a target, or create release state.
+
 ## Candidate Quickstart Profile
 
 Use the candidate Quickstart Profile to evaluate an early Resource → Task → Result exchange before proposing it for the frozen registry:
@@ -78,7 +86,7 @@ import {
 
 Version 0.4.0 carries Quickstart Profile v2. Its protocol fixes the business-neutral operation to `execute-method`; Resource, Task, and Result schemas resolve one another through their real v2 `$id` values. Foundation validates the JSON-safe exchange shape, while the consumer owns method identifiers, parameter schemas, and domain results.
 
-The subpath is public but **not stable**. Its schemas remain absent from `src/registry.json`, do not expand the 31 stable object classes, and may change or be removed in a later minor release. Pin exactly `0.4.0` when evaluating v2. Integrations that still require candidate v1 must stay pinned to exactly `0.2.1`.
+The subpath is public but **not stable**. Its schemas remain absent from `src/registry.json`, do not expand the 32 stable object classes, and may change or be removed in a later minor release. Pin exactly `0.4.0` when evaluating v2. Integrations that still require candidate v1 must stay pinned to exactly `0.2.1`.
 
 ## Typical Use Cases
 
@@ -257,7 +265,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Architectural invariants
 
-- The set of 31 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift. Contracts 1.7.0 adds Project Profile through FND-ADR-013.
+- The set of 32 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift. Contracts 1.8.0 adds the source-authority receipt without adding an error code.
 - The validator is exclusively Ajv 8.20.0 (exact pin); no other implementation is accepted.
 
 ### Route elsewhere when

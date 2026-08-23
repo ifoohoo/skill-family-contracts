@@ -2,7 +2,7 @@
  * skill-family-contracts: the single authority for machine-readable structures,
  * protocols, stable error codes, and the protocol-name registry.
  *
- * v1 is frozen: thirty-one top-level object schemas (the migration-manifest
+ * v1 is frozen: thirty-two top-level object schemas (the migration-manifest
  * contract was added in 1.1.0; the report-model and report-binding contracts
  * were added in 1.2.0; eight host-integration contracts were added in 1.3.0;
  * two durable-state contracts were added in 1.4.0; the token-estimate-result
@@ -15,7 +15,8 @@
  * observation-scope, profile-adoption-declaration, audit-baseline-pin and
  * token-estimate-record contracts were added in 1.6.0 per the audit
  * remediation C5 delivery; the project-profile contract was added in 1.7.0
- * per FND-ADR-013), one kernel protocol, a closed set of nine
+ * per FND-ADR-013; the source-authority-receipt contract was added in 1.8.0),
+ * one kernel protocol, a closed set of nine
  * mechanical check types, and a bounded mandatory rule set. Validation is
  * implemented entirely on Ajv (dialect-aware), never on a hand-written
  * schema-subset interpreter.
@@ -53,6 +54,7 @@ export const CONTRACT_OBJECTS = Object.freeze([
   "profile-adoption-declaration",
   "audit-baseline-pin",
   "token-estimate-record",
+  "source-authority-receipt",
 ]);
 
 export const CONTRACT_BOUNDARY = Object.freeze({
@@ -60,8 +62,8 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Contracts package version: 1.7.0 adds the Project Profile contract from FND-ADR-013 to the 30-object 1.6.0 registry. */
-export const CONTRACTS_VERSION = "1.7.0";
+/** Contracts package version: 1.8.0 adds the business-neutral source-authority receipt to the 31-object 1.7.0 registry. */
+export const CONTRACTS_VERSION = "1.8.0";
 
 export {
   ContractsError,
@@ -137,3 +139,12 @@ export {
   describeBaselinePin,
   verifyBaselinePin,
 } from "./audit-surface.mjs";
+
+// External source authority is supplied by a caller-owned receipt. Contracts
+// validates its closed shape and exact subject binding, but never discovers,
+// executes, resumes, or publishes the referenced source.
+export {
+  SOURCE_AUTHORITY_RECEIPT_SCHEMA_ID,
+  validateSourceAuthorityReceipt,
+  parseSourceAuthorityReceipt,
+} from "./source-authority.mjs";
