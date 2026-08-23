@@ -5,23 +5,23 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.8.1 -->
+<!-- release-skill:release-version: 0.8.2 -->
 
 机器可执行工程结构和机制协议的唯一权威包（Contracts 1.7.0，冻结）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.8.1** (2026-08-22)
+**0.8.2** (2026-08-23)
 
-随 Foundation 0.8 补丁线锁步升版；Contracts 1.7.0 机器合同保持不变。
+随 Foundation 0.8.2 锁步升版；Contracts 1.7.0 机器合同保持不变。
 
 **变更**
 
-- 包版本与 Harness、Engineering Kit 一同升至 0.8.1。
+- 包版本与 Harness、Engineering Kit 一同升至 0.8.2。
 - Contracts 1.7.0、31 类顶层对象登记、Schema、错误码和公共导出均保持不变。
 
 **升级说明**
 
-消费者可精确锁定 0.8.1，继续使用 Foundation 锁步补丁线；从 0.8.0 升级不需要迁移 Contracts API 或规格。
+消费者必须把三个 Foundation 包精确锁定到 0.8.2，再重建受管 Bundle；从 0.8.1 升级不需要迁移 Contracts API 或规格。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -37,14 +37,14 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 ## 安装和最小示例
 
 ```sh
-npm install skill-family-contracts@0.8.1
+npm install skill-family-contracts@0.8.2
 npm info skill-family-contracts --help
 ```
 
 最小示例从空目录开始，演示如何校验一份已登记契约对象：
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.8.1
+// 从空目录运行：npm install skill-family-contracts@0.8.2
 import { validateDocument } from "skill-family-contracts";
 
 const document = {

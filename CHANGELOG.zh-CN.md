@@ -1,5 +1,21 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.8.2 locale=zh-CN baseline=sha256:29a5b9a3e8227837c90b1ce74b84ca5036b3f2ba25e2909f17f951f709e208b3 -->
+## [0.8.2] - 2026-08-23
+
+随 Foundation 0.8.2 锁步升版；Contracts 1.7.0 机器合同保持不变。
+
+### 变更
+
+- 包版本与 Harness、Engineering Kit 一同升至 0.8.2。
+- Contracts 1.7.0、31 类顶层对象登记、Schema、错误码和公共导出均保持不变。
+
+### 升级说明
+
+消费者必须把三个 Foundation 包精确锁定到 0.8.2，再重建受管 Bundle；从 0.8.1 升级不需要迁移 Contracts API 或规格。
+<!-- release-skill:changelog:end version=0.8.2 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.8.1 locale=zh-CN baseline=sha256:083c386c488815200bf1974601a773d646dd6b436177c370311b804e99cafd16 -->
 ## [0.8.1] - 2026-08-22
 
