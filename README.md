@@ -4,23 +4,23 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.8.2 -->
+<!-- release-skill:release-version: 0.8.3 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols (Contracts 1.7.0, frozen).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.8.2** (2026-08-23)
+**0.8.3** (2026-08-23)
 
-Lockstep patch release for Foundation 0.8.2; the Contracts 1.7.0 machine contract is unchanged.
+Lockstep patch release for Foundation 0.8.3; the Contracts 1.7.0 machine contract is unchanged.
 
 **Changed**
 
-- Moves the package version to 0.8.2 together with Harness and Engineering Kit.
+- Moves the package version to 0.8.3 together with Harness and Engineering Kit.
 - Keeps Contracts 1.7.0, all 31 registered top-level object classes, schemas, error codes, and public exports unchanged.
 
 **Upgrade Notes**
 
-Consumers must pin all three Foundation packages to exactly 0.8.2 before rebuilding a managed Bundle. No Contracts API or specification migration is required from 0.8.1.
+Consumers must pin all three Foundation packages to exactly 0.8.3 before rebuilding a managed Bundle. No Contracts API or specification migration is required from 0.8.2.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -36,14 +36,14 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 ## Installation and Minimal Example
 
 ```sh
-npm install skill-family-contracts@0.8.2
+npm install skill-family-contracts@0.8.3
 npm info skill-family-contracts --help
 ```
 
 The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// Run from an empty directory: npm install skill-family-contracts@0.8.2
+// Run from an empty directory: npm install skill-family-contracts@0.8.3
 import { validateDocument } from "skill-family-contracts";
 
 const document = {

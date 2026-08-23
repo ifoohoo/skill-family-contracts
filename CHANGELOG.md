@@ -1,5 +1,21 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.8.3 locale=en baseline=sha256:6bd6b0b96981be77e1cdc0e46e9ff6e68b29a57ccb5182ae5ace1c2d9814cbd4 -->
+## [0.8.3] - 2026-08-23
+
+Lockstep patch release for Foundation 0.8.3; the Contracts 1.7.0 machine contract is unchanged.
+
+### Changed
+
+- Moves the package version to 0.8.3 together with Harness and Engineering Kit.
+- Keeps Contracts 1.7.0, all 31 registered top-level object classes, schemas, error codes, and public exports unchanged.
+
+### Upgrade Notes
+
+Consumers must pin all three Foundation packages to exactly 0.8.3 before rebuilding a managed Bundle. No Contracts API or specification migration is required from 0.8.2.
+<!-- release-skill:changelog:end version=0.8.3 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.8.2 locale=en baseline=sha256:03f1845f7e02e7dc89a5f963df7d0ad105e284bb8b87bce69bc2fed265e99fbc -->
 ## [0.8.2] - 2026-08-23
 
