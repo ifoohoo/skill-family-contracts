@@ -5,27 +5,31 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.9.0 -->
+<!-- release-skill:release-version: 0.10.0 -->
 
-机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.9.0）。
+机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.10.0）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.9.0** (2026-08-24)
+**0.10.0** (2026-08-24)
 
-Contracts 1.9.0 新增稳定文件系统绑定与固定集合发布 Schema，并新增有序批量校验的 candidate Schema。
+Contracts 0.10.0 发布 Contracts 1.10.0 minor 规格，将能力成熟度与消费者规范身份分离，扩展既有宿主合同，并增加业务中立的同级适配器只读验证合同。
 
 **新增**
 
-- 将 filesystem-root-binding、fixed-set-publication-manifest 与 fixed-set-publication-receipt 登记为稳定顶层契约对象。
-- 为现有 Quickstart Bundle 机制桥接增加 schema-validation-batch 请求与结果 candidate Schema。
+- 新增 skill-family-contracts/quickstart-profile 规范导出，与历史 candidate 路径使用同一模块。
+- 新增机器可读的 candidate 晋升政策与历史 candidate 迁移政策。
+- 新增冻结的八项迁移表，把历史 Quickstart 与批量校验 Schema ID 映射到成熟度中立的规范 ID。
+- 保持既有宿主 Schema 身份不变，增加手动宿主支持、有限 source alias 和九项独立 probe fact 表达。
+- 新增闭集 request/result Schema，验证两个或更多 peer 真实适配器目录的共同闭包、逐字节摘要和完整 logicalMappings，且输入顺序不影响结论。
 
 **变更**
 
-- 包版本进入 Foundation 0.9.0 锁步版本线。
+- Quickstart Profile v2 与有序批量校验仍为 candidate；loader 改为返回规范 Schema ID。Registry、rules 与 error-codes 文档携带 1.10.0 坐标，Kernel 文档仍保持 1.8.0 生命周期坐标和字节基线。
+- 0.10.0 以后新能力必须从首版起使用不携带成熟度的规范身份。
 
 **升级说明**
 
-消费者可在核对对应 Harness API 后采用稳定文件系统 Schema；批量校验仍为 candidate，必须精确锁定 0.9.0 Bundle 面。
+现有 Quickstart v2 消费者应把三个包的精确 pin 更新到 0.10.0，并从历史 candidate 子路径和 Schema ID 迁移一次到规范身份；以后晋升 stable 不再改源码或合同身份，投影重建仍按既有绑定输入规则执行。Quickstart v1 消费者继续锁定 0.2.1。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -34,21 +38,21 @@ Contracts 1.9.0 新增稳定文件系统绑定与固定集合发布 Schema，并
 
 ## 核心心智模型
 
-Contracts 是「定义与登记」层，不是「执行」层。它拥有 35 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、文件系统绑定与固定集合发布对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
+Contracts 是「定义与登记」层，不是「执行」层。它拥有 37 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、文件系统绑定、固定集合发布与同级适配器验证对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
 
 Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.json`），按方言路由到对应 Ajv 类；不实现任何手写 Schema 子集解释器。
 
 ## 安装和最小示例
 
 ```sh
-npm install skill-family-contracts@0.9.0
+npm install skill-family-contracts@0.10.0
 npm info skill-family-contracts --help
 ```
 
 最小示例从空目录开始，演示如何校验一份已登记契约对象：
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.9.0
+// 从空目录运行：npm install skill-family-contracts@0.10.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -82,12 +86,12 @@ import {
   QUICKSTART_PROTOCOL,
   quickstartProfileSchemas,
   validateQuickstartProfileDocument,
-} from "skill-family-contracts/candidate/quickstart-profile";
+} from "skill-family-contracts/quickstart-profile";
 ```
 
 0.4.0 携带 Quickstart Profile v2。协议把业务中立的操作固定为 `execute-method`，Resource、Task、Result Schema 通过真实的 v2 `$id` 互相解析。Foundation 只校验 JSON-safe 交换结构；方法标识、参数 Schema 与领域结果继续归消费者所有。
 
-以上子路径公开但**不稳定**。这些 Schema 不进入 `src/registry.json`，也不扩张 35 类稳定对象，后续小版本可以修改或移除。评估 v2 时应精确锁定 `0.4.0`；仍依赖 candidate v1 的接入必须继续精确锁定 `0.2.1`。
+该能力仍是 **candidate**，Schema 不进入 `src/registry.json`。评估时必须精确锁定三个 Foundation 包。0.10.0 新增上面的规范入口；历史 `/candidate/quickstart-profile` 入口作为同源迁移别名继续可用。消费者迁移一次后，未来晋升 stable 不再切入口。仍依赖 candidate v1 的接入必须继续精确锁定 `0.2.1`。
 
 ## 典型使用场景
 
@@ -96,7 +100,7 @@ import {
 - 需要运行强制机械规则、收集未解析引用：用 `runChecks` / `collectUnresolvedRefs`。
 - 需要枚举并校验公开 fixture：用 `verifyAllFixtures`。
 
-## 三十二类顶层对象
+## 三十七类顶层对象
 
 | 对象 | `$id` | Schema 文件 |
 | --- | --- | --- |
@@ -131,6 +135,8 @@ import {
 | `profile-adoption-declaration` | `https://contracts.skill-family.example/v1/profile-adoption-declaration.json` | `src/schemas/profile-adoption-declaration.schema.json` |
 | `audit-baseline-pin` | `https://contracts.skill-family.example/v1/audit-baseline-pin.json` | `src/schemas/audit-baseline-pin.schema.json` |
 | `token-estimate-record` | `https://contracts.skill-family.example/v1/token-estimate-record.json` | `src/schemas/token-estimate-record.schema.json` |
+| `adapter-peer-verification-request` | `https://contracts.skill-family.example/v1/adapter-peer-verification-request.json` | `src/schemas/adapter-peer-verification-request.schema.json` |
+| `adapter-peer-verification-result` | `https://contracts.skill-family.example/v1/adapter-peer-verification-result.json` | `src/schemas/adapter-peer-verification-result.schema.json` |
 
 所有 v1 Schema 使用 draft 2020-12 方言；实例信封统一为 `schemaVersion: 1` + 唯一 `kind` 常量 + 各层 `additionalProperties: false`。`$id` 命名空间 `contracts.skill-family.example` 使用保留示例域，永不解析到真实站点。
 
@@ -236,7 +242,7 @@ import {
 
 ### Capability selection
 
-- `foundation.contracts.object-validation`：Ajv 双方言校验 20 类对象。
+- `foundation.contracts.object-validation`：Ajv 双方言校验已登记的全部 37 类顶层对象。
 - `foundation.contracts.registry-protocol`：Schema `$id` 与协议名登记查询。
 - `foundation.contracts.kernel-protocol`：operation-request/result 协议。
 - `foundation.contracts.mandatory-checks`：九类强制规则与未解析引用。
@@ -266,7 +272,7 @@ import {
 
 ### Architectural invariants
 
-- 35 类顶层对象集合固定，新增需 ADR；Contracts 1.9.0 新增文件系统绑定与固定集合发布对象，错误码冻结不漂移。
+- 37 类顶层对象集合固定，新增需 ADR；Contracts 1.10.0 增加同级适配器验证合同并扩展已登记宿主合同，不新增错误码，错误码冻结不漂移。
 - 校验器仅 Ajv 8.20.0（精确 pin），不接受其他实现。
 
 ### Route elsewhere when
@@ -279,5 +285,5 @@ import {
 
 - 公开能力目录：[`capability-catalog.json`](https://ifoohoo.github.io/skill-family-engineering-kit/agents/capability-catalog.json)（`foundation.contracts.*` 条目）。
 - 包内结构合同：`src/registry.json`、`src/schemas/*`。
-- 包内 Candidate 源：`candidate/quickstart-profile/*`；公共导入：`skill-family-contracts/candidate/quickstart-profile`。
+- 包内 Candidate 源：`candidate/quickstart-profile/*`；规范公共导入：`skill-family-contracts/quickstart-profile`；历史迁移别名：`skill-family-contracts/candidate/quickstart-profile`。
 <!-- agent-quick-reference:end -->

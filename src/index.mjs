@@ -2,7 +2,7 @@
  * skill-family-contracts: the single authority for machine-readable structures,
  * protocols, stable error codes, and the protocol-name registry.
  *
- * v1 is frozen: thirty-two top-level object schemas (the migration-manifest
+ * v1 is frozen: thirty-seven top-level object schemas (the migration-manifest
  * contract was added in 1.1.0; the report-model and report-binding contracts
  * were added in 1.2.0; eight host-integration contracts were added in 1.3.0;
  * two durable-state contracts were added in 1.4.0; the token-estimate-result
@@ -16,7 +16,9 @@
  * token-estimate-record contracts were added in 1.6.0 per the audit
  * remediation C5 delivery; the project-profile contract was added in 1.7.0
  * per FND-ADR-013; the source-authority-receipt contract was added in 1.8.0;
- * filesystem operation contracts were added in 1.9.0),
+ * filesystem operation contracts were added in 1.9.0; the stable host
+ * descriptor, probe-result and operation-plan semantics and peer adapter
+ * verification contracts were extended in 1.10.0),
  * one kernel protocol, a closed set of nine
  * mechanical check types, and a bounded mandatory rule set. Validation is
  * implemented entirely on Ajv (dialect-aware), never on a hand-written
@@ -59,6 +61,8 @@ export const CONTRACT_OBJECTS = Object.freeze([
   "filesystem-root-binding",
   "fixed-set-publication-manifest",
   "fixed-set-publication-receipt",
+  "adapter-peer-verification-request",
+  "adapter-peer-verification-result",
 ]);
 
 export const CONTRACT_BOUNDARY = Object.freeze({
@@ -66,8 +70,16 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Contracts package version: 1.9.0 adds the filesystem operation contracts. */
-export const CONTRACTS_VERSION = "1.9.0";
+/** Contracts package version: 1.10.0 extends the stable host contracts. */
+export const CONTRACTS_VERSION = "1.10.0";
+
+export {
+  CAPABILITY_MATURITY_LEVELS,
+  CANDIDATE_PROMOTION_POLICY,
+  HISTORICAL_CANDIDATE_MIGRATION_POLICY,
+  describeCandidatePromotionPolicy,
+  describeHistoricalCandidateMigrationPolicy,
+} from "./stability.mjs";
 
 export {
   ContractsError,

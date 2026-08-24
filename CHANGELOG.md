@@ -1,5 +1,29 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.10.0 locale=en baseline=sha256:8c1c408b972d96d308a3517252b89671dd024ba0ae56d3e502a0071360577287 -->
+## [0.10.0] - 2026-08-24
+
+Contracts 0.10.0 ships the Contracts 1.10.0 minor specification, separating capability maturity from canonical consumer identity, extending existing host contracts, and adding business-neutral peer adapter verification contracts.
+
+### Added
+
+- Adds the canonical skill-family-contracts/quickstart-profile export backed by the same module as the historical candidate path.
+- Adds machine-readable candidate-promotion and historical-candidate migration policies.
+- Adds a frozen eight-entry migration map from historical Quickstart and batch Schema IDs to maturity-neutral canonical IDs.
+- Keeps the existing host Schema identities while extending their registered 1.10.0 semantics for manual host support, finite source aliases, independent nine-fact probe results, and digest-bound lifecycle plans.
+- Registers closed request/result Schemas for read-only verification of two or more peer adapter directories, including order-independent common closure and complete logical mappings.
+
+### Changed
+
+- Keeps Quickstart Profile v2 and ordered batch validation candidate while loaders expose canonical Schema IDs. Registry, rules, and error-code documents carry the 1.10.0 coordinate; the Kernel document remains byte-pinned at its 1.8.0 lifecycle coordinate.
+- Requires new capabilities to use maturity-neutral identities from their first release.
+
+### Upgrade Notes
+
+Existing Quickstart v2 consumers should update all three exact pins to 0.10.0 and migrate once from the historical candidate subpath and Schema IDs to canonical identities. A later stable promotion will not require another source or contract-identity change; projection rebuilds still follow existing bound-input rules. Quickstart v1 consumers remain pinned to 0.2.1.
+<!-- release-skill:changelog:end version=0.10.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.9.0 locale=en baseline=sha256:a56a3643cbb3bd948bad18d478965f67e6a1b63ac99c2fcf3879a92a48e3f994 -->
 ## [0.9.0] - 2026-08-24
 

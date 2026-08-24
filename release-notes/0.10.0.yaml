@@ -1,0 +1,29 @@
+version: 0.10.0
+date: 2026-08-24
+locales:
+  en:
+    summary: Contracts 0.10.0 ships the Contracts 1.10.0 minor specification, separating capability maturity from canonical consumer identity, extending existing host contracts, and adding business-neutral peer adapter verification contracts.
+    changes:
+      added:
+        - Adds the canonical skill-family-contracts/quickstart-profile export backed by the same module as the historical candidate path.
+        - Adds machine-readable candidate-promotion and historical-candidate migration policies.
+        - Adds a frozen eight-entry migration map from historical Quickstart and batch Schema IDs to maturity-neutral canonical IDs.
+        - Keeps the existing host Schema identities while extending their registered 1.10.0 semantics for manual host support, finite source aliases, independent nine-fact probe results, and digest-bound lifecycle plans.
+        - Registers closed request/result Schemas for read-only verification of two or more peer adapter directories, including order-independent common closure and complete logical mappings.
+      changed:
+        - Keeps Quickstart Profile v2 and ordered batch validation candidate while loaders expose canonical Schema IDs. Registry, rules, and error-code documents carry the 1.10.0 coordinate; the Kernel document remains byte-pinned at its 1.8.0 lifecycle coordinate.
+        - Requires new capabilities to use maturity-neutral identities from their first release.
+    upgradeNotes: Existing Quickstart v2 consumers should update all three exact pins to 0.10.0 and migrate once from the historical candidate subpath and Schema IDs to canonical identities. A later stable promotion will not require another source or contract-identity change; projection rebuilds still follow existing bound-input rules. Quickstart v1 consumers remain pinned to 0.2.1.
+  zh-CN:
+    summary: Contracts 0.10.0 发布 Contracts 1.10.0 minor 规格，将能力成熟度与消费者规范身份分离，扩展既有宿主合同，并增加业务中立的同级适配器只读验证合同。
+    changes:
+      added:
+        - 新增 skill-family-contracts/quickstart-profile 规范导出，与历史 candidate 路径使用同一模块。
+        - 新增机器可读的 candidate 晋升政策与历史 candidate 迁移政策。
+        - 新增冻结的八项迁移表，把历史 Quickstart 与批量校验 Schema ID 映射到成熟度中立的规范 ID。
+        - 保持既有宿主 Schema 身份不变，增加手动宿主支持、有限 source alias 和九项独立 probe fact 表达。
+        - 新增闭集 request/result Schema，验证两个或更多 peer 真实适配器目录的共同闭包、逐字节摘要和完整 logicalMappings，且输入顺序不影响结论。
+      changed:
+        - Quickstart Profile v2 与有序批量校验仍为 candidate；loader 改为返回规范 Schema ID。Registry、rules 与 error-codes 文档携带 1.10.0 坐标，Kernel 文档仍保持 1.8.0 生命周期坐标和字节基线。
+        - 0.10.0 以后新能力必须从首版起使用不携带成熟度的规范身份。
+    upgradeNotes: 现有 Quickstart v2 消费者应把三个包的精确 pin 更新到 0.10.0，并从历史 candidate 子路径和 Schema ID 迁移一次到规范身份；以后晋升 stable 不再改源码或合同身份，投影重建仍按既有绑定输入规则执行。Quickstart v1 消费者继续锁定 0.2.1。

@@ -1,5 +1,29 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.10.0 locale=zh-CN baseline=sha256:cfa887aada0fdc695e7bd594c104666cbffac7d3b2ad0dc90dcba45a36a583a8 -->
+## [0.10.0] - 2026-08-24
+
+Contracts 0.10.0 发布 Contracts 1.10.0 minor 规格，将能力成熟度与消费者规范身份分离，扩展既有宿主合同，并增加业务中立的同级适配器只读验证合同。
+
+### 新增
+
+- 新增 skill-family-contracts/quickstart-profile 规范导出，与历史 candidate 路径使用同一模块。
+- 新增机器可读的 candidate 晋升政策与历史 candidate 迁移政策。
+- 新增冻结的八项迁移表，把历史 Quickstart 与批量校验 Schema ID 映射到成熟度中立的规范 ID。
+- 保持既有宿主 Schema 身份不变，增加手动宿主支持、有限 source alias 和九项独立 probe fact 表达。
+- 新增闭集 request/result Schema，验证两个或更多 peer 真实适配器目录的共同闭包、逐字节摘要和完整 logicalMappings，且输入顺序不影响结论。
+
+### 变更
+
+- Quickstart Profile v2 与有序批量校验仍为 candidate；loader 改为返回规范 Schema ID。Registry、rules 与 error-codes 文档携带 1.10.0 坐标，Kernel 文档仍保持 1.8.0 生命周期坐标和字节基线。
+- 0.10.0 以后新能力必须从首版起使用不携带成熟度的规范身份。
+
+### 升级说明
+
+现有 Quickstart v2 消费者应把三个包的精确 pin 更新到 0.10.0，并从历史 candidate 子路径和 Schema ID 迁移一次到规范身份；以后晋升 stable 不再改源码或合同身份，投影重建仍按既有绑定输入规则执行。Quickstart v1 消费者继续锁定 0.2.1。
+<!-- release-skill:changelog:end version=0.10.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.9.0 locale=zh-CN baseline=sha256:e875e0408deb3335d0a6893c89fb1ad6707094b88aba6a5f3ab16364b1cef48e -->
 ## [0.9.0] - 2026-08-24
 
