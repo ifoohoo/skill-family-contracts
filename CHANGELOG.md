@@ -1,5 +1,25 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.9.0 locale=en baseline=sha256:a56a3643cbb3bd948bad18d478965f67e6a1b63ac99c2fcf3879a92a48e3f994 -->
+## [0.9.0] - 2026-08-24
+
+Contracts 1.9.0 adds stable filesystem binding and fixed-set publication schemas plus candidate ordered batch-validation schemas.
+
+### Added
+
+- Registers filesystem-root-binding, fixed-set-publication-manifest, and fixed-set-publication-receipt as stable top-level contract objects.
+- Adds candidate schema-validation-batch request and result schemas for the existing Quickstart Bundle mechanism bridge.
+
+### Changed
+
+- Moves the package to the Foundation 0.9.0 lockstep line.
+
+### Upgrade Notes
+
+Consumers may adopt the stable filesystem schemas after reviewing the corresponding Harness APIs. Batch validation remains candidate and requires the exact 0.9.0 Bundle surface.
+<!-- release-skill:changelog:end version=0.9.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.8.4 locale=en baseline=sha256:0fa2a928cd163594584b41398db0546b816f30028c6d4f565ad07187d40589da -->
 ## [0.8.4] - 2026-08-24
 

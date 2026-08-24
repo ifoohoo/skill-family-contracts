@@ -1,0 +1,21 @@
+version: 0.9.0
+date: 2026-08-24
+locales:
+  en:
+    summary: Contracts 1.9.0 adds stable filesystem binding and fixed-set publication schemas plus candidate ordered batch-validation schemas.
+    changes:
+      added:
+        - Registers filesystem-root-binding, fixed-set-publication-manifest, and fixed-set-publication-receipt as stable top-level contract objects.
+        - Adds candidate schema-validation-batch request and result schemas for the existing Quickstart Bundle mechanism bridge.
+      changed:
+        - Moves the package to the Foundation 0.9.0 lockstep line.
+    upgradeNotes: Consumers may adopt the stable filesystem schemas after reviewing the corresponding Harness APIs. Batch validation remains candidate and requires the exact 0.9.0 Bundle surface.
+  zh-CN:
+    summary: Contracts 1.9.0 新增稳定文件系统绑定与固定集合发布 Schema，并新增有序批量校验的 candidate Schema。
+    changes:
+      added:
+        - 将 filesystem-root-binding、fixed-set-publication-manifest 与 fixed-set-publication-receipt 登记为稳定顶层契约对象。
+        - 为现有 Quickstart Bundle 机制桥接增加 schema-validation-batch 请求与结果 candidate Schema。
+      changed:
+        - 包版本进入 Foundation 0.9.0 锁步版本线。
+    upgradeNotes: 消费者可在核对对应 Harness API 后采用稳定文件系统 Schema；批量校验仍为 candidate，必须精确锁定 0.9.0 Bundle 面。

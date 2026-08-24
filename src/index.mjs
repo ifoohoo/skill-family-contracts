@@ -15,7 +15,8 @@
  * observation-scope, profile-adoption-declaration, audit-baseline-pin and
  * token-estimate-record contracts were added in 1.6.0 per the audit
  * remediation C5 delivery; the project-profile contract was added in 1.7.0
- * per FND-ADR-013; the source-authority-receipt contract was added in 1.8.0),
+ * per FND-ADR-013; the source-authority-receipt contract was added in 1.8.0;
+ * filesystem operation contracts were added in 1.9.0),
  * one kernel protocol, a closed set of nine
  * mechanical check types, and a bounded mandatory rule set. Validation is
  * implemented entirely on Ajv (dialect-aware), never on a hand-written
@@ -55,6 +56,9 @@ export const CONTRACT_OBJECTS = Object.freeze([
   "audit-baseline-pin",
   "token-estimate-record",
   "source-authority-receipt",
+  "filesystem-root-binding",
+  "fixed-set-publication-manifest",
+  "fixed-set-publication-receipt",
 ]);
 
 export const CONTRACT_BOUNDARY = Object.freeze({
@@ -62,8 +66,8 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Contracts package version: 1.8.0 adds the business-neutral source-authority receipt to the 31-object 1.7.0 registry. */
-export const CONTRACTS_VERSION = "1.8.0";
+/** Contracts package version: 1.9.0 adds the filesystem operation contracts. */
+export const CONTRACTS_VERSION = "1.9.0";
 
 export {
   ContractsError,

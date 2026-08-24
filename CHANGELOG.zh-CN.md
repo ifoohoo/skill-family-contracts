@@ -1,5 +1,25 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.9.0 locale=zh-CN baseline=sha256:e875e0408deb3335d0a6893c89fb1ad6707094b88aba6a5f3ab16364b1cef48e -->
+## [0.9.0] - 2026-08-24
+
+Contracts 1.9.0 新增稳定文件系统绑定与固定集合发布 Schema，并新增有序批量校验的 candidate Schema。
+
+### 新增
+
+- 将 filesystem-root-binding、fixed-set-publication-manifest 与 fixed-set-publication-receipt 登记为稳定顶层契约对象。
+- 为现有 Quickstart Bundle 机制桥接增加 schema-validation-batch 请求与结果 candidate Schema。
+
+### 变更
+
+- 包版本进入 Foundation 0.9.0 锁步版本线。
+
+### 升级说明
+
+消费者可在核对对应 Harness API 后采用稳定文件系统 Schema；批量校验仍为 candidate，必须精确锁定 0.9.0 Bundle 面。
+<!-- release-skill:changelog:end version=0.9.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.8.4 locale=zh-CN baseline=sha256:b53db664b96371ac7e0cd86b16258da3a2beb76d13d7ef015860376cb93e07f0 -->
 ## [0.8.4] - 2026-08-24
 

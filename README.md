@@ -4,27 +4,27 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.8.4 -->
+<!-- release-skill:release-version: 0.9.0 -->
 
-The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.8.0).
+The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.9.0).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.8.4** (2026-08-24)
+**0.9.0** (2026-08-24)
 
-Contracts 1.8.0 adds a business-neutral external source-authority receipt and pure validation APIs.
+Contracts 1.9.0 adds stable filesystem binding and fixed-set publication schemas plus candidate ordered batch-validation schemas.
 
 **Added**
 
-- Registers the closed source-authority-receipt Schema as the thirty-second stable top-level contract object.
-- Adds validateSourceAuthorityReceipt and parseSourceAuthorityReceipt for canonical receipt validation and exact caller-observed subject matching.
+- Registers filesystem-root-binding, fixed-set-publication-manifest, and fixed-set-publication-receipt as stable top-level contract objects.
+- Adds candidate schema-validation-batch request and result schemas for the existing Quickstart Bundle mechanism bridge.
 
 **Changed**
 
-- Moves the package version to 0.8.4 together with Harness and Engineering Kit.
+- Moves the package to the Foundation 0.9.0 lockstep line.
 
 **Upgrade Notes**
 
-Consumers that need source authority must validate the external receipt against actual package subjects, then pass the returned sourceRepository and sourceBaseCommit through their existing source fields. Existing Contracts consumers need no migration.
+Consumers may adopt the stable filesystem schemas after reviewing the corresponding Harness APIs. Batch validation remains candidate and requires the exact 0.9.0 Bundle surface.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -33,21 +33,21 @@ When every skill-family project writes its own set of structural contracts, you 
 
 ## Core Mental Model
 
-Contracts is the "definition and registry" layer, not the "execution" layer. It owns the JSON Schemas for the 32 top-level object classes, including the Project Profile, shared profile-adoption definitions, and the external source-authority receipt. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
+Contracts is the "definition and registry" layer, not the "execution" layer. It owns the JSON Schemas for the 35 top-level object classes, including the Project Profile, shared profile-adoption definitions, filesystem binding and fixed-set publication objects. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
 
 Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version in `package.json`), routing by dialect to the corresponding Ajv class; no hand-written schema-subset interpreter is implemented.
 
 ## Installation and Minimal Example
 
 ```sh
-npm install skill-family-contracts@0.8.4
+npm install skill-family-contracts@0.9.0
 npm info skill-family-contracts --help
 ```
 
 The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// Run from an empty directory: npm install skill-family-contracts@0.8.4
+// Run from an empty directory: npm install skill-family-contracts@0.9.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -86,7 +86,7 @@ import {
 
 Version 0.4.0 carries Quickstart Profile v2. Its protocol fixes the business-neutral operation to `execute-method`; Resource, Task, and Result schemas resolve one another through their real v2 `$id` values. Foundation validates the JSON-safe exchange shape, while the consumer owns method identifiers, parameter schemas, and domain results.
 
-The subpath is public but **not stable**. Its schemas remain absent from `src/registry.json`, do not expand the 32 stable object classes, and may change or be removed in a later minor release. Pin exactly `0.4.0` when evaluating v2. Integrations that still require candidate v1 must stay pinned to exactly `0.2.1`.
+The subpath is public but **not stable**. Its schemas remain absent from `src/registry.json`, do not expand the 35 stable object classes, and may change or be removed in a later minor release. Pin exactly `0.4.0` when evaluating v2. Integrations that still require candidate v1 must stay pinned to exactly `0.2.1`.
 
 ## Typical Use Cases
 
@@ -265,7 +265,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Architectural invariants
 
-- The set of 32 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift. Contracts 1.8.0 adds the source-authority receipt without adding an error code.
+- The set of 35 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift. Contracts 1.9.0 adds filesystem binding and fixed-set publication objects without adding an error code.
 - The validator is exclusively Ajv 8.20.0 (exact pin); no other implementation is accepted.
 
 ### Route elsewhere when

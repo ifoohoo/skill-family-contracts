@@ -21,6 +21,11 @@ const documents = Object.freeze({
   surfaceInventory: load("harness-surface-inventory.schema.json"),
 });
 
+const BATCH_SCHEMAS = Object.freeze({
+  request: load(new URL("../foundation-mechanisms/schema-validation-batch-request.schema.json", import.meta.url)),
+  result: load(new URL("../foundation-mechanisms/schema-validation-batch-result.schema.json", import.meta.url)),
+});
+
 const VALIDATE_KINDS = Object.freeze(["resource", "task", "result"]);
 const INVENTORY_KIND = "inventory";
 const SURFACE_INVENTORY_KIND = "surfaceInventory";
@@ -82,6 +87,14 @@ export function loadConsumerSchemaInventorySchema() {
 
 export function loadHarnessSurfaceInventorySchema() {
   return structuredClone(documents.surfaceInventory);
+}
+
+export function loadSchemaValidationBatchRequestSchema() {
+  return structuredClone(BATCH_SCHEMAS.request);
+}
+
+export function loadSchemaValidationBatchResultSchema() {
+  return structuredClone(BATCH_SCHEMAS.result);
 }
 
 // The stable envelopes declare a date-time format; the candidate instance

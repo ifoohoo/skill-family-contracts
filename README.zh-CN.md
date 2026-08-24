@@ -5,27 +5,27 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.8.4 -->
+<!-- release-skill:release-version: 0.9.0 -->
 
-机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.8.0）。
+机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.9.0）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.8.4** (2026-08-24)
+**0.9.0** (2026-08-24)
 
-Contracts 1.8.0 新增业务中立的外置 source-authority receipt 及纯校验 API。
+Contracts 1.9.0 新增稳定文件系统绑定与固定集合发布 Schema，并新增有序批量校验的 candidate Schema。
 
 **新增**
 
-- 登记闭合的 source-authority-receipt Schema，稳定顶层契约对象增至 32 类。
-- 新增 validateSourceAuthorityReceipt 与 parseSourceAuthorityReceipt，用于校验收据规范形态并精确核对调用方实际观测的 subjects。
+- 将 filesystem-root-binding、fixed-set-publication-manifest 与 fixed-set-publication-receipt 登记为稳定顶层契约对象。
+- 为现有 Quickstart Bundle 机制桥接增加 schema-validation-batch 请求与结果 candidate Schema。
 
 **变更**
 
-- 包版本与 Harness、Engineering Kit 一同升至 0.8.4。
+- 包版本进入 Foundation 0.9.0 锁步版本线。
 
 **升级说明**
 
-需要 source authority 的消费者先用实际包 subjects 校验外置 receipt，再把返回的 sourceRepository 与 sourceBaseCommit 传入既有 source 字段；其他 Contracts 消费者无需迁移。
+消费者可在核对对应 Harness API 后采用稳定文件系统 Schema；批量校验仍为 candidate，必须精确锁定 0.9.0 Bundle 面。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -34,21 +34,21 @@ Contracts 1.8.0 新增业务中立的外置 source-authority receipt 及纯校�
 
 ## 核心心智模型
 
-Contracts 是「定义与登记」层，不是「执行」层。它拥有 32 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义和外置 source-authority receipt；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
+Contracts 是「定义与登记」层，不是「执行」层。它拥有 35 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、文件系统绑定与固定集合发布对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
 
 Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.json`），按方言路由到对应 Ajv 类；不实现任何手写 Schema 子集解释器。
 
 ## 安装和最小示例
 
 ```sh
-npm install skill-family-contracts@0.8.4
+npm install skill-family-contracts@0.9.0
 npm info skill-family-contracts --help
 ```
 
 最小示例从空目录开始，演示如何校验一份已登记契约对象：
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.8.4
+// 从空目录运行：npm install skill-family-contracts@0.9.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -87,7 +87,7 @@ import {
 
 0.4.0 携带 Quickstart Profile v2。协议把业务中立的操作固定为 `execute-method`，Resource、Task、Result Schema 通过真实的 v2 `$id` 互相解析。Foundation 只校验 JSON-safe 交换结构；方法标识、参数 Schema 与领域结果继续归消费者所有。
 
-以上子路径公开但**不稳定**。这些 Schema 不进入 `src/registry.json`，也不扩张 32 类稳定对象，后续小版本可以修改或移除。评估 v2 时应精确锁定 `0.4.0`；仍依赖 candidate v1 的接入必须继续精确锁定 `0.2.1`。
+以上子路径公开但**不稳定**。这些 Schema 不进入 `src/registry.json`，也不扩张 35 类稳定对象，后续小版本可以修改或移除。评估 v2 时应精确锁定 `0.4.0`；仍依赖 candidate v1 的接入必须继续精确锁定 `0.2.1`。
 
 ## 典型使用场景
 
@@ -266,7 +266,7 @@ import {
 
 ### Architectural invariants
 
-- 32 类顶层对象集合固定，新增需 ADR；Contracts 1.8.0 新增 source-authority receipt，错误码冻结不漂移。
+- 35 类顶层对象集合固定，新增需 ADR；Contracts 1.9.0 新增文件系统绑定与固定集合发布对象，错误码冻结不漂移。
 - 校验器仅 Ajv 8.20.0（精确 pin），不接受其他实现。
 
 ### Route elsewhere when
