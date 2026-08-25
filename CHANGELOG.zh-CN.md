@@ -1,5 +1,25 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.11.0 locale=zh-CN baseline=sha256:c20d52d377b61fa822dc3616e40ed0f10c157918c4f44d47e448585d48be9823 -->
+## [0.11.0] - 2026-08-25
+
+Contracts 0.11.0 增加受约束真实宿主验证所需的候选请求与结果合同。
+
+### 新增
+
+- 新增闭合的宿主验证请求与结果 Schema，明确摘要前像、逐宿主绑定和失败关闭的终态语义。
+- 为 Kimi 与 WorkBuddy 登记宿主验证三元组（existing-user-state + host-managed），不增加通用 driver Registry 或认证 SPI。
+
+### 变更
+
+- 把此前准备好的宿主 Profile 闭包并入 0.11.0 三包锁步交付。
+
+### 升级说明
+
+消费者可以验证候选宿主验证合同；0.11.0 实现仍须等待 Kimi 与 WorkBuddy 真实宿主发布门通过后才能发布。
+<!-- release-skill:changelog:end version=0.11.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.10.0 locale=zh-CN baseline=sha256:cfa887aada0fdc695e7bd594c104666cbffac7d3b2ad0dc90dcba45a36a583a8 -->
 ## [0.10.0] - 2026-08-24
 

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "skill-family.contracts.registry",
-  "contractsVersion": "1.10.0",
+  "contractsVersion": "1.11.0",
   "note": "Protocol-name and schema-$id registry. Registration mechanically rejects duplicate protocol name/version (SFC1004) and duplicate $id (SFC1003). This file is the single registration surface; adding an entry is a contracts change.",
   "protocols": [
     {
@@ -271,6 +271,20 @@
       "dialect": "2020-12",
       "status": "stable",
       "file": "src/schemas/adapter-peer-verification-result.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/host-verification-request.json",
+      "object": "host-verification-request",
+      "dialect": "2020-12",
+      "status": "candidate",
+      "file": "src/schemas/host-verification-request.schema.json"
+    },
+    {
+      "$id": "https://contracts.skill-family.example/v1/host-verification-result.json",
+      "object": "host-verification-result",
+      "dialect": "2020-12",
+      "status": "candidate",
+      "file": "src/schemas/host-verification-result.schema.json"
     }
   ],
   "dialects": {

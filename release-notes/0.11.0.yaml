@@ -1,0 +1,21 @@
+version: 0.11.0
+date: 2026-08-25
+locales:
+  en:
+    summary: Contracts 0.11.0 adds candidate request and result contracts for bounded real-host verification.
+    changes:
+      added:
+        - Adds closed host-verification request and result schemas with explicit digest preimages, per-host bindings, and fail-closed terminal semantics.
+        - Adds the Kimi and WorkBuddy descriptor verification tuples (existing-user-state + host-managed) without adding a general driver registry or authentication SPI.
+      changed:
+        - Carries the previously prepared host Profile closure into the lockstep 0.11.0 family release.
+    upgradeNotes: Consumers may validate the candidate host-verification contracts, but the 0.11.0 implementation remains unpublished until the Kimi and WorkBuddy real-host publication gates pass.
+  zh-CN:
+    summary: Contracts 0.11.0 增加受约束真实宿主验证所需的候选请求与结果合同。
+    changes:
+      added:
+        - 新增闭合的宿主验证请求与结果 Schema，明确摘要前像、逐宿主绑定和失败关闭的终态语义。
+        - 为 Kimi 与 WorkBuddy 登记宿主验证三元组（existing-user-state + host-managed），不增加通用 driver Registry 或认证 SPI。
+      changed:
+        - 把此前准备好的宿主 Profile 闭包并入 0.11.0 三包锁步交付。
+    upgradeNotes: 消费者可以验证候选宿主验证合同；0.11.0 实现仍须等待 Kimi 与 WorkBuddy 真实宿主发布门通过后才能发布。

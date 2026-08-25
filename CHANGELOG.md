@@ -1,5 +1,25 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.11.0 locale=en baseline=sha256:3a3bae24cc03a238579c4c3ec3be60b144908f766dbf4367fe20ade6fc86f1a6 -->
+## [0.11.0] - 2026-08-25
+
+Contracts 0.11.0 adds candidate request and result contracts for bounded real-host verification.
+
+### Added
+
+- Adds closed host-verification request and result schemas with explicit digest preimages, per-host bindings, and fail-closed terminal semantics.
+- Adds the Kimi and WorkBuddy descriptor verification tuples (existing-user-state + host-managed) without adding a general driver registry or authentication SPI.
+
+### Changed
+
+- Carries the previously prepared host Profile closure into the lockstep 0.11.0 family release.
+
+### Upgrade Notes
+
+Consumers may validate the candidate host-verification contracts, but the 0.11.0 implementation remains unpublished until the Kimi and WorkBuddy real-host publication gates pass.
+<!-- release-skill:changelog:end version=0.11.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.10.0 locale=en baseline=sha256:8c1c408b972d96d308a3517252b89671dd024ba0ae56d3e502a0071360577287 -->
 ## [0.10.0] - 2026-08-24
 
