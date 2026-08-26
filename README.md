@@ -4,27 +4,27 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.11.0 -->
+<!-- release-skill:release-version: 0.12.0 -->
 
-The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.11.0).
+The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.12.0).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.11.0** (2026-08-25)
+**0.12.0** (2026-08-26)
 
-Contracts 0.11.0 adds candidate request and result contracts for bounded real-host verification.
+Contracts 0.12.0 extends the existing host-verification contracts to five fixed host and driver pairings.
 
 **Added**
 
-- Adds closed host-verification request and result schemas with explicit digest preimages, per-host bindings, and fail-closed terminal semantics.
-- Adds the Kimi and WorkBuddy descriptor verification tuples (existing-user-state + host-managed) without adding a general driver registry or authentication SPI.
+- Adds three fixed verification pairings to the existing two, with existing-user-state and host-managed credential semantics; the host capability matrix lists the exact hosts and drivers.
 
 **Changed**
 
-- Carries the previously prepared host Profile closure into the lockstep 0.11.0 family release.
+- Allows an execution-failed result with exit status zero when the host output fails the fixed protocol check.
+- Advances the Contracts specification to 1.12.0 without adding top-level object classes, Schema IDs, or error codes.
 
 **Upgrade Notes**
 
-Consumers may validate the candidate host-verification contracts, but the 0.11.0 implementation remains unpublished until the Kimi and WorkBuddy real-host publication gates pass.
+Upgrade the three Foundation packages together to 0.12.0. Host verification remains candidate and reports execution facts, not domain approval. Descriptor verification does not grant automatic installation or lifecycle support.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -40,14 +40,14 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 ## Installation and Minimal Example
 
 ```sh
-npm install skill-family-contracts@0.11.0
+npm install skill-family-contracts@0.12.0
 npm info skill-family-contracts --help
 ```
 
 The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// Run from an empty directory: npm install skill-family-contracts@0.11.0
+// Run from an empty directory: npm install skill-family-contracts@0.12.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -139,7 +139,7 @@ Host descriptor/probe/plan contracts remain the same registered object identitie
 
 The peer adapter verification request/result contracts are business-neutral and read-only. They require at least two explicit peers, closed path and mapping inputs, and a result that can be recomputed from real directories. They do not define canonical migration, directory writes, receipts, retries, lifecycle state, or consumer smoke.
 
-The host-verification request/result contracts are business-neutral candidate contracts. They bind a common candidate and per-host facts without exposing credentials, paths, prompts, raw streams, durable receipts, domain PASS/FAIL, or release state. Their `$id` and `operation=host-verification` are permanent from 1.11.0, as is the fixed `existing-user-state + host-managed` auth pair and the two descriptor-bound driver pairs (`kimi-code-print-v1`, `workbuddy-codebuddy-print-v1`), but the 0.11.0 implementation remains unpublished until the real-host publication gates pass.
+The host-verification request/result contracts are business-neutral candidate contracts. They bind a common candidate and per-host facts without exposing credentials, paths, prompts, raw streams, durable receipts, domain PASS/FAIL, or release state. Their `$id` and `operation=host-verification` are permanent from 1.11.0. Version 1.12.0 retains the fixed `existing-user-state + host-managed` auth pair and extends the descriptor-bound drivers from two to five; see the [host capability matrix](../../docs/reference/host-capability-matrix.md) for their exact identities. An exit status of zero may still produce `execution-failed` when the output fails its fixed protocol check.
 
 All v1 Schemas use the draft 2020-12 dialect; instance envelopes are uniformly `schemaVersion: 1` + a unique `kind` constant + `additionalProperties: false` at each layer. The `$id` namespace `contracts.skill-family.example` uses a reserved example domain and never resolves to a real site.
 

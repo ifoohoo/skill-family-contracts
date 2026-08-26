@@ -73,8 +73,8 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Contracts package version: 1.11.0 adds candidate host verification contracts. */
-export const CONTRACTS_VERSION = "1.11.0";
+/** Contracts package version: 1.12.0 admits the three built-in real host verification driver IDs. */
+export const CONTRACTS_VERSION = "1.12.0";
 
 export {
   CAPABILITY_MATURITY_LEVELS,

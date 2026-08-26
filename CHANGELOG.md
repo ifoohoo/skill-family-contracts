@@ -1,5 +1,25 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.12.0 locale=en baseline=sha256:f7558a99e241184b6e67230d9a61aee9ca770b299f00d01e2bca16a1fc2aed89 -->
+## [0.12.0] - 2026-08-26
+
+Contracts 0.12.0 extends the existing host-verification contracts to five fixed host and driver pairings.
+
+### Added
+
+- Adds three fixed verification pairings to the existing two, with existing-user-state and host-managed credential semantics; the host capability matrix lists the exact hosts and drivers.
+
+### Changed
+
+- Allows an execution-failed result with exit status zero when the host output fails the fixed protocol check.
+- Advances the Contracts specification to 1.12.0 without adding top-level object classes, Schema IDs, or error codes.
+
+### Upgrade Notes
+
+Upgrade the three Foundation packages together to 0.12.0. Host verification remains candidate and reports execution facts, not domain approval. Descriptor verification does not grant automatic installation or lifecycle support.
+<!-- release-skill:changelog:end version=0.12.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.11.0 locale=en baseline=sha256:3a3bae24cc03a238579c4c3ec3be60b144908f766dbf4367fe20ade6fc86f1a6 -->
 ## [0.11.0] - 2026-08-25
 

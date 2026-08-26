@@ -25,7 +25,7 @@
       "additionalProperties": false,
       "required": ["driverId", "authStrategy", "credentialMutation"],
       "properties": {
-        "driverId": { "enum": ["kimi-code-print-v1", "workbuddy-codebuddy-print-v1"] },
+        "driverId": { "enum": ["kimi-code-print-v1", "workbuddy-codebuddy-print-v1", "claude-code-print-v1", "codex-exec-v1", "qodercli-print-v1"] },
         "authStrategy": { "const": "existing-user-state" },
         "credentialMutation": { "const": "host-managed" }
       }
@@ -81,7 +81,28 @@
       }
     },
     {
-      "if": { "properties": { "hostId": { "enum": ["kimi-code", "workbuddy"] } }, "required": ["hostId"] },
+      "if": { "properties": { "hostId": { "const": "claude" } }, "required": ["hostId"] },
+      "then": {
+        "required": ["verification"],
+        "properties": { "verification": { "type": "object", "properties": { "driverId": { "const": "claude-code-print-v1" } } } }
+      }
+    },
+    {
+      "if": { "properties": { "hostId": { "const": "codex" } }, "required": ["hostId"] },
+      "then": {
+        "required": ["verification"],
+        "properties": { "verification": { "type": "object", "properties": { "driverId": { "const": "codex-exec-v1" } } } }
+      }
+    },
+    {
+      "if": { "properties": { "hostId": { "const": "qoder" } }, "required": ["hostId"] },
+      "then": {
+        "required": ["verification"],
+        "properties": { "verification": { "type": "object", "properties": { "driverId": { "const": "qodercli-print-v1" } } } }
+      }
+    },
+    {
+      "if": { "properties": { "hostId": { "enum": ["kimi-code", "workbuddy", "claude", "codex", "qoder"] } }, "required": ["hostId"] },
       "else": { "properties": { "verification": false } }
     },
     {

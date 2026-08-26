@@ -1,5 +1,25 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.12.0 locale=zh-CN baseline=sha256:c69ddf418a927bb24ed0fb8641b71d7ae6bf69b4c0997c5f5dfed419c40d1d00 -->
+## [0.12.0] - 2026-08-26
+
+Contracts 0.12.0 将既有宿主验证合同扩展为五组固定的宿主与驱动对应关系。
+
+### 新增
+
+- 在既有两个验证组合之外增加三个固定组合，继续使用 existing-user-state 与 host-managed 凭证语义；精确宿主与驱动名单见宿主能力矩阵。
+
+### 变更
+
+- 宿主输出未通过固定协议检查时，允许退出码为零的调用返回 execution-failed。
+- Contracts 规格升级为 1.12.0，不新增顶层对象类别、Schema ID 或错误码。
+
+### 升级说明
+
+三个 Foundation 包须一起升级到 0.12.0。宿主验证仍为 candidate，只报告执行事实，不代表领域审阅通过；Descriptor 中的验证配置不授予自动安装或生命周期能力。
+<!-- release-skill:changelog:end version=0.12.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.11.0 locale=zh-CN baseline=sha256:c20d52d377b61fa822dc3616e40ed0f10c157918c4f44d47e448585d48be9823 -->
 ## [0.11.0] - 2026-08-25
 

@@ -79,22 +79,6 @@
           }
         }
       }
-    },
-    {
-      "if": {
-        "allOf": [
-          { "properties": { "reason": { "const": "execution-failed" } } },
-          { "properties": { "execution": { "type": "object", "properties": { "spawned": { "const": true } } } } }
-        ]
-      },
-      "then": {
-        "properties": {
-          "execution": {
-            "type": "object",
-            "properties": { "exitStatus": { "not": { "const": 0 } } }
-          }
-        }
-      }
     }
   ],
   "properties": {

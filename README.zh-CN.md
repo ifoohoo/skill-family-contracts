@@ -5,27 +5,27 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.11.0 -->
+<!-- release-skill:release-version: 0.12.0 -->
 
-机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.11.0）。
+机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.12.0）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.11.0** (2026-08-25)
+**0.12.0** (2026-08-26)
 
-Contracts 0.11.0 增加受约束真实宿主验证所需的候选请求与结果合同。
+Contracts 0.12.0 将既有宿主验证合同扩展为五组固定的宿主与驱动对应关系。
 
 **新增**
 
-- 新增闭合的宿主验证请求与结果 Schema，明确摘要前像、逐宿主绑定和失败关闭的终态语义。
-- 为 Kimi 与 WorkBuddy 登记宿主验证三元组（existing-user-state + host-managed），不增加通用 driver Registry 或认证 SPI。
+- 在既有两个验证组合之外增加三个固定组合，继续使用 existing-user-state 与 host-managed 凭证语义；精确宿主与驱动名单见宿主能力矩阵。
 
 **变更**
 
-- 把此前准备好的宿主 Profile 闭包并入 0.11.0 三包锁步交付。
+- 宿主输出未通过固定协议检查时，允许退出码为零的调用返回 execution-failed。
+- Contracts 规格升级为 1.12.0，不新增顶层对象类别、Schema ID 或错误码。
 
 **升级说明**
 
-消费者可以验证候选宿主验证合同；0.11.0 实现仍须等待 Kimi 与 WorkBuddy 真实宿主发布门通过后才能发布。
+三个 Foundation 包须一起升级到 0.12.0。宿主验证仍为 candidate，只报告执行事实，不代表领域审阅通过；Descriptor 中的验证配置不授予自动安装或生命周期能力。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -41,14 +41,14 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 ## 安装和最小示例
 
 ```sh
-npm install skill-family-contracts@0.11.0
+npm install skill-family-contracts@0.12.0
 npm info skill-family-contracts --help
 ```
 
 最小示例从空目录开始，演示如何校验一份已登记契约对象：
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.11.0
+// 从空目录运行：npm install skill-family-contracts@0.12.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {

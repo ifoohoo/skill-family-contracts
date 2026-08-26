@@ -1,0 +1,21 @@
+version: 0.12.0
+date: 2026-08-26
+locales:
+  en:
+    summary: Contracts 0.12.0 extends the existing host-verification contracts to five fixed host and driver pairings.
+    changes:
+      added:
+        - Adds three fixed verification pairings to the existing two, with existing-user-state and host-managed credential semantics; the host capability matrix lists the exact hosts and drivers.
+      changed:
+        - Allows an execution-failed result with exit status zero when the host output fails the fixed protocol check.
+        - Advances the Contracts specification to 1.12.0 without adding top-level object classes, Schema IDs, or error codes.
+    upgradeNotes: Upgrade the three Foundation packages together to 0.12.0. Host verification remains candidate and reports execution facts, not domain approval. Descriptor verification does not grant automatic installation or lifecycle support.
+  zh-CN:
+    summary: Contracts 0.12.0 将既有宿主验证合同扩展为五组固定的宿主与驱动对应关系。
+    changes:
+      added:
+        - 在既有两个验证组合之外增加三个固定组合，继续使用 existing-user-state 与 host-managed 凭证语义；精确宿主与驱动名单见宿主能力矩阵。
+      changed:
+        - 宿主输出未通过固定协议检查时，允许退出码为零的调用返回 execution-failed。
+        - Contracts 规格升级为 1.12.0，不新增顶层对象类别、Schema ID 或错误码。
+    upgradeNotes: 三个 Foundation 包须一起升级到 0.12.0。宿主验证仍为 candidate，只报告执行事实，不代表领域审阅通过；Descriptor 中的验证配置不授予自动安装或生命周期能力。

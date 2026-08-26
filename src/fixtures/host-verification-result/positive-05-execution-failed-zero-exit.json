@@ -1,6 +1,6 @@
 {
-  "fixtureId": "host-verification-result/negative-04-execution-failed-zero-exit",
-  "class": "negative",
+  "fixtureId": "host-verification-result/positive-05-execution-failed-zero-exit",
+  "class": "positive",
   "contract": "host-verification-result",
   "validation": { "schemaId": "https://contracts.skill-family.example/v1/host-verification-result.json", "dialect": "2020-12", "policy": "strict" },
   "data": {
@@ -18,5 +18,5 @@
     "reason": "execution-failed",
     "requiredActions": []
   },
-  "expect": { "valid": false, "errorCode": "SFC1001" }
+  "expect": { "valid": true }
 }
