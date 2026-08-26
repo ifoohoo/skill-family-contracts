@@ -1,5 +1,25 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.13.0 locale=zh-CN baseline=sha256:4e688ca871352558d1c93ed95ffc496bb25e8341c44089d8cd02c2359ca72264 -->
+## [0.13.0] - 2026-08-26
+
+Contracts 0.13.0 源码候选增加完整插件验证与私有文件系统树观察合同。
+
+### 新增
+
+- 以永久 Schema 身份增加 plugin-verification-request、plugin-verification-result 和 filesystem-tree-observation。
+
+### 变更
+
+- Contracts 规格升至 1.13.0，登记 42 类顶层对象。
+- 为既有 watchdog 信封增加可选每流输出限额事实；未启用限额的旧调用保持原形状。
+
+### 升级说明
+
+三个包须精确锁定到同一版本。既有单 Skill 宿主验证与 Kernel 1.8.0 保持不变。候选准备不代表宿主资格、独立验收或发布完成。
+<!-- release-skill:changelog:end version=0.13.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.12.0 locale=zh-CN baseline=sha256:c69ddf418a927bb24ed0fb8641b71d7ae6bf69b4c0997c5f5dfed419c40d1d00 -->
 ## [0.12.0] - 2026-08-26
 

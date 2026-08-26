@@ -1,5 +1,25 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.13.0 locale=en baseline=sha256:98b7210e4eafd177ac3fe9294badfc810f1f93626fbdde589e8e3dee1a556d49 -->
+## [0.13.0] - 2026-08-26
+
+Contracts 0.13.0 is a source candidate for complete plugin verification and private filesystem tree observations.
+
+### Added
+
+- Adds plugin-verification-request, plugin-verification-result and filesystem-tree-observation under permanent Schema identities.
+
+### Changed
+
+- Advances the Contracts specification to 1.13.0 with 42 registered top-level object classes.
+- Extends the existing watchdog envelope with optional per-stream output limit facts; legacy uncapped calls keep their shape.
+
+### Upgrade Notes
+
+Pin all three packages together. Existing single-Skill host verification and Kernel 1.8.0 remain unchanged. Candidate preparation does not establish host qualification, independent acceptance or publication.
+<!-- release-skill:changelog:end version=0.13.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.12.0 locale=en baseline=sha256:f7558a99e241184b6e67230d9a61aee9ca770b299f00d01e2bca16a1fc2aed89 -->
 ## [0.12.0] - 2026-08-26
 

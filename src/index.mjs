@@ -2,7 +2,7 @@
  * skill-family-contracts: the single authority for machine-readable structures,
  * protocols, stable error codes, and the protocol-name registry.
  *
- * v1 is frozen: thirty-seven top-level object schemas (the migration-manifest
+ * v1 is frozen: forty-two top-level object schemas (the migration-manifest
  * contract was added in 1.1.0; the report-model and report-binding contracts
  * were added in 1.2.0; eight host-integration contracts were added in 1.3.0;
  * two durable-state contracts were added in 1.4.0; the token-estimate-result
@@ -19,7 +19,8 @@
  * filesystem operation contracts were added in 1.9.0; the stable host
  * descriptor, probe-result and operation-plan semantics and peer adapter
  * verification contracts were extended in 1.10.0; host verification candidate
- * contracts were added in 1.11.0),
+ * contracts were added in 1.11.0; the plugin verification pair and the
+ * filesystem-tree-observation contract were added in 1.13.0),
  * one kernel protocol, a closed set of nine
  * mechanical check types, and a bounded mandatory rule set. Validation is
  * implemented entirely on Ajv (dialect-aware), never on a hand-written
@@ -66,6 +67,9 @@ export const CONTRACT_OBJECTS = Object.freeze([
   "adapter-peer-verification-result",
   "host-verification-request",
   "host-verification-result",
+  "plugin-verification-request",
+  "plugin-verification-result",
+  "filesystem-tree-observation",
 ]);
 
 export const CONTRACT_BOUNDARY = Object.freeze({
@@ -73,8 +77,8 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Contracts package version: 1.12.0 admits the three built-in real host verification driver IDs. */
-export const CONTRACTS_VERSION = "1.12.0";
+/** Contracts package version: 1.13.0 adds the plugin verification pair and the neutral tree observation contract (FND-DES-014). */
+export const CONTRACTS_VERSION = "1.13.0";
 
 export {
   CAPABILITY_MATURITY_LEVELS,

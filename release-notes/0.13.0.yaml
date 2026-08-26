@@ -1,0 +1,21 @@
+version: 0.13.0
+date: 2026-08-26
+locales:
+  en:
+    summary: Contracts 0.13.0 is a source candidate for complete plugin verification and private filesystem tree observations.
+    changes:
+      added:
+        - Adds plugin-verification-request, plugin-verification-result and filesystem-tree-observation under permanent Schema identities.
+      changed:
+        - Advances the Contracts specification to 1.13.0 with 42 registered top-level object classes.
+        - Extends the existing watchdog envelope with optional per-stream output limit facts; legacy uncapped calls keep their shape.
+    upgradeNotes: Pin all three packages together. Existing single-Skill host verification and Kernel 1.8.0 remain unchanged. Candidate preparation does not establish host qualification, independent acceptance or publication.
+  zh-CN:
+    summary: Contracts 0.13.0 源码候选增加完整插件验证与私有文件系统树观察合同。
+    changes:
+      added:
+        - 以永久 Schema 身份增加 plugin-verification-request、plugin-verification-result 和 filesystem-tree-observation。
+      changed:
+        - Contracts 规格升至 1.13.0，登记 42 类顶层对象。
+        - 为既有 watchdog 信封增加可选每流输出限额事实；未启用限额的旧调用保持原形状。
+    upgradeNotes: 三个包须精确锁定到同一版本。既有单 Skill 宿主验证与 Kernel 1.8.0 保持不变。候选准备不代表宿主资格、独立验收或发布完成。

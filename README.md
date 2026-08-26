@@ -4,27 +4,27 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.12.0 -->
+<!-- release-skill:release-version: 0.13.0 -->
 
-The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.12.0).
+The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.13.0).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.12.0** (2026-08-26)
+**0.13.0** (2026-08-26)
 
-Contracts 0.12.0 extends the existing host-verification contracts to five fixed host and driver pairings.
+Contracts 0.13.0 is a source candidate for complete plugin verification and private filesystem tree observations.
 
 **Added**
 
-- Adds three fixed verification pairings to the existing two, with existing-user-state and host-managed credential semantics; the host capability matrix lists the exact hosts and drivers.
+- Adds plugin-verification-request, plugin-verification-result and filesystem-tree-observation under permanent Schema identities.
 
 **Changed**
 
-- Allows an execution-failed result with exit status zero when the host output fails the fixed protocol check.
-- Advances the Contracts specification to 1.12.0 without adding top-level object classes, Schema IDs, or error codes.
+- Advances the Contracts specification to 1.13.0 with 42 registered top-level object classes.
+- Extends the existing watchdog envelope with optional per-stream output limit facts; legacy uncapped calls keep their shape.
 
 **Upgrade Notes**
 
-Upgrade the three Foundation packages together to 0.12.0. Host verification remains candidate and reports execution facts, not domain approval. Descriptor verification does not grant automatic installation or lifecycle support.
+Pin all three packages together. Existing single-Skill host verification and Kernel 1.8.0 remain unchanged. Candidate preparation does not establish host qualification, independent acceptance or publication.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -33,21 +33,23 @@ When every skill-family project writes its own set of structural contracts, you 
 
 ## Core Mental Model
 
-Contracts is the "definition and registry" layer, not the "execution" layer. It owns the JSON Schemas for the 39 top-level object classes, including the Project Profile, shared profile-adoption definitions, filesystem binding, fixed-set publication, peer adapter verification, and candidate real-host verification objects. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
+Contracts is the "definition and registry" layer, not the "execution" layer. It owns the JSON Schemas for the 42 top-level object classes, including the Project Profile, shared profile-adoption definitions, filesystem binding, fixed-set publication, peer adapter verification, and candidate real-host verification objects. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
 
 Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version in `package.json`), routing by dialect to the corresponding Ajv class; no hand-written schema-subset interpreter is implemented.
 
 ## Installation and Minimal Example
 
+Version 0.13.0 is not published. The registry command below is for use after publication; this iteration installs the three local candidate tarballs in an isolated directory.
+
 ```sh
-npm install skill-family-contracts@0.12.0
+npm install skill-family-contracts@0.13.0
 npm info skill-family-contracts --help
 ```
 
 The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// Run from an empty directory: npm install skill-family-contracts@0.12.0
+// Run from an empty directory: npm install skill-family-contracts@0.13.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -134,12 +136,16 @@ The capability remains **candidate** and its schemas stay outside `src/registry.
 | `token-estimate-record` | `https://contracts.skill-family.example/v1/token-estimate-record.json` | `src/schemas/token-estimate-record.schema.json` |
 | `host-verification-request` | `https://contracts.skill-family.example/v1/host-verification-request.json` | `src/schemas/host-verification-request.schema.json` |
 | `host-verification-result` | `https://contracts.skill-family.example/v1/host-verification-result.json` | `src/schemas/host-verification-result.schema.json` |
+| `plugin-verification-request` | `https://contracts.skill-family.example/v1/plugin-verification-request.json` | `src/schemas/plugin-verification-request.schema.json` |
+| `plugin-verification-result` | `https://contracts.skill-family.example/v1/plugin-verification-result.json` | `src/schemas/plugin-verification-result.schema.json` |
+| `filesystem-tree-observation` | `https://contracts.skill-family.example/v1/filesystem-tree-observation.json` | `src/schemas/filesystem-tree-observation.schema.json` |
 
 Host descriptor/probe/plan contracts remain the same registered object identities, while Contracts 1.10.0 extends their stable semantics. Version 0.10.0 adds optional maturity and finite source-alias fields, permits `manual` host support, and binds update/uninstall plans to prior member digests. The nine probe facts are always represented independently; an unavailable or unknown fact is not inferred from the CLI or version fact.
 
 The peer adapter verification request/result contracts are business-neutral and read-only. They require at least two explicit peers, closed path and mapping inputs, and a result that can be recomputed from real directories. They do not define canonical migration, directory writes, receipts, retries, lifecycle state, or consumer smoke.
 
 The host-verification request/result contracts are business-neutral candidate contracts. They bind a common candidate and per-host facts without exposing credentials, paths, prompts, raw streams, durable receipts, domain PASS/FAIL, or release state. Their `$id` and `operation=host-verification` are permanent from 1.11.0. Version 1.12.0 retains the fixed `existing-user-state + host-managed` auth pair and extends the descriptor-bound drivers from two to five; see the [host capability matrix](../../docs/reference/host-capability-matrix.md) for their exact identities. An exit status of zero may still produce `execution-failed` when the output fails its fixed protocol check.
+
 
 All v1 Schemas use the draft 2020-12 dialect; instance envelopes are uniformly `schemaVersion: 1` + a unique `kind` constant + `additionalProperties: false` at each layer. The `$id` namespace `contracts.skill-family.example` uses a reserved example domain and never resolves to a real site.
 
@@ -245,7 +251,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Capability selection
 
-- `foundation.contracts.object-validation`: Ajv dual-dialect validation of all 39 registered top-level object classes.
+- `foundation.contracts.object-validation`: Ajv dual-dialect validation of all 42 registered top-level object classes.
 - `foundation.contracts.registry-protocol`: Schema `$id` and protocol-name registry query.
 - `foundation.contracts.kernel-protocol`: operation-request/result protocol.
 - `foundation.contracts.mandatory-checks`: nine mandatory rules and unresolved references.
@@ -275,7 +281,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Architectural invariants
 
-- The set of 39 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift. Contracts 1.10.0 adds the two peer adapter verification contracts; Contracts 1.11.0 adds two candidate host-verification contracts without adding an error code.
+- The set of 42 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift. Contracts 1.10.0 adds the two peer adapter verification contracts; Contracts 1.11.0 adds two candidate host-verification contracts without adding an error code.
 - The validator is exclusively Ajv 8.20.0 (exact pin); no other implementation is accepted.
 
 ### Route elsewhere when
@@ -290,3 +296,9 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 - Package-local structural contract: `src/registry.json`, `src/schemas/*`.
 - Package-local candidate source: `candidate/quickstart-profile/*`; canonical public import: `skill-family-contracts/quickstart-profile`; historical migration alias: `skill-family-contracts/candidate/quickstart-profile`.
 <!-- agent-quick-reference:end -->
+
+## Complete Plugin Candidate
+
+Three new candidate schemas describe plugin requests, plugin results and complete tree observations. Installation, discovery, invocation and payload comparison remain separate; raw tree content is private.
+
+Version 0.13.0 is a local source candidate and is not published. Consume the three locally verified tarballs; a version marker, unit test or successful install is not complete host qualification or release approval.

@@ -5,27 +5,27 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.12.0 -->
+<!-- release-skill:release-version: 0.13.0 -->
 
-机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.12.0）。
+机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.13.0）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.12.0** (2026-08-26)
+**0.13.0** (2026-08-26)
 
-Contracts 0.12.0 将既有宿主验证合同扩展为五组固定的宿主与驱动对应关系。
+Contracts 0.13.0 源码候选增加完整插件验证与私有文件系统树观察合同。
 
 **新增**
 
-- 在既有两个验证组合之外增加三个固定组合，继续使用 existing-user-state 与 host-managed 凭证语义；精确宿主与驱动名单见宿主能力矩阵。
+- 以永久 Schema 身份增加 plugin-verification-request、plugin-verification-result 和 filesystem-tree-observation。
 
 **变更**
 
-- 宿主输出未通过固定协议检查时，允许退出码为零的调用返回 execution-failed。
-- Contracts 规格升级为 1.12.0，不新增顶层对象类别、Schema ID 或错误码。
+- Contracts 规格升至 1.13.0，登记 42 类顶层对象。
+- 为既有 watchdog 信封增加可选每流输出限额事实；未启用限额的旧调用保持原形状。
 
 **升级说明**
 
-三个 Foundation 包须一起升级到 0.12.0。宿主验证仍为 candidate，只报告执行事实，不代表领域审阅通过；Descriptor 中的验证配置不授予自动安装或生命周期能力。
+三个包须精确锁定到同一版本。既有单 Skill 宿主验证与 Kernel 1.8.0 保持不变。候选准备不代表宿主资格、独立验收或发布完成。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -34,21 +34,23 @@ Contracts 0.12.0 将既有宿主验证合同扩展为五组固定的宿主与驱
 
 ## 核心心智模型
 
-Contracts 是「定义与登记」层，不是「执行」层。它拥有 39 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、文件系统绑定、固定集合发布与同级适配器验证对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
+Contracts 是「定义与登记」层，不是「执行」层。它拥有 42 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、文件系统绑定、固定集合发布与同级适配器验证对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
 
 Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.json`），按方言路由到对应 Ajv 类；不实现任何手写 Schema 子集解释器。
 
 ## 安装和最小示例
 
+0.13.0 尚未发布。下面的 registry 安装命令供发布后使用；本轮验证应在隔离目录安装三个本地候选 tarball。
+
 ```sh
-npm install skill-family-contracts@0.12.0
+npm install skill-family-contracts@0.13.0
 npm info skill-family-contracts --help
 ```
 
 最小示例从空目录开始，演示如何校验一份已登记契约对象：
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.12.0
+// 从空目录运行：npm install skill-family-contracts@0.13.0
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -133,6 +135,10 @@ import {
 | `token-estimate-record` | `https://contracts.skill-family.example/v1/token-estimate-record.json` | `src/schemas/token-estimate-record.schema.json` |
 | `adapter-peer-verification-request` | `https://contracts.skill-family.example/v1/adapter-peer-verification-request.json` | `src/schemas/adapter-peer-verification-request.schema.json` |
 | `adapter-peer-verification-result` | `https://contracts.skill-family.example/v1/adapter-peer-verification-result.json` | `src/schemas/adapter-peer-verification-result.schema.json` |
+| `plugin-verification-request` | `https://contracts.skill-family.example/v1/plugin-verification-request.json` | `src/schemas/plugin-verification-request.schema.json` |
+| `plugin-verification-result` | `https://contracts.skill-family.example/v1/plugin-verification-result.json` | `src/schemas/plugin-verification-result.schema.json` |
+| `filesystem-tree-observation` | `https://contracts.skill-family.example/v1/filesystem-tree-observation.json` | `src/schemas/filesystem-tree-observation.schema.json` |
+
 
 所有 v1 Schema 使用 draft 2020-12 方言；实例信封统一为 `schemaVersion: 1` + 唯一 `kind` 常量 + 各层 `additionalProperties: false`。`$id` 命名空间 `contracts.skill-family.example` 使用保留示例域，永不解析到真实站点。
 
@@ -238,7 +244,7 @@ import {
 
 ### Capability selection
 
-- `foundation.contracts.object-validation`：Ajv 双方言校验已登记的全部 39 类顶层对象。
+- `foundation.contracts.object-validation`：Ajv 双方言校验已登记的全部 42 类顶层对象。
 - `foundation.contracts.registry-protocol`：Schema `$id` 与协议名登记查询。
 - `foundation.contracts.kernel-protocol`：operation-request/result 协议。
 - `foundation.contracts.mandatory-checks`：九类强制规则与未解析引用。
@@ -268,7 +274,7 @@ import {
 
 ### Architectural invariants
 
-- 39 类顶层对象集合固定，新增需 ADR；Contracts 1.10.0 增加同级适配器验证合同并扩展已登记宿主合同，不新增错误码，错误码冻结不漂移。
+- 42 类顶层对象集合固定，新增需 ADR；Contracts 1.10.0 增加同级适配器验证合同并扩展已登记宿主合同，不新增错误码，错误码冻结不漂移。
 - 校验器仅 Ajv 8.20.0（精确 pin），不接受其他实现。
 
 ### Route elsewhere when
@@ -283,3 +289,9 @@ import {
 - 包内结构合同：`src/registry.json`、`src/schemas/*`。
 - 包内 Candidate 源：`candidate/quickstart-profile/*`；规范公共导入：`skill-family-contracts/quickstart-profile`；历史迁移别名：`skill-family-contracts/candidate/quickstart-profile`。
 <!-- agent-quick-reference:end -->
+
+## 完整插件候选能力
+
+完整插件请求、结果与完整树观察使用三个新增候选 Schema。安装、发现、调用与载荷比较分别表达；原始树内容属于私有数据。
+
+0.13.0 为本地源码候选，尚未发布。消费本地已验证的三包 tarball，不能把版本标记、单元测试或安装成功当作完整宿主资格与发布批准。
