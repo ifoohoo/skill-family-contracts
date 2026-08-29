@@ -20,7 +20,8 @@
  * descriptor, probe-result and operation-plan semantics and peer adapter
  * verification contracts were extended in 1.10.0; host verification candidate
  * contracts were added in 1.11.0; the plugin verification pair and the
- * filesystem-tree-observation contract were added in 1.13.0),
+ * filesystem-tree-observation contract were added in 1.13.0; the consumer
+ * contract vector and capability-adoption contracts were added in 1.14.0),
  * one kernel protocol, a closed set of nine
  * mechanical check types, and a bounded mandatory rule set. Validation is
  * implemented entirely on Ajv (dialect-aware), never on a hand-written
@@ -77,8 +78,8 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Contracts package version: 1.13.0 adds the plugin verification pair and the neutral tree observation contract (FND-DES-014). */
-export const CONTRACTS_VERSION = "1.13.0";
+/** Contracts package version: 1.14.0 adds consumer contract vectors and capability-adoption fields. */
+export const CONTRACTS_VERSION = "1.14.0";
 
 export {
   CAPABILITY_MATURITY_LEVELS,
@@ -133,6 +134,14 @@ export {
   verifyFixture,
   verifyAllFixtures,
 } from "./fixtures.mjs";
+
+export {
+  FOUNDATION_PACKAGE_VERSION,
+  SFC1013,
+  CONSUMER_CONTRACT_VECTOR_SCHEMA_ID,
+  listConsumerContractVectors,
+  verifyConsumerContractVector,
+} from "./consumer-contract-vectors.mjs";
 
 // Minimal consumption contract of the token estimate record (SG-33, audit
 // friction F1): which field carries the numeric estimate, the degraded

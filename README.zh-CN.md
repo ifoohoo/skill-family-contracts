@@ -5,27 +5,28 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.13.0 -->
+<!-- release-skill:release-version: 0.14.0 -->
 
-机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.13.0）。
+机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.14.0）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.13.0** (2026-08-26)
+**0.14.0** (2026-08-28)
 
-Contracts 0.13.0 源码候选增加完整插件验证与私有文件系统树观察合同。
+Contracts 0.14.0 增加消费者契约测试向量与能力采用字段，继续保持三包锁步。
 
 **新增**
 
-- 以永久 Schema 身份增加 plugin-verification-request、plugin-verification-result 和 filesystem-tree-observation。
+- 新增 consumer-contract-vector Schema、正式向量以及 listConsumerContractVectors/verifyConsumerContractVector 入口。
+- 为 migration manifest 增加能力使用与能力决策字段，明确记录采用决策。
 
 **变更**
 
-- Contracts 规格升至 1.13.0，登记 42 类顶层对象。
-- 为既有 watchdog 信封增加可选每流输出限额事实；未启用限额的旧调用保持原形状。
+- Contracts 规格升至 1.14.0；消费者向量仍是候选测试合同，不改变既有宿主验证身份。
+- 明确区分候选发现、迁移完成、契约接入完成和真实宿主资格四种结论。
 
 **升级说明**
 
-三个包须精确锁定到同一版本。既有单 Skill 宿主验证与 Kernel 1.8.0 保持不变。候选准备不代表宿主资格、独立验收或发布完成。
+Contracts、Harness 与 Engineering Kit 须一起精确锁定到 0.14.0。消费者向量只证明契约接线；领域测试与真实宿主资格仍由消费者负责。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -40,17 +41,28 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-0.13.0 尚未发布。下面的 registry 安装命令供发布后使用；本轮验证应在隔离目录安装三个本地候选 tarball。
+0.14.0 是本地候选版本。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
 
 ```sh
-npm install skill-family-contracts@0.13.0
+pack_dir="$(mktemp -d)"
+(cd packages/skill-family-contracts && pnpm pack --pack-destination "$pack_dir")
+(cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
+(cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
+mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.14.0.tgz" "$pack_dir/skill-family-harness-node-0.14.0.tgz" "$pack_dir/skill-family-engineering-kit-0.14.0.tgz")
+```
+
+发布后再使用 registry 坐标：
+
+```sh
+npm install skill-family-contracts@0.14.0
 npm info skill-family-contracts --help
 ```
 
 最小示例从空目录开始，演示如何校验一份已登记契约对象：
 
 ```js
-// 从空目录运行：npm install skill-family-contracts@0.13.0
+// 发布后从已安装的消费者目录运行。
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -75,6 +87,39 @@ if (!result.valid) console.error(result.errorCode);
 
 `parseSourceAuthorityReceipt(receipt, actualSubjects)` 校验调用方提供的 receipt，并逐项核对实际 subjects 的包名、版本、文件名与 SHA-256。receipt 内的 subjects 必须按 `packageName` 唯一、确定排序；实际 subjects 的输入顺序不限。校验成功时，`data` 只返回 `{ sourceRepository, sourceBaseCommit }`。Contracts 不发现包、不执行目标，也不创建发布状态。
 
+## 消费方契约测试向量
+
+Foundation 0.14.0 提供两组带精确版本身份的消费方契约测试向量。`listConsumerContractVectors` 返回按 `vectorId` 排序的深度冻结数组；`verifyConsumerContractVector` 在消费方代码运行前核对向量结构、`capabilityId`、`vectorSetId` 和 `FOUNDATION_PACKAGE_VERSION`。
+
+```js
+import {
+  FOUNDATION_PACKAGE_VERSION,
+  listConsumerContractVectors,
+  verifyConsumerContractVector,
+} from "skill-family-contracts";
+
+const vectors = listConsumerContractVectors({
+  capabilityId: "foundation.contracts.object-validation",
+  foundationVersion: FOUNDATION_PACKAGE_VERSION,
+});
+const result = verifyConsumerContractVector(vectors[0], {
+  capabilityId: vectors[0].capabilityId,
+  foundationVersion: FOUNDATION_PACKAGE_VERSION,
+  vectorSetId: vectors[0].vectorSetId,
+});
+if (!result.ok) throw new Error(`consumer vector rejected: ${result.mismatchCode}`);
+// 消费方适配器代码只能在身份和结构校验通过后运行。
+const consumerResult = invokeConsumerAdapter(vectors[0]);
+```
+
+首组向量覆盖 `foundation.contracts.object-validation`，第二组覆盖 `foundation.harness.atomic-write`。每组都包含正例、反例和不确定类。版本或身份不匹配时以 `SFC1013`（`CONSUMER_CONTRACT_VERSION_MISMATCH`）失败关闭。Contracts 只校验公开向量的结构和身份，不调用消费方、Harness 实现、测试替身（`fake`）或宿主。
+
+`foundation.harness.atomic-write` 的正例只声明闭合的 `valueRelation: "atomic-write-contained-absolute-target"`，不把路径值写入向量。运行时含义由 Harness 和消费方测试验证，Contracts 不执行或解释它。
+
+对于 `foundation.harness.atomic-write`，每个 `request.root` 都是闭合声明 `{ runtimeBinding: "atomic-write-canonical-root" }`，不是路径，Contracts 不求值。反例在 `outcome` 和 `errorCode` 旁增加稳定的 `errorKind: "path-traversal"`；通用 throw 向量仍保持只含两个字段的闭对象。
+
+能力特定 Schema 还会拒绝非 atomic 向量携带这个 atomic binding；除此之外，不扩大对其他 request 字段的限制。
+
 ## Candidate Quickstart Profile
 
 需要在进入冻结登记表前评估早期 Resource → Task → Result 交换时，使用 candidate Quickstart Profile：
@@ -98,7 +143,7 @@ import {
 - 需要运行强制机械规则、收集未解析引用：用 `runChecks` / `collectUnresolvedRefs`。
 - 需要枚举并校验公开 fixture：用 `verifyAllFixtures`。
 
-## 三十七类顶层对象
+## 已登记顶层对象类
 
 | 对象 | `$id` | Schema 文件 |
 | --- | --- | --- |
@@ -112,13 +157,13 @@ import {
 | `report-model` | `https://contracts.skill-family.example/v1/report-model.json` | `src/schemas/report-model.schema.json` |
 | `report-binding` | `https://contracts.skill-family.example/v1/report-binding.json` | `src/schemas/report-binding.schema.json` |
 | `host-descriptor` | `https://contracts.skill-family.example/v1/host-descriptor.json` | `src/schemas/host-descriptor.schema.json` |
+| `host-registry` | `https://contracts.skill-family.example/v1/host-registry.json` | `src/schemas/host-registry.schema.json` |
+| `adapter-source` | `https://contracts.skill-family.example/v1/adapter-source.json` | `src/schemas/adapter-source.schema.json` |
 | `host-capability-fact` | `https://contracts.skill-family.example/v1/host-capability-fact.json` | `src/schemas/host-capability-fact.schema.json` |
+| `host-probe-result` | `https://contracts.skill-family.example/v1/host-probe-result.json` | `src/schemas/host-probe-result.schema.json` |
 | `adapter-build-manifest` | `https://contracts.skill-family.example/v1/adapter-build-manifest.json` | `src/schemas/adapter-build-manifest.schema.json` |
 | `host-operation-plan` | `https://contracts.skill-family.example/v1/host-operation-plan.json` | `src/schemas/host-operation-plan.schema.json` |
 | `host-operation-receipt` | `https://contracts.skill-family.example/v1/host-operation-receipt.json` | `src/schemas/host-operation-receipt.schema.json` |
-| `adapter-source` | `https://contracts.skill-family.example/v1/adapter-source.json` | `src/schemas/adapter-source.schema.json` |
-| `host-registry` | `https://contracts.skill-family.example/v1/host-registry.json` | `src/schemas/host-registry.schema.json` |
-| `host-probe-result` | `https://contracts.skill-family.example/v1/host-probe-result.json` | `src/schemas/host-probe-result.schema.json` |
 | `state-event-envelope` | `https://contracts.skill-family.example/v1/state-event-envelope.json` | `src/schemas/state-event-envelope.schema.json` |
 | `state-snapshot-metadata` | `https://contracts.skill-family.example/v1/state-snapshot-metadata.json` | `src/schemas/state-snapshot-metadata.schema.json` |
 | `token-estimate-result` | `https://contracts.skill-family.example/v1/token-estimate-result.json` | `src/schemas/token-estimate-result.schema.json` |
@@ -133,8 +178,14 @@ import {
 | `profile-adoption-declaration` | `https://contracts.skill-family.example/v1/profile-adoption-declaration.json` | `src/schemas/profile-adoption-declaration.schema.json` |
 | `audit-baseline-pin` | `https://contracts.skill-family.example/v1/audit-baseline-pin.json` | `src/schemas/audit-baseline-pin.schema.json` |
 | `token-estimate-record` | `https://contracts.skill-family.example/v1/token-estimate-record.json` | `src/schemas/token-estimate-record.schema.json` |
+| `source-authority-receipt` | `https://contracts.skill-family.example/v1/source-authority-receipt.json` | `src/schemas/source-authority-receipt.schema.json` |
+| `filesystem-root-binding` | `https://contracts.skill-family.example/v1/filesystem-root-binding.json` | `src/schemas/filesystem-root-binding.schema.json` |
+| `fixed-set-publication-manifest` | `https://contracts.skill-family.example/v1/fixed-set-publication-manifest.json` | `src/schemas/fixed-set-publication-manifest.schema.json` |
+| `fixed-set-publication-receipt` | `https://contracts.skill-family.example/v1/fixed-set-publication-receipt.json` | `src/schemas/fixed-set-publication-receipt.schema.json` |
 | `adapter-peer-verification-request` | `https://contracts.skill-family.example/v1/adapter-peer-verification-request.json` | `src/schemas/adapter-peer-verification-request.schema.json` |
 | `adapter-peer-verification-result` | `https://contracts.skill-family.example/v1/adapter-peer-verification-result.json` | `src/schemas/adapter-peer-verification-result.schema.json` |
+| `host-verification-request` | `https://contracts.skill-family.example/v1/host-verification-request.json` | `src/schemas/host-verification-request.schema.json` |
+| `host-verification-result` | `https://contracts.skill-family.example/v1/host-verification-result.json` | `src/schemas/host-verification-result.schema.json` |
 | `plugin-verification-request` | `https://contracts.skill-family.example/v1/plugin-verification-request.json` | `src/schemas/plugin-verification-request.schema.json` |
 | `plugin-verification-result` | `https://contracts.skill-family.example/v1/plugin-verification-result.json` | `src/schemas/plugin-verification-result.schema.json` |
 | `filesystem-tree-observation` | `https://contracts.skill-family.example/v1/filesystem-tree-observation.json` | `src/schemas/filesystem-tree-observation.schema.json` |
@@ -171,6 +222,7 @@ import {
 | SFC1010 | FIXTURE_EXPECTATION_MISMATCH | fixture 行为与声明期望不符 |
 | SFC1011 | UNKNOWN_PROTOCOL | 请求引用未登记的协议名/版本 |
 | SFC1012 | SCHEMA_COMPILE_FAILED | Schema 本身无法编译 |
+| SFC1013 | CONSUMER_CONTRACT_VERSION_MISMATCH | 消费方向量身份或 Foundation 精确版本不匹配 |
 | SFC2002 | UNKNOWN_OPERATION | 操作名不在冻结词汇表 |
 | SFC2003 | INVALID_PARAMS | 参数不满足操作的冻结 params 合同 |
 | SFC2004 | EXECUTION_FAILED | 机制运行时执行失败（仅运行时可演示） |
@@ -207,11 +259,15 @@ import {
   loadKernelProtocol, checkOperation,
   runChecks, CHECK_TYPES, MANDATORY_RULES, RULE_BUDGET,
   listFixtures, verifyAllFixtures,
+  FOUNDATION_PACKAGE_VERSION, listConsumerContractVectors,
+  verifyConsumerContractVector, SFC1013,
   ERROR_CODES, ContractsError, stableError,
 } from "skill-family-contracts";
 ```
 
 以上导入列出了本包稳定公共面；`validateDocument` 与 `runChecks` 是最常用入口。`validateDocument(document, { schemaId | schema, dialect, policy })` 返回 `{ valid, errorCode, errors, data }`；`runChecks({ rules?, registry?, fixtures?, loadSchema? })` 返回 `{ ok, mandatoryCount, budget, results }`；`registerSchema` / `registerProtocol` 返回新登记表副本，重复项分别以 `SFC1003` / `SFC1004` 抛出 `ContractsError`。
+
+`detectDialect(schema)` 在声明缺失或未知时返回 `null`，支持的结果为 `draft-07` 或 `2020-12`。不支持的方言由 `compileSchema` 抛出 `SFC1006`，由 `validateDocument` 以 `errorCode: "SFC1006"` 返回。登记表查询未命中返回 `null`。随包登记表的 `schemaVersion=1`、`contractsVersion=1.14.0`、42 类 Schema 与 1 个 Kernel Protocol 以机器源为准；注册函数返回副本且不修改输入，消费方向量身份或精确版本不匹配时报 `SFC1013`。
 
 ## 安全边界与非目标
 
@@ -294,4 +350,4 @@ import {
 
 完整插件请求、结果与完整树观察使用三个新增候选 Schema。安装、发现、调用与载荷比较分别表达；原始树内容属于私有数据。
 
-0.13.0 为本地源码候选，尚未发布。消费本地已验证的三包 tarball，不能把版本标记、单元测试或安装成功当作完整宿主资格与发布批准。
+0.14.0 为本地源码候选，尚未发布。消费本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。

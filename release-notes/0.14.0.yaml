@@ -1,0 +1,23 @@
+version: 0.14.0
+date: 2026-08-28
+locales:
+  en:
+    summary: Contracts 0.14.0 adds consumer contract-testing vectors and capability-adoption fields while keeping the three-package lockstep.
+    changes:
+      added:
+        - Adds the consumer-contract-vector schema, official vectors, and listConsumerContractVectors/verifyConsumerContractVector entrypoints.
+        - Adds capability-use and capability-decision fields to the migration manifest for explicit adoption decisions.
+      changed:
+        - Advances the Contracts specification to 1.14.0; the consumer vector remains a candidate testing contract and does not change existing host-verification identities.
+        - Keeps candidate discovery, migration completion, contract integration, and real-host qualification as separate conclusions.
+    upgradeNotes: Pin Contracts, Harness, and Engineering Kit to 0.14.0 together. Consumer vectors prove contract wiring only; consumers still own domain tests and any real-host qualification.
+  zh-CN:
+    summary: Contracts 0.14.0 增加消费者契约测试向量与能力采用字段，继续保持三包锁步。
+    changes:
+      added:
+        - 新增 consumer-contract-vector Schema、正式向量以及 listConsumerContractVectors/verifyConsumerContractVector 入口。
+        - 为 migration manifest 增加能力使用与能力决策字段，明确记录采用决策。
+      changed:
+        - Contracts 规格升至 1.14.0；消费者向量仍是候选测试合同，不改变既有宿主验证身份。
+        - 明确区分候选发现、迁移完成、契约接入完成和真实宿主资格四种结论。
+    upgradeNotes: Contracts、Harness 与 Engineering Kit 须一起精确锁定到 0.14.0。消费者向量只证明契约接线；领域测试与真实宿主资格仍由消费者负责。

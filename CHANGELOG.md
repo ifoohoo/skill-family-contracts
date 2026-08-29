@@ -1,5 +1,26 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.14.0 locale=en baseline=sha256:1d5adc83e3472a4c9379f52a90c9f264499e09840eb5d084709bb0020b8313d9 -->
+## [0.14.0] - 2026-08-28
+
+Contracts 0.14.0 adds consumer contract-testing vectors and capability-adoption fields while keeping the three-package lockstep.
+
+### Added
+
+- Adds the consumer-contract-vector schema, official vectors, and listConsumerContractVectors/verifyConsumerContractVector entrypoints.
+- Adds capability-use and capability-decision fields to the migration manifest for explicit adoption decisions.
+
+### Changed
+
+- Advances the Contracts specification to 1.14.0; the consumer vector remains a candidate testing contract and does not change existing host-verification identities.
+- Keeps candidate discovery, migration completion, contract integration, and real-host qualification as separate conclusions.
+
+### Upgrade Notes
+
+Pin Contracts, Harness, and Engineering Kit to 0.14.0 together. Consumer vectors prove contract wiring only; consumers still own domain tests and any real-host qualification.
+<!-- release-skill:changelog:end version=0.14.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.13.0 locale=en baseline=sha256:98b7210e4eafd177ac3fe9294badfc810f1f93626fbdde589e8e3dee1a556d49 -->
 ## [0.13.0] - 2026-08-26
 

@@ -1,5 +1,26 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.14.0 locale=zh-CN baseline=sha256:dd29155fc5fa3db2890cb03d81d0630b4c8366736072829648d96d0961c4159c -->
+## [0.14.0] - 2026-08-28
+
+Contracts 0.14.0 增加消费者契约测试向量与能力采用字段，继续保持三包锁步。
+
+### 新增
+
+- 新增 consumer-contract-vector Schema、正式向量以及 listConsumerContractVectors/verifyConsumerContractVector 入口。
+- 为 migration manifest 增加能力使用与能力决策字段，明确记录采用决策。
+
+### 变更
+
+- Contracts 规格升至 1.14.0；消费者向量仍是候选测试合同，不改变既有宿主验证身份。
+- 明确区分候选发现、迁移完成、契约接入完成和真实宿主资格四种结论。
+
+### 升级说明
+
+Contracts、Harness 与 Engineering Kit 须一起精确锁定到 0.14.0。消费者向量只证明契约接线；领域测试与真实宿主资格仍由消费者负责。
+<!-- release-skill:changelog:end version=0.14.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.13.0 locale=zh-CN baseline=sha256:4e688ca871352558d1c93ed95ffc496bb25e8341c44089d8cd02c2359ca72264 -->
 ## [0.13.0] - 2026-08-26
 

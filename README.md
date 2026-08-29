@@ -4,27 +4,28 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.13.0 -->
+<!-- release-skill:release-version: 0.14.0 -->
 
-The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.13.0).
+The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.14.0).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.13.0** (2026-08-26)
+**0.14.0** (2026-08-28)
 
-Contracts 0.13.0 is a source candidate for complete plugin verification and private filesystem tree observations.
+Contracts 0.14.0 adds consumer contract-testing vectors and capability-adoption fields while keeping the three-package lockstep.
 
 **Added**
 
-- Adds plugin-verification-request, plugin-verification-result and filesystem-tree-observation under permanent Schema identities.
+- Adds the consumer-contract-vector schema, official vectors, and listConsumerContractVectors/verifyConsumerContractVector entrypoints.
+- Adds capability-use and capability-decision fields to the migration manifest for explicit adoption decisions.
 
 **Changed**
 
-- Advances the Contracts specification to 1.13.0 with 42 registered top-level object classes.
-- Extends the existing watchdog envelope with optional per-stream output limit facts; legacy uncapped calls keep their shape.
+- Advances the Contracts specification to 1.14.0; the consumer vector remains a candidate testing contract and does not change existing host-verification identities.
+- Keeps candidate discovery, migration completion, contract integration, and real-host qualification as separate conclusions.
 
 **Upgrade Notes**
 
-Pin all three packages together. Existing single-Skill host verification and Kernel 1.8.0 remain unchanged. Candidate preparation does not establish host qualification, independent acceptance or publication.
+Pin Contracts, Harness, and Engineering Kit to 0.14.0 together. Consumer vectors prove contract wiring only; consumers still own domain tests and any real-host qualification.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -39,17 +40,28 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-Version 0.13.0 is not published. The registry command below is for use after publication; this iteration installs the three local candidate tarballs in an isolated directory.
+Version 0.14.0 is a local candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
 
 ```sh
-npm install skill-family-contracts@0.13.0
+pack_dir="$(mktemp -d)"
+(cd packages/skill-family-contracts && pnpm pack --pack-destination "$pack_dir")
+(cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
+(cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
+mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.14.0.tgz" "$pack_dir/skill-family-harness-node-0.14.0.tgz" "$pack_dir/skill-family-engineering-kit-0.14.0.tgz")
+```
+
+After publication, use the registry coordinate:
+
+```sh
+npm install skill-family-contracts@0.14.0
 npm info skill-family-contracts --help
 ```
 
 The minimal example starts from an empty directory and demonstrates how to validate a registered contract object:
 
 ```js
-// Run from an empty directory: npm install skill-family-contracts@0.13.0
+// Run from an installed consumer directory after publication.
 import { validateDocument } from "skill-family-contracts";
 
 const document = {
@@ -74,6 +86,39 @@ The code above shows the basic `validateDocument` call: pass the document and th
 
 `parseSourceAuthorityReceipt(receipt, actualSubjects)` validates a caller-supplied receipt and compares every package name, version, filename, and SHA-256 against the caller's actual subjects. Receipt subjects must be unique and sorted by `packageName`; actual subjects may arrive in any order. A successful result exposes only `{ sourceRepository, sourceBaseCommit }` through `data`. Contracts does not discover packages, execute a target, or create release state.
 
+## Consumer Contract Vectors
+
+Foundation 0.14.0 exposes two public, version-bound vector sets for consumer contract tests. `listConsumerContractVectors` returns a deeply frozen array sorted by `vectorId`; `verifyConsumerContractVector` checks the vector shape and its `capabilityId`, `vectorSetId`, and exact `FOUNDATION_PACKAGE_VERSION` before consumer code runs.
+
+```js
+import {
+  FOUNDATION_PACKAGE_VERSION,
+  listConsumerContractVectors,
+  verifyConsumerContractVector,
+} from "skill-family-contracts";
+
+const vectors = listConsumerContractVectors({
+  capabilityId: "foundation.contracts.object-validation",
+  foundationVersion: FOUNDATION_PACKAGE_VERSION,
+});
+const result = verifyConsumerContractVector(vectors[0], {
+  capabilityId: vectors[0].capabilityId,
+  foundationVersion: FOUNDATION_PACKAGE_VERSION,
+  vectorSetId: vectors[0].vectorSetId,
+});
+if (!result.ok) throw new Error(`consumer vector rejected: ${result.mismatchCode}`);
+// Consumer adapter code starts only after the identity and structure check.
+const consumerResult = invokeConsumerAdapter(vectors[0]);
+```
+
+The first set covers `foundation.contracts.object-validation`; the second covers `foundation.harness.atomic-write`. Both contain positive, negative, and indeterminate cases. A version or identity mismatch fails closed with `SFC1013` (`CONSUMER_CONTRACT_VERSION_MISMATCH`). Contracts validates only public vector structure and identity; it does not invoke a consumer, Harness implementation, fake, or host.
+
+The `foundation.harness.atomic-write` positive vector declares the closed relation `valueRelation: "atomic-write-contained-absolute-target"` instead of embedding a path value. Its runtime meaning is checked by the Harness and consumer tests, not by Contracts.
+
+For `foundation.harness.atomic-write`, each `request.root` is the closed declaration `{ runtimeBinding: "atomic-write-canonical-root" }`; it is not a path, and Contracts does not evaluate it. The negative vector adds the stable `errorKind: "path-traversal"` beside `outcome` and `errorCode`; generic throw vectors retain their two-field closed shape.
+
+The capability-specific Schema rejects that atomic binding when it appears on a non-atomic vector, while leaving other request fields outside this rule unchanged.
+
 ## Candidate Quickstart Profile
 
 Use the candidate Quickstart Profile to evaluate an early Resource → Task → Result exchange before proposing it for the frozen registry:
@@ -97,7 +142,7 @@ The capability remains **candidate** and its schemas stay outside `src/registry.
 - Need to run mandatory mechanical rules and collect unresolved references: use `runChecks` / `collectUnresolvedRefs`.
 - Need to enumerate and validate the public fixtures: use `verifyAllFixtures`.
 
-## Thirty-Nine Top-Level Object Classes
+## Registered Top-Level Object Classes
 
 | Object | `$id` | Schema File |
 | --- | --- | --- |
@@ -111,13 +156,13 @@ The capability remains **candidate** and its schemas stay outside `src/registry.
 | `report-model` | `https://contracts.skill-family.example/v1/report-model.json` | `src/schemas/report-model.schema.json` |
 | `report-binding` | `https://contracts.skill-family.example/v1/report-binding.json` | `src/schemas/report-binding.schema.json` |
 | `host-descriptor` | `https://contracts.skill-family.example/v1/host-descriptor.json` | `src/schemas/host-descriptor.schema.json` |
+| `host-registry` | `https://contracts.skill-family.example/v1/host-registry.json` | `src/schemas/host-registry.schema.json` |
+| `adapter-source` | `https://contracts.skill-family.example/v1/adapter-source.json` | `src/schemas/adapter-source.schema.json` |
 | `host-capability-fact` | `https://contracts.skill-family.example/v1/host-capability-fact.json` | `src/schemas/host-capability-fact.schema.json` |
+| `host-probe-result` | `https://contracts.skill-family.example/v1/host-probe-result.json` | `src/schemas/host-probe-result.schema.json` |
 | `adapter-build-manifest` | `https://contracts.skill-family.example/v1/adapter-build-manifest.json` | `src/schemas/adapter-build-manifest.schema.json` |
 | `host-operation-plan` | `https://contracts.skill-family.example/v1/host-operation-plan.json` | `src/schemas/host-operation-plan.schema.json` |
 | `host-operation-receipt` | `https://contracts.skill-family.example/v1/host-operation-receipt.json` | `src/schemas/host-operation-receipt.schema.json` |
-| `adapter-source` | `https://contracts.skill-family.example/v1/adapter-source.json` | `src/schemas/adapter-source.schema.json` |
-| `host-registry` | `https://contracts.skill-family.example/v1/host-registry.json` | `src/schemas/host-registry.schema.json` |
-| `host-probe-result` | `https://contracts.skill-family.example/v1/host-probe-result.json` | `src/schemas/host-probe-result.schema.json` |
 | `state-event-envelope` | `https://contracts.skill-family.example/v1/state-event-envelope.json` | `src/schemas/state-event-envelope.schema.json` |
 | `state-snapshot-metadata` | `https://contracts.skill-family.example/v1/state-snapshot-metadata.json` | `src/schemas/state-snapshot-metadata.schema.json` |
 | `token-estimate-result` | `https://contracts.skill-family.example/v1/token-estimate-result.json` | `src/schemas/token-estimate-result.schema.json` |
@@ -128,12 +173,16 @@ The capability remains **candidate** and its schemas stay outside `src/registry.
 | `watchdog-termination-envelope` | `https://contracts.skill-family.example/v1/watchdog-termination-envelope.json` | `src/schemas/watchdog-termination-envelope.schema.json` |
 | `public-boundary-declaration` | `https://contracts.skill-family.example/v1/public-boundary-declaration.json` | `src/schemas/public-boundary-declaration.schema.json` |
 | `platform-difference-registry` | `https://contracts.skill-family.example/v1/platform-difference-registry.json` | `src/schemas/platform-difference-registry.schema.json` |
-| `adapter-peer-verification-request` | `https://contracts.skill-family.example/v1/adapter-peer-verification-request.json` | `src/schemas/adapter-peer-verification-request.schema.json` |
-| `adapter-peer-verification-result` | `https://contracts.skill-family.example/v1/adapter-peer-verification-result.json` | `src/schemas/adapter-peer-verification-result.schema.json` |
 | `observation-scope` | `https://contracts.skill-family.example/v1/observation-scope.json` | `src/schemas/observation-scope.schema.json` |
 | `profile-adoption-declaration` | `https://contracts.skill-family.example/v1/profile-adoption-declaration.json` | `src/schemas/profile-adoption-declaration.schema.json` |
 | `audit-baseline-pin` | `https://contracts.skill-family.example/v1/audit-baseline-pin.json` | `src/schemas/audit-baseline-pin.schema.json` |
 | `token-estimate-record` | `https://contracts.skill-family.example/v1/token-estimate-record.json` | `src/schemas/token-estimate-record.schema.json` |
+| `source-authority-receipt` | `https://contracts.skill-family.example/v1/source-authority-receipt.json` | `src/schemas/source-authority-receipt.schema.json` |
+| `filesystem-root-binding` | `https://contracts.skill-family.example/v1/filesystem-root-binding.json` | `src/schemas/filesystem-root-binding.schema.json` |
+| `fixed-set-publication-manifest` | `https://contracts.skill-family.example/v1/fixed-set-publication-manifest.json` | `src/schemas/fixed-set-publication-manifest.schema.json` |
+| `fixed-set-publication-receipt` | `https://contracts.skill-family.example/v1/fixed-set-publication-receipt.json` | `src/schemas/fixed-set-publication-receipt.schema.json` |
+| `adapter-peer-verification-request` | `https://contracts.skill-family.example/v1/adapter-peer-verification-request.json` | `src/schemas/adapter-peer-verification-request.schema.json` |
+| `adapter-peer-verification-result` | `https://contracts.skill-family.example/v1/adapter-peer-verification-result.json` | `src/schemas/adapter-peer-verification-result.schema.json` |
 | `host-verification-request` | `https://contracts.skill-family.example/v1/host-verification-request.json` | `src/schemas/host-verification-request.schema.json` |
 | `host-verification-result` | `https://contracts.skill-family.example/v1/host-verification-result.json` | `src/schemas/host-verification-result.schema.json` |
 | `plugin-verification-request` | `https://contracts.skill-family.example/v1/plugin-verification-request.json` | `src/schemas/plugin-verification-request.schema.json` |
@@ -178,6 +227,7 @@ Frozen registry: `src/error-codes.json`. `SFC1xxx` are contract-authority-layer 
 | SFC1010 | FIXTURE_EXPECTATION_MISMATCH | Fixture behavior does not match declared expectation |
 | SFC1011 | UNKNOWN_PROTOCOL | Request references an unregistered protocol name/version |
 | SFC1012 | SCHEMA_COMPILE_FAILED | Schema itself cannot be compiled |
+| SFC1013 | CONSUMER_CONTRACT_VERSION_MISMATCH | Consumer vector identity or exact Foundation version mismatch |
 | SFC2002 | UNKNOWN_OPERATION | Operation name not in the frozen vocabulary |
 | SFC2003 | INVALID_PARAMS | Parameters do not satisfy the operation's frozen params contract |
 | SFC2004 | EXECUTION_FAILED | Mechanism runtime execution failed (only demonstrable at runtime) |
@@ -214,11 +264,15 @@ import {
   loadKernelProtocol, checkOperation,
   runChecks, CHECK_TYPES, MANDATORY_RULES, RULE_BUDGET,
   listFixtures, verifyAllFixtures,
+  FOUNDATION_PACKAGE_VERSION, listConsumerContractVectors,
+  verifyConsumerContractVector, SFC1013,
   ERROR_CODES, ContractsError, stableError,
 } from "skill-family-contracts";
 ```
 
 The imports above list the stable public surface of this package; `validateDocument` and `runChecks` are the most commonly used entry points. `validateDocument(document, { schemaId | schema, dialect, policy })` returns `{ valid, errorCode, errors, data }`; `runChecks({ rules?, registry?, fixtures?, loadSchema? })` returns `{ ok, mandatoryCount, budget, results }`; `registerSchema` / `registerProtocol` return a new registry copy, throwing `ContractsError` with `SFC1003` / `SFC1004` respectively on duplicates.
+
+`detectDialect(schema)` returns `draft-07`, `2020-12`, or `null` when the declaration is absent or unknown. `compileSchema` throws `SFC1006` for an unsupported dialect; `validateDocument` reports the same condition as `errorCode: "SFC1006"`. Registry lookup functions return `null` on a miss. The bundled registry is `schemaVersion=1`, `contractsVersion=1.14.0`, with 42 registered Schemas and one Kernel Protocol. Registration returns a copied registry and leaves the input unchanged; consumer vector identity or exact-version mismatches fail with `SFC1013`.
 
 ## Security Boundaries and Non-Goals
 
@@ -301,4 +355,4 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 Three new candidate schemas describe plugin requests, plugin results and complete tree observations. Installation, discovery, invocation and payload comparison remain separate; raw tree content is private.
 
-Version 0.13.0 is a local source candidate and is not published. Consume the three locally verified tarballs; a version marker, unit test or successful install is not complete host qualification or release approval.
+Version 0.14.0 is a local source candidate and is not published. Consume the three locally verified tarballs; a version marker, unit test or successful install is not complete contract integration, migration completion, or real-host qualification.
