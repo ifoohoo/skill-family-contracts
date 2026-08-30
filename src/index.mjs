@@ -2,7 +2,7 @@
  * skill-family-contracts: the single authority for machine-readable structures,
  * protocols, stable error codes, and the protocol-name registry.
  *
- * v1 is frozen: forty-two top-level object schemas (the migration-manifest
+ * v1 is frozen: forty-five top-level object schemas (the migration-manifest
  * contract was added in 1.1.0; the report-model and report-binding contracts
  * were added in 1.2.0; eight host-integration contracts were added in 1.3.0;
  * two durable-state contracts were added in 1.4.0; the token-estimate-result
@@ -21,7 +21,10 @@
  * verification contracts were extended in 1.10.0; host verification candidate
  * contracts were added in 1.11.0; the plugin verification pair and the
  * filesystem-tree-observation contract were added in 1.13.0; the consumer
- * contract vector and capability-adoption contracts were added in 1.14.0),
+ * contract vector and capability-adoption contracts were added in 1.14.0;
+ * executable identity, symlink record, and host directory verification
+ * contracts were appended in the same 1.14.0 delivery; the 1.15.0 protocol
+ * coordinate freezes that forty-five-object surface and its audit baseline),
  * one kernel protocol, a closed set of nine
  * mechanical check types, and a bounded mandatory rule set. Validation is
  * implemented entirely on Ajv (dialect-aware), never on a hand-written
@@ -71,6 +74,9 @@ export const CONTRACT_OBJECTS = Object.freeze([
   "plugin-verification-request",
   "plugin-verification-result",
   "filesystem-tree-observation",
+  "executable-identity-observation",
+  "skill-family-directory-verification-request",
+  "skill-family-directory-verification-result",
 ]);
 
 export const CONTRACT_BOUNDARY = Object.freeze({
@@ -78,8 +84,8 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Contracts package version: 1.14.0 adds consumer contract vectors and capability-adoption fields. */
-export const CONTRACTS_VERSION = "1.14.0";
+/** Contracts package version: 1.15.0 freezes the 45-object Foundation surface. */
+export const CONTRACTS_VERSION = "1.15.0";
 
 export {
   CAPABILITY_MATURITY_LEVELS,

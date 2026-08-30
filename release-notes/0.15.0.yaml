@@ -1,0 +1,19 @@
+version: 0.15.0
+date: 2026-08-29
+locales:
+  en:
+    summary: Contracts 0.15.0 adds closed executable identity and Kimi directory verification contracts.
+    changes:
+      added:
+        - Adds executable-identity-observation and skill-family-directory-verification request/result contracts.
+      changed:
+        - Separates Kimi driverVersion 1.0.0 from the closed CLI version 0.39.1.
+    upgradeNotes: Pin all three Foundation packages to 0.15.0. Consumers still own domain acceptance and real-host observation.
+  zh-CN:
+    summary: Contracts 0.15.0 增加封闭的可执行文件身份与 Kimi 目录验证合同。
+    changes:
+      added:
+        - 新增 executable-identity-observation 以及 skill-family-directory-verification 请求/结果合同。
+      changed:
+        - 将 Kimi 的 driverVersion 1.0.0 与闭合 CLI 版本 0.39.1 分开。
+    upgradeNotes: 三个 Foundation 包须一起精确锁定到 0.15.0；领域接受规则与真实宿主观察仍由消费者负责。

@@ -1,5 +1,24 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.15.0 locale=zh-CN baseline=sha256:71524174ce3feb8bbe6e19f7ab7b0b712a4e48eebc3467136093931f304aed39 -->
+## [0.15.0] - 2026-08-29
+
+Contracts 0.15.0 增加封闭的可执行文件身份与 Kimi 目录验证合同。
+
+### 新增
+
+- 新增 executable-identity-observation 以及 skill-family-directory-verification 请求/结果合同。
+
+### 变更
+
+- 将 Kimi 的 driverVersion 1.0.0 与闭合 CLI 版本 0.39.1 分开。
+
+### 升级说明
+
+三个 Foundation 包须一起精确锁定到 0.15.0；领域接受规则与真实宿主观察仍由消费者负责。
+<!-- release-skill:changelog:end version=0.15.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.14.0 locale=zh-CN baseline=sha256:dd29155fc5fa3db2890cb03d81d0630b4c8366736072829648d96d0961c4159c -->
 ## [0.14.0] - 2026-08-28
 

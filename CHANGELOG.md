@@ -1,5 +1,24 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.15.0 locale=en baseline=sha256:d3962e3dfd89e5c93491972cb1693584acaad0a53f406d32bade0a10c4f5d86d -->
+## [0.15.0] - 2026-08-29
+
+Contracts 0.15.0 adds closed executable identity and Kimi directory verification contracts.
+
+### Added
+
+- Adds executable-identity-observation and skill-family-directory-verification request/result contracts.
+
+### Changed
+
+- Separates Kimi driverVersion 1.0.0 from the closed CLI version 0.39.1.
+
+### Upgrade Notes
+
+Pin all three Foundation packages to 0.15.0. Consumers still own domain acceptance and real-host observation.
+<!-- release-skill:changelog:end version=0.15.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.14.0 locale=en baseline=sha256:1d5adc83e3472a4c9379f52a90c9f264499e09840eb5d084709bb0020b8313d9 -->
 ## [0.14.0] - 2026-08-28
 
