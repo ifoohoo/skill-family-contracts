@@ -1,5 +1,20 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.16.0 locale=zh-CN baseline=sha256:0317e589a23c3d9d16647f4ecec9aace7bda35c2399a2c2d6d1767e3c2bbb4e0 -->
+## [0.16.0] - 2026-08-31
+
+Contracts 0.16.0 保持现有合同面，并将消费方向量与 Foundation 0.16.0 锁步版本对齐。
+
+### 变更
+
+- 将消费方契约测试向量的版本坐标更新为 0.16.0，不新增合同对象，也不改变校验语义。
+
+### 升级说明
+
+三个 Foundation 包须一起精确锁定到 0.16.0；消费方接受规则与真实宿主观察仍由调用方负责。
+<!-- release-skill:changelog:end version=0.16.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.15.0 locale=zh-CN baseline=sha256:71524174ce3feb8bbe6e19f7ab7b0b712a4e48eebc3467136093931f304aed39 -->
 ## [0.15.0] - 2026-08-29
 

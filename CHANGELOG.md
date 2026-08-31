@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.16.0 locale=en baseline=sha256:ba375443d1f461565ff82baaa5851889d6e50c9839fcab6faa251da2b8c647ab -->
+## [0.16.0] - 2026-08-31
+
+Contracts 0.16.0 keeps the existing contract surface and aligns consumer vectors with the 0.16.0 Foundation lockstep.
+
+### Changed
+
+- Updates the consumer contract vector coordinate to 0.16.0 without adding a contract object or changing validation semantics.
+
+### Upgrade Notes
+
+Pin skill-family-contracts, skill-family-harness-node, and skill-family-engineering-kit to the same exact 0.16.0 version; existing consumer acceptance and real-host observations remain the caller's responsibility.
+<!-- release-skill:changelog:end version=0.16.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.15.0 locale=en baseline=sha256:d3962e3dfd89e5c93491972cb1693584acaad0a53f406d32bade0a10c4f5d86d -->
 ## [0.15.0] - 2026-08-29
 

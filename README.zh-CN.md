@@ -5,26 +5,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.15.0 -->
+<!-- release-skill:release-version: 0.16.0 -->
 
 机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.15.0）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.15.0** (2026-08-29)
+**0.16.0** (2026-08-31)
 
-Contracts 0.15.0 增加封闭的可执行文件身份与 Kimi 目录验证合同。
-
-**新增**
-
-- 新增 executable-identity-observation 以及 skill-family-directory-verification 请求/结果合同。
+Contracts 0.16.0 保持现有合同面，并将消费方向量与 Foundation 0.16.0 锁步版本对齐。
 
 **变更**
 
-- 将 Kimi 的 driverVersion 1.0.0 与闭合 CLI 版本 0.39.1 分开。
+- 将消费方契约测试向量的版本坐标更新为 0.16.0，不新增合同对象，也不改变校验语义。
 
 **升级说明**
 
-三个 Foundation 包须一起精确锁定到 0.15.0；领域接受规则与真实宿主观察仍由消费者负责。
+三个 Foundation 包须一起精确锁定到 0.16.0；消费方接受规则与真实宿主观察仍由调用方负责。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -39,7 +35,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-0.15.0 是本地候选版本。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
+0.16.0 是本地候选版本。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -47,13 +43,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.15.0.tgz" "$pack_dir/skill-family-harness-node-0.15.0.tgz" "$pack_dir/skill-family-engineering-kit-0.15.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.16.0.tgz" "$pack_dir/skill-family-harness-node-0.16.0.tgz" "$pack_dir/skill-family-engineering-kit-0.16.0.tgz")
 ```
 
 发布后再使用 registry 坐标：
 
 ```sh
-npm install skill-family-contracts@0.15.0
+npm install skill-family-contracts@0.16.0
 npm info skill-family-contracts --help
 ```
 
@@ -355,4 +351,4 @@ import {
 
 完整插件请求、结果与完整树观察使用三个新增候选 Schema。安装、发现、调用与载荷比较分别表达；原始树内容属于私有数据。
 
-0.15.0 为本地源码候选，尚未发布。消费本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。
+0.16.0 为本地源码候选，尚未发布。消费本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。

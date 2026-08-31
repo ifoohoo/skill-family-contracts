@@ -4,26 +4,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.15.0 -->
+<!-- release-skill:release-version: 0.16.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.15.0).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.15.0** (2026-08-29)
+**0.16.0** (2026-08-31)
 
-Contracts 0.15.0 adds closed executable identity and Kimi directory verification contracts.
-
-**Added**
-
-- Adds executable-identity-observation and skill-family-directory-verification request/result contracts.
+Contracts 0.16.0 keeps the existing contract surface and aligns consumer vectors with the 0.16.0 Foundation lockstep.
 
 **Changed**
 
-- Separates Kimi driverVersion 1.0.0 from the closed CLI version 0.39.1.
+- Updates the consumer contract vector coordinate to 0.16.0 without adding a contract object or changing validation semantics.
 
 **Upgrade Notes**
 
-Pin all three Foundation packages to 0.15.0. Consumers still own domain acceptance and real-host observation.
+Pin skill-family-contracts, skill-family-harness-node, and skill-family-engineering-kit to the same exact 0.16.0 version; existing consumer acceptance and real-host observations remain the caller's responsibility.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -38,7 +34,7 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-Version 0.15.0 is a local candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
+Version 0.16.0 is a local candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -46,13 +42,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.15.0.tgz" "$pack_dir/skill-family-harness-node-0.15.0.tgz" "$pack_dir/skill-family-engineering-kit-0.15.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.16.0.tgz" "$pack_dir/skill-family-harness-node-0.16.0.tgz" "$pack_dir/skill-family-engineering-kit-0.16.0.tgz")
 ```
 
 After publication, use the registry coordinate:
 
 ```sh
-npm install skill-family-contracts@0.15.0
+npm install skill-family-contracts@0.16.0
 npm info skill-family-contracts --help
 ```
 
@@ -360,4 +356,4 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 Three new candidate schemas describe plugin requests, plugin results and complete tree observations. Installation, discovery, invocation and payload comparison remain separate; raw tree content is private.
 
-Version 0.15.0 is a local source candidate and is not published. Consume the three locally verified tarballs; a version marker, unit test or successful install is not complete contract integration, migration completion, or real-host qualification.
+Version 0.16.0 is a local source candidate and is not published. Consume the three locally verified tarballs; a version marker, unit test or successful install is not complete contract integration, migration completion, or real-host qualification.

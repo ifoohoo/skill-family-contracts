@@ -1,0 +1,15 @@
+version: 0.16.0
+date: 2026-08-31
+locales:
+  en:
+    summary: Contracts 0.16.0 keeps the existing contract surface and aligns consumer vectors with the 0.16.0 Foundation lockstep.
+    changes:
+      changed:
+        - Updates the consumer contract vector coordinate to 0.16.0 without adding a contract object or changing validation semantics.
+    upgradeNotes: Pin skill-family-contracts, skill-family-harness-node, and skill-family-engineering-kit to the same exact 0.16.0 version; existing consumer acceptance and real-host observations remain the caller's responsibility.
+  zh-CN:
+    summary: Contracts 0.16.0 保持现有合同面，并将消费方向量与 Foundation 0.16.0 锁步版本对齐。
+    changes:
+      changed:
+        - 将消费方契约测试向量的版本坐标更新为 0.16.0，不新增合同对象，也不改变校验语义。
+    upgradeNotes: 三个 Foundation 包须一起精确锁定到 0.16.0；消费方接受规则与真实宿主观察仍由调用方负责。
