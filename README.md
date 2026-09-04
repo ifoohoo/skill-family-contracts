@@ -4,22 +4,27 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.16.0 -->
+<!-- release-skill:release-version: 0.17.0 -->
 
-The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.15.0).
+The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.16.0).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.16.0** (2026-08-31)
+**0.17.0** (2026-09-01)
 
-Contracts 0.16.0 keeps the existing contract surface and aligns consumer vectors with the 0.16.0 Foundation lockstep.
+Contracts 0.17.0 adds the business-neutral engineering-baseline contract and moves the contract specification to 1.16.0.
+
+**Added**
+
+- Adds the closed engineering-baseline schema with provider identity, canonical rule lineage references, and one Foundation reference-skeleton identity.
+- Adds validateEngineeringBaseline and describeEngineeringBaseline. They verify inert JSON input, deterministic rule-reference ordering, uniqueness, and the self-binding digest without interpreting provider-owned rule semantics.
 
 **Changed**
 
-- Updates the consumer contract vector coordinate to 0.16.0 without adding a contract object or changing validation semantics.
+- Moves the consumer contract vectors to the Foundation 0.17.0 lockstep coordinate.
 
 **Upgrade Notes**
 
-Pin skill-family-contracts, skill-family-harness-node, and skill-family-engineering-kit to the same exact 0.16.0 version; existing consumer acceptance and real-host observations remain the caller's responsibility.
+Pin all three Foundation packages to exactly 0.17.0. Audit or another baseline provider owns rule meaning and publishes the baseline document; Foundation validates only the neutral identity and reference binding, so the dependency direction remains provider to Foundation.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -28,13 +33,13 @@ When every skill-family project writes its own set of structural contracts, you 
 
 ## Core Mental Model
 
-Contracts is the "definition and registry" layer, not the "execution" layer. It owns the JSON Schemas for the 45 top-level object classes, including the Project Profile, shared profile-adoption definitions, filesystem binding, fixed-set publication, peer adapter verification, candidate real-host verification, executable identity, and skill-family directory verification objects. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
+Contracts is the "definition and registry" layer, not the "execution" layer. It owns the JSON Schemas for the 46 top-level object classes, including the Project Profile, shared profile-adoption definitions, filesystem binding, fixed-set publication, peer adapter verification, candidate real-host verification, executable identity, skill-family directory verification, and engineering-baseline objects. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
 
 Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version in `package.json`), routing by dialect to the corresponding Ajv class; no hand-written schema-subset interpreter is implemented.
 
 ## Installation and Minimal Example
 
-Version 0.16.0 is a local candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
+Version 0.17.0 is a local candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -42,13 +47,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.16.0.tgz" "$pack_dir/skill-family-harness-node-0.16.0.tgz" "$pack_dir/skill-family-engineering-kit-0.16.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.17.0.tgz" "$pack_dir/skill-family-harness-node-0.17.0.tgz" "$pack_dir/skill-family-engineering-kit-0.17.0.tgz")
 ```
 
 After publication, use the registry coordinate:
 
 ```sh
-npm install skill-family-contracts@0.16.0
+npm install skill-family-contracts@0.17.0
 npm info skill-family-contracts --help
 ```
 
@@ -185,6 +190,7 @@ The capability remains **candidate** and its schemas stay outside `src/registry.
 | `executable-identity-observation` | `https://contracts.skill-family.example/v1/executable-identity-observation.json` | `src/schemas/executable-identity-observation.schema.json` |
 | `skill-family-directory-verification-request` | `https://contracts.skill-family.example/v1/skill-family-directory-verification-request.json` | `src/schemas/skill-family-directory-verification-request.schema.json` |
 | `skill-family-directory-verification-result` | `https://contracts.skill-family.example/v1/skill-family-directory-verification-result.json` | `src/schemas/skill-family-directory-verification-result.schema.json` |
+| `engineering-baseline` | `https://contracts.skill-family.example/v1/engineering-baseline.json` | `src/schemas/engineering-baseline.schema.json` |
 
 Host descriptor/probe/plan contracts remain the same registered object identities, while Contracts 1.10.0 extends their stable semantics. Version 0.10.0 adds optional maturity and finite source-alias fields, permits `manual` host support, and binds update/uninstall plans to prior member digests. The nine probe facts are always represented independently; an unavailable or unknown fact is not inferred from the CLI or version fact.
 
@@ -273,7 +279,7 @@ import {
 
 The imports above list the stable public surface of this package; `validateDocument` and `runChecks` are the most commonly used entry points. `validateDocument(document, { schemaId | schema, dialect, policy })` returns `{ valid, errorCode, errors, data }`; `runChecks({ rules?, registry?, fixtures?, loadSchema? })` returns `{ ok, mandatoryCount, budget, results }`; `registerSchema` / `registerProtocol` return a new registry copy, throwing `ContractsError` with `SFC1003` / `SFC1004` respectively on duplicates.
 
-`detectDialect(schema)` returns `draft-07`, `2020-12`, or `null` when the declaration is absent or unknown. `compileSchema` throws `SFC1006` for an unsupported dialect; `validateDocument` reports the same condition as `errorCode: "SFC1006"`. Registry lookup functions return `null` on a miss. The bundled registry is `schemaVersion=1`, `contractsVersion=1.15.0`, with 45 registered Schemas and one Kernel Protocol. Registration returns a copied registry and leaves the input unchanged; consumer vector identity or exact-version mismatches fail with `SFC1013`.
+`detectDialect(schema)` returns `draft-07`, `2020-12`, or `null` when the declaration is absent or unknown. `compileSchema` throws `SFC1006` for an unsupported dialect; `validateDocument` reports the same condition as `errorCode: "SFC1006"`. Registry lookup functions return `null` on a miss. The bundled registry is `schemaVersion=1`, `contractsVersion=1.16.0`, with 46 registered Schemas and one Kernel Protocol. Registration returns a copied registry and leaves the input unchanged; consumer vector identity or exact-version mismatches fail with `SFC1013`.
 
 ## Security Boundaries and Non-Goals
 
@@ -306,7 +312,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Capability selection
 
-- `foundation.contracts.object-validation`: Ajv dual-dialect validation of all 45 registered top-level object classes.
+- `foundation.contracts.object-validation`: Ajv dual-dialect validation of all 46 registered top-level object classes.
 - `foundation.contracts.registry-protocol`: Schema `$id` and protocol-name registry query.
 - `foundation.contracts.kernel-protocol`: operation-request/result protocol.
 - `foundation.contracts.mandatory-checks`: nine mandatory rules and unresolved references.
@@ -336,7 +342,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Architectural invariants
 
-- The set of 45 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift. Contracts 1.10.0 adds the two peer adapter verification contracts; Contracts 1.11.0 adds two candidate host-verification contracts without adding an error code.
+- The set of 46 top-level object classes is fixed; additions require an ADR; the error-code freeze does not drift. Contracts 1.10.0 adds the two peer adapter verification contracts; Contracts 1.11.0 adds two candidate host-verification contracts without adding an error code.
 - The validator is exclusively Ajv 8.20.0 (exact pin); no other implementation is accepted.
 
 ### Route elsewhere when
@@ -356,4 +362,4 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 Three new candidate schemas describe plugin requests, plugin results and complete tree observations. Installation, discovery, invocation and payload comparison remain separate; raw tree content is private.
 
-Version 0.16.0 is a local source candidate and is not published. Consume the three locally verified tarballs; a version marker, unit test or successful install is not complete contract integration, migration completion, or real-host qualification.
+Version 0.17.0 is a local source candidate and is not published. Consume the three locally verified tarballs; a version marker, unit test or successful install is not complete contract integration, migration completion, or real-host qualification.

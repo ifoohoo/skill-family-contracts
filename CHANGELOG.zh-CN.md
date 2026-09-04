@@ -1,5 +1,25 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.17.0 locale=zh-CN baseline=sha256:526755ba8892da548e7ebb04387c1adebd3ecb581695bf6c9f538ad880f7395c -->
+## [0.17.0] - 2026-09-01
+
+Contracts 0.17.0 新增业务中立的 engineering-baseline 合同，并将契约规格升至 1.16.0。
+
+### 新增
+
+- 新增闭合的 engineering-baseline Schema，记录提供方身份、权威规则谱系引用和一个 Foundation 参考骨架身份。
+- 新增 validateEngineeringBaseline 与 describeEngineeringBaseline，校验惰性 JSON 输入、规则引用的确定性顺序与唯一性，以及文档自身摘要；不解释提供方拥有的规则语义。
+
+### 变更
+
+- 将消费方契约测试向量更新到 Foundation 0.17.0 锁步坐标。
+
+### 升级说明
+
+三个 Foundation 包须一起精确锁定到 0.17.0。Audit 或其他基线提供方负责规则含义并发布基线文档；Foundation 只校验中立身份与参考绑定，依赖方向保持为提供方依赖 Foundation。
+<!-- release-skill:changelog:end version=0.17.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.16.0 locale=zh-CN baseline=sha256:0317e589a23c3d9d16647f4ecec9aace7bda35c2399a2c2d6d1767e3c2bbb4e0 -->
 ## [0.16.0] - 2026-08-31
 

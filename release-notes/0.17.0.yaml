@@ -1,0 +1,21 @@
+version: 0.17.0
+date: 2026-09-01
+locales:
+  en:
+    summary: Contracts 0.17.0 adds the business-neutral engineering-baseline contract and moves the contract specification to 1.16.0.
+    changes:
+      added:
+        - Adds the closed engineering-baseline schema with provider identity, canonical rule lineage references, and one Foundation reference-skeleton identity.
+        - Adds validateEngineeringBaseline and describeEngineeringBaseline. They verify inert JSON input, deterministic rule-reference ordering, uniqueness, and the self-binding digest without interpreting provider-owned rule semantics.
+      changed:
+        - Moves the consumer contract vectors to the Foundation 0.17.0 lockstep coordinate.
+    upgradeNotes: Pin all three Foundation packages to exactly 0.17.0. Audit or another baseline provider owns rule meaning and publishes the baseline document; Foundation validates only the neutral identity and reference binding, so the dependency direction remains provider to Foundation.
+  zh-CN:
+    summary: Contracts 0.17.0 新增业务中立的 engineering-baseline 合同，并将契约规格升至 1.16.0。
+    changes:
+      added:
+        - 新增闭合的 engineering-baseline Schema，记录提供方身份、权威规则谱系引用和一个 Foundation 参考骨架身份。
+        - 新增 validateEngineeringBaseline 与 describeEngineeringBaseline，校验惰性 JSON 输入、规则引用的确定性顺序与唯一性，以及文档自身摘要；不解释提供方拥有的规则语义。
+      changed:
+        - 将消费方契约测试向量更新到 Foundation 0.17.0 锁步坐标。
+    upgradeNotes: 三个 Foundation 包须一起精确锁定到 0.17.0。Audit 或其他基线提供方负责规则含义并发布基线文档；Foundation 只校验中立身份与参考绑定，依赖方向保持为提供方依赖 Foundation。

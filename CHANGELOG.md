@@ -1,5 +1,25 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.17.0 locale=en baseline=sha256:b616668436df6342685f0297c27be8c4d4ef74f7664eaca9e1480d8c4745b07f -->
+## [0.17.0] - 2026-09-01
+
+Contracts 0.17.0 adds the business-neutral engineering-baseline contract and moves the contract specification to 1.16.0.
+
+### Added
+
+- Adds the closed engineering-baseline schema with provider identity, canonical rule lineage references, and one Foundation reference-skeleton identity.
+- Adds validateEngineeringBaseline and describeEngineeringBaseline. They verify inert JSON input, deterministic rule-reference ordering, uniqueness, and the self-binding digest without interpreting provider-owned rule semantics.
+
+### Changed
+
+- Moves the consumer contract vectors to the Foundation 0.17.0 lockstep coordinate.
+
+### Upgrade Notes
+
+Pin all three Foundation packages to exactly 0.17.0. Audit or another baseline provider owns rule meaning and publishes the baseline document; Foundation validates only the neutral identity and reference binding, so the dependency direction remains provider to Foundation.
+<!-- release-skill:changelog:end version=0.17.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.16.0 locale=en baseline=sha256:ba375443d1f461565ff82baaa5851889d6e50c9839fcab6faa251da2b8c647ab -->
 ## [0.16.0] - 2026-08-31
 
