@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.18.0 locale=en baseline=sha256:996a1fceed2ef12c05d8a1d619145eb6c2ded2c6f8ffd763c80c6f859e86d3ca -->
+## [0.18.0] - 2026-09-05
+
+Contracts 0.18.0 is a lockstep compatibility release with no new contract, Schema, or public API.
+
+### Changed
+
+- Moves the package version to 0.18.0 together with Harness and Engineering Kit while preserving the 0.17.0 contract surface.
+
+### Upgrade Notes
+
+Pin all three Foundation packages to exactly 0.18.0. The replace-existing fixed-set capability is a Harness mechanism and does not add a Contracts object or migration.
+<!-- release-skill:changelog:end version=0.18.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.17.0 locale=en baseline=sha256:b616668436df6342685f0297c27be8c4d4ef74f7664eaca9e1480d8c4745b07f -->
 ## [0.17.0] - 2026-09-01
 

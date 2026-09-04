@@ -1,0 +1,15 @@
+version: 0.18.0
+date: 2026-09-05
+locales:
+  en:
+    summary: Contracts 0.18.0 is a lockstep compatibility release with no new contract, Schema, or public API.
+    changes:
+      changed:
+        - Moves the package version to 0.18.0 together with Harness and Engineering Kit while preserving the 0.17.0 contract surface.
+    upgradeNotes: Pin all three Foundation packages to exactly 0.18.0. The replace-existing fixed-set capability is a Harness mechanism and does not add a Contracts object or migration.
+  zh-CN:
+    summary: Contracts 0.18.0 是锁步兼容发布，不新增合同、Schema 或公共 API。
+    changes:
+      changed:
+        - 包版本与 Harness、Engineering Kit 一同升至 0.18.0，0.17.0 的合同表面保持不变。
+    upgradeNotes: 三个 Foundation 包须一起精确锁定到 0.18.0。既有目标固定集合替换属于 Harness 机制，不新增 Contracts 对象，也不需要合同迁移。

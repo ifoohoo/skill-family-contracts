@@ -4,27 +4,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.17.0 -->
+<!-- release-skill:release-version: 0.18.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.16.0).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.17.0** (2026-09-01)
+**0.18.0** (2026-09-05)
 
-Contracts 0.17.0 adds the business-neutral engineering-baseline contract and moves the contract specification to 1.16.0.
-
-**Added**
-
-- Adds the closed engineering-baseline schema with provider identity, canonical rule lineage references, and one Foundation reference-skeleton identity.
-- Adds validateEngineeringBaseline and describeEngineeringBaseline. They verify inert JSON input, deterministic rule-reference ordering, uniqueness, and the self-binding digest without interpreting provider-owned rule semantics.
+Contracts 0.18.0 is a lockstep compatibility release with no new contract, Schema, or public API.
 
 **Changed**
 
-- Moves the consumer contract vectors to the Foundation 0.17.0 lockstep coordinate.
+- Moves the package version to 0.18.0 together with Harness and Engineering Kit while preserving the 0.17.0 contract surface.
 
 **Upgrade Notes**
 
-Pin all three Foundation packages to exactly 0.17.0. Audit or another baseline provider owns rule meaning and publishes the baseline document; Foundation validates only the neutral identity and reference binding, so the dependency direction remains provider to Foundation.
+Pin all three Foundation packages to exactly 0.18.0. The replace-existing fixed-set capability is a Harness mechanism and does not add a Contracts object or migration.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -39,7 +34,7 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-Version 0.17.0 is a local candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
+Version 0.18.0 is a local candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -47,13 +42,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.17.0.tgz" "$pack_dir/skill-family-harness-node-0.17.0.tgz" "$pack_dir/skill-family-engineering-kit-0.17.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.18.0.tgz" "$pack_dir/skill-family-harness-node-0.18.0.tgz" "$pack_dir/skill-family-engineering-kit-0.18.0.tgz")
 ```
 
 After publication, use the registry coordinate:
 
 ```sh
-npm install skill-family-contracts@0.17.0
+npm install skill-family-contracts@0.18.0
 npm info skill-family-contracts --help
 ```
 
@@ -362,4 +357,4 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 Three new candidate schemas describe plugin requests, plugin results and complete tree observations. Installation, discovery, invocation and payload comparison remain separate; raw tree content is private.
 
-Version 0.17.0 is a local source candidate and is not published. Consume the three locally verified tarballs; a version marker, unit test or successful install is not complete contract integration, migration completion, or real-host qualification.
+Version 0.18.0 is a local source candidate and is not published. Consume the three locally verified tarballs; a version marker, unit test or successful install is not complete contract integration, migration completion, or real-host qualification.

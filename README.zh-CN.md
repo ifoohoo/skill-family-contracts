@@ -5,27 +5,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.17.0 -->
+<!-- release-skill:release-version: 0.18.0 -->
 
 机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.16.0）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.17.0** (2026-09-01)
+**0.18.0** (2026-09-05)
 
-Contracts 0.17.0 新增业务中立的 engineering-baseline 合同，并将契约规格升至 1.16.0。
-
-**新增**
-
-- 新增闭合的 engineering-baseline Schema，记录提供方身份、权威规则谱系引用和一个 Foundation 参考骨架身份。
-- 新增 validateEngineeringBaseline 与 describeEngineeringBaseline，校验惰性 JSON 输入、规则引用的确定性顺序与唯一性，以及文档自身摘要；不解释提供方拥有的规则语义。
+Contracts 0.18.0 是锁步兼容发布，不新增合同、Schema 或公共 API。
 
 **变更**
 
-- 将消费方契约测试向量更新到 Foundation 0.17.0 锁步坐标。
+- 包版本与 Harness、Engineering Kit 一同升至 0.18.0，0.17.0 的合同表面保持不变。
 
 **升级说明**
 
-三个 Foundation 包须一起精确锁定到 0.17.0。Audit 或其他基线提供方负责规则含义并发布基线文档；Foundation 只校验中立身份与参考绑定，依赖方向保持为提供方依赖 Foundation。
+三个 Foundation 包须一起精确锁定到 0.18.0。既有目标固定集合替换属于 Harness 机制，不新增 Contracts 对象，也不需要合同迁移。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -40,7 +35,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-0.17.0 是本地候选版本。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
+0.18.0 是本地候选版本。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -48,13 +43,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.17.0.tgz" "$pack_dir/skill-family-harness-node-0.17.0.tgz" "$pack_dir/skill-family-engineering-kit-0.17.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.18.0.tgz" "$pack_dir/skill-family-harness-node-0.18.0.tgz" "$pack_dir/skill-family-engineering-kit-0.18.0.tgz")
 ```
 
 发布后再使用 registry 坐标：
 
 ```sh
-npm install skill-family-contracts@0.17.0
+npm install skill-family-contracts@0.18.0
 npm info skill-family-contracts --help
 ```
 
@@ -357,4 +352,4 @@ import {
 
 完整插件请求、结果与完整树观察使用三个新增候选 Schema。安装、发现、调用与载荷比较分别表达；原始树内容属于私有数据。
 
-0.17.0 为本地源码候选，尚未发布。消费本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。
+0.18.0 为本地源码候选，尚未发布。消费本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。

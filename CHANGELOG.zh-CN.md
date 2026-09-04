@@ -1,5 +1,20 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.18.0 locale=zh-CN baseline=sha256:8768c26c39341b90e127d3442d365faa5280336e2d9f1307230ac6615b71599e -->
+## [0.18.0] - 2026-09-05
+
+Contracts 0.18.0 是锁步兼容发布，不新增合同、Schema 或公共 API。
+
+### 变更
+
+- 包版本与 Harness、Engineering Kit 一同升至 0.18.0，0.17.0 的合同表面保持不变。
+
+### 升级说明
+
+三个 Foundation 包须一起精确锁定到 0.18.0。既有目标固定集合替换属于 Harness 机制，不新增 Contracts 对象，也不需要合同迁移。
+<!-- release-skill:changelog:end version=0.18.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.17.0 locale=zh-CN baseline=sha256:526755ba8892da548e7ebb04387c1adebd3ecb581695bf6c9f538ad880f7395c -->
 ## [0.17.0] - 2026-09-01
 
