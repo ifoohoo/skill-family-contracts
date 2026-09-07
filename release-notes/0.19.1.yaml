@@ -1,0 +1,17 @@
+version: 0.19.1
+date: 2026-09-08
+locales:
+  en:
+    summary: Contracts 0.19.1 links each mechanism-batch result response to its exit code without changing the 1.17.0 specification coordinate, Schema identity, since 0.19.0, or candidate maturity.
+    changes:
+      fixed:
+        - Requires exit code 0 to carry exactly a text response with one string field and exit code 2 to carry the existing closed error envelope.
+        - Preserves existing JSON error data, including non-string messages and non-object details, so valid 0.19.0 error projections remain compatible.
+    upgradeNotes: Pin all three Foundation packages to exactly 0.19.1. Consumers that validate batch results can now reject malformed responses and exit-code/response mismatches. Candidate contracts still require re-verification after an upgrade.
+  zh-CN:
+    summary: Contracts 0.19.1 按每项退出码约束机制批量结果的响应形状。Contracts 规格坐标 1.17.0、Schema 身份、since 0.19.0 与 candidate 成熟度保持不变。
+    changes:
+      fixed:
+        - 退出码 0 只接受含一个字符串字段的文本响应，退出码 2 继续使用既有闭合错误封套。
+        - 保留既有 JSON 错误数据，包括非字符串 message 与非对象 details，确保 0.19.0 的有效错误投影继续兼容。
+    upgradeNotes: 三个 Foundation 包须一起精确锁定到 0.19.1。消费者可用结果 Schema 拒绝畸形响应及退出码与响应体矛盾。候选合同升级后仍须重新验证。

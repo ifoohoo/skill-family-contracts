@@ -4,27 +4,23 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.19.0 -->
+<!-- release-skill:release-version: 0.19.1 -->
 
-The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.16.0).
+The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.17.0).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.19.0** (2026-09-07)
+**0.19.1** (2026-09-08)
 
-Contracts 0.19.0 adds two candidate mechanism-batch Schemas and the frozen batch capacity policy for the bounded same-operation batch transport.
+Contracts 0.19.1 links each mechanism-batch result response to its exit code without changing the 1.17.0 specification coordinate, Schema identity, since 0.19.0, or candidate maturity.
 
-**Added**
+**Fixed**
 
-- Adds the mechanism-batch-request and mechanism-batch-result candidate Schemas under the foundation-mechanisms/v1 canonical identities with closed fields.
-- Adds the frozen mechanism-batch-policy.json as the single capacity authority: 256 items, 16,777,216 input bytes, and 33,554,432 output bytes.
-
-**Changed**
-
-- Raises the Contracts spec coordinate to 1.17.0. The forty-six top-level objects remain frozen; the batch contracts are candidate-only and are not registered as stable top-level objects.
+- Requires exit code 0 to carry exactly a text response with one string field and exit code 2 to carry the existing closed error envelope.
+- Preserves existing JSON error data, including non-string messages and non-object details, so valid 0.19.0 error projections remain compatible.
 
 **Upgrade Notes**
 
-Pin all three Foundation packages to exactly 0.19.0. The batch transport is a Harness mechanism; candidate contracts may still change in later versions, so consumers must re-verify after upgrading a candidate version.
+Pin all three Foundation packages to exactly 0.19.1. Consumers that validate batch results can now reject malformed responses and exit-code/response mismatches. Candidate contracts still require re-verification after an upgrade.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -39,7 +35,7 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-Version 0.18.0 is a local candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
+Version 0.19.1 is the local source candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -47,13 +43,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.18.0.tgz" "$pack_dir/skill-family-harness-node-0.18.0.tgz" "$pack_dir/skill-family-engineering-kit-0.18.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.19.1.tgz" "$pack_dir/skill-family-harness-node-0.19.1.tgz" "$pack_dir/skill-family-engineering-kit-0.19.1.tgz")
 ```
 
 After publication, use the registry coordinate:
 
 ```sh
-npm install skill-family-contracts@0.19.0
+npm install skill-family-contracts@0.19.1
 npm info skill-family-contracts --help
 ```
 
@@ -279,7 +275,7 @@ import {
 
 The imports above list the stable public surface of this package; `validateDocument` and `runChecks` are the most commonly used entry points. `validateDocument(document, { schemaId | schema, dialect, policy })` returns `{ valid, errorCode, errors, data }`; `runChecks({ rules?, registry?, fixtures?, loadSchema? })` returns `{ ok, mandatoryCount, budget, results }`; `registerSchema` / `registerProtocol` return a new registry copy, throwing `ContractsError` with `SFC1003` / `SFC1004` respectively on duplicates.
 
-`detectDialect(schema)` returns `draft-07`, `2020-12`, or `null` when the declaration is absent or unknown. `compileSchema` throws `SFC1006` for an unsupported dialect; `validateDocument` reports the same condition as `errorCode: "SFC1006"`. Registry lookup functions return `null` on a miss. The bundled registry is `schemaVersion=1`, `contractsVersion=1.16.0`, with 46 registered Schemas and one Kernel Protocol. Registration returns a copied registry and leaves the input unchanged; consumer vector identity or exact-version mismatches fail with `SFC1013`.
+`detectDialect(schema)` returns `draft-07`, `2020-12`, or `null` when the declaration is absent or unknown. `compileSchema` throws `SFC1006` for an unsupported dialect; `validateDocument` reports the same condition as `errorCode: "SFC1006"`. Registry lookup functions return `null` on a miss. The bundled registry is `schemaVersion=1`, `contractsVersion=1.17.0`, with 46 registered Schemas and one Kernel Protocol. Registration returns a copied registry and leaves the input unchanged; consumer vector identity or exact-version mismatches fail with `SFC1013`.
 
 ## Security Boundaries and Non-Goals
 
@@ -362,4 +358,4 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 Three new candidate schemas describe plugin requests, plugin results and complete tree observations. Installation, discovery, invocation and payload comparison remain separate; raw tree content is private.
 
-Version 0.18.0 is a local source candidate and is not published. Consume the three locally verified tarballs; a version marker, unit test or successful install is not complete contract integration, migration completion, or real-host qualification.
+Version 0.19.1 is the local source candidate. Remote availability must be established by the corresponding release-skill post-release evidence. Consume the three locally verified tarballs for candidate checks; a version marker, unit test, or successful install is not complete contract integration, migration completion, or real-host qualification.

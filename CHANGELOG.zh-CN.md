@@ -1,5 +1,21 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.19.1 locale=zh-CN baseline=sha256:93146481c209fc816aa653ea477cbdad9a24882d4cfb679c6777b2ab34fb6600 -->
+## [0.19.1] - 2026-09-08
+
+Contracts 0.19.1 按每项退出码约束机制批量结果的响应形状。Contracts 规格坐标 1.17.0、Schema 身份、since 0.19.0 与 candidate 成熟度保持不变。
+
+### 修复
+
+- 退出码 0 只接受含一个字符串字段的文本响应，退出码 2 继续使用既有闭合错误封套。
+- 保留既有 JSON 错误数据，包括非字符串 message 与非对象 details，确保 0.19.0 的有效错误投影继续兼容。
+
+### 升级说明
+
+三个 Foundation 包须一起精确锁定到 0.19.1。消费者可用结果 Schema 拒绝畸形响应及退出码与响应体矛盾。候选合同升级后仍须重新验证。
+<!-- release-skill:changelog:end version=0.19.1 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.19.0 locale=zh-CN baseline=sha256:80b81b07d8e72f87c8cde8a9d4c7d8b3fdb49f0957d554c53620d2c569d2cd40 -->
 ## [0.19.0] - 2026-09-07
 

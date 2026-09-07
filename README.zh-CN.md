@@ -5,27 +5,23 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.19.0 -->
+<!-- release-skill:release-version: 0.19.1 -->
 
-机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.16.0）。
+机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.17.0）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.19.0** (2026-09-07)
+**0.19.1** (2026-09-08)
 
-Contracts 0.19.0 新增两个候选机制批量 Schema 与冻结的批量容量政策，服务有界同操作批量传输。
+Contracts 0.19.1 按每项退出码约束机制批量结果的响应形状。Contracts 规格坐标 1.17.0、Schema 身份、since 0.19.0 与 candidate 成熟度保持不变。
 
-**新增**
+**修复**
 
-- 在 foundation-mechanisms/v1 规范身份下新增 mechanism-batch-request 与 mechanism-batch-result 两个候选 Schema，字段闭合。
-- 新增冻结的 mechanism-batch-policy.json 作为唯一容量权威：256 项、16,777,216 输入字节、33,554,432 输出字节。
-
-**变更**
-
-- Contracts 规格坐标升至 1.17.0。46 类顶层对象保持冻结；批量合同仅候选，不登记为稳定顶层对象。
+- 退出码 0 只接受含一个字符串字段的文本响应，退出码 2 继续使用既有闭合错误封套。
+- 保留既有 JSON 错误数据，包括非字符串 message 与非对象 details，确保 0.19.0 的有效错误投影继续兼容。
 
 **升级说明**
 
-三个 Foundation 包须一起精确锁定到 0.19.0。批量传输属于 Harness 机制；候选合同在后续版本仍可能调整，消费者升级候选版本后须重新验证。
+三个 Foundation 包须一起精确锁定到 0.19.1。消费者可用结果 Schema 拒绝畸形响应及退出码与响应体矛盾。候选合同升级后仍须重新验证。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -40,7 +36,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-0.18.0 是本地候选版本。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
+0.19.1 是本地源码候选。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -48,13 +44,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.18.0.tgz" "$pack_dir/skill-family-harness-node-0.18.0.tgz" "$pack_dir/skill-family-engineering-kit-0.18.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.19.1.tgz" "$pack_dir/skill-family-harness-node-0.19.1.tgz" "$pack_dir/skill-family-engineering-kit-0.19.1.tgz")
 ```
 
 发布后再使用 registry 坐标：
 
 ```sh
-npm install skill-family-contracts@0.19.0
+npm install skill-family-contracts@0.19.1
 npm info skill-family-contracts --help
 ```
 
@@ -274,7 +270,7 @@ import {
 
 以上导入列出了本包稳定公共面；`validateDocument` 与 `runChecks` 是最常用入口。`validateDocument(document, { schemaId | schema, dialect, policy })` 返回 `{ valid, errorCode, errors, data }`；`runChecks({ rules?, registry?, fixtures?, loadSchema? })` 返回 `{ ok, mandatoryCount, budget, results }`；`registerSchema` / `registerProtocol` 返回新登记表副本，重复项分别以 `SFC1003` / `SFC1004` 抛出 `ContractsError`。
 
-`detectDialect(schema)` 在声明缺失或未知时返回 `null`，支持的结果为 `draft-07` 或 `2020-12`。不支持的方言由 `compileSchema` 抛出 `SFC1006`，由 `validateDocument` 以 `errorCode: "SFC1006"` 返回。登记表查询未命中返回 `null`。随包登记表的 `schemaVersion=1`、`contractsVersion=1.16.0`、46 类 Schema 与 1 个 Kernel Protocol 以机器源为准；注册函数返回副本且不修改输入，消费方向量身份或精确版本不匹配时报 `SFC1013`。
+`detectDialect(schema)` 在声明缺失或未知时返回 `null`，支持的结果为 `draft-07` 或 `2020-12`。不支持的方言由 `compileSchema` 抛出 `SFC1006`，由 `validateDocument` 以 `errorCode: "SFC1006"` 返回。登记表查询未命中返回 `null`。随包登记表的 `schemaVersion=1`、`contractsVersion=1.17.0`、46 类 Schema 与 1 个 Kernel Protocol 以机器源为准；注册函数返回副本且不修改输入，消费方向量身份或精确版本不匹配时报 `SFC1013`。
 
 ## 安全边界与非目标
 
@@ -357,4 +353,4 @@ import {
 
 完整插件请求、结果与完整树观察使用三个新增候选 Schema。安装、发现、调用与载荷比较分别表达；原始树内容属于私有数据。
 
-0.18.0 为本地源码候选，尚未发布。消费本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。
+0.19.1 是本地源码候选，远端可用性须由对应的 release-skill 发布后证据证明。候选检查使用本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。

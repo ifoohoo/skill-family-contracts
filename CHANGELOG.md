@@ -1,5 +1,21 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.19.1 locale=en baseline=sha256:e8b26ad4a1cf7be023119651612546759291de7f71db36dc8b7ddc6fd0a57a3f -->
+## [0.19.1] - 2026-09-08
+
+Contracts 0.19.1 links each mechanism-batch result response to its exit code without changing the 1.17.0 specification coordinate, Schema identity, since 0.19.0, or candidate maturity.
+
+### Fixed
+
+- Requires exit code 0 to carry exactly a text response with one string field and exit code 2 to carry the existing closed error envelope.
+- Preserves existing JSON error data, including non-string messages and non-object details, so valid 0.19.0 error projections remain compatible.
+
+### Upgrade Notes
+
+Pin all three Foundation packages to exactly 0.19.1. Consumers that validate batch results can now reject malformed responses and exit-code/response mismatches. Candidate contracts still require re-verification after an upgrade.
+<!-- release-skill:changelog:end version=0.19.1 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.19.0 locale=en baseline=sha256:ea5dd700e61d57aa93db7e26959e331524d3e9f8248e1780281865d43fa92ac5 -->
 ## [0.19.0] - 2026-09-07
 
