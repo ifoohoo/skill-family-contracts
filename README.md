@@ -4,22 +4,27 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.18.0 -->
+<!-- release-skill:release-version: 0.19.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.16.0).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.18.0** (2026-09-05)
+**0.19.0** (2026-09-07)
 
-Contracts 0.18.0 is a lockstep compatibility release with no new contract, Schema, or public API.
+Contracts 0.19.0 adds two candidate mechanism-batch Schemas and the frozen batch capacity policy for the bounded same-operation batch transport.
+
+**Added**
+
+- Adds the mechanism-batch-request and mechanism-batch-result candidate Schemas under the foundation-mechanisms/v1 canonical identities with closed fields.
+- Adds the frozen mechanism-batch-policy.json as the single capacity authority: 256 items, 16,777,216 input bytes, and 33,554,432 output bytes.
 
 **Changed**
 
-- Moves the package version to 0.18.0 together with Harness and Engineering Kit while preserving the 0.17.0 contract surface.
+- Raises the Contracts spec coordinate to 1.17.0. The forty-six top-level objects remain frozen; the batch contracts are candidate-only and are not registered as stable top-level objects.
 
 **Upgrade Notes**
 
-Pin all three Foundation packages to exactly 0.18.0. The replace-existing fixed-set capability is a Harness mechanism and does not add a Contracts object or migration.
+Pin all three Foundation packages to exactly 0.19.0. The batch transport is a Harness mechanism; candidate contracts may still change in later versions, so consumers must re-verify after upgrading a candidate version.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -48,7 +53,7 @@ mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
 After publication, use the registry coordinate:
 
 ```sh
-npm install skill-family-contracts@0.18.0
+npm install skill-family-contracts@0.19.0
 npm info skill-family-contracts --help
 ```
 

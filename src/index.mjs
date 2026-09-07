@@ -26,7 +26,9 @@
  * contracts were appended in the same 1.14.0 delivery; the engineering
  * baseline contract was appended in 1.16.0, bringing the surface to forty-six
  * objects; the 1.15.0 coordinate freezes the forty-five-object surface and the
- * 1.16.0 coordinate freezes the forty-six-object surface and its audit baseline),
+ * 1.16.0 coordinate freezes the forty-six-object surface and its audit baseline,
+ * and the 1.17.0 coordinate re-records only the version-bearing documents; the
+ * bounded mechanism batch contracts stay candidate-only),
  * one kernel protocol, a closed set of nine
  * mechanical check types, and a bounded mandatory rule set. Validation is
  * implemented entirely on Ajv (dialect-aware), never on a hand-written
@@ -87,8 +89,8 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Contracts package version: 1.16.0 freezes the 46-object Foundation surface. */
-export const CONTRACTS_VERSION = "1.16.0";
+/** Contracts package version: 1.17.0 keeps the frozen 46-object Foundation surface. */
+export const CONTRACTS_VERSION = "1.17.0";
 
 export {
   CAPABILITY_MATURITY_LEVELS,

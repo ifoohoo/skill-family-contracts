@@ -1,5 +1,25 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.19.0 locale=zh-CN baseline=sha256:80b81b07d8e72f87c8cde8a9d4c7d8b3fdb49f0957d554c53620d2c569d2cd40 -->
+## [0.19.0] - 2026-09-07
+
+Contracts 0.19.0 新增两个候选机制批量 Schema 与冻结的批量容量政策，服务有界同操作批量传输。
+
+### 新增
+
+- 在 foundation-mechanisms/v1 规范身份下新增 mechanism-batch-request 与 mechanism-batch-result 两个候选 Schema，字段闭合。
+- 新增冻结的 mechanism-batch-policy.json 作为唯一容量权威：256 项、16,777,216 输入字节、33,554,432 输出字节。
+
+### 变更
+
+- Contracts 规格坐标升至 1.17.0。46 类顶层对象保持冻结；批量合同仅候选，不登记为稳定顶层对象。
+
+### 升级说明
+
+三个 Foundation 包须一起精确锁定到 0.19.0。批量传输属于 Harness 机制；候选合同在后续版本仍可能调整，消费者升级候选版本后须重新验证。
+<!-- release-skill:changelog:end version=0.19.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.18.0 locale=zh-CN baseline=sha256:8768c26c39341b90e127d3442d365faa5280336e2d9f1307230ac6615b71599e -->
 ## [0.18.0] - 2026-09-05
 

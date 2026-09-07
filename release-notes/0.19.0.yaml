@@ -1,0 +1,21 @@
+version: 0.19.0
+date: 2026-09-07
+locales:
+  en:
+    summary: Contracts 0.19.0 adds two candidate mechanism-batch Schemas and the frozen batch capacity policy for the bounded same-operation batch transport.
+    changes:
+      added:
+        - Adds the mechanism-batch-request and mechanism-batch-result candidate Schemas under the foundation-mechanisms/v1 canonical identities with closed fields.
+        - "Adds the frozen mechanism-batch-policy.json as the single capacity authority: 256 items, 16,777,216 input bytes, and 33,554,432 output bytes."
+      changed:
+        - Raises the Contracts spec coordinate to 1.17.0. The forty-six top-level objects remain frozen; the batch contracts are candidate-only and are not registered as stable top-level objects.
+    upgradeNotes: Pin all three Foundation packages to exactly 0.19.0. The batch transport is a Harness mechanism; candidate contracts may still change in later versions, so consumers must re-verify after upgrading a candidate version.
+  zh-CN:
+    summary: Contracts 0.19.0 新增两个候选机制批量 Schema 与冻结的批量容量政策，服务有界同操作批量传输。
+    changes:
+      added:
+        - 在 foundation-mechanisms/v1 规范身份下新增 mechanism-batch-request 与 mechanism-batch-result 两个候选 Schema，字段闭合。
+        - 新增冻结的 mechanism-batch-policy.json 作为唯一容量权威：256 项、16,777,216 输入字节、33,554,432 输出字节。
+      changed:
+        - Contracts 规格坐标升至 1.17.0。46 类顶层对象保持冻结；批量合同仅候选，不登记为稳定顶层对象。
+    upgradeNotes: 三个 Foundation 包须一起精确锁定到 0.19.0。批量传输属于 Harness 机制；候选合同在后续版本仍可能调整，消费者升级候选版本后须重新验证。

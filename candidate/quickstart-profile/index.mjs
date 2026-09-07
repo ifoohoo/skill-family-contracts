@@ -28,6 +28,16 @@ const BATCH_SCHEMAS = Object.freeze({
   result: load(new URL("../foundation-mechanisms/schema-validation-batch-result.schema.json", import.meta.url)),
 });
 
+const MECHANISM_BATCH_SCHEMAS = Object.freeze({
+  request: load(new URL("../foundation-mechanisms/mechanism-batch-request.schema.json", import.meta.url)),
+  result: load(new URL("../foundation-mechanisms/mechanism-batch-result.schema.json", import.meta.url)),
+});
+
+/** Fixed capacity authority for the bounded mechanism batch transport. */
+const MECHANISM_BATCH_POLICY = Object.freeze(
+  load(new URL("../foundation-mechanisms/mechanism-batch-policy.json", import.meta.url)),
+);
+
 const VALIDATE_KINDS = Object.freeze(["resource", "task", "result"]);
 const INVENTORY_KIND = "inventory";
 const SURFACE_INVENTORY_KIND = "surfaceInventory";
@@ -124,6 +134,18 @@ export function loadSchemaValidationBatchRequestSchema() {
 
 export function loadSchemaValidationBatchResultSchema() {
   return structuredClone(BATCH_SCHEMAS.result);
+}
+
+export function loadMechanismBatchRequestSchema() {
+  return structuredClone(MECHANISM_BATCH_SCHEMAS.request);
+}
+
+export function loadMechanismBatchResultSchema() {
+  return structuredClone(MECHANISM_BATCH_SCHEMAS.result);
+}
+
+export function loadMechanismBatchPolicy() {
+  return structuredClone(MECHANISM_BATCH_POLICY);
 }
 
 // The stable envelopes declare a date-time format; the candidate instance

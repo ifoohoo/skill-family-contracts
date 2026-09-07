@@ -1,5 +1,25 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.19.0 locale=en baseline=sha256:ea5dd700e61d57aa93db7e26959e331524d3e9f8248e1780281865d43fa92ac5 -->
+## [0.19.0] - 2026-09-07
+
+Contracts 0.19.0 adds two candidate mechanism-batch Schemas and the frozen batch capacity policy for the bounded same-operation batch transport.
+
+### Added
+
+- Adds the mechanism-batch-request and mechanism-batch-result candidate Schemas under the foundation-mechanisms/v1 canonical identities with closed fields.
+- Adds the frozen mechanism-batch-policy.json as the single capacity authority: 256 items, 16,777,216 input bytes, and 33,554,432 output bytes.
+
+### Changed
+
+- Raises the Contracts spec coordinate to 1.17.0. The forty-six top-level objects remain frozen; the batch contracts are candidate-only and are not registered as stable top-level objects.
+
+### Upgrade Notes
+
+Pin all three Foundation packages to exactly 0.19.0. The batch transport is a Harness mechanism; candidate contracts may still change in later versions, so consumers must re-verify after upgrading a candidate version.
+<!-- release-skill:changelog:end version=0.19.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.18.0 locale=en baseline=sha256:996a1fceed2ef12c05d8a1d619145eb6c2ded2c6f8ffd763c80c6f859e86d3ca -->
 ## [0.18.0] - 2026-09-05
 

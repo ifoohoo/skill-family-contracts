@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.skill-family.example/foundation-mechanisms/v1/mechanism-batch-result.json",
+  "title": "Candidate bounded mechanism batch result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["results"],
+  "properties": {
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["inputIndex", "exitCode", "response"],
+        "properties": {
+          "inputIndex": { "type": "integer", "minimum": 0 },
+          "exitCode": { "enum": [0, 2] },
+          "response": {}
+        }
+      }
+    }
+  }
+}

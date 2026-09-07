@@ -5,22 +5,27 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.18.0 -->
+<!-- release-skill:release-version: 0.19.0 -->
 
 机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.16.0）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.18.0** (2026-09-05)
+**0.19.0** (2026-09-07)
 
-Contracts 0.18.0 是锁步兼容发布，不新增合同、Schema 或公共 API。
+Contracts 0.19.0 新增两个候选机制批量 Schema 与冻结的批量容量政策，服务有界同操作批量传输。
+
+**新增**
+
+- 在 foundation-mechanisms/v1 规范身份下新增 mechanism-batch-request 与 mechanism-batch-result 两个候选 Schema，字段闭合。
+- 新增冻结的 mechanism-batch-policy.json 作为唯一容量权威：256 项、16,777,216 输入字节、33,554,432 输出字节。
 
 **变更**
 
-- 包版本与 Harness、Engineering Kit 一同升至 0.18.0，0.17.0 的合同表面保持不变。
+- Contracts 规格坐标升至 1.17.0。46 类顶层对象保持冻结；批量合同仅候选，不登记为稳定顶层对象。
 
 **升级说明**
 
-三个 Foundation 包须一起精确锁定到 0.18.0。既有目标固定集合替换属于 Harness 机制，不新增 Contracts 对象，也不需要合同迁移。
+三个 Foundation 包须一起精确锁定到 0.19.0。批量传输属于 Harness 机制；候选合同在后续版本仍可能调整，消费者升级候选版本后须重新验证。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -49,7 +54,7 @@ mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
 发布后再使用 registry 坐标：
 
 ```sh
-npm install skill-family-contracts@0.18.0
+npm install skill-family-contracts@0.19.0
 npm info skill-family-contracts --help
 ```
 
