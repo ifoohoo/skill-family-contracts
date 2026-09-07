@@ -1,5 +1,20 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.19.2 locale=zh-CN baseline=sha256:e0dfc11312babaf97d2208d6a8487985676ef9d80dfa8e614795182eb9ae14b5 -->
+## [0.19.2] - 2026-09-08
+
+Contracts 0.19.2 将包版本和消费者向量的精确发布坐标与 Foundation Adoption Review 分发补丁对齐。Contracts 规格仍为 1.17.0，公开 API、Schema、能力目录和机制行为均不变。
+
+### 变更
+
+- 包版本、发布说明和既有消费者向量的版本绑定与 Foundation 0.19.2 数值对齐；向量结构和预期行为不变。
+
+### 升级说明
+
+三个 Foundation 包须一起精确锁定到 0.19.2。本补丁不增加 Contracts 能力，不改变 Schema 身份、since 0.19.0 或 candidate 成熟度。
+<!-- release-skill:changelog:end version=0.19.2 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.19.1 locale=zh-CN baseline=sha256:93146481c209fc816aa653ea477cbdad9a24882d4cfb679c6777b2ab34fb6600 -->
 ## [0.19.1] - 2026-09-08
 

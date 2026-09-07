@@ -4,23 +4,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.19.1 -->
+<!-- release-skill:release-version: 0.19.2 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.17.0).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.19.1** (2026-09-08)
+**0.19.2** (2026-09-08)
 
-Contracts 0.19.1 links each mechanism-batch result response to its exit code without changing the 1.17.0 specification coordinate, Schema identity, since 0.19.0, or candidate maturity.
+Contracts 0.19.2 aligns its package and exact consumer-vector release coordinates with the Foundation Adoption Review distribution patch. The 1.17.0 specification, public APIs, Schema, capability catalog, and mechanism behavior are unchanged.
 
-**Fixed**
+**Changed**
 
-- Requires exit code 0 to carry exactly a text response with one string field and exit code 2 to carry the existing closed error envelope.
-- Preserves existing JSON error data, including non-string messages and non-object details, so valid 0.19.0 error projections remain compatible.
+- Aligns the package version, release documentation, and existing consumer-vector version bindings with Foundation 0.19.2 without changing vector structure or expected behavior.
 
 **Upgrade Notes**
 
-Pin all three Foundation packages to exactly 0.19.1. Consumers that validate batch results can now reject malformed responses and exit-code/response mismatches. Candidate contracts still require re-verification after an upgrade.
+Pin all three Foundation packages to exactly 0.19.2. This patch adds no Contracts capability and does not change Schema identity, since 0.19.0, or candidate maturity.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -35,7 +34,7 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-Version 0.19.1 is the local source candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
+Version 0.19.2 is the local source candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -43,13 +42,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.19.1.tgz" "$pack_dir/skill-family-harness-node-0.19.1.tgz" "$pack_dir/skill-family-engineering-kit-0.19.1.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.19.2.tgz" "$pack_dir/skill-family-harness-node-0.19.2.tgz" "$pack_dir/skill-family-engineering-kit-0.19.2.tgz")
 ```
 
 After publication, use the registry coordinate:
 
 ```sh
-npm install skill-family-contracts@0.19.1
+npm install skill-family-contracts@0.19.2
 npm info skill-family-contracts --help
 ```
 
@@ -358,4 +357,4 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 Three new candidate schemas describe plugin requests, plugin results and complete tree observations. Installation, discovery, invocation and payload comparison remain separate; raw tree content is private.
 
-Version 0.19.1 is the local source candidate. Remote availability must be established by the corresponding release-skill post-release evidence. Consume the three locally verified tarballs for candidate checks; a version marker, unit test, or successful install is not complete contract integration, migration completion, or real-host qualification.
+Version 0.19.2 is the local source candidate. Remote availability must be established by the corresponding release-skill post-release evidence. Consume the three locally verified tarballs for candidate checks; a version marker, unit test, or successful install is not complete contract integration, migration completion, or real-host qualification.

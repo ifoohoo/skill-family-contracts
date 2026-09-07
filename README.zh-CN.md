@@ -5,23 +5,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.19.1 -->
+<!-- release-skill:release-version: 0.19.2 -->
 
 机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.17.0）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.19.1** (2026-09-08)
+**0.19.2** (2026-09-08)
 
-Contracts 0.19.1 按每项退出码约束机制批量结果的响应形状。Contracts 规格坐标 1.17.0、Schema 身份、since 0.19.0 与 candidate 成熟度保持不变。
+Contracts 0.19.2 将包版本和消费者向量的精确发布坐标与 Foundation Adoption Review 分发补丁对齐。Contracts 规格仍为 1.17.0，公开 API、Schema、能力目录和机制行为均不变。
 
-**修复**
+**变更**
 
-- 退出码 0 只接受含一个字符串字段的文本响应，退出码 2 继续使用既有闭合错误封套。
-- 保留既有 JSON 错误数据，包括非字符串 message 与非对象 details，确保 0.19.0 的有效错误投影继续兼容。
+- 包版本、发布说明和既有消费者向量的版本绑定与 Foundation 0.19.2 数值对齐；向量结构和预期行为不变。
 
 **升级说明**
 
-三个 Foundation 包须一起精确锁定到 0.19.1。消费者可用结果 Schema 拒绝畸形响应及退出码与响应体矛盾。候选合同升级后仍须重新验证。
+三个 Foundation 包须一起精确锁定到 0.19.2。本补丁不增加 Contracts 能力，不改变 Schema 身份、since 0.19.0 或 candidate 成熟度。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -36,7 +35,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-0.19.1 是本地源码候选。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
+0.19.2 是本地源码候选。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -44,13 +43,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.19.1.tgz" "$pack_dir/skill-family-harness-node-0.19.1.tgz" "$pack_dir/skill-family-engineering-kit-0.19.1.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.19.2.tgz" "$pack_dir/skill-family-harness-node-0.19.2.tgz" "$pack_dir/skill-family-engineering-kit-0.19.2.tgz")
 ```
 
 发布后再使用 registry 坐标：
 
 ```sh
-npm install skill-family-contracts@0.19.1
+npm install skill-family-contracts@0.19.2
 npm info skill-family-contracts --help
 ```
 
@@ -353,4 +352,4 @@ import {
 
 完整插件请求、结果与完整树观察使用三个新增候选 Schema。安装、发现、调用与载荷比较分别表达；原始树内容属于私有数据。
 
-0.19.1 是本地源码候选，远端可用性须由对应的 release-skill 发布后证据证明。候选检查使用本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。
+0.19.2 是本地源码候选，远端可用性须由对应的 release-skill 发布后证据证明。候选检查使用本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。

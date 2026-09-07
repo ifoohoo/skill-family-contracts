@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.19.2 locale=en baseline=sha256:e6cfa40fdaf1a1535a31d03387af737d156e82a34d6b6b00f82d4a18fd0b590e -->
+## [0.19.2] - 2026-09-08
+
+Contracts 0.19.2 aligns its package and exact consumer-vector release coordinates with the Foundation Adoption Review distribution patch. The 1.17.0 specification, public APIs, Schema, capability catalog, and mechanism behavior are unchanged.
+
+### Changed
+
+- Aligns the package version, release documentation, and existing consumer-vector version bindings with Foundation 0.19.2 without changing vector structure or expected behavior.
+
+### Upgrade Notes
+
+Pin all three Foundation packages to exactly 0.19.2. This patch adds no Contracts capability and does not change Schema identity, since 0.19.0, or candidate maturity.
+<!-- release-skill:changelog:end version=0.19.2 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.19.1 locale=en baseline=sha256:e8b26ad4a1cf7be023119651612546759291de7f71db36dc8b7ddc6fd0a57a3f -->
 ## [0.19.1] - 2026-09-08
 
