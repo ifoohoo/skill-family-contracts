@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.19.3 locale=en baseline=sha256:bcbbdb46fa1964883f6ac68859ae5769bd6acab5ab6c2f6e638efcc93bfb7f85 -->
+## [0.19.3] - 2026-09-08
+
+Contracts 0.19.3 aligns its package and release documentation with the Foundation Adoption Review Qoder distribution patch. The 1.17.0 specification, public APIs, Schema, capability catalog, and mechanism behavior are unchanged.
+
+### Changed
+
+- Aligns the package version, release documentation, and verified public package projection with Foundation 0.19.3 without changing contract structure or expected behavior.
+
+### Upgrade Notes
+
+Pin all three Foundation packages to exactly 0.19.3. This patch adds no Contracts capability and does not change Schema identity, since values, or candidate maturity.
+<!-- release-skill:changelog:end version=0.19.3 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.19.2 locale=en baseline=sha256:e6cfa40fdaf1a1535a31d03387af737d156e82a34d6b6b00f82d4a18fd0b590e -->
 ## [0.19.2] - 2026-09-08
 

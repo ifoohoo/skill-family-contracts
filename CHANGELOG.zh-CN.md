@@ -1,5 +1,20 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.19.3 locale=zh-CN baseline=sha256:b5bc5df9963909476057566d265d87e000219b5923f84643aa3093ee7a3bfd84 -->
+## [0.19.3] - 2026-09-08
+
+Contracts 0.19.3 将包版本和发布文档与 Foundation Adoption Review 的 Qoder 分发补丁对齐。Contracts 规格仍为 1.17.0，公开 API、Schema、能力目录和机制行为均不变。
+
+### 变更
+
+- 包版本、发布文档和经验证的公开 package.json 投影与 Foundation 0.19.3 数值对齐；契约结构和预期行为不变。
+
+### 升级说明
+
+三个 Foundation 包须一起精确锁定到 0.19.3。本补丁不增加 Contracts 能力，不改变 Schema 身份、since 字段或 candidate 成熟度。
+<!-- release-skill:changelog:end version=0.19.3 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.19.2 locale=zh-CN baseline=sha256:e0dfc11312babaf97d2208d6a8487985676ef9d80dfa8e614795182eb9ae14b5 -->
 ## [0.19.2] - 2026-09-08
 
