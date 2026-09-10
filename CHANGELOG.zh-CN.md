@@ -1,5 +1,21 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.20.0 locale=zh-CN baseline=sha256:4b7c9cd8f0a512ea70add52ccc2cfa80aa4d8f40ea6717b240d69753369eff25 -->
+## [0.20.0] - 2026-09-10
+
+Contracts 0.20.0 发布 1.18.0 规格，在保持 46 类顶层合同不变的前提下增加 Cursor 宿主与固定驱动的唯一配对。
+
+### 变更
+
+- 在封闭的宿主描述符验证合同中，只允许 `cursor` 绑定 `cursor-agent-print-v1`。
+- Contracts 规格从 1.17.0 前移到 1.18.0，不增加顶层对象类别、mandatory rule、错误码或 Kernel 协议。
+
+### 升级说明
+
+三个 Foundation 包须一起精确锁定到 0.20.0。Cursor 继续保持 manual/developer-preview；本版本不表示 Cursor Marketplace 已上架，也不承诺模型自动选择 Skill。
+<!-- release-skill:changelog:end version=0.20.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.19.3 locale=zh-CN baseline=sha256:b5bc5df9963909476057566d265d87e000219b5923f84643aa3093ee7a3bfd84 -->
 ## [0.19.3] - 2026-09-08
 

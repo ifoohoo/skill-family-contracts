@@ -5,22 +5,23 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.19.3 -->
+<!-- release-skill:release-version: 0.20.0 -->
 
-机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.17.0）。
+机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.18.0）。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.19.3** (2026-09-08)
+**0.20.0** (2026-09-10)
 
-Contracts 0.19.3 将包版本和发布文档与 Foundation Adoption Review 的 Qoder 分发补丁对齐。Contracts 规格仍为 1.17.0，公开 API、Schema、能力目录和机制行为均不变。
+Contracts 0.20.0 发布 1.18.0 规格，在保持 46 类顶层合同不变的前提下增加 Cursor 宿主与固定驱动的唯一配对。
 
 **变更**
 
-- 包版本、发布文档和经验证的公开 package.json 投影与 Foundation 0.19.3 数值对齐；契约结构和预期行为不变。
+- 在封闭的宿主描述符验证合同中，只允许 `cursor` 绑定 `cursor-agent-print-v1`。
+- Contracts 规格从 1.17.0 前移到 1.18.0，不增加顶层对象类别、mandatory rule、错误码或 Kernel 协议。
 
 **升级说明**
 
-三个 Foundation 包须一起精确锁定到 0.19.3。本补丁不增加 Contracts 能力，不改变 Schema 身份、since 字段或 candidate 成熟度。
+三个 Foundation 包须一起精确锁定到 0.20.0。Cursor 继续保持 manual/developer-preview；本版本不表示 Cursor Marketplace 已上架，也不承诺模型自动选择 Skill。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -35,7 +36,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-0.19.3 是本地源码候选。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
+0.20.0 是本地源码候选。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -43,13 +44,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.19.3.tgz" "$pack_dir/skill-family-harness-node-0.19.3.tgz" "$pack_dir/skill-family-engineering-kit-0.19.3.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.20.0.tgz" "$pack_dir/skill-family-harness-node-0.20.0.tgz" "$pack_dir/skill-family-engineering-kit-0.20.0.tgz")
 ```
 
 发布后再使用 registry 坐标：
 
 ```sh
-npm install skill-family-contracts@0.19.3
+npm install skill-family-contracts@0.20.0
 npm info skill-family-contracts --help
 ```
 
@@ -269,7 +270,7 @@ import {
 
 以上导入列出了本包稳定公共面；`validateDocument` 与 `runChecks` 是最常用入口。`validateDocument(document, { schemaId | schema, dialect, policy })` 返回 `{ valid, errorCode, errors, data }`；`runChecks({ rules?, registry?, fixtures?, loadSchema? })` 返回 `{ ok, mandatoryCount, budget, results }`；`registerSchema` / `registerProtocol` 返回新登记表副本，重复项分别以 `SFC1003` / `SFC1004` 抛出 `ContractsError`。
 
-`detectDialect(schema)` 在声明缺失或未知时返回 `null`，支持的结果为 `draft-07` 或 `2020-12`。不支持的方言由 `compileSchema` 抛出 `SFC1006`，由 `validateDocument` 以 `errorCode: "SFC1006"` 返回。登记表查询未命中返回 `null`。随包登记表的 `schemaVersion=1`、`contractsVersion=1.17.0`、46 类 Schema 与 1 个 Kernel Protocol 以机器源为准；注册函数返回副本且不修改输入，消费方向量身份或精确版本不匹配时报 `SFC1013`。
+`detectDialect(schema)` 在声明缺失或未知时返回 `null`，支持的结果为 `draft-07` 或 `2020-12`。不支持的方言由 `compileSchema` 抛出 `SFC1006`，由 `validateDocument` 以 `errorCode: "SFC1006"` 返回。登记表查询未命中返回 `null`。随包登记表的 `schemaVersion=1`、`contractsVersion=1.18.0`、46 类 Schema 与 1 个 Kernel Protocol 以机器源为准；注册函数返回副本且不修改输入，消费方向量身份或精确版本不匹配时报 `SFC1013`。
 
 ## 安全边界与非目标
 
@@ -352,4 +353,4 @@ import {
 
 完整插件请求、结果与完整树观察使用三个新增候选 Schema。安装、发现、调用与载荷比较分别表达；原始树内容属于私有数据。
 
-0.19.3 是本地源码候选，远端可用性须由对应的 release-skill 发布后证据证明。候选检查使用本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。
+0.20.0 是本地源码候选，远端可用性须由对应的 release-skill 发布后证据证明。候选检查使用本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。

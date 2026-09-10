@@ -1,5 +1,21 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.20.0 locale=en baseline=sha256:d969d2a83078d7342dfbaf048b28e7d25e6717a5c59790cf85e6d70aa46e38b9 -->
+## [0.20.0] - 2026-09-10
+
+Contracts 0.20.0 publishes the 1.18.0 specification and admits the single Cursor host-to-driver pairing while preserving the 46-object contract surface.
+
+### Changed
+
+- Allows `cursor` to bind only to `cursor-agent-print-v1` in the closed host descriptor verification contract.
+- Advances the Contracts specification from 1.17.0 to 1.18.0 without adding top-level object classes, mandatory rules, error codes, or Kernel protocols.
+
+### Upgrade Notes
+
+Pin all three Foundation packages to exactly 0.20.0. Cursor remains manual/developer-preview; this release does not imply Cursor Marketplace availability or automatic Skill selection.
+<!-- release-skill:changelog:end version=0.20.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.19.3 locale=en baseline=sha256:bcbbdb46fa1964883f6ac68859ae5769bd6acab5ab6c2f6e638efcc93bfb7f85 -->
 ## [0.19.3] - 2026-09-08
 

@@ -1,0 +1,17 @@
+version: 0.20.0
+date: 2026-09-10
+locales:
+  en:
+    summary: Contracts 0.20.0 publishes the 1.18.0 specification and admits the single Cursor host-to-driver pairing while preserving the 46-object contract surface.
+    changes:
+      changed:
+        - Allows `cursor` to bind only to `cursor-agent-print-v1` in the closed host descriptor verification contract.
+        - Advances the Contracts specification from 1.17.0 to 1.18.0 without adding top-level object classes, mandatory rules, error codes, or Kernel protocols.
+    upgradeNotes: Pin all three Foundation packages to exactly 0.20.0. Cursor remains manual/developer-preview; this release does not imply Cursor Marketplace availability or automatic Skill selection.
+  zh-CN:
+    summary: Contracts 0.20.0 发布 1.18.0 规格，在保持 46 类顶层合同不变的前提下增加 Cursor 宿主与固定驱动的唯一配对。
+    changes:
+      changed:
+        - 在封闭的宿主描述符验证合同中，只允许 `cursor` 绑定 `cursor-agent-print-v1`。
+        - Contracts 规格从 1.17.0 前移到 1.18.0，不增加顶层对象类别、mandatory rule、错误码或 Kernel 协议。
+    upgradeNotes: 三个 Foundation 包须一起精确锁定到 0.20.0。Cursor 继续保持 manual/developer-preview；本版本不表示 Cursor Marketplace 已上架，也不承诺模型自动选择 Skill。

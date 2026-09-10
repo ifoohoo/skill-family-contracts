@@ -4,22 +4,23 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.19.3 -->
+<!-- release-skill:release-version: 0.20.0 -->
 
-The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.17.0).
+The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.18.0).
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.19.3** (2026-09-08)
+**0.20.0** (2026-09-10)
 
-Contracts 0.19.3 aligns its package and release documentation with the Foundation Adoption Review Qoder distribution patch. The 1.17.0 specification, public APIs, Schema, capability catalog, and mechanism behavior are unchanged.
+Contracts 0.20.0 publishes the 1.18.0 specification and admits the single Cursor host-to-driver pairing while preserving the 46-object contract surface.
 
 **Changed**
 
-- Aligns the package version, release documentation, and verified public package projection with Foundation 0.19.3 without changing contract structure or expected behavior.
+- Allows `cursor` to bind only to `cursor-agent-print-v1` in the closed host descriptor verification contract.
+- Advances the Contracts specification from 1.17.0 to 1.18.0 without adding top-level object classes, mandatory rules, error codes, or Kernel protocols.
 
 **Upgrade Notes**
 
-Pin all three Foundation packages to exactly 0.19.3. This patch adds no Contracts capability and does not change Schema identity, since values, or candidate maturity.
+Pin all three Foundation packages to exactly 0.20.0. Cursor remains manual/developer-preview; this release does not imply Cursor Marketplace availability or automatic Skill selection.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -34,7 +35,7 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-Version 0.19.3 is the local source candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
+Version 0.20.0 is the local source candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -42,13 +43,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.19.3.tgz" "$pack_dir/skill-family-harness-node-0.19.3.tgz" "$pack_dir/skill-family-engineering-kit-0.19.3.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.20.0.tgz" "$pack_dir/skill-family-harness-node-0.20.0.tgz" "$pack_dir/skill-family-engineering-kit-0.20.0.tgz")
 ```
 
 After publication, use the registry coordinate:
 
 ```sh
-npm install skill-family-contracts@0.19.3
+npm install skill-family-contracts@0.20.0
 npm info skill-family-contracts --help
 ```
 
@@ -274,7 +275,7 @@ import {
 
 The imports above list the stable public surface of this package; `validateDocument` and `runChecks` are the most commonly used entry points. `validateDocument(document, { schemaId | schema, dialect, policy })` returns `{ valid, errorCode, errors, data }`; `runChecks({ rules?, registry?, fixtures?, loadSchema? })` returns `{ ok, mandatoryCount, budget, results }`; `registerSchema` / `registerProtocol` return a new registry copy, throwing `ContractsError` with `SFC1003` / `SFC1004` respectively on duplicates.
 
-`detectDialect(schema)` returns `draft-07`, `2020-12`, or `null` when the declaration is absent or unknown. `compileSchema` throws `SFC1006` for an unsupported dialect; `validateDocument` reports the same condition as `errorCode: "SFC1006"`. Registry lookup functions return `null` on a miss. The bundled registry is `schemaVersion=1`, `contractsVersion=1.17.0`, with 46 registered Schemas and one Kernel Protocol. Registration returns a copied registry and leaves the input unchanged; consumer vector identity or exact-version mismatches fail with `SFC1013`.
+`detectDialect(schema)` returns `draft-07`, `2020-12`, or `null` when the declaration is absent or unknown. `compileSchema` throws `SFC1006` for an unsupported dialect; `validateDocument` reports the same condition as `errorCode: "SFC1006"`. Registry lookup functions return `null` on a miss. The bundled registry is `schemaVersion=1`, `contractsVersion=1.18.0`, with 46 registered Schemas and one Kernel Protocol. Registration returns a copied registry and leaves the input unchanged; consumer vector identity or exact-version mismatches fail with `SFC1013`.
 
 ## Security Boundaries and Non-Goals
 
@@ -357,4 +358,4 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 Three new candidate schemas describe plugin requests, plugin results and complete tree observations. Installation, discovery, invocation and payload comparison remain separate; raw tree content is private.
 
-Version 0.19.3 is the local source candidate. Remote availability must be established by the corresponding release-skill post-release evidence. Consume the three locally verified tarballs for candidate checks; a version marker, unit test, or successful install is not complete contract integration, migration completion, or real-host qualification.
+Version 0.20.0 is the local source candidate. Remote availability must be established by the corresponding release-skill post-release evidence. Consume the three locally verified tarballs for candidate checks; a version marker, unit test, or successful install is not complete contract integration, migration completion, or real-host qualification.
