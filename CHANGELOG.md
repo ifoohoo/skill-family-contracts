@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.21.0 locale=en baseline=sha256:e9d7d56cfc11f72a157f15fb5e419a2a8ded5bcebeaa50c440e4a8ba47e19eb3 -->
+## [0.21.0] - 2026-09-11
+
+Contracts 0.21.0 aligns its package version with the lockstep Foundation release and reuses the published 1.18.0 specification without adding a contract object or protocol.
+
+### Changed
+
+- Aligns package identity and published projections with Foundation 0.21.0 while keeping the 46-object contract surface, mandatory rules, error codes, and Kernel protocols unchanged.
+
+### Upgrade Notes
+
+Pin all three Foundation packages to exactly 0.21.0. This release reuses Contracts 1.18.0 and does not add a request, result, Schema, or protocol for host-verification invocation preparation.
+<!-- release-skill:changelog:end version=0.21.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.20.0 locale=en baseline=sha256:d969d2a83078d7342dfbaf048b28e7d25e6717a5c59790cf85e6d70aa46e38b9 -->
 ## [0.20.0] - 2026-09-10
 

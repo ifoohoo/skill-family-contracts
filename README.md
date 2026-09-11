@@ -4,23 +4,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.20.0 -->
+<!-- release-skill:release-version: 0.21.0 -->
 
-The single authoritative package of machine-executable engineering structure and mechanism protocols (source candidate: Contracts 1.18.0).
+The single authoritative package of machine-executable engineering structure and mechanism protocols. The 0.21.0 source candidate reuses the Contracts 1.18.0 specification published with Foundation 0.20.0.
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.20.0** (2026-09-10)
+**0.21.0** (2026-09-11)
 
-Contracts 0.20.0 publishes the 1.18.0 specification and admits the single Cursor host-to-driver pairing while preserving the 46-object contract surface.
+Contracts 0.21.0 aligns its package version with the lockstep Foundation release and reuses the published 1.18.0 specification without adding a contract object or protocol.
 
 **Changed**
 
-- Allows `cursor` to bind only to `cursor-agent-print-v1` in the closed host descriptor verification contract.
-- Advances the Contracts specification from 1.17.0 to 1.18.0 without adding top-level object classes, mandatory rules, error codes, or Kernel protocols.
+- Aligns package identity and published projections with Foundation 0.21.0 while keeping the 46-object contract surface, mandatory rules, error codes, and Kernel protocols unchanged.
 
 **Upgrade Notes**
 
-Pin all three Foundation packages to exactly 0.20.0. Cursor remains manual/developer-preview; this release does not imply Cursor Marketplace availability or automatic Skill selection.
+Pin all three Foundation packages to exactly 0.21.0. This release reuses Contracts 1.18.0 and does not add a request, result, Schema, or protocol for host-verification invocation preparation.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Problem It Solves
@@ -35,7 +34,7 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-Version 0.20.0 is the local source candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
+Version 0.21.0 is the local source candidate. Build all three tarballs into one temporary directory and install those exact files for a candidate check:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -43,13 +42,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.20.0.tgz" "$pack_dir/skill-family-harness-node-0.20.0.tgz" "$pack_dir/skill-family-engineering-kit-0.20.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.21.0.tgz" "$pack_dir/skill-family-harness-node-0.21.0.tgz" "$pack_dir/skill-family-engineering-kit-0.21.0.tgz")
 ```
 
 After publication, use the registry coordinate:
 
 ```sh
-npm install skill-family-contracts@0.20.0
+npm install skill-family-contracts@0.21.0
 npm info skill-family-contracts --help
 ```
 
@@ -358,4 +357,4 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 Three new candidate schemas describe plugin requests, plugin results and complete tree observations. Installation, discovery, invocation and payload comparison remain separate; raw tree content is private.
 
-Version 0.20.0 is the local source candidate. Remote availability must be established by the corresponding release-skill post-release evidence. Consume the three locally verified tarballs for candidate checks; a version marker, unit test, or successful install is not complete contract integration, migration completion, or real-host qualification.
+Version 0.21.0 is the local source candidate. Remote availability must be established by the corresponding release-skill post-release evidence. Consume the three locally verified tarballs for candidate checks; a version marker, unit test, or successful install is not complete contract integration, migration completion, or real-host qualification.

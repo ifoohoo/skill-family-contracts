@@ -1,5 +1,20 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.21.0 locale=zh-CN baseline=sha256:b60649b5102e7707385b3143177cfa7735d80d464ccffb06a42b09cb206244ee -->
+## [0.21.0] - 2026-09-11
+
+Contracts 0.21.0 与 Foundation 锁步版本对齐，沿用已发布的 1.18.0 规格，不增加合同对象或协议。
+
+### 变更
+
+- 包身份和公开投影与 Foundation 0.21.0 对齐；46 类顶层对象、mandatory rule、错误码和 Kernel 协议保持不变。
+
+### 升级说明
+
+三个 Foundation 包须一起精确锁定到 0.21.0。本版本沿用 Contracts 1.18.0，不为宿主验证调用准备新增 request、result、Schema 或协议。
+<!-- release-skill:changelog:end version=0.21.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.20.0 locale=zh-CN baseline=sha256:4b7c9cd8f0a512ea70add52ccc2cfa80aa4d8f40ea6717b240d69753369eff25 -->
 ## [0.20.0] - 2026-09-10
 

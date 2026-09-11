@@ -1,0 +1,15 @@
+version: 0.21.0
+date: 2026-09-11
+locales:
+  en:
+    summary: Contracts 0.21.0 aligns its package version with the lockstep Foundation release and reuses the published 1.18.0 specification without adding a contract object or protocol.
+    changes:
+      changed:
+        - Aligns package identity and published projections with Foundation 0.21.0 while keeping the 46-object contract surface, mandatory rules, error codes, and Kernel protocols unchanged.
+    upgradeNotes: Pin all three Foundation packages to exactly 0.21.0. This release reuses Contracts 1.18.0 and does not add a request, result, Schema, or protocol for host-verification invocation preparation.
+  zh-CN:
+    summary: Contracts 0.21.0 与 Foundation 锁步版本对齐，沿用已发布的 1.18.0 规格，不增加合同对象或协议。
+    changes:
+      changed:
+        - 包身份和公开投影与 Foundation 0.21.0 对齐；46 类顶层对象、mandatory rule、错误码和 Kernel 协议保持不变。
+    upgradeNotes: 三个 Foundation 包须一起精确锁定到 0.21.0。本版本沿用 Contracts 1.18.0，不为宿主验证调用准备新增 request、result、Schema 或协议。

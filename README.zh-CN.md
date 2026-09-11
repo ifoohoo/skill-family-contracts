@@ -5,23 +5,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.20.0 -->
+<!-- release-skill:release-version: 0.21.0 -->
 
-机器可执行工程结构和机制协议的唯一权威包（源码候选：Contracts 1.18.0）。
+机器可执行工程结构和机制协议的唯一权威包。0.21.0 源码候选沿用已随 Foundation 0.20.0 发布的 Contracts 1.18.0 规格。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.20.0** (2026-09-10)
+**0.21.0** (2026-09-11)
 
-Contracts 0.20.0 发布 1.18.0 规格，在保持 46 类顶层合同不变的前提下增加 Cursor 宿主与固定驱动的唯一配对。
+Contracts 0.21.0 与 Foundation 锁步版本对齐，沿用已发布的 1.18.0 规格，不增加合同对象或协议。
 
 **变更**
 
-- 在封闭的宿主描述符验证合同中，只允许 `cursor` 绑定 `cursor-agent-print-v1`。
-- Contracts 规格从 1.17.0 前移到 1.18.0，不增加顶层对象类别、mandatory rule、错误码或 Kernel 协议。
+- 包身份和公开投影与 Foundation 0.21.0 对齐；46 类顶层对象、mandatory rule、错误码和 Kernel 协议保持不变。
 
 **升级说明**
 
-三个 Foundation 包须一起精确锁定到 0.20.0。Cursor 继续保持 manual/developer-preview；本版本不表示 Cursor Marketplace 已上架，也不承诺模型自动选择 Skill。
+三个 Foundation 包须一起精确锁定到 0.21.0。本版本沿用 Contracts 1.18.0，不为宿主验证调用准备新增 request、result、Schema 或协议。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 解决的问题
@@ -36,7 +35,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-0.20.0 是本地源码候选。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
+0.21.0 是本地源码候选。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -44,13 +43,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.20.0.tgz" "$pack_dir/skill-family-harness-node-0.20.0.tgz" "$pack_dir/skill-family-engineering-kit-0.20.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.21.0.tgz" "$pack_dir/skill-family-harness-node-0.21.0.tgz" "$pack_dir/skill-family-engineering-kit-0.21.0.tgz")
 ```
 
 发布后再使用 registry 坐标：
 
 ```sh
-npm install skill-family-contracts@0.20.0
+npm install skill-family-contracts@0.21.0
 npm info skill-family-contracts --help
 ```
 
@@ -353,4 +352,4 @@ import {
 
 完整插件请求、结果与完整树观察使用三个新增候选 Schema。安装、发现、调用与载荷比较分别表达；原始树内容属于私有数据。
 
-0.20.0 是本地源码候选，远端可用性须由对应的 release-skill 发布后证据证明。候选检查使用本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。
+0.21.0 是本地源码候选，远端可用性须由对应的 release-skill 发布后证据证明。候选检查使用本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。
