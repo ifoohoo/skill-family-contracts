@@ -5,23 +5,39 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.21.0 -->
+<!-- release-skill:release-version: 0.22.0 -->
 
-机器可执行工程结构和机制协议的唯一权威包。0.21.0 源码候选沿用已随 Foundation 0.20.0 发布的 Contracts 1.18.0 规格。
+机器可执行工程结构和机制协议的唯一权威包。0.22.0 携带 Contracts 1.20.0 规格与 53 类顶层对象。此前已发布的 0.21.0 仍是 Contracts 1.18.0 的 46 类对象，不能把 1.20.0 表面归入该制品。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.21.0** (2026-09-11)
+**0.22.0** (2026-09-18)
 
-Contracts 0.21.0 与 Foundation 锁步版本对齐，沿用已发布的 1.18.0 规格，不增加合同对象或协议。
+Contracts 0.22.0 把规格从 1.18.0 前移到 1.20.0，顶层合同对象从 46 类增加到 53 类，新增多路径文件集合应用与恢复，以及治理采用的专业结论对象。
+
+**新增**
+
+- 新增 file-set-apply-request、file-set-recovery-request、file-set-prune-request、file-set-result、file-set-event-payload、state-store-recovery-observation 六个文件集合对象，并配套正例、负例和方言不支持 fixture。
+- 新增 professional-conclusion 对象及配套 fixture，使调用方持有的结论可以只按结构交换。
+- 扩展 project-manifest 合同，允许工程声明引用已登记的版本来源与物理入口，而不是执行目标。
 
 **变更**
 
-- 包身份和公开投影与 Foundation 0.21.0 对齐；46 类顶层对象、mandatory rule、错误码和 Kernel 协议保持不变。
+- Contracts 规格从 1.18.0 前移到 1.20.0；九条 mandatory rule、错误码区间和 Kernel 协议登记保持不变。
 
 **升级说明**
 
-三个 Foundation 包须一起精确锁定到 0.21.0。本版本沿用 Contracts 1.18.0，不为宿主验证调用准备新增 request、result、Schema 或协议。
+三个 Foundation 包须一起精确锁定到 0.22.0。新增对象仍登记为 `candidate`；结构校验不授予业务语义、持久恢复保证或真实宿主资格。业务计划、候选重新派生和实际消费验证仍由调用方负责。
 <!-- release-skill:managed:end id=latest-release -->
+
+## 本地未发布合同状态
+
+当前工作树把合同规格推进到 1.20.0。它登记 `professional-conclusion` Schema，并在
+`project-manifest` 中增加可选的声明式工程元数据，用于列出发行单元版本和物理入口；随后登记
+多路径普通文件应用与恢复族 —— `file-set-apply-request`、`file-set-recovery-request`、
+`file-set-prune-request`、`file-set-result`、`file-set-event-payload` 与
+`state-store-recovery-observation`。Contracts 只校验结构；专业 code 与详情仍归提供方，显式
+路径传递、根内读取、接受决定以及 `validate` 内部的领域判定仍归调用方，文件集合机制归 Harness。
+这些字节尚无已发布包坐标。
 
 ## 解决的问题
 
@@ -29,13 +45,13 @@ Contracts 0.21.0 与 Foundation 锁步版本对齐，沿用已发布的 1.18.0 �
 
 ## 核心心智模型
 
-Contracts 是「定义与登记」层，不是「执行」层。它拥有 46 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、文件系统绑定、固定集合发布、同级适配器验证、可执行身份、技能族目录验证和 engineering-baseline 对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
+Contracts 是「定义与登记」层，不是「执行」层。当前本地源码拥有 53 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、文件系统绑定、固定集合发布、多路径文件集合应用与恢复、同级适配器验证、候选真实宿主验证、可执行身份、技能族目录验证、engineering-baseline 与 professional-conclusion 对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
 
 Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.json`），按方言路由到对应 Ajv 类；不实现任何手写 Schema 子集解释器。
 
 ## 安装和最小示例
 
-0.21.0 是本地源码候选。候选验证先把三个包分别打入同一个临时目录，再安装这三个精确 tarball：
+下面的命令为本地接线验证构建工作树 tarball。它们不是已发布的 0.22.0 制品，也不会给 1.20.0 合同另行授予 registry 坐标：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -43,13 +59,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.21.0.tgz" "$pack_dir/skill-family-harness-node-0.21.0.tgz" "$pack_dir/skill-family-engineering-kit-0.21.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.22.0.tgz" "$pack_dir/skill-family-harness-node-0.22.0.tgz" "$pack_dir/skill-family-engineering-kit-0.22.0.tgz")
 ```
 
 发布后再使用 registry 坐标：
 
 ```sh
-npm install skill-family-contracts@0.21.0
+npm install skill-family-contracts@0.22.0
 npm info skill-family-contracts --help
 ```
 
@@ -187,6 +203,13 @@ import {
 | `skill-family-directory-verification-request` | `https://contracts.skill-family.example/v1/skill-family-directory-verification-request.json` | `src/schemas/skill-family-directory-verification-request.schema.json` |
 | `skill-family-directory-verification-result` | `https://contracts.skill-family.example/v1/skill-family-directory-verification-result.json` | `src/schemas/skill-family-directory-verification-result.schema.json` |
 | `engineering-baseline` | `https://contracts.skill-family.example/v1/engineering-baseline.json` | `src/schemas/engineering-baseline.schema.json` |
+| `professional-conclusion` | `https://contracts.skill-family.example/v1/professional-conclusion.json` | `src/schemas/professional-conclusion.schema.json` |
+| `file-set-apply-request` | `https://contracts.skill-family.example/v1/file-set-apply-request.json` | `src/schemas/file-set-apply-request.schema.json` |
+| `file-set-recovery-request` | `https://contracts.skill-family.example/v1/file-set-recovery-request.json` | `src/schemas/file-set-recovery-request.schema.json` |
+| `file-set-prune-request` | `https://contracts.skill-family.example/v1/file-set-prune-request.json` | `src/schemas/file-set-prune-request.schema.json` |
+| `file-set-result` | `https://contracts.skill-family.example/v1/file-set-result.json` | `src/schemas/file-set-result.schema.json` |
+| `file-set-event-payload` | `https://contracts.skill-family.example/v1/file-set-event-payload.json` | `src/schemas/file-set-event-payload.schema.json` |
+| `state-store-recovery-observation` | `https://contracts.skill-family.example/v1/state-store-recovery-observation.json` | `src/schemas/state-store-recovery-observation.schema.json` |
 
 plugin-verification 合同保留既有 `install-only` 与 `install-and-invoke` 目标，并增加 `native-lifecycle` 分支。原生命周期结果恰好包含十二个有序语义阶段。Contracts 只检查闭合结构、阶段顺序、停止传播，以及后续 `not-performed` 阶段的 `commands` 与 `trees` 为空；不定义跨宿主统一命令计划，不解释厂商输出，不暴露 `hostState`，也不拥有 Qoder 与 WorkBuddy 的 Oracle。
 
@@ -269,7 +292,7 @@ import {
 
 以上导入列出了本包稳定公共面；`validateDocument` 与 `runChecks` 是最常用入口。`validateDocument(document, { schemaId | schema, dialect, policy })` 返回 `{ valid, errorCode, errors, data }`；`runChecks({ rules?, registry?, fixtures?, loadSchema? })` 返回 `{ ok, mandatoryCount, budget, results }`；`registerSchema` / `registerProtocol` 返回新登记表副本，重复项分别以 `SFC1003` / `SFC1004` 抛出 `ContractsError`。
 
-`detectDialect(schema)` 在声明缺失或未知时返回 `null`，支持的结果为 `draft-07` 或 `2020-12`。不支持的方言由 `compileSchema` 抛出 `SFC1006`，由 `validateDocument` 以 `errorCode: "SFC1006"` 返回。登记表查询未命中返回 `null`。随包登记表的 `schemaVersion=1`、`contractsVersion=1.18.0`、46 类 Schema 与 1 个 Kernel Protocol 以机器源为准；注册函数返回副本且不修改输入，消费方向量身份或精确版本不匹配时报 `SFC1013`。
+`detectDialect(schema)` 在声明缺失或未知时返回 `null`，支持的结果为 `draft-07` 或 `2020-12`。不支持的方言由 `compileSchema` 抛出 `SFC1006`，由 `validateDocument` 以 `errorCode: "SFC1006"` 返回。登记表查询未命中返回 `null`。当前本地登记表的 `schemaVersion=1`、`contractsVersion=1.20.0`、53 类 Schema 与 1 个 Kernel Protocol 以机器源为准；注册函数返回副本且不修改输入，消费方向量身份或精确版本不匹配时报 `SFC1013`。
 
 ## 安全边界与非目标
 
@@ -302,7 +325,7 @@ import {
 
 ### Capability selection
 
-- `foundation.contracts.object-validation`：Ajv 双方言校验已登记的全部 46 类顶层对象。
+- `foundation.contracts.object-validation`：Ajv 双方言校验当前本地合同源码已登记的全部 53 类顶层对象。
 - `foundation.contracts.registry-protocol`：Schema `$id` 与协议名登记查询。
 - `foundation.contracts.kernel-protocol`：operation-request/result 协议。
 - `foundation.contracts.mandatory-checks`：九类强制规则与未解析引用。
@@ -332,7 +355,7 @@ import {
 
 ### Architectural invariants
 
-- 46 类顶层对象集合固定，新增需 ADR；Contracts 1.10.0 增加同级适配器验证合同并扩展已登记宿主合同，不新增错误码，错误码冻结不漂移。
+- 当前本地源码的 53 类顶层对象集合固定，新增需 ADR，错误码冻结不漂移。已发布的 0.21.0 包仍停留在 Contracts 1.18.0 的 46 类对象表面。
 - 校验器仅 Ajv 8.20.0（精确 pin），不接受其他实现。
 
 ### Route elsewhere when
@@ -352,4 +375,4 @@ import {
 
 完整插件请求、结果与完整树观察使用三个新增候选 Schema。安装、发现、调用与载荷比较分别表达；原始树内容属于私有数据。
 
-0.21.0 是本地源码候选，远端可用性须由对应的 release-skill 发布后证据证明。候选检查使用本地已验证的三包 tarball；版本标记、单元测试或安装成功都不等于契约接入完成、迁移完成或真实宿主资格。
+Contracts 1.20.0 随 0.22.0 包发布。远端可用性须由对应的 release-skill 发布后证据证明，已发布的 0.21.0 保持 Contracts 1.18.0 的 46 类对象表面。本地测试或工作树 tarball 不等于契约接入完成、迁移完成或真实宿主资格。

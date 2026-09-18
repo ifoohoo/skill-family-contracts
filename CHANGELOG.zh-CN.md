@@ -1,5 +1,26 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.22.0 locale=zh-CN baseline=sha256:c918a4b76146b5122558cd15977caeb2cca67756ad10f48042e2a3a28c29cc98 -->
+## [0.22.0] - 2026-09-18
+
+Contracts 0.22.0 把规格从 1.18.0 前移到 1.20.0，顶层合同对象从 46 类增加到 53 类，新增多路径文件集合应用与恢复，以及治理采用的专业结论对象。
+
+### 新增
+
+- 新增 file-set-apply-request、file-set-recovery-request、file-set-prune-request、file-set-result、file-set-event-payload、state-store-recovery-observation 六个文件集合对象，并配套正例、负例和方言不支持 fixture。
+- 新增 professional-conclusion 对象及配套 fixture，使调用方持有的结论可以只按结构交换。
+- 扩展 project-manifest 合同，允许工程声明引用已登记的版本来源与物理入口，而不是执行目标。
+
+### 变更
+
+- Contracts 规格从 1.18.0 前移到 1.20.0；九条 mandatory rule、错误码区间和 Kernel 协议登记保持不变。
+
+### 升级说明
+
+三个 Foundation 包须一起精确锁定到 0.22.0。新增对象仍登记为 `candidate`；结构校验不授予业务语义、持久恢复保证或真实宿主资格。业务计划、候选重新派生和实际消费验证仍由调用方负责。
+<!-- release-skill:changelog:end version=0.22.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.21.0 locale=zh-CN baseline=sha256:b60649b5102e7707385b3143177cfa7735d80d464ccffb06a42b09cb206244ee -->
 ## [0.21.0] - 2026-09-11
 

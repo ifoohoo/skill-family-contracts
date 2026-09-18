@@ -1,5 +1,26 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.22.0 locale=en baseline=sha256:c53ff874c075725c33326b2fdcfbe822894d7ff498e8684c7eec9c10fd23bc73 -->
+## [0.22.0] - 2026-09-18
+
+Contracts 0.22.0 advances the specification from 1.18.0 to 1.20.0 and grows the contract surface from 46 to 53 top-level object classes with multi-path file-set application and recovery plus the governance professional-conclusion object.
+
+### Added
+
+- Adds six file-set objects — file-set-apply-request, file-set-recovery-request, file-set-prune-request, file-set-result, file-set-event-payload, and state-store-recovery-observation — with matching positive, negative, and unsupported-dialect fixtures.
+- Adds the professional-conclusion object with matching fixtures so a caller-owned conclusion can be exchanged with structural-only enforcement.
+- Extends the project-manifest contract with an engineering declaration that references a declared version source and physical entry rather than executing the target.
+
+### Changed
+
+- Advances the Contracts specification from 1.18.0 to 1.20.0; the nine mandatory rules, error-code ranges, and the Kernel protocol registration are unchanged.
+
+### Upgrade Notes
+
+Pin all three Foundation packages to exactly 0.22.0. The new objects are registered as `candidate`; structural validation does not grant business semantics, durable recovery guarantees, or real-host qualification. Consumers own their business plan, candidate re-derivation, and actual consumption verification.
+<!-- release-skill:changelog:end version=0.22.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.21.0 locale=en baseline=sha256:e9d7d56cfc11f72a157f15fb5e419a2a8ded5bcebeaa50c440e4a8ba47e19eb3 -->
 ## [0.21.0] - 2026-09-11
 

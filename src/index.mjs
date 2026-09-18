@@ -30,6 +30,9 @@
  * the 1.17.0 coordinate re-records only the version-bearing documents, and the
  * 1.18.0 coordinate admits the Cursor fixed verification tuple in the stable
  * host descriptor while retaining the same forty-six-object surface; the
+ * 1.19.0 coordinate appends the professional-conclusion contract and extends
+ * project-manifest with optional declarative engineering metadata, bringing
+ * the current surface to forty-seven objects; the
  * bounded mechanism batch contracts stay candidate-only),
  * one kernel protocol, a closed set of nine
  * mechanical check types, and a bounded mandatory rule set. Validation is
@@ -84,6 +87,13 @@ export const CONTRACT_OBJECTS = Object.freeze([
   "skill-family-directory-verification-request",
   "skill-family-directory-verification-result",
   "engineering-baseline",
+  "professional-conclusion",
+  "file-set-apply-request",
+  "file-set-recovery-request",
+  "file-set-prune-request",
+  "file-set-result",
+  "file-set-event-payload",
+  "state-store-recovery-observation",
 ]);
 
 export const CONTRACT_BOUNDARY = Object.freeze({
@@ -91,8 +101,8 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Contracts specification version: 1.18.0 keeps the frozen 46-object Foundation surface. */
-export const CONTRACTS_VERSION = "1.18.0";
+/** Contracts specification version: 1.20.0 adds six file-set and state recovery objects. */
+export const CONTRACTS_VERSION = "1.20.0";
 
 export {
   CAPABILITY_MATURITY_LEVELS,
