@@ -1,5 +1,21 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.23.0 locale=zh-CN baseline=sha256:609110142fe48fce67f3e883531acf5cdd8c48336afea2aa1bfa14641da43bab -->
+## [0.23.0] - 2026-09-26
+
+Contracts 0.23.0 与 Foundation 0.23.0 锁步前移包坐标，规格继续使用已发布的 1.20.0。本说明不新增合同对象、Schema 或协议，也不表示 0.23.0 已经远端发布。
+
+### 变更
+
+- 包身份与 Foundation 0.23.0 对齐。规格仍是 Contracts 1.20.0，53 类顶层对象、九条 mandatory rule、错误码区间和 Kernel 协议登记保持不变。
+- 不新增 request、result、Schema、fixture 族或机制。文件集合应用与恢复，以及 professional-conclusion 对象，仍保持 0.22.0 已发布的内容。
+
+### 升级说明
+
+三个 Foundation 包须一起精确锁定到 0.23.0。消费方继续使用 Contracts 1.20.0。0.23.0 的远端发布不在本说明范围内。
+<!-- release-skill:changelog:end version=0.23.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.22.0 locale=zh-CN baseline=sha256:c918a4b76146b5122558cd15977caeb2cca67756ad10f48042e2a3a28c29cc98 -->
 ## [0.22.0] - 2026-09-18
 

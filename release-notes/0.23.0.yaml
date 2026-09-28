@@ -1,0 +1,17 @@
+version: 0.23.0
+date: 2026-09-26
+locales:
+  en:
+    summary: Contracts 0.23.0 moves the package coordinate in lockstep with Foundation 0.23.0 and keeps the published 1.20.0 specification. This note adds no contract object, Schema, or protocol, and it does not claim remote publication.
+    changes:
+      changed:
+        - Aligns the package identity with Foundation 0.23.0 while the specification remains Contracts 1.20.0, with the same 53 top-level object classes, nine mandatory rules, error-code ranges, and Kernel protocol registration.
+        - Adds no request, result, Schema, fixture family, or mechanism. File-set application and recovery, and the professional-conclusion object, stay as published in 0.22.0.
+    upgradeNotes: Pin all three Foundation packages to exactly 0.23.0. Consumers keep using Contracts 1.20.0. Remote publication of 0.23.0 is outside this note.
+  zh-CN:
+    summary: Contracts 0.23.0 与 Foundation 0.23.0 锁步前移包坐标，规格继续使用已发布的 1.20.0。本说明不新增合同对象、Schema 或协议，也不表示 0.23.0 已经远端发布。
+    changes:
+      changed:
+        - 包身份与 Foundation 0.23.0 对齐。规格仍是 Contracts 1.20.0，53 类顶层对象、九条 mandatory rule、错误码区间和 Kernel 协议登记保持不变。
+        - 不新增 request、result、Schema、fixture 族或机制。文件集合应用与恢复，以及 professional-conclusion 对象，仍保持 0.22.0 已发布的内容。
+    upgradeNotes: 三个 Foundation 包须一起精确锁定到 0.23.0。消费方继续使用 Contracts 1.20.0。0.23.0 的远端发布不在本说明范围内。

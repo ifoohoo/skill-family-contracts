@@ -1,5 +1,21 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.23.0 locale=en baseline=sha256:a79994077fa0c8be91d21953c3c5482f61d5859d2a75996b45085b2c9916d25d -->
+## [0.23.0] - 2026-09-26
+
+Contracts 0.23.0 moves the package coordinate in lockstep with Foundation 0.23.0 and keeps the published 1.20.0 specification. This note adds no contract object, Schema, or protocol, and it does not claim remote publication.
+
+### Changed
+
+- Aligns the package identity with Foundation 0.23.0 while the specification remains Contracts 1.20.0, with the same 53 top-level object classes, nine mandatory rules, error-code ranges, and Kernel protocol registration.
+- Adds no request, result, Schema, fixture family, or mechanism. File-set application and recovery, and the professional-conclusion object, stay as published in 0.22.0.
+
+### Upgrade Notes
+
+Pin all three Foundation packages to exactly 0.23.0. Consumers keep using Contracts 1.20.0. Remote publication of 0.23.0 is outside this note.
+<!-- release-skill:changelog:end version=0.23.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.22.0 locale=en baseline=sha256:c53ff874c075725c33326b2fdcfbe822894d7ff498e8684c7eec9c10fd23bc73 -->
 ## [0.22.0] - 2026-09-18
 

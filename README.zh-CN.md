@@ -5,39 +5,37 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.22.0 -->
+<!-- release-skill:release-version: 0.23.0 -->
 
 机器可执行工程结构和机制协议的唯一权威包。0.22.0 携带 Contracts 1.20.0 规格与 53 类顶层对象。此前已发布的 0.21.0 仍是 Contracts 1.18.0 的 46 类对象，不能把 1.20.0 表面归入该制品。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.22.0** (2026-09-18)
+**0.23.0** (2026-09-26)
 
-Contracts 0.22.0 把规格从 1.18.0 前移到 1.20.0，顶层合同对象从 46 类增加到 53 类，新增多路径文件集合应用与恢复，以及治理采用的专业结论对象。
-
-**新增**
-
-- 新增 file-set-apply-request、file-set-recovery-request、file-set-prune-request、file-set-result、file-set-event-payload、state-store-recovery-observation 六个文件集合对象，并配套正例、负例和方言不支持 fixture。
-- 新增 professional-conclusion 对象及配套 fixture，使调用方持有的结论可以只按结构交换。
-- 扩展 project-manifest 合同，允许工程声明引用已登记的版本来源与物理入口，而不是执行目标。
+Contracts 0.23.0 与 Foundation 0.23.0 锁步前移包坐标，规格继续使用已发布的 1.20.0。本说明不新增合同对象、Schema 或协议，也不表示 0.23.0 已经远端发布。
 
 **变更**
 
-- Contracts 规格从 1.18.0 前移到 1.20.0；九条 mandatory rule、错误码区间和 Kernel 协议登记保持不变。
+- 包身份与 Foundation 0.23.0 对齐。规格仍是 Contracts 1.20.0，53 类顶层对象、九条 mandatory rule、错误码区间和 Kernel 协议登记保持不变。
+- 不新增 request、result、Schema、fixture 族或机制。文件集合应用与恢复，以及 professional-conclusion 对象，仍保持 0.22.0 已发布的内容。
 
 **升级说明**
 
-三个 Foundation 包须一起精确锁定到 0.22.0。新增对象仍登记为 `candidate`；结构校验不授予业务语义、持久恢复保证或真实宿主资格。业务计划、候选重新派生和实际消费验证仍由调用方负责。
+三个 Foundation 包须一起精确锁定到 0.23.0。消费方继续使用 Contracts 1.20.0。0.23.0 的远端发布不在本说明范围内。
 <!-- release-skill:managed:end id=latest-release -->
 
-## 本地未发布合同状态
+## 已发布的 1.20.0 规格
 
-当前工作树把合同规格推进到 1.20.0。它登记 `professional-conclusion` Schema，并在
+Contracts 1.20.0 已随 0.22.0 包发布，因此该规格已有公开包坐标。
+
+该版本登记
+`professional-conclusion` Schema，并在
 `project-manifest` 中增加可选的声明式工程元数据，用于列出发行单元版本和物理入口；随后登记
 多路径普通文件应用与恢复族 —— `file-set-apply-request`、`file-set-recovery-request`、
 `file-set-prune-request`、`file-set-result`、`file-set-event-payload` 与
 `state-store-recovery-observation`。Contracts 只校验结构；专业 code 与详情仍归提供方，显式
 路径传递、根内读取、接受决定以及 `validate` 内部的领域判定仍归调用方，文件集合机制归 Harness。
-这些字节尚无已发布包坐标。
+当前工作树是尚未正式发布的 0.23.0 锁步候选，沿用 Contracts 1.20.0，不新增规格坐标。
 
 ## 解决的问题
 
@@ -51,7 +49,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-下面的命令为本地接线验证构建工作树 tarball。它们不是已发布的 0.22.0 制品，也不会给 1.20.0 合同另行授予 registry 坐标：
+0.23.0 是尚未正式发布的本地源码候选。0.22.0 是已发布包，且已包含 Contracts 1.20.0。候选验证先把三个工作树包分别打入同一个临时目录，再安装这些精确的 tarball：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -59,13 +57,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.22.0.tgz" "$pack_dir/skill-family-harness-node-0.22.0.tgz" "$pack_dir/skill-family-engineering-kit-0.22.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.23.0.tgz" "$pack_dir/skill-family-harness-node-0.23.0.tgz" "$pack_dir/skill-family-engineering-kit-0.23.0.tgz")
 ```
 
-发布后再使用 registry 坐标：
+0.23.0 正式发布后，再使用对应的 registry 坐标：
 
 ```sh
-npm install skill-family-contracts@0.22.0
+npm install skill-family-contracts@0.23.0
 npm info skill-family-contracts --help
 ```
 

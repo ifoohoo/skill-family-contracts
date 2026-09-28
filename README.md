@@ -4,40 +4,35 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.22.0 -->
+<!-- release-skill:release-version: 0.23.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols. The 0.22.0 package carries the Contracts 1.20.0 specification with 53 top-level objects. The earlier published 0.21.0 package keeps Contracts 1.18.0 and 46 objects; do not attribute the 1.20.0 surface to that artifact.
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.22.0** (2026-09-18)
+**0.23.0** (2026-09-26)
 
-Contracts 0.22.0 advances the specification from 1.18.0 to 1.20.0 and grows the contract surface from 46 to 53 top-level object classes with multi-path file-set application and recovery plus the governance professional-conclusion object.
-
-**Added**
-
-- Adds six file-set objects — file-set-apply-request, file-set-recovery-request, file-set-prune-request, file-set-result, file-set-event-payload, and state-store-recovery-observation — with matching positive, negative, and unsupported-dialect fixtures.
-- Adds the professional-conclusion object with matching fixtures so a caller-owned conclusion can be exchanged with structural-only enforcement.
-- Extends the project-manifest contract with an engineering declaration that references a declared version source and physical entry rather than executing the target.
+Contracts 0.23.0 moves the package coordinate in lockstep with Foundation 0.23.0 and keeps the published 1.20.0 specification. This note adds no contract object, Schema, or protocol, and it does not claim remote publication.
 
 **Changed**
 
-- Advances the Contracts specification from 1.18.0 to 1.20.0; the nine mandatory rules, error-code ranges, and the Kernel protocol registration are unchanged.
+- Aligns the package identity with Foundation 0.23.0 while the specification remains Contracts 1.20.0, with the same 53 top-level object classes, nine mandatory rules, error-code ranges, and Kernel protocol registration.
+- Adds no request, result, Schema, fixture family, or mechanism. File-set application and recovery, and the professional-conclusion object, stay as published in 0.22.0.
 
 **Upgrade Notes**
 
-Pin all three Foundation packages to exactly 0.22.0. The new objects are registered as `candidate`; structural validation does not grant business semantics, durable recovery guarantees, or real-host qualification. Consumers own their business plan, candidate re-derivation, and actual consumption verification.
+Pin all three Foundation packages to exactly 0.23.0. Consumers keep using Contracts 1.20.0. Remote publication of 0.23.0 is outside this note.
 <!-- release-skill:managed:end id=latest-release -->
 
-## Unreleased Local Contract State
+## Published 1.20.0 Specification
 
-The current working tree advances the contract specification to 1.20.0. It registers the
+Contracts 1.20.0 already ships in the published 0.22.0 package, so this specification has a published package coordinate. That release registers the
 `professional-conclusion` Schema and extends `project-manifest` with optional declarative engineering
 metadata for release-unit versions and physical entries; it then registers the multi-path ordinary-file
 apply/recovery family — `file-set-apply-request`, `file-set-recovery-request`, `file-set-prune-request`,
 `file-set-result`, `file-set-event-payload` and `state-store-recovery-observation`. Contracts validates
 only structure: the provider still owns domain codes and details, the caller owns explicit-path transfer,
 contained reading, the acceptance decision, and the domain judgment inside `validate`; the Harness owns
-the file-set mechanism. These bytes have no published package coordinate yet.
+the file-set mechanism. The current working tree is the 0.23.0 lockstep candidate and is not yet formally published. It keeps Contracts 1.20.0 and adds no new specification coordinate.
 
 ## Problem It Solves
 
@@ -51,7 +46,7 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-The commands below build working-tree tarballs for local integration checks. They are not the published 0.22.0 artifacts and do not grant the 1.20.0 contract a separate registry coordinate:
+Version 0.23.0 is the local source candidate and is not yet formally published. Version 0.22.0 remains the published package and already carries Contracts 1.20.0. Build all three working-tree tarballs into one temporary directory and install those exact files for a candidate check:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -59,13 +54,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.22.0.tgz" "$pack_dir/skill-family-harness-node-0.22.0.tgz" "$pack_dir/skill-family-engineering-kit-0.22.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.23.0.tgz" "$pack_dir/skill-family-harness-node-0.23.0.tgz" "$pack_dir/skill-family-engineering-kit-0.23.0.tgz")
 ```
 
-After publication, use the registry coordinate:
+After 0.23.0 is formally published, use the registry coordinate:
 
 ```sh
-npm install skill-family-contracts@0.22.0
+npm install skill-family-contracts@0.23.0
 npm info skill-family-contracts --help
 ```
 
