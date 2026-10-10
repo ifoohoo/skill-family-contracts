@@ -1,5 +1,20 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.24.0 locale=zh-CN baseline=sha256:1f512ea889bda4ce32a1c38246c4b3c2136ab443d7c4dffc6b46cd67d5d8f417 -->
+## [0.24.0] - 2026-10-07
+
+Contracts 0.24.0 随本轮 Foundation 四单元锁步前移包坐标，规格延续为 Contracts 1.20.0。本版本没有新增合同对象、Schema、协议或机制；本说明不证明远端发布已完成。
+
+### 变更
+
+- 顶层对象共 53 类，强制规则（mandatory rule）维持 9 条，错误码区间与 Kernel 协议登记范围保持不变。原 0.23.1 候选的版本修复按实际源码范围承接，不作为新公共能力，也不表示全部版本派生已完成核验。
+
+### 升级说明
+
+三个 Foundation npm 包须精确锁定至 0.24.0，独立 Plugin 与三包同版交付。Contracts 1.20.0 是规格坐标，不是 npm 包版本。0.24.0 仍为本地候选，四单元发布及发布后验证尚未完成。
+<!-- release-skill:changelog:end version=0.24.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.23.0 locale=zh-CN baseline=sha256:609110142fe48fce67f3e883531acf5cdd8c48336afea2aa1bfa14641da43bab -->
 ## [0.23.0] - 2026-09-26
 

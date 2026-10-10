@@ -1,0 +1,17 @@
+version: 0.23.1
+date: 2026-10-05
+locales:
+  en:
+    summary: Contracts 0.23.1 moves the package coordinate to 0.23.1 under the existing lockstep contract. This round adds no mechanism. This note does not say that 0.23.1 has been published remotely.
+    changes:
+      changed:
+        - Aligns the package coordinate with Foundation 0.23.1. The specification remains Contracts 1.20.0. The 53 top-level object classes, nine mandatory rules, error-code ranges, and Kernel protocol registration stay as published in 0.23.0. This round adds no contract object, Schema, or protocol.
+        - This round only advances the lockstep version number and adds no Harness mechanism. This note does not include a byte-for-byte recheck of the published payload.
+    upgradeNotes: Pin all three Foundation packages to exactly 0.23.1. Consumers keep using Contracts 1.20.0. 0.23.1 remains a local candidate. Remote publication is outside this note.
+  zh-CN:
+    summary: Contracts 0.23.1 仅依据既有锁步合同，将包坐标前移至 0.23.1。本轮未引入任何新机制。本说明不表示 0.23.1 已完成远端发布。
+    changes:
+      changed:
+        - 包坐标已与 Foundation 0.23.1 对齐。规格仍为 Contracts 1.20.0。53 类顶层对象、九条 mandatory rule、错误码区间及 Kernel 协议登记内容，均延续 0.23.0 已发布状态。本轮未新增合同对象、Schema 或协议。
+        - 本轮仅执行锁步数值前移，未引入 Harness 机制。本说明未对已发布载荷进行逐字节重核。
+    upgradeNotes: 三个 Foundation 包必须一同精确锁定至 0.23.1。消费方继续使用 Contracts 1.20.0。0.23.1 仍为本地候选版本。远端发布不在本说明覆盖范围内。

@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.24.0 locale=en baseline=sha256:8cf95fe05eed7c8a7e88f6617e447729a8eaef6658714b6f172e44cabab989c2 -->
+## [0.24.0] - 2026-10-07
+
+Contracts 0.24.0 moves the package coordinate in lockstep with the four Foundation release units and retains Contracts specification 1.20.0. This version adds no contract object, Schema, protocol, or mechanism; this note does not prove remote publication.
+
+### Changed
+
+- The 53 top-level object classes, nine mandatory rules, error-code ranges, and Kernel protocol registration retain their existing scope. Version fixes from the 0.23.1 candidate are carried forward only within their actual source scope; they are not new public capabilities and do not prove every derived version has been verified.
+
+### Upgrade Notes
+
+Pin all three Foundation npm packages to exactly 0.24.0; the independent Plugin ships at the same version. Contracts 1.20.0 is a specification coordinate, not the npm package version. 0.24.0 remains a local candidate; publication and post-publish verification of all four units are unfinished.
+<!-- release-skill:changelog:end version=0.24.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.23.0 locale=en baseline=sha256:a79994077fa0c8be91d21953c3c5482f61d5859d2a75996b45085b2c9916d25d -->
 ## [0.23.0] - 2026-09-26
 

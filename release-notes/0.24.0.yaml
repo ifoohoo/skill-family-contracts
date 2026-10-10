@@ -1,0 +1,15 @@
+version: 0.24.0
+date: 2026-10-07
+locales:
+  en:
+    summary: "Contracts 0.24.0 moves the package coordinate in lockstep with the four Foundation release units and retains Contracts specification 1.20.0. This version adds no contract object, Schema, protocol, or mechanism; this note does not prove remote publication."
+    changes:
+      changed:
+        - "The 53 top-level object classes, nine mandatory rules, error-code ranges, and Kernel protocol registration retain their existing scope. Version fixes from the 0.23.1 candidate are carried forward only within their actual source scope; they are not new public capabilities and do not prove every derived version has been verified."
+    upgradeNotes: "Pin all three Foundation npm packages to exactly 0.24.0; the independent Plugin ships at the same version. Contracts 1.20.0 is a specification coordinate, not the npm package version. 0.24.0 remains a local candidate; publication and post-publish verification of all four units are unfinished."
+  zh-CN:
+    summary: "Contracts 0.24.0 随本轮 Foundation 四单元锁步前移包坐标，规格延续为 Contracts 1.20.0。本版本没有新增合同对象、Schema、协议或机制；本说明不证明远端发布已完成。"
+    changes:
+      changed:
+        - "顶层对象共 53 类，强制规则（mandatory rule）维持 9 条，错误码区间与 Kernel 协议登记范围保持不变。原 0.23.1 候选的版本修复按实际源码范围承接，不作为新公共能力，也不表示全部版本派生已完成核验。"
+    upgradeNotes: "三个 Foundation npm 包须精确锁定至 0.24.0，独立 Plugin 与三包同版交付。Contracts 1.20.0 是规格坐标，不是 npm 包版本。0.24.0 仍为本地候选，四单元发布及发布后验证尚未完成。"
