@@ -5,22 +5,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.24.0 -->
+<!-- release-skill:release-version: 0.24.1 -->
 
 机器可执行工程结构和机制协议的唯一权威包。0.22.0 携带 Contracts 1.20.0 规格与 53 类顶层对象。此前已发布的 0.21.0 仍是 Contracts 1.18.0 的 46 类对象，不能把 1.20.0 表面归入该制品。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.24.0** (2026-10-07)
+**0.24.1** (2026-10-12)
 
-Contracts 0.24.0 随本轮 Foundation 四单元锁步前移包坐标，规格延续为 Contracts 1.20.0。本版本没有新增合同对象、Schema、协议或机制；本说明不证明远端发布已完成。
+Contracts 0.24.1 仅随 Foundation 文档补丁按既有四单元合同锁步前移，没有新增能力、API、Schema、协议或机制。
 
 **变更**
 
-- 顶层对象共 53 类，强制规则（mandatory rule）维持 9 条，错误码区间与 Kernel 协议登记范围保持不变。原 0.23.1 候选的版本修复按实际源码范围承接，不作为新公共能力，也不表示全部版本派生已完成核验。
+- 仅更新包版本和相应受管版本派生；现有能力、参数与失败边界保持不变。
 
 **升级说明**
 
-三个 Foundation npm 包须精确锁定至 0.24.0，独立 Plugin 与三包同版交付。Contracts 1.20.0 是规格坐标，不是 npm 包版本。0.24.0 仍为本地候选，四单元发布及发布后验证尚未完成。
+三个 Foundation npm 包须精确锁定同版，独立插件与三包保持相同发布版本。Contracts 规格仍为 1.20.0，与 npm 包版本分别处理；消费以实际发布版本的公开接口和来源为准，本说明不替代发布后验证。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 已发布的 1.20.0 规格
@@ -34,7 +34,7 @@ Contracts 1.20.0 已随 0.22.0 包发布，因此该规格已有公开包坐标�
 `file-set-prune-request`、`file-set-result`、`file-set-event-payload` 与
 `state-store-recovery-observation`。Contracts 只校验结构；专业 code 与详情仍归提供方，显式
 路径传递、根内读取、接受决定以及 `validate` 内部的领域判定仍归调用方，文件集合机制归 Harness。
-当前工作树是尚未正式发布的 0.23.1 锁步候选，沿用 Contracts 1.20.0，不新增规格坐标。
+本包版本 0.24.1 沿用 Contracts 1.20.0，不新增规格坐标。
 
 ## 解决的问题
 
@@ -48,7 +48,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-0.23.1 是尚未正式发布的本地源码候选。0.23.0 是已发布包，且已包含 Contracts 1.20.0。候选验证先把三个工作树包分别打入同一个临时目录，再安装这些精确的 tarball：
+本包版本为 0.24.1。已发布的 0.24.0 包已包含 Contracts 1.20.0。验证尚未正式发布的工作树时，先把三个工作树包分别打入同一个临时目录，再安装这些精确的 tarball：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -56,13 +56,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.23.1.tgz" "$pack_dir/skill-family-harness-node-0.23.1.tgz" "$pack_dir/skill-family-engineering-kit-0.23.1.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.24.1.tgz" "$pack_dir/skill-family-harness-node-0.24.1.tgz" "$pack_dir/skill-family-engineering-kit-0.24.1.tgz")
 ```
 
-0.23.1 正式发布后，再使用对应的 registry 坐标：
+以下 registry 安装方式以精确版本 0.24.1 已正式可用为前提：
 
 ```sh
-npm install skill-family-contracts@0.23.1
+npm install skill-family-contracts@0.24.1
 npm info skill-family-contracts --help
 ```
 
