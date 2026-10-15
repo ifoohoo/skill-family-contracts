@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.25.0 locale=en baseline=sha256:710c25e20d6fb82777cd27d77721c5069c59118b006b447ed579ce93be855c9b -->
+## [0.25.0] - 2026-10-15
+
+Contracts 0.25.0 advances only to keep the existing four-unit lockstep contract. It adds no capability, API, Schema, protocol, or mechanism.
+
+### Changed
+
+- Update only the package coordinate and its managed version projections; existing capabilities, parameters, and failure boundaries remain unchanged. Published 0.24.1 functionality is not redone.
+
+### Upgrade Notes
+
+Pin the three Foundation npm packages to exactly 0.25.0 and keep the independent Plugin at that release version. Contracts specification 1.20.0 remains a separate coordinate from npm package versions. Use the actual published version's public interfaces and sources. This note does not replace post-publish verification.
+<!-- release-skill:changelog:end version=0.25.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.24.1 locale=en baseline=sha256:8be414df53bb5afd272835307e1ad31e1881a6ca07bc7b31b2cc56661ad50bbc -->
 ## [0.24.1] - 2026-10-12
 
