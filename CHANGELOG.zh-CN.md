@@ -1,5 +1,20 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.26.0 locale=zh-CN baseline=sha256:284bca07b3884b2b0e46049b85f421fc489a5c873762464f4335eb305aee51b1 -->
+## [0.26.0] - 2026-10-17
+
+Contracts 0.26.0 仅随其他发布单元锁步前移，未新增能力、API、Schema、协议或机制。
+
+### 变更
+
+- 仅更新包版本及受管版本派生。现有参数、行为与失败边界保持不变，不重做 0.25.0 已发布功能。Engineering Kit 新增的宿主检查能力不属于 Contracts 的功能增量。
+
+### 升级说明
+
+三个 Foundation npm 包及独立 Plugin 须精确同版为 0.26.0。Contracts 规格仍为 1.20.0，与包版本分别处理。消费以实际正式发布的公共接口和来源为准；本说明不替代发布后验证，也不宣称发布或消费者验收已经完成。
+<!-- release-skill:changelog:end version=0.26.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.25.0 locale=zh-CN baseline=sha256:423371deac865b56de30156048ea2e6c93e4c615c5606d9fe1338bf4ac036109 -->
 ## [0.25.0] - 2026-10-15
 

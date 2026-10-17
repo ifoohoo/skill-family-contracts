@@ -4,22 +4,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.25.0 -->
+<!-- release-skill:release-version: 0.26.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols. The 0.22.0 package carries the Contracts 1.20.0 specification with 53 top-level objects. The earlier published 0.21.0 package keeps Contracts 1.18.0 and 46 objects; do not attribute the 1.20.0 surface to that artifact.
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.25.0** (2026-10-15)
+**0.26.0** (2026-10-17)
 
-Contracts 0.25.0 advances only to keep the existing four-unit lockstep contract. It adds no capability, API, Schema, protocol, or mechanism.
+Contracts 0.26.0 advances only in lockstep with the other release units. It adds no capability, API, Schema, protocol, or mechanism.
 
 **Changed**
 
-- Update only the package coordinate and its managed version projections; existing capabilities, parameters, and failure boundaries remain unchanged. Published 0.24.1 functionality is not redone.
+- Update only the package version and its managed version projections. Existing parameters, behavior, and failure boundaries remain unchanged; published 0.25.0 functionality is not reimplemented. The new host checks in Engineering Kit are not a Contracts capability increment.
 
 **Upgrade Notes**
 
-Pin the three Foundation npm packages to exactly 0.25.0 and keep the independent Plugin at that release version. Contracts specification 1.20.0 remains a separate coordinate from npm package versions. Use the actual published version's public interfaces and sources. This note does not replace post-publish verification.
+Pin the three Foundation npm packages and the independent Plugin to exactly 0.26.0. Contracts specification 1.20.0 remains separate from the package version. Consume the actual officially published public interfaces and sources. This note does not replace post-publish verification or claim that publication or consumer acceptance is complete.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Published 1.20.0 Specification
@@ -31,7 +31,7 @@ apply/recovery family — `file-set-apply-request`, `file-set-recovery-request`,
 `file-set-result`, `file-set-event-payload` and `state-store-recovery-observation`. Contracts validates
 only structure: the provider still owns domain codes and details, the caller owns explicit-path transfer,
 contained reading, the acceptance decision, and the domain judgment inside `validate`; the Harness owns
-the file-set mechanism. Package version 0.25.0 keeps Contracts 1.20.0 and adds no new specification coordinate.
+the file-set mechanism. Package version 0.26.0 keeps Contracts 1.20.0 and adds no new specification coordinate.
 
 ## Problem It Solves
 
@@ -45,7 +45,7 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-This package version is 0.25.0. The published 0.24.1 package already carries Contracts 1.20.0. To verify a working tree before formal publication, build all three working-tree tarballs into one temporary directory and install those exact files:
+This package version is 0.26.0. The published 0.24.1 package already carries Contracts 1.20.0. To verify a working tree before formal publication, build all three working-tree tarballs into one temporary directory and install those exact files:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -53,13 +53,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.25.0.tgz" "$pack_dir/skill-family-harness-node-0.25.0.tgz" "$pack_dir/skill-family-engineering-kit-0.25.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.26.0.tgz" "$pack_dir/skill-family-harness-node-0.26.0.tgz" "$pack_dir/skill-family-engineering-kit-0.26.0.tgz")
 ```
 
-The registry installation below requires exact version 0.25.0 to be formally available:
+The registry installation below requires exact version 0.26.0 to be formally available:
 
 ```sh
-npm install skill-family-contracts@0.25.0
+npm install skill-family-contracts@0.26.0
 npm info skill-family-contracts --help
 ```
 

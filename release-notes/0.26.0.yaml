@@ -1,0 +1,15 @@
+version: 0.26.0
+date: 2026-10-17
+locales:
+  en:
+    summary: "Contracts 0.26.0 advances only in lockstep with the other release units. It adds no capability, API, Schema, protocol, or mechanism."
+    changes:
+      changed:
+        - "Update only the package version and its managed version projections. Existing parameters, behavior, and failure boundaries remain unchanged; published 0.25.0 functionality is not reimplemented. The new host checks in Engineering Kit are not a Contracts capability increment."
+    upgradeNotes: "Pin the three Foundation npm packages and the independent Plugin to exactly 0.26.0. Contracts specification 1.20.0 remains separate from the package version. Consume the actual officially published public interfaces and sources. This note does not replace post-publish verification or claim that publication or consumer acceptance is complete."
+  zh-CN:
+    summary: "Contracts 0.26.0 仅随其他发布单元锁步前移，未新增能力、API、Schema、协议或机制。"
+    changes:
+      changed:
+        - "仅更新包版本及受管版本派生。现有参数、行为与失败边界保持不变，不重做 0.25.0 已发布功能。Engineering Kit 新增的宿主检查能力不属于 Contracts 的功能增量。"
+    upgradeNotes: "三个 Foundation npm 包及独立 Plugin 须精确同版为 0.26.0。Contracts 规格仍为 1.20.0，与包版本分别处理。消费以实际正式发布的公共接口和来源为准；本说明不替代发布后验证，也不宣称发布或消费者验收已经完成。"

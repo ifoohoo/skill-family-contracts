@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.26.0 locale=en baseline=sha256:aa28e82449f62cda35ba25f55cf90420cf4b18f1c3db2af908b273cbf1f4ac84 -->
+## [0.26.0] - 2026-10-17
+
+Contracts 0.26.0 advances only in lockstep with the other release units. It adds no capability, API, Schema, protocol, or mechanism.
+
+### Changed
+
+- Update only the package version and its managed version projections. Existing parameters, behavior, and failure boundaries remain unchanged; published 0.25.0 functionality is not reimplemented. The new host checks in Engineering Kit are not a Contracts capability increment.
+
+### Upgrade Notes
+
+Pin the three Foundation npm packages and the independent Plugin to exactly 0.26.0. Contracts specification 1.20.0 remains separate from the package version. Consume the actual officially published public interfaces and sources. This note does not replace post-publish verification or claim that publication or consumer acceptance is complete.
+<!-- release-skill:changelog:end version=0.26.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.25.0 locale=en baseline=sha256:710c25e20d6fb82777cd27d77721c5069c59118b006b447ed579ce93be855c9b -->
 ## [0.25.0] - 2026-10-15
 
