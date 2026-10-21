@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.27.1 locale=en baseline=sha256:109edc70638900695172b0cf653587d3dbc7fb6d3a0620e6cd9a9b6149a30896 -->
+## [0.27.1] - 2026-10-21
+
+skill-family-contracts 0.27.1 moves in lockstep with the other three release units and adds no contract object, rule, or specification change. The specification remains 1.20.0. Published 0.27.0 is unchanged.
+
+### Changed
+
+- No new capability. This unit is republished at 0.27.1 so the four release units keep one version coordinate.
+
+### Upgrade Notes
+
+Pin this package to exactly 0.27.1 with the other Foundation units. The specification coordinate stays 1.20.0. This note does not replace post-publish verification.
+<!-- release-skill:changelog:end version=0.27.1 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.27.0 locale=en baseline=sha256:a0d6f5953f03c91183b4a047fec4e9db32eabbc93185f9056d579bff90bb74c3 -->
 ## [0.27.0] - 2026-10-21
 

@@ -1,5 +1,20 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.27.1 locale=zh-CN baseline=sha256:2795b0bfa872fa631b727cf600ee16fdc44daf9bca5a19e544347d3541ee2856 -->
+## [0.27.1] - 2026-10-21
+
+skill-family-contracts 0.27.1 与其他三个发布单元锁步前移，不新增合同对象、规则或规格。规格仍为 1.20.0。已发布的 0.27.0 不改写。
+
+### 变更
+
+- 没有新增能力。本单元按 0.27.1 重新发布，使四个发布单元保持同一版本坐标。
+
+### 升级说明
+
+本包须与其他 Foundation 单元精确锁定 0.27.1。规格坐标仍为 1.20.0。本说明不替代发布后验证。
+<!-- release-skill:changelog:end version=0.27.1 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.27.0 locale=zh-CN baseline=sha256:7ccd75cfc44c15cae47b99932c7147611f05619796bf05d922f0f8cc3d44c58b -->
 ## [0.27.0] - 2026-10-21
 

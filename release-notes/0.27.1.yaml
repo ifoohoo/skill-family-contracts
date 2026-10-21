@@ -1,0 +1,15 @@
+version: 0.27.1
+date: 2026-10-21
+locales:
+  en:
+    summary: "skill-family-contracts 0.27.1 moves in lockstep with the other three release units and adds no contract object, rule, or specification change. The specification remains 1.20.0. Published 0.27.0 is unchanged."
+    changes:
+      changed:
+        - "No new capability. This unit is republished at 0.27.1 so the four release units keep one version coordinate."
+    upgradeNotes: "Pin this package to exactly 0.27.1 with the other Foundation units. The specification coordinate stays 1.20.0. This note does not replace post-publish verification."
+  zh-CN:
+    summary: "skill-family-contracts 0.27.1 与其他三个发布单元锁步前移，不新增合同对象、规则或规格。规格仍为 1.20.0。已发布的 0.27.0 不改写。"
+    changes:
+      changed:
+        - "没有新增能力。本单元按 0.27.1 重新发布，使四个发布单元保持同一版本坐标。"
+    upgradeNotes: "本包须与其他 Foundation 单元精确锁定 0.27.1。规格坐标仍为 1.20.0。本说明不替代发布后验证。"
