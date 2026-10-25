@@ -1,5 +1,24 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.28.0 locale=en baseline=sha256:4f4b550e14d96b2457d06be429ee18ffa1e584b643acbc92d5e3cf8a5b32d050 -->
+## [0.28.0] - 2026-10-24
+
+Contracts 1.21.0 introduces three generation objects and Windows-specific observations for filesystem, recovery, and executable identity. The package advances to 0.28.0 in alignment with the other three release units.
+
+### Added
+
+- fixed-set-generation-pointer, fixed-set-generation-result, and fixed-set-generation-resolution are introduced as candidate objects, increasing the top-level surface to 56.
+
+### Changed
+
+- Windows observations now bind canonical local NTFS paths, file identity, and owner/DACL permission facts. Kernel 1.8 and the existing POSIX v1 contract remain unchanged.
+
+### Upgrade Notes
+
+Pin all three npm packages and the independent Plugin to exactly 0.28.0. Contracts 1.21.0 is a standalone specification coordinate; the published 0.27.1 retains its original 1.20.0 and 53-object surface. Release notes do not substitute for remote verification.
+<!-- release-skill:changelog:end version=0.28.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.27.1 locale=en baseline=sha256:109edc70638900695172b0cf653587d3dbc7fb6d3a0620e6cd9a9b6149a30896 -->
 ## [0.27.1] - 2026-10-21
 

@@ -32,7 +32,9 @@
  * host descriptor while retaining the same forty-six-object surface; the
  * 1.19.0 coordinate appends the professional-conclusion contract and extends
  * project-manifest with optional declarative engineering metadata, bringing
- * the current surface to forty-seven objects; the
+ * the current surface to forty-seven objects; Windows generation pointer,
+ * result and resolution objects are registered on the local 1.21.0 coordinate
+ * and bring the source surface to fifty-six objects; the
  * bounded mechanism batch contracts stay candidate-only),
  * one kernel protocol, a closed set of nine
  * mechanical check types, and a bounded mandatory rule set. Validation is
@@ -94,6 +96,9 @@ export const CONTRACT_OBJECTS = Object.freeze([
   "file-set-result",
   "file-set-event-payload",
   "state-store-recovery-observation",
+  "fixed-set-generation-pointer",
+  "fixed-set-generation-result",
+  "fixed-set-generation-resolution",
 ]);
 
 export const CONTRACT_BOUNDARY = Object.freeze({
@@ -101,8 +106,8 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Contracts specification version: 1.20.0 adds six file-set and state recovery objects. */
-export const CONTRACTS_VERSION = "1.20.0";
+/** Local Contracts 1.21.0 adds the Windows branches and three candidate generation documents; published 1.20.0 remains unchanged. */
+export const CONTRACTS_VERSION = "1.21.0";
 
 export {
   CAPABILITY_MATURITY_LEVELS,

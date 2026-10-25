@@ -1,0 +1,19 @@
+version: 0.28.0
+date: 2026-10-24
+locales:
+  en:
+    summary: Contracts 1.21.0 introduces three generation objects and Windows-specific observations for filesystem, recovery, and executable identity. The package advances to 0.28.0 in alignment with the other three release units.
+    changes:
+      added:
+        - fixed-set-generation-pointer, fixed-set-generation-result, and fixed-set-generation-resolution are introduced as candidate objects, increasing the top-level surface to 56.
+      changed:
+        - Windows observations now bind canonical local NTFS paths, file identity, and owner/DACL permission facts. Kernel 1.8 and the existing POSIX v1 contract remain unchanged.
+    upgradeNotes: Pin all three npm packages and the independent Plugin to exactly 0.28.0. Contracts 1.21.0 is a standalone specification coordinate; the published 0.27.1 retains its original 1.20.0 and 53-object surface. Release notes do not substitute for remote verification.
+  zh-CN:
+    summary: Contracts 1.21.0 新增三个世代对象，并接入 Windows 文件系统、恢复与可执行身份的特定观察。该包版本与其余三个发布单元同步升级至 0.28.0。
+    changes:
+      added:
+        - 新增 fixed-set-generation-pointer、fixed-set-generation-result 与 fixed-set-generation-resolution 作为 candidate 对象，顶层对象数增至 56。
+      changed:
+        - Windows 观察绑定规范本地 NTFS 路径、文件身份，以及 owner/DACL 权限事实。Kernel 1.8 与既有 POSIX v1 合同保持不变。
+    upgradeNotes: 三个 npm 包与独立 Plugin 必须精确锁定为 0.28.0。Contracts 1.21.0 为独立规格坐标；已发布的 0.27.1 仍维持原有 1.20.0 与 53 对象表面。本说明不替代发布后远端核验。

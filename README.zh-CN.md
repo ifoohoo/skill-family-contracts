@@ -5,22 +5,26 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.27.1 -->
+<!-- release-skill:release-version: 0.28.0 -->
 
 机器可执行工程结构和机制协议的唯一权威包。0.22.0 携带 Contracts 1.20.0 规格与 53 类顶层对象。此前已发布的 0.21.0 仍是 Contracts 1.18.0 的 46 类对象，不能把 1.20.0 表面归入该制品。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.27.1** (2026-10-21)
+**0.28.0** (2026-10-24)
 
-skill-family-contracts 0.27.1 与其他三个发布单元锁步前移，不新增合同对象、规则或规格。规格仍为 1.20.0。已发布的 0.27.0 不改写。
+Contracts 1.21.0 新增三个世代对象，并接入 Windows 文件系统、恢复与可执行身份的特定观察。该包版本与其余三个发布单元同步升级至 0.28.0。
+
+**新增**
+
+- 新增 fixed-set-generation-pointer、fixed-set-generation-result 与 fixed-set-generation-resolution 作为 candidate 对象，顶层对象数增至 56。
 
 **变更**
 
-- 没有新增能力。本单元按 0.27.1 重新发布，使四个发布单元保持同一版本坐标。
+- Windows 观察绑定规范本地 NTFS 路径、文件身份，以及 owner/DACL 权限事实。Kernel 1.8 与既有 POSIX v1 合同保持不变。
 
 **升级说明**
 
-本包须与其他 Foundation 单元精确锁定 0.27.1。规格坐标仍为 1.20.0。本说明不替代发布后验证。
+三个 npm 包与独立 Plugin 必须精确锁定为 0.28.0。Contracts 1.21.0 为独立规格坐标；已发布的 0.27.1 仍维持原有 1.20.0 与 53 对象表面。本说明不替代发布后远端核验。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 已发布的 1.20.0 规格
@@ -42,13 +46,13 @@ Contracts 1.20.0 已随 0.22.0 包发布，因此该规格已有公开包坐标�
 
 ## 核心心智模型
 
-Contracts 是「定义与登记」层，不是「执行」层。当前本地源码拥有 53 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、文件系统绑定、固定集合发布、多路径文件集合应用与恢复、同级适配器验证、候选真实宿主验证、可执行身份、技能族目录验证、engineering-baseline 与 professional-conclusion 对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
+Contracts 是「定义与登记」层，不是「执行」层。当前本地源码拥有 56 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、文件系统绑定、固定集合发布、多路径文件集合应用与恢复、同级适配器验证、候选真实宿主验证、可执行身份、技能族目录验证、engineering-baseline 与 professional-conclusion 对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
 
 Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.json`），按方言路由到对应 Ajv 类；不实现任何手写 Schema 子集解释器。
 
 ## 安装和最小示例
 
-本包版本为 0.27.1。已发布的 0.24.1 包已包含 Contracts 1.20.0。验证尚未正式发布的工作树时，先把三个工作树包分别打入同一个临时目录，再安装这些精确的 tarball：
+本包版本为 0.28.0。已发布的 0.24.1 包已包含 Contracts 1.20.0。验证尚未正式发布的工作树时，先把三个工作树包分别打入同一个临时目录，再安装这些精确的 tarball：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -56,13 +60,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.27.1.tgz" "$pack_dir/skill-family-harness-node-0.27.1.tgz" "$pack_dir/skill-family-engineering-kit-0.27.1.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.28.0.tgz" "$pack_dir/skill-family-harness-node-0.28.0.tgz" "$pack_dir/skill-family-engineering-kit-0.28.0.tgz")
 ```
 
-以下 registry 安装方式以精确版本 0.27.1 已正式可用为前提：
+以下 registry 安装方式以精确版本 0.28.0 已正式可用为前提：
 
 ```sh
-npm install skill-family-contracts@0.27.1
+npm install skill-family-contracts@0.28.0
 npm info skill-family-contracts --help
 ```
 
@@ -207,6 +211,9 @@ import {
 | `file-set-result` | `https://contracts.skill-family.example/v1/file-set-result.json` | `src/schemas/file-set-result.schema.json` |
 | `file-set-event-payload` | `https://contracts.skill-family.example/v1/file-set-event-payload.json` | `src/schemas/file-set-event-payload.schema.json` |
 | `state-store-recovery-observation` | `https://contracts.skill-family.example/v1/state-store-recovery-observation.json` | `src/schemas/state-store-recovery-observation.schema.json` |
+| `fixed-set-generation-pointer` | `https://contracts.skill-family.example/v1/fixed-set-generation-pointer.json` | `src/schemas/fixed-set-generation-pointer.schema.json` |
+| `fixed-set-generation-result` | `https://contracts.skill-family.example/v1/fixed-set-generation-result.json` | `src/schemas/fixed-set-generation-result.schema.json` |
+| `fixed-set-generation-resolution` | `https://contracts.skill-family.example/v1/fixed-set-generation-resolution.json` | `src/schemas/fixed-set-generation-resolution.schema.json` |
 
 plugin-verification 合同保留既有 `install-only` 与 `install-and-invoke` 目标，并增加 `native-lifecycle` 分支。原生命周期结果恰好包含十二个有序语义阶段。Contracts 只检查闭合结构、阶段顺序、停止传播，以及后续 `not-performed` 阶段的 `commands` 与 `trees` 为空；不定义跨宿主统一命令计划，不解释厂商输出，不暴露 `hostState`，也不拥有 Qoder 与 WorkBuddy 的 Oracle。
 
@@ -289,7 +296,7 @@ import {
 
 以上导入列出了本包稳定公共面；`validateDocument` 与 `runChecks` 是最常用入口。`validateDocument(document, { schemaId | schema, dialect, policy })` 返回 `{ valid, errorCode, errors, data }`；`runChecks({ rules?, registry?, fixtures?, loadSchema? })` 返回 `{ ok, mandatoryCount, budget, results }`；`registerSchema` / `registerProtocol` 返回新登记表副本，重复项分别以 `SFC1003` / `SFC1004` 抛出 `ContractsError`。
 
-`detectDialect(schema)` 在声明缺失或未知时返回 `null`，支持的结果为 `draft-07` 或 `2020-12`。不支持的方言由 `compileSchema` 抛出 `SFC1006`，由 `validateDocument` 以 `errorCode: "SFC1006"` 返回。登记表查询未命中返回 `null`。当前本地登记表的 `schemaVersion=1`、`contractsVersion=1.20.0`、53 类 Schema 与 1 个 Kernel Protocol 以机器源为准；注册函数返回副本且不修改输入，消费方向量身份或精确版本不匹配时报 `SFC1013`。
+`detectDialect(schema)` 在声明缺失或未知时返回 `null`，支持的结果为 `draft-07` 或 `2020-12`。不支持的方言由 `compileSchema` 抛出 `SFC1006`，由 `validateDocument` 以 `errorCode: "SFC1006"` 返回。登记表查询未命中返回 `null`。当前本地登记表的 `schemaVersion=1`、`contractsVersion=1.21.0`、56 类 Schema 与 1 个 Kernel Protocol 以机器源为准；注册函数返回副本且不修改输入，消费方向量身份或精确版本不匹配时报 `SFC1013`。
 
 ## 安全边界与非目标
 
@@ -322,7 +329,7 @@ import {
 
 ### Capability selection
 
-- `foundation.contracts.object-validation`：Ajv 双方言校验当前本地合同源码已登记的全部 53 类顶层对象。
+- `foundation.contracts.object-validation`：Ajv 双方言校验当前本地合同源码已登记的全部 56 类顶层对象。
 - `foundation.contracts.registry-protocol`：Schema `$id` 与协议名登记查询。
 - `foundation.contracts.kernel-protocol`：operation-request/result 协议。
 - `foundation.contracts.mandatory-checks`：九类强制规则与未解析引用。
@@ -352,7 +359,7 @@ import {
 
 ### Architectural invariants
 
-- 当前本地源码的 53 类顶层对象集合固定，新增需 ADR，错误码冻结不漂移。已发布的 0.21.0 包仍停留在 Contracts 1.18.0 的 46 类对象表面。
+- 当前本地源码的 56 类顶层对象集合固定，新增需 ADR，错误码冻结不漂移。已发布的 0.21.0 包仍停留在 Contracts 1.18.0 的 46 类对象表面。
 - 校验器仅 Ajv 8.20.0（精确 pin），不接受其他实现。
 
 ### Route elsewhere when
@@ -373,3 +380,9 @@ import {
 完整插件请求、结果与完整树观察使用三个新增候选 Schema。安装、发现、调用与载荷比较分别表达；原始树内容属于私有数据。
 
 Contracts 1.20.0 随 0.22.0 包发布。远端可用性须由对应的 release-skill 发布后证据证明，已发布的 0.21.0 保持 Contracts 1.18.0 的 46 类对象表面。本地测试或工作树 tarball 不等于契约接入完成、迁移完成或真实宿主资格。
+
+## Windows 支持与使用边界
+
+Foundation 0.28.0 面向 Windows 11 x64、本地 NTFS 与普通用户，采用 Contracts 1.21.0、56 个登记对象，包含三个保持 candidate 的固定世代 v1 对象与 Windows v2 分支；其他成熟度维持原登记。官方 npm 包 `skill-family-contracts@0.27.1` 仍承载 `contractsVersion=1.20.0` 与 53 个对象。
+
+根绑定保持四字段，Windows v2 与 POSIX v1 分支并存；登记结构与执行、真实宿主资格分别判断。精确版本的远端可用性须由正式发布凭据证明，不能从源码版本、本地测试或安装推断。详见 [兼容性矩阵](https://ifoohoo.github.io/skill-family-engineering-kit/reference/compatibility/) 与 [API 文档](https://ifoohoo.github.io/skill-family-engineering-kit/reference/api/harness/)。

@@ -4,22 +4,26 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.27.1 -->
+<!-- release-skill:release-version: 0.28.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols. The 0.22.0 package carries the Contracts 1.20.0 specification with 53 top-level objects. The earlier published 0.21.0 package keeps Contracts 1.18.0 and 46 objects; do not attribute the 1.20.0 surface to that artifact.
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.27.1** (2026-10-21)
+**0.28.0** (2026-10-24)
 
-skill-family-contracts 0.27.1 moves in lockstep with the other three release units and adds no contract object, rule, or specification change. The specification remains 1.20.0. Published 0.27.0 is unchanged.
+Contracts 1.21.0 introduces three generation objects and Windows-specific observations for filesystem, recovery, and executable identity. The package advances to 0.28.0 in alignment with the other three release units.
+
+**Added**
+
+- fixed-set-generation-pointer, fixed-set-generation-result, and fixed-set-generation-resolution are introduced as candidate objects, increasing the top-level surface to 56.
 
 **Changed**
 
-- No new capability. This unit is republished at 0.27.1 so the four release units keep one version coordinate.
+- Windows observations now bind canonical local NTFS paths, file identity, and owner/DACL permission facts. Kernel 1.8 and the existing POSIX v1 contract remain unchanged.
 
 **Upgrade Notes**
 
-Pin this package to exactly 0.27.1 with the other Foundation units. The specification coordinate stays 1.20.0. This note does not replace post-publish verification.
+Pin all three npm packages and the independent Plugin to exactly 0.28.0. Contracts 1.21.0 is a standalone specification coordinate; the published 0.27.1 retains its original 1.20.0 and 53-object surface. Release notes do not substitute for remote verification.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Published 1.20.0 Specification
@@ -39,13 +43,13 @@ When every skill-family project writes its own set of structural contracts, you 
 
 ## Core Mental Model
 
-Contracts is the "definition and registry" layer, not the "execution" layer. The current local source owns the JSON Schemas for 53 top-level object classes, including Project Profile, shared profile-adoption definitions, filesystem binding, fixed-set publication, multi-path file-set apply/recovery, peer adapter verification, candidate real-host verification, executable identity, skill-family directory verification, engineering baseline, and professional conclusion. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
+Contracts is the "definition and registry" layer, not the "execution" layer. The current local source owns the JSON Schemas for 56 top-level object classes, including Project Profile, shared profile-adoption definitions, filesystem binding, fixed-set publication, multi-path file-set apply/recovery, peer adapter verification, candidate real-host verification, executable identity, skill-family directory verification, engineering baseline, and professional conclusion. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
 
 Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version in `package.json`), routing by dialect to the corresponding Ajv class; no hand-written schema-subset interpreter is implemented.
 
 ## Installation and Minimal Example
 
-This package version is 0.27.1. The published 0.24.1 package already carries Contracts 1.20.0. To verify a working tree before formal publication, build all three working-tree tarballs into one temporary directory and install those exact files:
+This package version is 0.28.0. The published 0.24.1 package already carries Contracts 1.20.0. To verify a working tree before formal publication, build all three working-tree tarballs into one temporary directory and install those exact files:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -53,13 +57,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.27.1.tgz" "$pack_dir/skill-family-harness-node-0.27.1.tgz" "$pack_dir/skill-family-engineering-kit-0.27.1.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.28.0.tgz" "$pack_dir/skill-family-harness-node-0.28.0.tgz" "$pack_dir/skill-family-engineering-kit-0.28.0.tgz")
 ```
 
-The registry installation below requires exact version 0.27.1 to be formally available:
+The registry installation below requires exact version 0.28.0 to be formally available:
 
 ```sh
-npm install skill-family-contracts@0.27.1
+npm install skill-family-contracts@0.28.0
 npm info skill-family-contracts --help
 ```
 
@@ -204,6 +208,9 @@ The capability remains **candidate** and its schemas stay outside `src/registry.
 | `file-set-result` | `https://contracts.skill-family.example/v1/file-set-result.json` | `src/schemas/file-set-result.schema.json` |
 | `file-set-event-payload` | `https://contracts.skill-family.example/v1/file-set-event-payload.json` | `src/schemas/file-set-event-payload.schema.json` |
 | `state-store-recovery-observation` | `https://contracts.skill-family.example/v1/state-store-recovery-observation.json` | `src/schemas/state-store-recovery-observation.schema.json` |
+| `fixed-set-generation-pointer` | `https://contracts.skill-family.example/v1/fixed-set-generation-pointer.json` | `src/schemas/fixed-set-generation-pointer.schema.json` |
+| `fixed-set-generation-result` | `https://contracts.skill-family.example/v1/fixed-set-generation-result.json` | `src/schemas/fixed-set-generation-result.schema.json` |
+| `fixed-set-generation-resolution` | `https://contracts.skill-family.example/v1/fixed-set-generation-resolution.json` | `src/schemas/fixed-set-generation-resolution.schema.json` |
 
 Host descriptor/probe/plan contracts remain the same registered object identities, while Contracts 1.10.0 extends their stable semantics. Version 0.10.0 adds optional maturity and finite source-alias fields, permits `manual` host support, and binds update/uninstall plans to prior member digests. The nine probe facts are always represented independently; an unavailable or unknown fact is not inferred from the CLI or version fact.
 
@@ -292,7 +299,7 @@ import {
 
 The imports above list the stable public surface of this package; `validateDocument` and `runChecks` are the most commonly used entry points. `validateDocument(document, { schemaId | schema, dialect, policy })` returns `{ valid, errorCode, errors, data }`; `runChecks({ rules?, registry?, fixtures?, loadSchema? })` returns `{ ok, mandatoryCount, budget, results }`; `registerSchema` / `registerProtocol` return a new registry copy, throwing `ContractsError` with `SFC1003` / `SFC1004` respectively on duplicates.
 
-`detectDialect(schema)` returns `draft-07`, `2020-12`, or `null` when the declaration is absent or unknown. `compileSchema` throws `SFC1006` for an unsupported dialect; `validateDocument` reports the same condition as `errorCode: "SFC1006"`. Registry lookup functions return `null` on a miss. The current local registry is `schemaVersion=1`, `contractsVersion=1.20.0`, with 53 registered Schemas and one Kernel Protocol. Registration returns a copied registry and leaves the input unchanged; consumer vector identity or exact-version mismatches fail with `SFC1013`.
+`detectDialect(schema)` returns `draft-07`, `2020-12`, or `null` when the declaration is absent or unknown. `compileSchema` throws `SFC1006` for an unsupported dialect; `validateDocument` reports the same condition as `errorCode: "SFC1006"`. Registry lookup functions return `null` on a miss. The current local registry is `schemaVersion=1`, `contractsVersion=1.21.0`, with 56 registered Schemas and one Kernel Protocol. Registration returns a copied registry and leaves the input unchanged; consumer vector identity or exact-version mismatches fail with `SFC1013`.
 
 ## Security Boundaries and Non-Goals
 
@@ -325,7 +332,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Capability selection
 
-- `foundation.contracts.object-validation`: Ajv dual-dialect validation of all 53 registered top-level object classes in the current local contract source.
+- `foundation.contracts.object-validation`: Ajv dual-dialect validation of all 56 registered top-level object classes in the current local contract source.
 - `foundation.contracts.registry-protocol`: Schema `$id` and protocol-name registry query.
 - `foundation.contracts.kernel-protocol`: operation-request/result protocol.
 - `foundation.contracts.mandatory-checks`: nine mandatory rules and unresolved references.
@@ -355,7 +362,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Architectural invariants
 
-- The set of 53 top-level object classes in the current local source is fixed; additions require an ADR, and the error-code freeze does not drift. The published 0.21.0 package remains on the 46-object Contracts 1.18.0 surface.
+- The set of 56 top-level object classes in the current local source is fixed; additions require an ADR, and the error-code freeze does not drift. The published 0.21.0 package remains on the 46-object Contracts 1.18.0 surface.
 - The validator is exclusively Ajv 8.20.0 (exact pin); no other implementation is accepted.
 
 ### Route elsewhere when
@@ -376,3 +383,9 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 Three new candidate schemas describe plugin requests, plugin results and complete tree observations. Installation, discovery, invocation and payload comparison remain separate; raw tree content is private.
 
 Contracts 1.20.0 ships with the 0.22.0 package. Remote availability must be established by the corresponding release-skill post-release evidence, and the published 0.21.0 package keeps the 46-object Contracts 1.18.0 surface. Local tests or working-tree tarballs do not prove contract integration, migration completion, or real-host qualification.
+
+## Windows support and boundaries
+
+Foundation 0.28.0 targets Windows 11 x64, local NTFS, and ordinary users. It uses Contracts 1.21.0 with 56 registered objects, including three candidate `fixed-set-generation` v1 objects and Windows v2 branches. All other maturity levels remain as registered. The official `skill-family-contracts@0.27.1` retains `contractsVersion=1.20.0` and 53 objects.
+
+The root binding retains four fields, Windows v2 and POSIX v1 coexist, and registration is separate from execution and real-host qualification. Exact remote availability requires formal release evidence; source versions, local tests, and installation do not establish it. See [compatibility matrix](https://ifoohoo.github.io/skill-family-engineering-kit/reference/compatibility/) and [API reference](https://ifoohoo.github.io/skill-family-engineering-kit/reference/api/harness/).

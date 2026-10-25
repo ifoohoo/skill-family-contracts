@@ -1,5 +1,24 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.28.0 locale=zh-CN baseline=sha256:1607c646bc75affbf650d3e5acbe034486ad14f4003faa3f1e0b038ae0be983d -->
+## [0.28.0] - 2026-10-24
+
+Contracts 1.21.0 新增三个世代对象，并接入 Windows 文件系统、恢复与可执行身份的特定观察。该包版本与其余三个发布单元同步升级至 0.28.0。
+
+### 新增
+
+- 新增 fixed-set-generation-pointer、fixed-set-generation-result 与 fixed-set-generation-resolution 作为 candidate 对象，顶层对象数增至 56。
+
+### 变更
+
+- Windows 观察绑定规范本地 NTFS 路径、文件身份，以及 owner/DACL 权限事实。Kernel 1.8 与既有 POSIX v1 合同保持不变。
+
+### 升级说明
+
+三个 npm 包与独立 Plugin 必须精确锁定为 0.28.0。Contracts 1.21.0 为独立规格坐标；已发布的 0.27.1 仍维持原有 1.20.0 与 53 对象表面。本说明不替代发布后远端核验。
+<!-- release-skill:changelog:end version=0.28.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.27.1 locale=zh-CN baseline=sha256:2795b0bfa872fa631b727cf600ee16fdc44daf9bca5a19e544347d3541ee2856 -->
 ## [0.27.1] - 2026-10-21
 
