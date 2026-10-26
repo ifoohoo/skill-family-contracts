@@ -5,26 +5,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.28.0 -->
+<!-- release-skill:release-version: 0.29.0 -->
 
 机器可执行工程结构和机制协议的唯一权威包。0.22.0 携带 Contracts 1.20.0 规格与 53 类顶层对象。此前已发布的 0.21.0 仍是 Contracts 1.18.0 的 46 类对象，不能把 1.20.0 表面归入该制品。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.28.0** (2026-10-24)
+**0.29.0** (2026-10-26)
 
-Contracts 1.21.0 新增三个世代对象，并接入 Windows 文件系统、恢复与可执行身份的特定观察。该包版本与其余三个发布单元同步升级至 0.28.0。
-
-**新增**
-
-- 新增 fixed-set-generation-pointer、fixed-set-generation-result 与 fixed-set-generation-resolution 作为 candidate 对象，顶层对象数增至 56。
+0.29.0仅锁步版本，无新增公共API、合同对象或机制，仍维持1.21.0规格与56类顶层对象。
 
 **变更**
 
-- Windows 观察绑定规范本地 NTFS 路径、文件身份，以及 owner/DACL 权限事实。Kernel 1.8 与既有 POSIX v1 合同保持不变。
+- 0.29.0仅锁步版本，无新增公共API、合同对象或机制，仍维持1.21.0规格与56类顶层对象。
 
 **升级说明**
 
-三个 npm 包与独立 Plugin 必须精确锁定为 0.28.0。Contracts 1.21.0 为独立规格坐标；已发布的 0.27.1 仍维持原有 1.20.0 与 53 对象表面。本说明不替代发布后远端核验。
+四个发布单元须锁步采用0.29.0。无功能变更，仅版本锁步，不影响现有合同兼容性。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 已发布的 1.20.0 规格
@@ -52,7 +48,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-本包版本为 0.28.0。已发布的 0.24.1 包已包含 Contracts 1.20.0。验证尚未正式发布的工作树时，先把三个工作树包分别打入同一个临时目录，再安装这些精确的 tarball：
+本包版本为 0.29.0。已发布的 0.24.1 包已包含 Contracts 1.20.0。验证尚未正式发布的工作树时，先把三个工作树包分别打入同一个临时目录，再安装这些精确的 tarball：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -60,13 +56,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.28.0.tgz" "$pack_dir/skill-family-harness-node-0.28.0.tgz" "$pack_dir/skill-family-engineering-kit-0.28.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.29.0.tgz" "$pack_dir/skill-family-harness-node-0.29.0.tgz" "$pack_dir/skill-family-engineering-kit-0.29.0.tgz")
 ```
 
-以下 registry 安装方式以精确版本 0.28.0 已正式可用为前提：
+以下 registry 安装方式以精确版本 0.29.0 已正式可用为前提：
 
 ```sh
-npm install skill-family-contracts@0.28.0
+npm install skill-family-contracts@0.29.0
 npm info skill-family-contracts --help
 ```
 

@@ -1,5 +1,20 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.29.0 locale=zh-CN baseline=sha256:896b4d30198b1ce79b9daab054cbea38e8734a97fc558abcc0c9c2d2d5899b02 -->
+## [0.29.0] - 2026-10-26
+
+0.29.0仅锁步版本，无新增公共API、合同对象或机制，仍维持1.21.0规格与56类顶层对象。
+
+### 变更
+
+- 0.29.0仅锁步版本，无新增公共API、合同对象或机制，仍维持1.21.0规格与56类顶层对象。
+
+### 升级说明
+
+四个发布单元须锁步采用0.29.0。无功能变更，仅版本锁步，不影响现有合同兼容性。
+<!-- release-skill:changelog:end version=0.29.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.28.0 locale=zh-CN baseline=sha256:1607c646bc75affbf650d3e5acbe034486ad14f4003faa3f1e0b038ae0be983d -->
 ## [0.28.0] - 2026-10-24
 

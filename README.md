@@ -4,26 +4,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.28.0 -->
+<!-- release-skill:release-version: 0.29.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols. The 0.22.0 package carries the Contracts 1.20.0 specification with 53 top-level objects. The earlier published 0.21.0 package keeps Contracts 1.18.0 and 46 objects; do not attribute the 1.20.0 surface to that artifact.
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.28.0** (2026-10-24)
+**0.29.0** (2026-10-26)
 
-Contracts 1.21.0 introduces three generation objects and Windows-specific observations for filesystem, recovery, and executable identity. The package advances to 0.28.0 in alignment with the other three release units.
-
-**Added**
-
-- fixed-set-generation-pointer, fixed-set-generation-result, and fixed-set-generation-resolution are introduced as candidate objects, increasing the top-level surface to 56.
+Contracts 0.29.0 advances in lockstep with the initialization Plugin. There are no new public APIs or contract objects; Contracts remains at specification 1.21.0 with 56 top-level objects.
 
 **Changed**
 
-- Windows observations now bind canonical local NTFS paths, file identity, and owner/DACL permission facts. Kernel 1.8 and the existing POSIX v1 contract remain unchanged.
+- Version alignment only; the existing contract surface is unchanged.
 
 **Upgrade Notes**
 
-Pin all three npm packages and the independent Plugin to exactly 0.28.0. Contracts 1.21.0 is a standalone specification coordinate; the published 0.27.1 retains its original 1.20.0 and 53-object surface. Release notes do not substitute for remote verification.
+Pin all three npm packages and the independent Plugin to exactly 0.29.0. Existing contract semantics and compatibility boundaries are unchanged.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Published 1.20.0 Specification
@@ -49,7 +45,7 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-This package version is 0.28.0. The published 0.24.1 package already carries Contracts 1.20.0. To verify a working tree before formal publication, build all three working-tree tarballs into one temporary directory and install those exact files:
+This package version is 0.29.0. The published 0.24.1 package already carries Contracts 1.20.0. To verify a working tree before formal publication, build all three working-tree tarballs into one temporary directory and install those exact files:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -57,13 +53,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.28.0.tgz" "$pack_dir/skill-family-harness-node-0.28.0.tgz" "$pack_dir/skill-family-engineering-kit-0.28.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.29.0.tgz" "$pack_dir/skill-family-harness-node-0.29.0.tgz" "$pack_dir/skill-family-engineering-kit-0.29.0.tgz")
 ```
 
-The registry installation below requires exact version 0.28.0 to be formally available:
+The registry installation below requires exact version 0.29.0 to be formally available:
 
 ```sh
-npm install skill-family-contracts@0.28.0
+npm install skill-family-contracts@0.29.0
 npm info skill-family-contracts --help
 ```
 

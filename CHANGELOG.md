@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.29.0 locale=en baseline=sha256:c119827c2b3227382aaf9955d51ee7a4ccfced89c7dcbac02e3616e1bcd96dd8 -->
+## [0.29.0] - 2026-10-26
+
+Contracts 0.29.0 advances in lockstep with the initialization Plugin. There are no new public APIs or contract objects; Contracts remains at specification 1.21.0 with 56 top-level objects.
+
+### Changed
+
+- Version alignment only; the existing contract surface is unchanged.
+
+### Upgrade Notes
+
+Pin all three npm packages and the independent Plugin to exactly 0.29.0. Existing contract semantics and compatibility boundaries are unchanged.
+<!-- release-skill:changelog:end version=0.29.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.28.0 locale=en baseline=sha256:4f4b550e14d96b2457d06be429ee18ffa1e584b643acbc92d5e3cf8a5b32d050 -->
 ## [0.28.0] - 2026-10-24
 
