@@ -4,22 +4,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.29.0 -->
+<!-- release-skill:release-version: 0.30.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols. The 0.22.0 package carries the Contracts 1.20.0 specification with 53 top-level objects. The earlier published 0.21.0 package keeps Contracts 1.18.0 and 46 objects; do not attribute the 1.20.0 surface to that artifact.
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.29.0** (2026-10-26)
+**0.30.0** (2026-10-31)
 
-Contracts 0.29.0 advances in lockstep with the initialization Plugin. There are no new public APIs or contract objects; Contracts remains at specification 1.21.0 with 56 top-level objects.
+Version-locked with other units, with no new public APIs, contract objects, or mechanism changes.
 
 **Changed**
 
-- Version alignment only; the existing contract surface is unchanged.
+- Version alignment only; professional-conclusion retains its existing structure and contract semantics.
 
 **Upgrade Notes**
 
-Pin all three npm packages and the independent Plugin to exactly 0.29.0. Existing contract semantics and compatibility boundaries are unchanged.
+Pin all four release units to exactly 0.30.0. The Contracts specification coordinate and compatibility boundaries remain unchanged.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Published 1.20.0 Specification
@@ -45,7 +45,7 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-This package version is 0.29.0. The published 0.24.1 package already carries Contracts 1.20.0. To verify a working tree before formal publication, build all three working-tree tarballs into one temporary directory and install those exact files:
+This package version is 0.30.0. The published 0.24.1 package already carries Contracts 1.20.0. To verify a working tree before formal publication, build all three working-tree tarballs into one temporary directory and install those exact files:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -53,13 +53,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.29.0.tgz" "$pack_dir/skill-family-harness-node-0.29.0.tgz" "$pack_dir/skill-family-engineering-kit-0.29.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.30.0.tgz" "$pack_dir/skill-family-harness-node-0.30.0.tgz" "$pack_dir/skill-family-engineering-kit-0.30.0.tgz")
 ```
 
-The registry installation below requires exact version 0.29.0 to be formally available:
+The registry installation below requires exact version 0.30.0 to be formally available:
 
 ```sh
-npm install skill-family-contracts@0.29.0
+npm install skill-family-contracts@0.30.0
 npm info skill-family-contracts --help
 ```
 

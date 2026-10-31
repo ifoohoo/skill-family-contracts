@@ -1,5 +1,20 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.30.0 locale=zh-CN baseline=sha256:ca49119695fbc17a1d7fd6a6887e743d67d97d321156342d1d2dbd9868e3091a -->
+## [0.30.0] - 2026-10-31
+
+仅随其他单元版本锁步，无新增公共 API、合同对象或机制变更。
+
+### 变更
+
+- 仅版本同步前移，保持 professional-conclusion 结构与合同语义不变。
+
+### 升级说明
+
+四个发布单元须精确锁步采用 0.30.0。Contracts 规格坐标与既有兼容边界不变。
+<!-- release-skill:changelog:end version=0.30.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.29.0 locale=zh-CN baseline=sha256:896b4d30198b1ce79b9daab054cbea38e8734a97fc558abcc0c9c2d2d5899b02 -->
 ## [0.29.0] - 2026-10-26
 

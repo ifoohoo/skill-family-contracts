@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.30.0 locale=en baseline=sha256:d0d7508624f2974d217375b97b6f3eb3637bb2f316e42438f6ccd85e02643058 -->
+## [0.30.0] - 2026-10-31
+
+Version-locked with other units, with no new public APIs, contract objects, or mechanism changes.
+
+### Changed
+
+- Version alignment only; professional-conclusion retains its existing structure and contract semantics.
+
+### Upgrade Notes
+
+Pin all four release units to exactly 0.30.0. The Contracts specification coordinate and compatibility boundaries remain unchanged.
+<!-- release-skill:changelog:end version=0.30.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.29.0 locale=en baseline=sha256:c119827c2b3227382aaf9955d51ee7a4ccfced89c7dcbac02e3616e1bcd96dd8 -->
 ## [0.29.0] - 2026-10-26
 

@@ -1,0 +1,18 @@
+version: 0.30.0
+date: 2026-10-31
+locales:
+  en:
+    summary: Version-locked with other units, with no new public APIs, contract
+      objects, or mechanism changes.
+    changes:
+      changed:
+        - Version alignment only; professional-conclusion retains its existing
+          structure and contract semantics.
+    upgradeNotes: Pin all four release units to exactly 0.30.0. The Contracts
+      specification coordinate and compatibility boundaries remain unchanged.
+  zh-CN:
+    summary: 仅随其他单元版本锁步，无新增公共 API、合同对象或机制变更。
+    changes:
+      changed:
+        - 仅版本同步前移，保持 professional-conclusion 结构与合同语义不变。
+    upgradeNotes: 四个发布单元须精确锁步采用 0.30.0。Contracts 规格坐标与既有兼容边界不变。
