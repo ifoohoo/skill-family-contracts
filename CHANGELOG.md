@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.31.0 locale=en baseline=sha256:887b39867022406152184aa19607bf3066931b8a30f2df9a28c414c5c1c5e607 -->
+## [0.31.0] - 2026-11-01
+
+This release enforces version lockstep at 0.31.0 across all four units. No new public APIs, contract objects, or mechanisms are introduced. The professional-conclusion contract and its independent specification coordinates remain unchanged.
+
+### Changed
+
+- Only version synchronization at 0.31.0 is enforced. No additions to contracts, APIs, or underlying mechanisms.
+
+### Upgrade Notes
+
+All four units must upgrade to exactly 0.31.0. Contract specification coordinates are not affected by package version updates.
+<!-- release-skill:changelog:end version=0.31.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.30.0 locale=en baseline=sha256:d0d7508624f2974d217375b97b6f3eb3637bb2f316e42438f6ccd85e02643058 -->
 ## [0.30.0] - 2026-10-31
 

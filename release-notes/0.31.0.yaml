@@ -1,0 +1,20 @@
+version: 0.31.0
+date: 2026-11-01
+locales:
+  en:
+    summary: This release enforces version lockstep at 0.31.0 across all four units. No new
+      public APIs, contract objects, or mechanisms are introduced. The
+      professional-conclusion contract and its independent specification coordinates remain
+      unchanged.
+    changes:
+      changed:
+        - Only version synchronization at 0.31.0 is enforced. No additions to contracts,
+          APIs, or underlying mechanisms.
+    upgradeNotes: All four units must upgrade to exactly 0.31.0. Contract specification
+      coordinates are not affected by package version updates.
+  zh-CN:
+    summary: 本次发布仅强制四单元精确至0.31.0版本锁步。未新增公共API、合同对象或机制。professional-conclusion合同及其独立规格坐标保持不变。
+    changes:
+      changed:
+        - 仅执行0.31.0版本同步。未引入新合同、API或底层机制。
+    upgradeNotes: 四单元必须精确升级至0.31.0。合同规格坐标不随包版本变更而调整。
