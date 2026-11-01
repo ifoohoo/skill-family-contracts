@@ -5,22 +5,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.31.0 -->
+<!-- release-skill:release-version: 0.32.0 -->
 
 机器可执行工程结构和机制协议的唯一权威包。0.22.0 携带 Contracts 1.20.0 规格与 53 类顶层对象。此前已发布的 0.21.0 仍是 Contracts 1.18.0 的 46 类对象，不能把 1.20.0 表面归入该制品。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.31.0** (2026-11-01)
+**0.32.0** (2026-11-01)
 
-本次发布仅强制四单元精确至0.31.0版本锁步。未新增公共API、合同对象或机制。professional-conclusion合同及其独立规格坐标保持不变。
+Contracts 与 Harness 随四单元同步发布至 0.32.0 版本，仅更新发行版本，未引入任何机制变更、顶层合同对象、公共机制、路径读取逻辑、摘要生成、闭包算法或平台资格。Contracts 独立规格坐标不随包版本调整。
 
 **变更**
 
-- 仅执行0.31.0版本同步。未引入新合同、API或底层机制。
+- Contracts 与 Harness 随四单元同步发布至 0.32.0 版本，仅更新发行版本，未引入任何机制变更、顶层合同对象、公共机制、路径读取逻辑、摘要生成、闭包算法或平台资格。
 
 **升级说明**
 
-四单元必须精确升级至0.31.0。合同规格坐标不随包版本变更而调整。
+本次四单元发行版本实现锁步同步，仅更新发行版本号，不强制所有消费者升级。旧版本能力继续按兼容合同运行。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 已发布的 1.20.0 规格
@@ -48,7 +48,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-本包版本为 0.31.0。已发布的 0.24.1 包已包含 Contracts 1.20.0。验证尚未正式发布的工作树时，先把三个工作树包分别打入同一个临时目录，再安装这些精确的 tarball：
+本包版本为 0.32.0。已发布的 0.24.1 包已包含 Contracts 1.20.0。验证尚未正式发布的工作树时，先把三个工作树包分别打入同一个临时目录，再安装这些精确的 tarball：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -56,13 +56,13 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.31.0.tgz" "$pack_dir/skill-family-harness-node-0.31.0.tgz" "$pack_dir/skill-family-engineering-kit-0.31.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.32.0.tgz" "$pack_dir/skill-family-harness-node-0.32.0.tgz" "$pack_dir/skill-family-engineering-kit-0.32.0.tgz")
 ```
 
-以下 registry 安装方式以精确版本 0.31.0 已正式可用为前提：
+以下 registry 安装方式以精确版本 0.32.0 已正式可用为前提：
 
 ```sh
-npm install skill-family-contracts@0.31.0
+npm install skill-family-contracts@0.32.0
 npm info skill-family-contracts --help
 ```
 
