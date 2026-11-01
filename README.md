@@ -4,22 +4,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.32.0 -->
+<!-- release-skill:release-version: 0.34.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols. The 0.22.0 package carries the Contracts 1.20.0 specification with 53 top-level objects. The earlier published 0.21.0 package keeps Contracts 1.18.0 and 46 objects; do not attribute the 1.20.0 surface to that artifact.
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.32.0** (2026-11-01)
+**0.34.0** (2026-11-02)
 
-Contracts and Harness are synchronized to version 0.32.0 as part of the four-unit release cycle, with no changes to underlying mechanisms, specifications, or platform eligibility. The Contracts specification coordinate remains independent of package versioning.
+This unit has no new behavior in this release. Its version and necessary derived references move in lockstep with all four release units; existing mechanism algorithms and compatible contracts remain unchanged.
 
 **Changed**
 
-- Contracts and Harness are synchronized to version 0.32.0 as part of the four-unit release cycle, with no changes to underlying mechanisms, specifications, or platform eligibility
+- This unit has no new behavior in this release.
 
 **Upgrade Notes**
 
-The 0.32.0 release of Contracts and Harness is strictly version-synchronized across the four-unit system. Existing public capabilities remain available under their compatible contracts, with no enforced precision upgrade gate for all users.
+Use Engineering Kit and foundation-adoption-review 0.34.0 for the new scopes. Existing entrypoints remain compatible, with no mandatory migration for old consumers. Contracts and Harness have no new mechanism behavior and move only in lockstep version and necessary derivations. Version 0.33.0 remains an unpublished source candidate; 0.34.0 combines both capabilities. Local candidates do not establish remote publication or authorization; the four units require formal verification before overall publication is claimed.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Published 1.20.0 Specification
@@ -45,7 +45,9 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-This package version is 0.32.0. The published 0.24.1 package already carries Contracts 1.20.0. To verify a working tree before formal publication, build all three working-tree tarballs into one temporary directory and install those exact files:
+This working tree targets the 0.34.0 candidate. The previously published 0.24.1 package carries Contracts 1.20.0. Choose the installation path that matches your source.
+
+To verify the unpublished working tree, pack all three working-tree packages into one temporary directory and install those exact 0.34.0 tarballs in a new consumer project:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -53,13 +55,15 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.32.0.tgz" "$pack_dir/skill-family-harness-node-0.32.0.tgz" "$pack_dir/skill-family-engineering-kit-0.32.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.34.0.tgz" "$pack_dir/skill-family-harness-node-0.34.0.tgz" "$pack_dir/skill-family-engineering-kit-0.34.0.tgz")
 ```
 
-The registry installation below requires exact version 0.32.0 to be formally available:
+This verifies the local candidate without requiring these three 0.34.0 packages to be published in the registry. Installing third-party dependencies may still contact the registry.
+
+Only after exact version 0.34.0 is formally available in the registry do the following installation and help commands apply:
 
 ```sh
-npm install skill-family-contracts@0.32.0
+npm install skill-family-contracts@0.34.0
 npm info skill-family-contracts --help
 ```
 
