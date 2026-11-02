@@ -5,24 +5,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.34.0 -->
+<!-- release-skill:release-version: 0.35.0 -->
 
 机器可执行工程结构和机制协议的唯一权威包。0.22.0 携带 Contracts 1.20.0 规格与 53 类顶层对象。此前已发布的 0.21.0 仍是 Contracts 1.18.0 的 46 类对象，不能把 1.20.0 表面归入该制品。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.34.0** (2026-11-02)
+**0.35.0** (2026-11-02)
 
-本版本没有新增行为，仅同步四单元锁步版本与必要派生；既有机制算法和兼容合同保持不变。
+本版仅锁步版本和必要派生，无新增机制、协议或算法行为。
 
 **变更**
 
-- 本版本没有新增行为，仅同步四单元锁步版本与必要派生；既有机制算法和兼容合同保持不变。
+- 本版仅锁步版本和必要派生，无新增机制、协议或算法行为。
 
 **升级说明**
 
-Contracts与Harness在本版无新增机制行为，仅进行锁步版本同步与必要派生，既有协议与算法保持不变。升级需同时满足Kit与Plugin均升级至0.34.0版本。旧有入口保持兼容，不强制旧消费者迁移。
-
-0.33.0版本仅为未发布源码候选，不具备正式发布效力；0.34.0为首次合并交付，统一包含两项公共能力。本地候选状态不构成远端发布或授权证明，四单元正式验证通过后，方可认定整体发布。
+四单元同时采用 0.35.0；需要新比较选择时显式提供 `nodeType`，旧调用不强制改写。候选、本地测试与静态退出 0 均不等于正式发布、安装、加载或业务通过；正式发布仍按四单元原发布合同核收。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 已发布的 1.20.0 规格
@@ -50,9 +48,9 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-本项目当前为 `0.34.0` 工作树候选版本。已发布的 `0.24.1` 版本包含 Contracts 1.20.0。请根据以下两种场景选择安装方式：
+本项目当前为 `0.35.0` 工作树候选版本。已发布的 `0.24.1` 版本包含 Contracts 1.20.0。
 
-若需验证当前未发布的 `0.34.0` 工作树，请将三个工作树包分别打包至同一临时目录，并在新消费者项目中安装这三个精确版本的 `.tgz` 文件：
+当 `0.35.0` 版本尚未在公共注册表中正式发布时，需通过本地候选验证方式安装。请将三个工作树包分别打包至同一临时目录，并在新消费者项目中安装这三个精确版本的 `.tgz` 文件：
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -60,15 +58,15 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.34.0.tgz" "$pack_dir/skill-family-harness-node-0.34.0.tgz" "$pack_dir/skill-family-engineering-kit-0.34.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.35.0.tgz" "$pack_dir/skill-family-harness-node-0.35.0.tgz" "$pack_dir/skill-family-engineering-kit-0.35.0.tgz")
 ```
 
-此方式用于验证本地候选，不要求这三个 `0.34.0` 包已在 registry 发布；安装第三方依赖仍可能访问 registry。
+此方式用于验证本地候选版本，不要求 `0.35.0` 包已在 registry 发布；安装第三方依赖仍可能访问公共注册表。
 
-当 `0.34.0` 版本已在公共注册表中正式可用时，可使用以下命令进行安装与操作：
+当 `0.35.0` 版本已在公共注册表中正式可用时，可使用以下命令进行安装与操作：
 
 ```sh
-npm install skill-family-contracts@0.34.0
+npm install skill-family-contracts@0.35.0
 npm info skill-family-contracts --help
 ```
 

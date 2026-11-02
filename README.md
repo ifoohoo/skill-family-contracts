@@ -4,22 +4,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.34.0 -->
+<!-- release-skill:release-version: 0.35.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols. The 0.22.0 package carries the Contracts 1.20.0 specification with 53 top-level objects. The earlier published 0.21.0 package keeps Contracts 1.18.0 and 46 objects; do not attribute the 1.20.0 surface to that artifact.
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.34.0** (2026-11-02)
+**0.35.0** (2026-11-02)
 
-This unit has no new behavior in this release. Its version and necessary derived references move in lockstep with all four release units; existing mechanism algorithms and compatible contracts remain unchanged.
+This unit advances only its lockstep version and necessary derived artifacts, with no new mechanism, protocol or algorithm behavior.
 
 **Changed**
 
-- This unit has no new behavior in this release.
+- This unit advances only its lockstep version and necessary derived artifacts, with no new mechanism, protocol or algorithm behavior.
 
 **Upgrade Notes**
 
-Use Engineering Kit and foundation-adoption-review 0.34.0 for the new scopes. Existing entrypoints remain compatible, with no mandatory migration for old consumers. Contracts and Harness have no new mechanism behavior and move only in lockstep version and necessary derivations. Version 0.33.0 remains an unpublished source candidate; 0.34.0 combines both capabilities. Local candidates do not establish remote publication or authorization; the four units require formal verification before overall publication is claimed.
+Adopt all four units at 0.35.0. Set nodeType explicitly for the new comparison selection; existing callers need no forced migration. A candidate, local tests or a static exit code of zero do not establish publication, installation, loading or business success. The existing four-unit release contract still applies.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Published 1.20.0 Specification
@@ -45,9 +45,9 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-This working tree targets the 0.34.0 candidate. The previously published 0.24.1 package carries Contracts 1.20.0. Choose the installation path that matches your source.
+This working tree targets the 0.35.0 candidate. The previously published 0.24.1 package carries Contracts 1.20.0. Choose the installation path that matches your source.
 
-To verify the unpublished working tree, pack all three working-tree packages into one temporary directory and install those exact 0.34.0 tarballs in a new consumer project:
+To verify the unpublished working tree, pack all three working-tree packages into one temporary directory and install those exact 0.35.0 tarballs in a new consumer project:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -55,15 +55,15 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.34.0.tgz" "$pack_dir/skill-family-harness-node-0.34.0.tgz" "$pack_dir/skill-family-engineering-kit-0.34.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.35.0.tgz" "$pack_dir/skill-family-harness-node-0.35.0.tgz" "$pack_dir/skill-family-engineering-kit-0.35.0.tgz")
 ```
 
-This verifies the local candidate without requiring these three 0.34.0 packages to be published in the registry. Installing third-party dependencies may still contact the registry.
+This verifies the local candidate without requiring these three 0.35.0 packages to be published in the registry. Installing third-party dependencies may still contact the registry.
 
-Only after exact version 0.34.0 is formally available in the registry do the following installation and help commands apply:
+Only after exact version 0.35.0 is formally available in the registry do the following installation and help commands apply:
 
 ```sh
-npm install skill-family-contracts@0.34.0
+npm install skill-family-contracts@0.35.0
 npm info skill-family-contracts --help
 ```
 
