@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.36.0 locale=en baseline=sha256:91721ec2f960ceb785b5097b4a222f2f46488cc9a2cc469cd34aedacee49e351 -->
+## [0.36.0] - 2026-11-03
+
+Contracts remains synchronized across four units in version 0.36.0 with no new capabilities, interfaces, protocols, or algorithmic changes. All four units must be adopted at the same version; migration from old invocations is not mandatory. Source candidates, local testing, or static exits cannot validate formal channels, installation, loading, or business readiness.
+
+### Changed
+
+- Contracts remains synchronized across four units in version 0.36.0 with no new capabilities, interfaces, protocols, or algorithmic changes. All four units must be adopted at the same version; migration from old invocations is not mandatory. Source candidates, local testing, or static exits cannot validate formal channels, installation, loading, or business readiness.
+
+### Upgrade Notes
+
+Adopt all four units at 0.36.0; existing callers need no forced migration. Source candidates, local testing, or static exits cannot validate formal channels, installation, loading, or business readiness. The formal 0.35.0 package does not contain the new API.
+<!-- release-skill:changelog:end version=0.36.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.35.0 locale=en baseline=sha256:3344b2e0a5c01cc3251a7ea29bb5741dea7e337df856b76db29352ca82dfa6dc -->
 ## [0.35.0] - 2026-11-02
 
