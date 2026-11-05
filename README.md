@@ -4,22 +4,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.36.0 -->
+<!-- release-skill:release-version: 0.37.0 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols. The 0.22.0 package carries the Contracts 1.20.0 specification with 53 top-level objects. The earlier published 0.21.0 package keeps Contracts 1.18.0 and 46 objects; do not attribute the 1.20.0 surface to that artifact.
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.36.0** (2026-11-03)
+**0.37.0** (2026-11-05)
 
-Contracts remains synchronized across four units in version 0.36.0 with no new capabilities, interfaces, protocols, or algorithmic changes. All four units must be adopted at the same version; migration from old invocations is not mandatory. Source candidates, local testing, or static exits cannot validate formal channels, installation, loading, or business readiness.
+Contracts remains synchronized across four units in version 0.37.0 with no new capabilities, interfaces, protocols, or algorithmic changes. All four units must be adopted at the same version; migration from old invocations is not mandatory. Source candidates, local testing, or static exits cannot validate formal channels, installation, loading, or business readiness. Source verification is limited to authorized scope; formal consumption requires the actual exact published payload and public entry points.
 
 **Changed**
 
-- Contracts remains synchronized across four units in version 0.36.0 with no new capabilities, interfaces, protocols, or algorithmic changes. All four units must be adopted at the same version; migration from old invocations is not mandatory. Source candidates, local testing, or static exits cannot validate formal channels, installation, loading, or business readiness.
+- Contracts remains synchronized across four units in version 0.37.0 with no new capabilities, interfaces, protocols, or algorithmic changes. All four units must be adopted at the same version; migration from old invocations is not mandatory. Source candidates, local testing, or static exits cannot validate formal channels, installation, loading, or business readiness. Source verification is limited to authorized scope; formal consumption requires the actual exact published payload and public entry points.
 
 **Upgrade Notes**
 
-Adopt all four units at 0.36.0; existing callers need no forced migration. Source candidates, local testing, or static exits cannot validate formal channels, installation, loading, or business readiness. The formal 0.35.0 package does not contain the new API.
+Adopt all four units at 0.37.0; existing callers need no forced migration. Source candidates, local testing, or static exits cannot validate formal channels, installation, loading, or business readiness. Source verification is limited to authorized scope; formal consumption requires the actual exact published payload and public entry points.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Published 1.20.0 Specification
@@ -45,9 +45,9 @@ Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version
 
 ## Installation and Minimal Example
 
-Before formal publication, a caller may need authorized development verification of a local 0.36.0 source candidate. Historically, version 0.24.1 was published with Contracts 1.20.0.
+Before formal publication, a caller may need authorized development verification of a local 0.37.0 source candidate. Historically, version 0.36.0 remains the published four-unit release.
 
-To verify the unpublished working tree, pack all three working-tree packages into one temporary directory and install those exact 0.36.0 tarballs in a new consumer project:
+To verify the unpublished working tree, pack all three working-tree packages into one temporary directory and install those exact 0.37.0 tarballs in a new consumer project:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -55,15 +55,15 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.36.0.tgz" "$pack_dir/skill-family-harness-node-0.36.0.tgz" "$pack_dir/skill-family-engineering-kit-0.36.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.37.0.tgz" "$pack_dir/skill-family-harness-node-0.37.0.tgz" "$pack_dir/skill-family-engineering-kit-0.37.0.tgz")
 ```
 
-This process verifies the local candidate without requiring the three 0.36.0 packages to be published in the registry. Installing third-party dependencies may still contact the registry.
+This process verifies the local candidate without requiring the three 0.37.0 packages to be published in the registry. Installing third-party dependencies may still contact the registry.
 
-Only after the exact version 0.36.0 is formally available in the registry do the following installation and help commands apply:
+Only after the exact version 0.37.0 is formally available in the registry do the following installation and help commands apply:
 
 ```sh
-npm install skill-family-contracts@0.36.0
+npm install skill-family-contracts@0.37.0
 npm info skill-family-contracts --help
 ```
 

@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.37.0 locale=en baseline=sha256:9e9803d76498ccb07bed3d7df3ec7341f50a0b7ed813ce8c20d86e62add50e37 -->
+## [0.37.0] - 2026-11-05
+
+Contracts remains synchronized across four units in version 0.37.0 with no new capabilities, interfaces, protocols, or algorithmic changes. All four units must be adopted at the same version; migration from old invocations is not mandatory. Source candidates, local testing, or static exits cannot validate formal channels, installation, loading, or business readiness. Source verification is limited to authorized scope; formal consumption requires the actual exact published payload and public entry points.
+
+### Changed
+
+- Contracts remains synchronized across four units in version 0.37.0 with no new capabilities, interfaces, protocols, or algorithmic changes. All four units must be adopted at the same version; migration from old invocations is not mandatory. Source candidates, local testing, or static exits cannot validate formal channels, installation, loading, or business readiness. Source verification is limited to authorized scope; formal consumption requires the actual exact published payload and public entry points.
+
+### Upgrade Notes
+
+Adopt all four units at 0.37.0; existing callers need no forced migration. Source candidates, local testing, or static exits cannot validate formal channels, installation, loading, or business readiness. Source verification is limited to authorized scope; formal consumption requires the actual exact published payload and public entry points.
+<!-- release-skill:changelog:end version=0.37.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.36.0 locale=en baseline=sha256:91721ec2f960ceb785b5097b4a222f2f46488cc9a2cc469cd34aedacee49e351 -->
 ## [0.36.0] - 2026-11-03
 
