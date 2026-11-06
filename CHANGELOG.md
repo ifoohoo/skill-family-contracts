@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.38.0 locale=en baseline=sha256:14bc4ecdc36d3c79b531f9a9445f08a2a8933007c6a0f533f54acea698347546 -->
+## [0.38.0] - 2026-11-06
+
+Maintains 1.21.0 machine protocol specification and existing Schema. Package version synchronized to 0.38.0. No new capabilities introduced. All four units adopt 0.38.0 in sync, with no migration required for existing calls.
+
+### Changed
+
+- Maintains 1.21.0 machine protocol specification and existing Schema. Package version synchronized to 0.38.0. No new capabilities introduced. All four units adopt 0.38.0 in sync, with no migration required for existing calls.
+
+### Upgrade Notes
+
+All four units adopt 0.38.0 in sync. No migration is required for existing calls. Version number is used solely for dependency alignment, with no semantic or behavioral changes introduced.
+<!-- release-skill:changelog:end version=0.38.0 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.37.0 locale=en baseline=sha256:9e9803d76498ccb07bed3d7df3ec7341f50a0b7ed813ce8c20d86e62add50e37 -->
 ## [0.37.0] - 2026-11-05
 

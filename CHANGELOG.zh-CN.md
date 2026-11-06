@@ -1,5 +1,20 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.38.0 locale=zh-CN baseline=sha256:5e1f8f6f0c58a5a953824ef5462ff9a0423853039674c035f88710e24164e273 -->
+## [0.38.0] - 2026-11-06
+
+沿用1.21.0机器协议规格与现有Schema，包版本同步至0.38.0。无新增能力，旧调用保持原合同，四单元同步采用0.38.0，无需迁移。
+
+### 变更
+
+- 沿用1.21.0机器协议规格与现有Schema，包版本同步至0.38.0。无新增能力，旧调用保持原合同，四单元同步采用0.38.0，无需迁移。
+
+### 升级说明
+
+四单元同步采用0.38.0版本，旧调用无需迁移。版本号仅用于依赖链锁步，不引入新语义或行为变更。
+<!-- release-skill:changelog:end version=0.38.0 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.37.0 locale=zh-CN baseline=sha256:1e13375abb602949fda2dacc419e295664019f93b9522fe8a780c9ce75e1c6f9 -->
 ## [0.37.0] - 2026-11-05
 

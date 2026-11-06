@@ -1,0 +1,15 @@
+version: 0.38.0
+date: 2026-11-06
+locales:
+  zh-CN:
+    summary: 沿用1.21.0机器协议规格与现有Schema，包版本同步至0.38.0。无新增能力，旧调用保持原合同，四单元同步采用0.38.0，无需迁移。
+    upgradeNotes: 四单元同步采用0.38.0版本，旧调用无需迁移。版本号仅用于依赖链锁步，不引入新语义或行为变更。
+    changes:
+      changed:
+        - 沿用1.21.0机器协议规格与现有Schema，包版本同步至0.38.0。无新增能力，旧调用保持原合同，四单元同步采用0.38.0，无需迁移。
+  en:
+    summary: Maintains 1.21.0 machine protocol specification and existing Schema. Package version synchronized to 0.38.0. No new capabilities introduced. All four units adopt 0.38.0 in sync, with no migration required for existing calls.
+    upgradeNotes: All four units adopt 0.38.0 in sync. No migration is required for existing calls. Version number is used solely for dependency alignment, with no semantic or behavioral changes introduced.
+    changes:
+      changed:
+        - Maintains 1.21.0 machine protocol specification and existing Schema. Package version synchronized to 0.38.0. No new capabilities introduced. All four units adopt 0.38.0 in sync, with no migration required for existing calls.
