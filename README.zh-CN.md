@@ -5,22 +5,22 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.38.0 -->
+<!-- release-skill:release-version: 0.39.0 -->
 
 机器可执行工程结构和机制协议的唯一权威包。0.22.0 携带 Contracts 1.20.0 规格与 53 类顶层对象。此前已发布的 0.21.0 仍是 Contracts 1.18.0 的 46 类对象，不能把 1.20.0 表面归入该制品。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.38.0** (2026-11-06)
+**0.39.0** (2026-11-06)
 
-沿用1.21.0机器协议规格与现有Schema，包版本同步至0.38.0。无新增能力，旧调用保持原合同，四单元同步采用0.38.0，无需迁移。
+Contracts 和 Harness 本轮未引入新能力或算法变更，随 Engineering Kit 及独立 Plugin 一同采用 0.39.0 版本。四个发行单元版本必须保持一致，Contracts 规格版本仍作为独立协议坐标。在使用新功能前，需核对精确已发布包中的实际入口，确保调用正确。
 
 **变更**
 
-- 沿用1.21.0机器协议规格与现有Schema，包版本同步至0.38.0。无新增能力，旧调用保持原合同，四单元同步采用0.38.0，无需迁移。
+- Contracts 和 Harness 本轮未引入新能力或算法变更，随 Engineering Kit 及独立 Plugin 一同采用 0.39.0 版本。四个发行单元版本必须保持一致，Contracts 规格版本仍作为独立协议坐标。在使用新功能前，需核对精确已发布包中的实际入口，确保调用正确。
 
 **升级说明**
 
-四单元同步采用0.38.0版本，旧调用无需迁移。版本号仅用于依赖链锁步，不引入新语义或行为变更。
+四个发行单元同步采用0.39.0。新入口须核实精确正式包；旧默认登记、MIT及Apache路径保持兼容。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 已发布的 1.20.0 规格
@@ -48,9 +48,7 @@ Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.
 
 ## 安装和最小示例
 
-若需在正式发布前对本地 `0.38.0` 源码候选进行已授权的开发验证，可使用以下方式。历史版本 `0.37.0` 仍是已发布的四单元版本。
-
-在 `0.38.0` 版本尚未正式发布至公共注册表前，需通过本地候选验证方式安装。请将三个工作树包分别打包至同一临时目录，并在新消费者项目中安装这三个精确版本的 `.tgz` 文件：
+在 `0.39.0` 版本尚未正式发布至公共注册表前，需通过本地候选验证方式安装。请将三个工作树包分别打包至同一临时目录，并在新消费者项目中安装这三个精确版本的 `.tgz` 文件。
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -58,19 +56,19 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.38.0.tgz" "$pack_dir/skill-family-harness-node-0.38.0.tgz" "$pack_dir/skill-family-engineering-kit-0.38.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.39.0.tgz" "$pack_dir/skill-family-harness-node-0.39.0.tgz" "$pack_dir/skill-family-engineering-kit-0.39.0.tgz")
 ```
 
-该方式仅用于验证本地候选版本，不要求 `0.38.0` 包已在公共注册表中发布；安装第三方依赖时仍可能访问公共注册表。
+该方式仅用于验证本地候选版本，不要求 `0.39.0` 包已在公共注册表中发布。安装第三方依赖时仍可能访问公共注册表。
 
-当 `0.38.0` 版本已在公共注册表中正式可用后，可使用以下命令进行安装与操作：
+当 `0.39.0` 版本已在公共注册表中正式可用后，可使用以下命令进行安装与操作。
 
 ```sh
-npm install skill-family-contracts@0.38.0
+npm install skill-family-contracts@0.39.0
 npm info skill-family-contracts --help
 ```
 
-最小示例从空目录开始，演示如何校验一份已登记契约对象：
+最小示例从空目录开始，演示如何校验一份已登记契约对象。
 
 ```js
 // 发布后从已安装的消费者目录运行。
@@ -92,7 +90,7 @@ const result = validateDocument(document, {
 if (!result.valid) console.error(result.errorCode);
 ```
 
-以上代码展示了 `validateDocument` 的基本调用：传入文档与目标 Schema 的 `$id`，返回 `{ valid, errorCode, errors, data }`，其中 `data` 是规范化后的副本，原输入不被修改。
+以上代码展示了 `validateDocument` 的基本调用中，传入文档与目标 Schema 的 `$id`，返回 `{ valid, errorCode, errors, data }`，其中 `data` 是规范化后的副本，原输入不被修改。
 
 ## 外置来源权威
 
