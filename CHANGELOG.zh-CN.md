@@ -1,5 +1,20 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.39.1 locale=zh-CN baseline=sha256:165fca4a1ccb0c4b68276dfa3c389edb44a46c3689559e42797ab61302ddc494 -->
+## [0.39.1] - 2026-11-25
+
+随 Foundation 0.39.1 锁步补丁发布：提供 Contracts 1.22.0 本地契约集合（含内部依赖选版收据、十宿主注册支持与跨技能族任务交接信封），消费方契约测试向量同步对齐 0.39.1，并将包主页与 README 在线文档入口统一切换至独立公开文档站 ifoohoo/skill-family-foundation-site。
+
+### 变更
+
+- 同步锁步升至 0.39.1，消费方契约测试向量与正反例夹具对齐 0.39.1 坐标，包主页与双语 README 在线文档入口切换至 https://ifoohoo.github.io/skill-family-foundation-site/。
+
+### 升级说明
+
+五个发布单元（三套机制包、独立 Plugin 与独立公开文档站）同步采用 0.39.1；升级时须锁步更新三个 npm 包版本，既有稳定 Schema 与错误码保持兼容。
+<!-- release-skill:changelog:end version=0.39.1 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.39.0 locale=zh-CN baseline=sha256:c3846f0c4749ff56a1c831a0433a4859e072f6c73b11c34f96711f9f5b5abdd9 -->
 ## [0.39.0] - 2026-11-06
 

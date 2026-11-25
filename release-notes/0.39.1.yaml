@@ -1,0 +1,15 @@
+version: 0.39.1
+date: 2026-11-25
+locales:
+  zh-CN:
+    summary: 随 Foundation 0.39.1 锁步补丁发布：提供 Contracts 1.22.0 本地契约集合（含内部依赖选版收据、十宿主注册支持与跨技能族任务交接信封），消费方契约测试向量同步对齐 0.39.1，并将包主页与 README 在线文档入口统一切换至独立公开文档站 ifoohoo/skill-family-foundation-site。
+    upgradeNotes: 五个发布单元（三套机制包、独立 Plugin 与独立公开文档站）同步采用 0.39.1；升级时须锁步更新三个 npm 包版本，既有稳定 Schema 与错误码保持兼容。
+    changes:
+      changed:
+        - 同步锁步升至 0.39.1，消费方契约测试向量与正反例夹具对齐 0.39.1 坐标，包主页与双语 README 在线文档入口切换至 https://ifoohoo.github.io/skill-family-foundation-site/。
+  en:
+    summary: Lockstep 0.39.1 patch release carrying the Contracts 1.22.0 schema surface (including internal dependency resolution receipts, ten-host registry support, and cross-skill-family task handoff envelopes), aligning consumer contract vectors to 0.39.1, and pointing package homepage and README documentation links to the standalone ifoohoo/skill-family-foundation-site site.
+    upgradeNotes: Adopt all 0.39.1 release units in lockstep. Existing stable schemas and error codes remain compatible.
+    changes:
+      changed:
+        - Advances package coordinate and consumer contract vectors to 0.39.1 in lockstep and points homepage and bilingual README documentation links to https://ifoohoo.github.io/skill-family-foundation-site/.

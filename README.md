@@ -1,25 +1,26 @@
 <!-- release-skill:safe-first-command -->
 <!-- release-skill:external-write-boundary -->
 > 简体中文版：[README.zh-CN.md](./README.zh-CN.md)
+> Documentation site: <https://ifoohoo.github.io/skill-family-foundation-site/>
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.39.0 -->
+<!-- release-skill:release-version: 0.39.1 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols. The 0.22.0 package carries the Contracts 1.20.0 specification with 53 top-level objects. The earlier published 0.21.0 package keeps Contracts 1.18.0 and 46 objects; do not attribute the 1.20.0 surface to that artifact.
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.39.0** (2026-11-06)
+**0.39.1** (2026-11-25)
 
-No new capability or algorithm changes. This unit adopts 0.39.0 in lockstep with the Engineering Kit and independent Plugin. The Contracts specification remains a separate protocol coordinate.
+Lockstep 0.39.1 patch release carrying the Contracts 1.22.0 schema surface (including internal dependency resolution receipts, ten-host registry support, and cross-skill-family task handoff envelopes), aligning consumer contract vectors to 0.39.1, and pointing package homepage and README documentation links to the standalone ifoohoo/skill-family-foundation-site site.
 
 **Changed**
 
-- No new capability or algorithm changes. This unit adopts 0.39.0 in lockstep with the Engineering Kit and independent Plugin. The Contracts specification remains a separate protocol coordinate.
+- Advances package coordinate and consumer contract vectors to 0.39.1 in lockstep and points homepage and bilingual README documentation links to https://ifoohoo.github.io/skill-family-foundation-site/.
 
 **Upgrade Notes**
 
-Adopt all four 0.39.0 release units together and verify new entries in the exact published package. Existing default registration, MIT and Apache behavior is retained.
+Adopt all 0.39.1 release units in lockstep. Existing stable schemas and error codes remain compatible.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Published 1.20.0 Specification
@@ -39,15 +40,15 @@ When every skill-family project writes its own set of structural contracts, you 
 
 ## Core Mental Model
 
-Contracts is the "definition and registry" layer, not the "execution" layer. The current local source owns the JSON Schemas for 56 top-level object classes, including Project Profile, shared profile-adoption definitions, filesystem binding, fixed-set publication, multi-path file-set apply/recovery, peer adapter verification, candidate real-host verification, executable identity, skill-family directory verification, engineering baseline, and professional conclusion. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
+Contracts is the "definition and registry" layer, not the "execution" layer. The current local source owns the JSON Schemas for 59 top-level object classes, including Project Profile, shared profile-adoption definitions, internal dependency resolution receipts, cross-skill-family task handoff envelopes, registered consumer contract vectors, filesystem binding, fixed-set publication, multi-path file-set apply/recovery, peer adapter verification, candidate real-host verification, executable identity, skill-family directory verification, engineering baseline, and professional conclusion. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
 
 Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version in `package.json`), routing by dialect to the corresponding Ajv class; no hand-written schema-subset interpreter is implemented.
 
 ## Installation and Minimal Example
 
-Before formal publication, a caller may need authorized development verification of a local 0.39.0 source candidate. Historically, version 0.38.0 remains the published four-unit release.
+Before formal publication, a caller may need authorized development verification of a local 0.39.1 source candidate. Historically, version 0.39.0 remains the published four-unit release.
 
-To verify the unpublished working tree, pack all three working-tree packages into one temporary directory and install those exact 0.39.0 tarballs in a new consumer project:
+To verify the unpublished working tree, pack all three working-tree packages into one temporary directory and install those exact 0.39.1 tarballs in a new consumer project:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -55,15 +56,15 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.39.0.tgz" "$pack_dir/skill-family-harness-node-0.39.0.tgz" "$pack_dir/skill-family-engineering-kit-0.39.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.39.1.tgz" "$pack_dir/skill-family-harness-node-0.39.1.tgz" "$pack_dir/skill-family-engineering-kit-0.39.1.tgz")
 ```
 
-This process verifies the local candidate without requiring the three 0.39.0 packages to be published in the registry. Installing third-party dependencies may still contact the registry.
+This process verifies the local candidate without requiring the three 0.39.1 packages to be published in the registry. Installing third-party dependencies may still contact the registry.
 
-Only after the exact version 0.39.0 is formally available in the registry do the following installation and help commands apply:
+Only after the exact version 0.39.1 is formally available in the registry do the following installation and help commands apply:
 
 ```sh
-npm install skill-family-contracts@0.39.0
+npm install skill-family-contracts@0.39.1
 npm info skill-family-contracts --help
 ```
 
@@ -211,6 +212,9 @@ The capability remains **candidate** and its schemas stay outside `src/registry.
 | `fixed-set-generation-pointer` | `https://contracts.skill-family.example/v1/fixed-set-generation-pointer.json` | `src/schemas/fixed-set-generation-pointer.schema.json` |
 | `fixed-set-generation-result` | `https://contracts.skill-family.example/v1/fixed-set-generation-result.json` | `src/schemas/fixed-set-generation-result.schema.json` |
 | `fixed-set-generation-resolution` | `https://contracts.skill-family.example/v1/fixed-set-generation-resolution.json` | `src/schemas/fixed-set-generation-resolution.schema.json` |
+| `internal-dependency-resolution-receipt` | `https://contracts.skill-family.example/v1/internal-dependency-resolution-receipt.json` | `src/schemas/internal-dependency-resolution-receipt.schema.json` |
+| `task-handoff-envelope` | `https://contracts.skill-family.example/v1/task-handoff-envelope.json` | `src/schemas/task-handoff-envelope.schema.json` |
+| `consumer-contract-vector` | `https://contracts.skill-family.example/v1/consumer-contract-vector.json` | `src/schemas/consumer-contract-vector.schema.json` |
 
 Host descriptor/probe/plan contracts remain the same registered object identities, while Contracts 1.10.0 extends their stable semantics. Version 0.10.0 adds optional maturity and finite source-alias fields, permits `manual` host support, and binds update/uninstall plans to prior member digests. The nine probe facts are always represented independently; an unavailable or unknown fact is not inferred from the CLI or version fact.
 
@@ -299,7 +303,9 @@ import {
 
 The imports above list the stable public surface of this package; `validateDocument` and `runChecks` are the most commonly used entry points. `validateDocument(document, { schemaId | schema, dialect, policy })` returns `{ valid, errorCode, errors, data }`; `runChecks({ rules?, registry?, fixtures?, loadSchema? })` returns `{ ok, mandatoryCount, budget, results }`; `registerSchema` / `registerProtocol` return a new registry copy, throwing `ContractsError` with `SFC1003` / `SFC1004` respectively on duplicates.
 
-`detectDialect(schema)` returns `draft-07`, `2020-12`, or `null` when the declaration is absent or unknown. `compileSchema` throws `SFC1006` for an unsupported dialect; `validateDocument` reports the same condition as `errorCode: "SFC1006"`. Registry lookup functions return `null` on a miss. The current local registry is `schemaVersion=1`, `contractsVersion=1.21.0`, with 56 registered Schemas and one Kernel Protocol. Registration returns a copied registry and leaves the input unchanged; consumer vector identity or exact-version mismatches fail with `SFC1013`.
+`detectDialect(schema)` returns `draft-07`, `2020-12`, or `null` when the declaration is absent or unknown. `compileSchema` throws `SFC1006` for an unsupported dialect; `validateDocument` reports the same condition as `errorCode: "SFC1006"`. Registry lookup functions return `null` on a miss. The current local registry is `schemaVersion=1`, `contractsVersion=1.22.0`, with 59 registered Schemas and one Kernel Protocol. Registration returns a copied registry and leaves the input unchanged; consumer vector identity or exact-version mismatches fail with `SFC1013`.
+
+`project-manifest` also accepts optional `internalDependencies` mapping package names to either legacy exact `"x.y.z"` strings or fixed-major range objects `{ major, minVersion, verifiedCeiling? }` (`major: 0` for `0.x`, `major: N` for `N.x`). Pure helpers `parseExactSemver`, `compareExactSemver`, `validateInternalDependencySpec`, `validateInternalDependencyMap`, `validateInternalDependencyResolutionReceipt`, and `describeInternalDependencyResolutionReceipt` validate ranges and self-binding session receipts without I/O.
 
 ## Security Boundaries and Non-Goals
 
@@ -311,9 +317,9 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ## Further Documentation
 
-- Architecture boundaries and routing: [Architecture](https://ifoohoo.github.io/skill-family-engineering-kit/architecture/), [Agent architecture routing](https://ifoohoo.github.io/skill-family-engineering-kit/agents/architecture-routing/)
-- Capability catalog: [capability-catalog.json](https://ifoohoo.github.io/skill-family-engineering-kit/agents/capability-catalog.json)
-- Current product status: [Public status](https://ifoohoo.github.io/skill-family-engineering-kit/public/status/)
+- Online documentation site: [Skill Family Foundation Docs](https://ifoohoo.github.io/skill-family-foundation-site/)
+- Architecture and capabilities: [Capabilities](https://ifoohoo.github.io/skill-family-foundation-site/capabilities.html), [Quickstart](https://ifoohoo.github.io/skill-family-foundation-site/quickstart.html)
+- Host support matrix: [Host Matrix](https://ifoohoo.github.io/skill-family-foundation-site/host-matrix.html)
 
 <!-- agent-quick-reference:start -->
 ## Agent Quick Reference
@@ -332,7 +338,8 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Capability selection
 
-- `foundation.contracts.object-validation`: Ajv dual-dialect validation of all 56 registered top-level object classes in the current local contract source.
+- `foundation.contracts.object-validation`: Ajv dual-dialect validation of all 59 registered top-level object classes in the current local contract source.
+- `foundation.contracts.task-handoff-envelope`: closed task scope, method selection/exclusion, write-set, and digest-bound upstream artifact handoff envelope across skill families.
 - `foundation.contracts.registry-protocol`: Schema `$id` and protocol-name registry query.
 - `foundation.contracts.kernel-protocol`: operation-request/result protocol.
 - `foundation.contracts.mandatory-checks`: nine mandatory rules and unresolved references.
@@ -362,7 +369,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Architectural invariants
 
-- The set of 56 top-level object classes in the current local source is fixed; additions require an ADR, and the error-code freeze does not drift. The published 0.21.0 package remains on the 46-object Contracts 1.18.0 surface.
+- The set of 59 top-level object classes in the current local source is fixed; additions require an ADR, and the error-code freeze does not drift. The published 0.21.0 package remains on the 46-object Contracts 1.18.0 surface.
 - The validator is exclusively Ajv 8.20.0 (exact pin); no other implementation is accepted.
 
 ### Route elsewhere when
@@ -373,7 +380,7 @@ On validation failure `errorCode` is `SFC1001` (SCHEMA_VALIDATION_FAILED, docume
 
 ### Machine-readable sources
 
-- Public capability catalog: [`capability-catalog.json`](https://ifoohoo.github.io/skill-family-engineering-kit/agents/capability-catalog.json) (`foundation.contracts.*` entries).
+- Public capability catalog: `skill-family-engineering-kit/data/capability-catalog/capability-catalog.json` (`foundation.contracts.*` entries; rendered overview at [Capabilities](https://ifoohoo.github.io/skill-family-foundation-site/capabilities.html)).
 - Package-local structural contract: `src/registry.json`, `src/schemas/*`.
 - Package-local candidate source: `candidate/quickstart-profile/*`; canonical public import: `skill-family-contracts/quickstart-profile`; historical migration alias: `skill-family-contracts/candidate/quickstart-profile`.
 <!-- agent-quick-reference:end -->
@@ -388,4 +395,4 @@ Contracts 1.20.0 ships with the 0.22.0 package. Remote availability must be esta
 
 Foundation 0.28.0 targets Windows 11 x64, local NTFS, and ordinary users. It uses Contracts 1.21.0 with 56 registered objects, including three candidate `fixed-set-generation` v1 objects and Windows v2 branches. All other maturity levels remain as registered. The official `skill-family-contracts@0.27.1` retains `contractsVersion=1.20.0` and 53 objects.
 
-The root binding retains four fields, Windows v2 and POSIX v1 coexist, and registration is separate from execution and real-host qualification. Exact remote availability requires formal release evidence; source versions, local tests, and installation do not establish it. See [compatibility matrix](https://ifoohoo.github.io/skill-family-engineering-kit/reference/compatibility/) and [API reference](https://ifoohoo.github.io/skill-family-engineering-kit/reference/api/harness/).
+The root binding retains four fields, Windows v2 and POSIX v1 coexist, and registration is separate from execution and real-host qualification. Exact remote availability requires formal release evidence; source versions, local tests, and installation do not establish it. See [host matrix](https://ifoohoo.github.io/skill-family-foundation-site/host-matrix.html) and [capabilities](https://ifoohoo.github.io/skill-family-foundation-site/capabilities.html).

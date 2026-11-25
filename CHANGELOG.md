@@ -1,5 +1,20 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.39.1 locale=en baseline=sha256:8d111242c58e76ad148c791113a9c229d5fbbf5be615825d3a6aeb68b1489bd8 -->
+## [0.39.1] - 2026-11-25
+
+Lockstep 0.39.1 patch release carrying the Contracts 1.22.0 schema surface (including internal dependency resolution receipts, ten-host registry support, and cross-skill-family task handoff envelopes), aligning consumer contract vectors to 0.39.1, and pointing package homepage and README documentation links to the standalone ifoohoo/skill-family-foundation-site site.
+
+### Changed
+
+- Advances package coordinate and consumer contract vectors to 0.39.1 in lockstep and points homepage and bilingual README documentation links to https://ifoohoo.github.io/skill-family-foundation-site/.
+
+### Upgrade Notes
+
+Adopt all 0.39.1 release units in lockstep. Existing stable schemas and error codes remain compatible.
+<!-- release-skill:changelog:end version=0.39.1 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.39.0 locale=en baseline=sha256:04563321d2ce20870eea6a0403add4028e62c75020442e1872be7403dcd5f65b -->
 ## [0.39.0] - 2026-11-06
 

@@ -1,3 +1,6 @@
+// @decision FND-ADR-002
+// @decision FND-ADR-007
+// @design FND-DES-001
 /**
  * skill-family-contracts: the single authority for machine-readable structures,
  * protocols, stable error codes, and the protocol-name registry.
@@ -99,6 +102,9 @@ export const CONTRACT_OBJECTS = Object.freeze([
   "fixed-set-generation-pointer",
   "fixed-set-generation-result",
   "fixed-set-generation-resolution",
+  "internal-dependency-resolution-receipt",
+  "task-handoff-envelope",
+  "consumer-contract-vector",
 ]);
 
 export const CONTRACT_BOUNDARY = Object.freeze({
@@ -106,8 +112,8 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Local Contracts 1.21.0 adds the Windows branches and three candidate generation documents; published 1.20.0 remains unchanged. */
-export const CONTRACTS_VERSION = "1.21.0";
+/** Local Contracts 1.22.0 adds internal dependency range semantics, session resolution receipt, task handoff envelope, and registered consumer contract vector (59 objects), with Chinese schema descriptions. */
+export const CONTRACTS_VERSION = "1.22.0";
 
 export {
   CAPABILITY_MATURITY_LEVELS,
@@ -215,3 +221,22 @@ export {
   validateEngineeringBaseline,
   describeEngineeringBaseline,
 } from "./engineering-baseline.mjs";
+
+export {
+  INTERNAL_DEPENDENCY_RECEIPT_SCHEMA_ID,
+  INTERNAL_DEPENDENCY_RECEIPT_KIND,
+  INTERNAL_DEPENDENCY_POLICY_ID,
+  parseExactSemver,
+  compareExactSemver,
+  validateInternalDependencySpec,
+  validateInternalDependencyMap,
+  validateInternalDependencyResolutionReceipt,
+  describeInternalDependencyResolutionReceipt,
+} from "./internal-dependencies.mjs";
+
+export {
+  TASK_HANDOFF_ENVELOPE_SCHEMA_ID,
+  TASK_HANDOFF_ENVELOPE_KIND,
+  validateTaskHandoffEnvelope,
+  createTaskHandoffEnvelope,
+} from "./task-handoff-envelope.mjs";

@@ -2,25 +2,26 @@
 <!-- release-skill:external-write-boundary -->
 
 > English version: [README.md](./README.md)
+> 在线文档站：<https://ifoohoo.github.io/skill-family-foundation-site/>
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.39.0 -->
+<!-- release-skill:release-version: 0.39.1 -->
 
 机器可执行工程结构和机制协议的唯一权威包。0.22.0 携带 Contracts 1.20.0 规格与 53 类顶层对象。此前已发布的 0.21.0 仍是 Contracts 1.18.0 的 46 类对象，不能把 1.20.0 表面归入该制品。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.39.0** (2026-11-06)
+**0.39.1** (2026-11-25)
 
-Contracts 和 Harness 本轮未引入新能力或算法变更，随 Engineering Kit 及独立 Plugin 一同采用 0.39.0 版本。四个发行单元版本必须保持一致，Contracts 规格版本仍作为独立协议坐标。在使用新功能前，需核对精确已发布包中的实际入口，确保调用正确。
+随 Foundation 0.39.1 锁步补丁发布：提供 Contracts 1.22.0 本地契约集合（含内部依赖选版收据、十宿主注册支持与跨技能族任务交接信封），消费方契约测试向量同步对齐 0.39.1，并将包主页与 README 在线文档入口统一切换至独立公开文档站 ifoohoo/skill-family-foundation-site。
 
 **变更**
 
-- Contracts 和 Harness 本轮未引入新能力或算法变更，随 Engineering Kit 及独立 Plugin 一同采用 0.39.0 版本。四个发行单元版本必须保持一致，Contracts 规格版本仍作为独立协议坐标。在使用新功能前，需核对精确已发布包中的实际入口，确保调用正确。
+- 同步锁步升至 0.39.1，消费方契约测试向量与正反例夹具对齐 0.39.1 坐标，包主页与双语 README 在线文档入口切换至 https://ifoohoo.github.io/skill-family-foundation-site/。
 
 **升级说明**
 
-四个发行单元同步采用0.39.0。新入口须核实精确正式包；旧默认登记、MIT及Apache路径保持兼容。
+五个发布单元（三套机制包、独立 Plugin 与独立公开文档站）同步采用 0.39.1；升级时须锁步更新三个 npm 包版本，既有稳定 Schema 与错误码保持兼容。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 已发布的 1.20.0 规格
@@ -42,13 +43,13 @@ Contracts 1.20.0 已随 0.22.0 包发布，因此该规格已有公开包坐标�
 
 ## 核心心智模型
 
-Contracts 是「定义与登记」层，不是「执行」层。当前本地源码拥有 56 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、文件系统绑定、固定集合发布、多路径文件集合应用与恢复、同级适配器验证、候选真实宿主验证、可执行身份、技能族目录验证、engineering-baseline 与 professional-conclusion 对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
+Contracts 是「定义与登记」层，不是「执行」层。当前本地源码拥有 59 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、内部依赖会话选版收据、跨技能族任务交接信封、已登记的消费方契约测试向量、文件系统绑定、固定集合发布、多路径文件集合应用与恢复、同级适配器验证、候选真实宿主验证、可执行身份、技能族目录验证、engineering-baseline 与 professional-conclusion 对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
 
 Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.json`），按方言路由到对应 Ajv 类；不实现任何手写 Schema 子集解释器。
 
 ## 安装和最小示例
 
-在 `0.39.0` 版本尚未正式发布至公共注册表前，需通过本地候选验证方式安装。请将三个工作树包分别打包至同一临时目录，并在新消费者项目中安装这三个精确版本的 `.tgz` 文件。
+在 `0.39.1` 版本尚未正式发布至公共注册表前，需通过本地候选验证方式安装。请将三个工作树包分别打包至同一临时目录，并在新消费者项目中安装这三个精确版本的 `.tgz` 文件。
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -56,15 +57,15 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.39.0.tgz" "$pack_dir/skill-family-harness-node-0.39.0.tgz" "$pack_dir/skill-family-engineering-kit-0.39.0.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.39.1.tgz" "$pack_dir/skill-family-harness-node-0.39.1.tgz" "$pack_dir/skill-family-engineering-kit-0.39.1.tgz")
 ```
 
-该方式仅用于验证本地候选版本，不要求 `0.39.0` 包已在公共注册表中发布。安装第三方依赖时仍可能访问公共注册表。
+该方式仅用于验证本地候选版本，不要求 `0.39.1` 包已在公共注册表中发布。安装第三方依赖时仍可能访问公共注册表。
 
-当 `0.39.0` 版本已在公共注册表中正式可用后，可使用以下命令进行安装与操作。
+当 `0.39.1` 版本已在公共注册表中正式可用后，可使用以下命令进行安装与操作。
 
 ```sh
-npm install skill-family-contracts@0.39.0
+npm install skill-family-contracts@0.39.1
 npm info skill-family-contracts --help
 ```
 
@@ -212,6 +213,9 @@ import {
 | `fixed-set-generation-pointer` | `https://contracts.skill-family.example/v1/fixed-set-generation-pointer.json` | `src/schemas/fixed-set-generation-pointer.schema.json` |
 | `fixed-set-generation-result` | `https://contracts.skill-family.example/v1/fixed-set-generation-result.json` | `src/schemas/fixed-set-generation-result.schema.json` |
 | `fixed-set-generation-resolution` | `https://contracts.skill-family.example/v1/fixed-set-generation-resolution.json` | `src/schemas/fixed-set-generation-resolution.schema.json` |
+| `internal-dependency-resolution-receipt` | `https://contracts.skill-family.example/v1/internal-dependency-resolution-receipt.json` | `src/schemas/internal-dependency-resolution-receipt.schema.json` |
+| `task-handoff-envelope` | `https://contracts.skill-family.example/v1/task-handoff-envelope.json` | `src/schemas/task-handoff-envelope.schema.json` |
+| `consumer-contract-vector` | `https://contracts.skill-family.example/v1/consumer-contract-vector.json` | `src/schemas/consumer-contract-vector.schema.json` |
 
 plugin-verification 合同保留既有 `install-only` 与 `install-and-invoke` 目标，并增加 `native-lifecycle` 分支。原生命周期结果恰好包含十二个有序语义阶段。Contracts 只检查闭合结构、阶段顺序、停止传播，以及后续 `not-performed` 阶段的 `commands` 与 `trees` 为空；不定义跨宿主统一命令计划，不解释厂商输出，不暴露 `hostState`，也不拥有 Qoder 与 WorkBuddy 的 Oracle。
 
@@ -294,7 +298,9 @@ import {
 
 以上导入列出了本包稳定公共面；`validateDocument` 与 `runChecks` 是最常用入口。`validateDocument(document, { schemaId | schema, dialect, policy })` 返回 `{ valid, errorCode, errors, data }`；`runChecks({ rules?, registry?, fixtures?, loadSchema? })` 返回 `{ ok, mandatoryCount, budget, results }`；`registerSchema` / `registerProtocol` 返回新登记表副本，重复项分别以 `SFC1003` / `SFC1004` 抛出 `ContractsError`。
 
-`detectDialect(schema)` 在声明缺失或未知时返回 `null`，支持的结果为 `draft-07` 或 `2020-12`。不支持的方言由 `compileSchema` 抛出 `SFC1006`，由 `validateDocument` 以 `errorCode: "SFC1006"` 返回。登记表查询未命中返回 `null`。当前本地登记表的 `schemaVersion=1`、`contractsVersion=1.21.0`、56 类 Schema 与 1 个 Kernel Protocol 以机器源为准；注册函数返回副本且不修改输入，消费方向量身份或精确版本不匹配时报 `SFC1013`。
+`detectDialect(schema)` 在声明缺失或未知时返回 `null`，支持的结果为 `draft-07` 或 `2020-12`。不支持的方言由 `compileSchema` 抛出 `SFC1006`，由 `validateDocument` 以 `errorCode: "SFC1006"` 返回。登记表查询未命中返回 `null`。当前本地登记表的 `schemaVersion=1`、`contractsVersion=1.22.0`、59 类 Schema 与 1 个 Kernel Protocol 以机器源为准；注册函数返回副本且不修改输入，消费方向量身份或精确版本不匹配时报 `SFC1013`。
+
+`project-manifest` 同时支持可选 `internalDependencies` 字段：每个依赖既可保留向下兼容的精确 `"x.y.z"` 字符串，也可声明 `{ major, minVersion, verifiedCeiling? }`（`major: 0` 对应 `0.x` 轨道，`major: N` 对应 `N.x` 轨道）。纯函数 `parseExactSemver`、`compareExactSemver`、`validateInternalDependencySpec`、`validateInternalDependencyMap`、`validateInternalDependencyResolutionReceipt` 与 `describeInternalDependencyResolutionReceipt` 在无外部 I/O 的前提下完成范围与会话收据自绑定校验。
 
 ## 安全边界与非目标
 
@@ -306,9 +312,9 @@ import {
 
 ## 深入文档入口
 
-- 架构边界与路由：[架构说明](https://ifoohoo.github.io/skill-family-engineering-kit/architecture/)、[智能体架构路由](https://ifoohoo.github.io/skill-family-engineering-kit/agents/architecture-routing/)
-- 能力目录：[capability-catalog.json](https://ifoohoo.github.io/skill-family-engineering-kit/agents/capability-catalog.json)
-- 当前产品状态：[公开状态](https://ifoohoo.github.io/skill-family-engineering-kit/public/status/)
+- 在线文档站：[Skill Family Foundation 公开文档站](https://ifoohoo.github.io/skill-family-foundation-site/)
+- 架构与能力总览：[能力总览](https://ifoohoo.github.io/skill-family-foundation-site/capabilities.html)、[五分钟上手](https://ifoohoo.github.io/skill-family-foundation-site/quickstart.html)
+- 宿主支持与兼容矩阵：[宿主支持矩阵](https://ifoohoo.github.io/skill-family-foundation-site/host-matrix.html)
 
 <!-- agent-quick-reference:start -->
 ## Agent Quick Reference
@@ -327,7 +333,8 @@ import {
 
 ### Capability selection
 
-- `foundation.contracts.object-validation`：Ajv 双方言校验当前本地合同源码已登记的全部 56 类顶层对象。
+- `foundation.contracts.object-validation`：Ajv 双方言校验当前本地合同源码已登记的全部 59 类顶层对象。
+- `foundation.contracts.task-handoff-envelope`：跨技能族协作请求的任务范围、方法选排、允许写集与摘要绑定上游制品交接信封契约。
 - `foundation.contracts.registry-protocol`：Schema `$id` 与协议名登记查询。
 - `foundation.contracts.kernel-protocol`：operation-request/result 协议。
 - `foundation.contracts.mandatory-checks`：九类强制规则与未解析引用。
@@ -357,7 +364,7 @@ import {
 
 ### Architectural invariants
 
-- 当前本地源码的 56 类顶层对象集合固定，新增需 ADR，错误码冻结不漂移。已发布的 0.21.0 包仍停留在 Contracts 1.18.0 的 46 类对象表面。
+- 当前本地源码的 59 类顶层对象集合固定，新增需 ADR，错误码冻结不漂移。已发布的 0.21.0 包仍停留在 Contracts 1.18.0 的 46 类对象表面。
 - 校验器仅 Ajv 8.20.0（精确 pin），不接受其他实现。
 
 ### Route elsewhere when
@@ -368,7 +375,7 @@ import {
 
 ### Machine-readable sources
 
-- 公开能力目录：[`capability-catalog.json`](https://ifoohoo.github.io/skill-family-engineering-kit/agents/capability-catalog.json)（`foundation.contracts.*` 条目）。
+- 公开能力目录：`skill-family-engineering-kit/data/capability-catalog/capability-catalog.json`（`foundation.contracts.*` 条目；在线浏览见[能力总览](https://ifoohoo.github.io/skill-family-foundation-site/capabilities.html)）。
 - 包内结构合同：`src/registry.json`、`src/schemas/*`。
 - 包内 Candidate 源：`candidate/quickstart-profile/*`；规范公共导入：`skill-family-contracts/quickstart-profile`；历史迁移别名：`skill-family-contracts/candidate/quickstart-profile`。
 <!-- agent-quick-reference:end -->
@@ -383,4 +390,4 @@ Contracts 1.20.0 随 0.22.0 包发布。远端可用性须由对应的 release-s
 
 Foundation 0.28.0 面向 Windows 11 x64、本地 NTFS 与普通用户，采用 Contracts 1.21.0、56 个登记对象，包含三个保持 candidate 的固定世代 v1 对象与 Windows v2 分支；其他成熟度维持原登记。官方 npm 包 `skill-family-contracts@0.27.1` 仍承载 `contractsVersion=1.20.0` 与 53 个对象。
 
-根绑定保持四字段，Windows v2 与 POSIX v1 分支并存；登记结构与执行、真实宿主资格分别判断。精确版本的远端可用性须由正式发布凭据证明，不能从源码版本、本地测试或安装推断。详见 [兼容性矩阵](https://ifoohoo.github.io/skill-family-engineering-kit/reference/compatibility/) 与 [API 文档](https://ifoohoo.github.io/skill-family-engineering-kit/reference/api/harness/)。
+根绑定保持四字段，Windows v2 与 POSIX v1 分支并存；登记结构与执行、真实宿主资格分别判断。精确版本的远端可用性须由正式发布凭据证明，不能从源码版本、本地测试或安装推断。详见 [宿主支持矩阵](https://ifoohoo.github.io/skill-family-foundation-site/host-matrix.html) 与 [能力总览](https://ifoohoo.github.io/skill-family-foundation-site/capabilities.html)。
