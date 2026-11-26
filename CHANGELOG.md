@@ -1,5 +1,24 @@
 # Changelog
 
+<!-- release-skill:changelog:start version=0.39.2 locale=en baseline=sha256:ab4dd0eba9e6ac3f489d66bd62cd36899e9f9228220ea51260aa841d3516dee6 -->
+## [0.39.2] - 2026-11-26
+
+Lockstep 0.39.2 candidate update adding Contracts 1.23.0 session-trace-bundle and orchestration-blueprint candidate contracts (61 top-level objects) with deterministic seal verification, no-zero-fill observability invariants, and blueprint graph structural checks.
+
+### Added
+
+- Registers candidate session-trace-bundle and orchestration-blueprint JSON Schema 2020-12 contracts and validation/sealing helpers.
+
+### Changed
+
+- Advances CONTRACTS_VERSION to 1.23.0 and aligns consumer contract vectors to 0.39.2.
+
+### Upgrade Notes
+
+Adopt all 0.39.2 units in lockstep. Existing stable schemas, kernel protocol, and error codes remain compatible.
+<!-- release-skill:changelog:end version=0.39.2 locale=en -->
+
+
 <!-- release-skill:changelog:start version=0.39.1 locale=en baseline=sha256:8d111242c58e76ad148c791113a9c229d5fbbf5be615825d3a6aeb68b1489bd8 -->
 ## [0.39.1] - 2026-11-25
 

@@ -105,6 +105,8 @@ export const CONTRACT_OBJECTS = Object.freeze([
   "internal-dependency-resolution-receipt",
   "task-handoff-envelope",
   "consumer-contract-vector",
+  "session-trace-bundle",
+  "orchestration-blueprint",
 ]);
 
 export const CONTRACT_BOUNDARY = Object.freeze({
@@ -112,8 +114,8 @@ export const CONTRACT_BOUNDARY = Object.freeze({
   doesNotOwn: ["generation", "semantic audit", "release state", "remote writes"],
 });
 
-/** Local Contracts 1.22.0 adds internal dependency range semantics, session resolution receipt, task handoff envelope, and registered consumer contract vector (59 objects), with Chinese schema descriptions. */
-export const CONTRACTS_VERSION = "1.22.0";
+/** Local Contracts 1.23.0 adds candidate session-trace-bundle and orchestration-blueprint contracts (61 objects). */
+export const CONTRACTS_VERSION = "1.23.0";
 
 export {
   CAPABILITY_MATURITY_LEVELS,
@@ -240,3 +242,20 @@ export {
   validateTaskHandoffEnvelope,
   createTaskHandoffEnvelope,
 } from "./task-handoff-envelope.mjs";
+
+export {
+  SESSION_TRACE_BUNDLE_SCHEMA_ID,
+  SESSION_TRACE_BUNDLE_KIND,
+  verifySessionTraceBundleInvariants,
+  validateSessionTraceBundle,
+  sealSessionTraceBundle,
+  verifySessionTraceBundleSeal,
+} from "./session-trace-bundle.mjs";
+
+export {
+  ORCHESTRATION_BLUEPRINT_SCHEMA_ID,
+  ORCHESTRATION_BLUEPRINT_KIND,
+  verifyOrchestrationBlueprintStructure,
+  validateOrchestrationBlueprint,
+  createOrchestrationBlueprint,
+} from "./orchestration-blueprint.mjs";

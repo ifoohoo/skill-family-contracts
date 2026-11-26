@@ -1,5 +1,24 @@
 # 变更日志
 
+<!-- release-skill:changelog:start version=0.39.2 locale=zh-CN baseline=sha256:4815f06622ea98c42074e3e160456b34a30b7502c9e84adec0c46b8e254cf4cf -->
+## [0.39.2] - 2026-11-26
+
+随 Foundation 0.39.2 锁步候选更新：新增 Contracts 1.23.0 的 session-trace-bundle 与 orchestration-blueprint 两项候选契约（61 类顶层对象），提供确定性封存摘要核验、可观测性禁补零约束与编排图结构不变量校验。
+
+### 新增
+
+- 以 candidate 成熟度登记 session-trace-bundle 与 orchestration-blueprint 两项 JSON Schema 2020-12 契约及校验/封存导出函数。
+
+### 变更
+
+- CONTRACTS_VERSION 前移至 1.23.0，消费方契约测试向量同步对齐 0.39.2。
+
+### 升级说明
+
+五个发布单元锁步采用 0.39.2；既有稳定契约、Kernel 协议与错误码保持完全兼容。
+<!-- release-skill:changelog:end version=0.39.2 locale=zh-CN -->
+
+
 <!-- release-skill:changelog:start version=0.39.1 locale=zh-CN baseline=sha256:165fca4a1ccb0c4b68276dfa3c389edb44a46c3689559e42797ab61302ddc494 -->
 ## [0.39.1] - 2026-11-25
 

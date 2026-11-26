@@ -1,0 +1,19 @@
+version: 0.39.2
+date: 2026-11-26
+locales:
+  zh-CN:
+    summary: 随 Foundation 0.39.2 锁步候选更新：新增 Contracts 1.23.0 的 session-trace-bundle 与 orchestration-blueprint 两项候选契约（61 类顶层对象），提供确定性封存摘要核验、可观测性禁补零约束与编排图结构不变量校验。
+    upgradeNotes: 五个发布单元锁步采用 0.39.2；既有稳定契约、Kernel 协议与错误码保持完全兼容。
+    changes:
+      added:
+        - 以 candidate 成熟度登记 session-trace-bundle 与 orchestration-blueprint 两项 JSON Schema 2020-12 契约及校验/封存导出函数。
+      changed:
+        - CONTRACTS_VERSION 前移至 1.23.0，消费方契约测试向量同步对齐 0.39.2。
+  en:
+    summary: Lockstep 0.39.2 candidate update adding Contracts 1.23.0 session-trace-bundle and orchestration-blueprint candidate contracts (61 top-level objects) with deterministic seal verification, no-zero-fill observability invariants, and blueprint graph structural checks.
+    upgradeNotes: Adopt all 0.39.2 units in lockstep. Existing stable schemas, kernel protocol, and error codes remain compatible.
+    changes:
+      added:
+        - Registers candidate session-trace-bundle and orchestration-blueprint JSON Schema 2020-12 contracts and validation/sealing helpers.
+      changed:
+        - Advances CONTRACTS_VERSION to 1.23.0 and aligns consumer contract vectors to 0.39.2.

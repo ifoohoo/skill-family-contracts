@@ -6,22 +6,26 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.39.1 -->
+<!-- release-skill:release-version: 0.39.2 -->
 
 机器可执行工程结构和机制协议的唯一权威包。0.22.0 携带 Contracts 1.20.0 规格与 53 类顶层对象。此前已发布的 0.21.0 仍是 Contracts 1.18.0 的 46 类对象，不能把 1.20.0 表面归入该制品。
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.39.1** (2026-11-25)
+**0.39.2** (2026-11-26)
 
-随 Foundation 0.39.1 锁步补丁发布：提供 Contracts 1.22.0 本地契约集合（含内部依赖选版收据、十宿主注册支持与跨技能族任务交接信封），消费方契约测试向量同步对齐 0.39.1，并将包主页与 README 在线文档入口统一切换至独立公开文档站 ifoohoo/skill-family-foundation-site。
+随 Foundation 0.39.2 锁步候选更新：新增 Contracts 1.23.0 的 session-trace-bundle 与 orchestration-blueprint 两项候选契约（61 类顶层对象），提供确定性封存摘要核验、可观测性禁补零约束与编排图结构不变量校验。
+
+**新增**
+
+- 以 candidate 成熟度登记 session-trace-bundle 与 orchestration-blueprint 两项 JSON Schema 2020-12 契约及校验/封存导出函数。
 
 **变更**
 
-- 同步锁步升至 0.39.1，消费方契约测试向量与正反例夹具对齐 0.39.1 坐标，包主页与双语 README 在线文档入口切换至 https://ifoohoo.github.io/skill-family-foundation-site/。
+- CONTRACTS_VERSION 前移至 1.23.0，消费方契约测试向量同步对齐 0.39.2。
 
 **升级说明**
 
-五个发布单元（三套机制包、独立 Plugin 与独立公开文档站）同步采用 0.39.1；升级时须锁步更新三个 npm 包版本，既有稳定 Schema 与错误码保持兼容。
+五个发布单元锁步采用 0.39.2；既有稳定契约、Kernel 协议与错误码保持完全兼容。
 <!-- release-skill:managed:end id=latest-release -->
 
 ## 已发布的 1.20.0 规格
@@ -43,13 +47,13 @@ Contracts 1.20.0 已随 0.22.0 包发布，因此该规格已有公开包坐标�
 
 ## 核心心智模型
 
-Contracts 是「定义与登记」层，不是「执行」层。当前本地源码拥有 59 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、内部依赖会话选版收据、跨技能族任务交接信封、已登记的消费方契约测试向量、文件系统绑定、固定集合发布、多路径文件集合应用与恢复、同级适配器验证、候选真实宿主验证、可执行身份、技能族目录验证、engineering-baseline 与 professional-conclusion 对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
+Contracts 是「定义与登记」层，不是「执行」层。当前本地源码拥有 61 类顶层对象的 JSON Schema，其中包括 Project Profile、共享的 profile-adoption 定义、内部依赖会话选版收据、跨技能族任务交接信封、已登记的消费方契约测试向量、文件系统绑定、固定集合发布、多路径文件集合应用与恢复、同级适配器验证、候选真实宿主验证、可执行身份、技能族目录验证、engineering-baseline 与 professional-conclusion 对象；同时拥有 Kernel Protocol（内核协议）、稳定错误码、协议名与 `$id` 登记表，以及九种有限机械检查类型与受限强制规则集。本包不执行骨架生成、文件写入、审计或发布；机制实现由 Harness 承担，工程命令由 Kit 承担。
 
 Schema 验证完全基于 [Ajv](https://ajv.js.org/)（精确版本见 `package.json`），按方言路由到对应 Ajv 类；不实现任何手写 Schema 子集解释器。
 
 ## 安装和最小示例
 
-在 `0.39.1` 版本尚未正式发布至公共注册表前，需通过本地候选验证方式安装。请将三个工作树包分别打包至同一临时目录，并在新消费者项目中安装这三个精确版本的 `.tgz` 文件。
+在 `0.39.2` 版本尚未正式发布至公共注册表前，需通过本地候选验证方式安装。请将三个工作树包分别打包至同一临时目录，并在新消费者项目中安装这三个精确版本的 `.tgz` 文件。
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -57,15 +61,15 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.39.1.tgz" "$pack_dir/skill-family-harness-node-0.39.1.tgz" "$pack_dir/skill-family-engineering-kit-0.39.1.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.39.2.tgz" "$pack_dir/skill-family-harness-node-0.39.2.tgz" "$pack_dir/skill-family-engineering-kit-0.39.2.tgz")
 ```
 
-该方式仅用于验证本地候选版本，不要求 `0.39.1` 包已在公共注册表中发布。安装第三方依赖时仍可能访问公共注册表。
+该方式仅用于验证本地候选版本，不要求 `0.39.2` 包已在公共注册表中发布。安装第三方依赖时仍可能访问公共注册表。
 
-当 `0.39.1` 版本已在公共注册表中正式可用后，可使用以下命令进行安装与操作。
+当 `0.39.2` 版本已在公共注册表中正式可用后，可使用以下命令进行安装与操作。
 
 ```sh
-npm install skill-family-contracts@0.39.1
+npm install skill-family-contracts@0.39.2
 npm info skill-family-contracts --help
 ```
 
@@ -216,6 +220,8 @@ import {
 | `internal-dependency-resolution-receipt` | `https://contracts.skill-family.example/v1/internal-dependency-resolution-receipt.json` | `src/schemas/internal-dependency-resolution-receipt.schema.json` |
 | `task-handoff-envelope` | `https://contracts.skill-family.example/v1/task-handoff-envelope.json` | `src/schemas/task-handoff-envelope.schema.json` |
 | `consumer-contract-vector` | `https://contracts.skill-family.example/v1/consumer-contract-vector.json` | `src/schemas/consumer-contract-vector.schema.json` |
+| `session-trace-bundle` | `https://contracts.skill-family.example/v1/session-trace-bundle.json` | `src/schemas/session-trace-bundle.schema.json` |
+| `orchestration-blueprint` | `https://contracts.skill-family.example/v1/orchestration-blueprint.json` | `src/schemas/orchestration-blueprint.schema.json` |
 
 plugin-verification 合同保留既有 `install-only` 与 `install-and-invoke` 目标，并增加 `native-lifecycle` 分支。原生命周期结果恰好包含十二个有序语义阶段。Contracts 只检查闭合结构、阶段顺序、停止传播，以及后续 `not-performed` 阶段的 `commands` 与 `trees` 为空；不定义跨宿主统一命令计划，不解释厂商输出，不暴露 `hostState`，也不拥有 Qoder 与 WorkBuddy 的 Oracle。
 

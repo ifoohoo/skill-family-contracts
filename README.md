@@ -5,22 +5,26 @@
 
 # skill-family-contracts
 
-<!-- release-skill:release-version: 0.39.1 -->
+<!-- release-skill:release-version: 0.39.2 -->
 
 The single authoritative package of machine-executable engineering structure and mechanism protocols. The 0.22.0 package carries the Contracts 1.20.0 specification with 53 top-level objects. The earlier published 0.21.0 package keeps Contracts 1.18.0 and 46 objects; do not attribute the 1.20.0 surface to that artifact.
 
 <!-- release-skill:managed:start id=latest-release -->
-**0.39.1** (2026-11-25)
+**0.39.2** (2026-11-26)
 
-Lockstep 0.39.1 patch release carrying the Contracts 1.22.0 schema surface (including internal dependency resolution receipts, ten-host registry support, and cross-skill-family task handoff envelopes), aligning consumer contract vectors to 0.39.1, and pointing package homepage and README documentation links to the standalone ifoohoo/skill-family-foundation-site site.
+Lockstep 0.39.2 candidate update adding Contracts 1.23.0 session-trace-bundle and orchestration-blueprint candidate contracts (61 top-level objects) with deterministic seal verification, no-zero-fill observability invariants, and blueprint graph structural checks.
+
+**Added**
+
+- Registers candidate session-trace-bundle and orchestration-blueprint JSON Schema 2020-12 contracts and validation/sealing helpers.
 
 **Changed**
 
-- Advances package coordinate and consumer contract vectors to 0.39.1 in lockstep and points homepage and bilingual README documentation links to https://ifoohoo.github.io/skill-family-foundation-site/.
+- Advances CONTRACTS_VERSION to 1.23.0 and aligns consumer contract vectors to 0.39.2.
 
 **Upgrade Notes**
 
-Adopt all 0.39.1 release units in lockstep. Existing stable schemas and error codes remain compatible.
+Adopt all 0.39.2 units in lockstep. Existing stable schemas, kernel protocol, and error codes remain compatible.
 <!-- release-skill:managed:end id=latest-release -->
 
 ## Published 1.20.0 Specification
@@ -40,15 +44,15 @@ When every skill-family project writes its own set of structural contracts, you 
 
 ## Core Mental Model
 
-Contracts is the "definition and registry" layer, not the "execution" layer. The current local source owns the JSON Schemas for 59 top-level object classes, including Project Profile, shared profile-adoption definitions, internal dependency resolution receipts, cross-skill-family task handoff envelopes, registered consumer contract vectors, filesystem binding, fixed-set publication, multi-path file-set apply/recovery, peer adapter verification, candidate real-host verification, executable identity, skill-family directory verification, engineering baseline, and professional conclusion. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
+Contracts is the "definition and registry" layer, not the "execution" layer. The current local source owns the JSON Schemas for 61 top-level object classes, including Project Profile, shared profile-adoption definitions, internal dependency resolution receipts, cross-skill-family task handoff envelopes, registered consumer contract vectors, filesystem binding, fixed-set publication, multi-path file-set apply/recovery, peer adapter verification, candidate real-host verification, executable identity, skill-family directory verification, engineering baseline, and professional conclusion. It also owns the Kernel Protocol, stable error codes, protocol-name and `$id` registry, and the nine finite mechanical check types together with a restricted set of mandatory rules. This package does not perform skeleton generation, file writing, auditing, or publishing; mechanism implementation is owned by the Harness, and engineering commands are owned by the Kit.
 
 Schema validation is based entirely on [Ajv](https://ajv.js.org/) (exact version in `package.json`), routing by dialect to the corresponding Ajv class; no hand-written schema-subset interpreter is implemented.
 
 ## Installation and Minimal Example
 
-Before formal publication, a caller may need authorized development verification of a local 0.39.1 source candidate. Historically, version 0.39.0 remains the published four-unit release.
+Before formal publication, a caller may need authorized development verification of a local 0.39.2 source candidate. Historically, version 0.39.0 remains the published four-unit release.
 
-To verify the unpublished working tree, pack all three working-tree packages into one temporary directory and install those exact 0.39.1 tarballs in a new consumer project:
+To verify the unpublished working tree, pack all three working-tree packages into one temporary directory and install those exact 0.39.2 tarballs in a new consumer project:
 
 ```sh
 pack_dir="$(mktemp -d)"
@@ -56,15 +60,15 @@ pack_dir="$(mktemp -d)"
 (cd packages/skill-family-harness-node && pnpm pack --pack-destination "$pack_dir")
 (cd packages/skill-family-engineering-kit && pnpm pack --pack-destination "$pack_dir")
 mkdir "$pack_dir/consumer" && (cd "$pack_dir/consumer" && npm init -y)
-(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.39.1.tgz" "$pack_dir/skill-family-harness-node-0.39.1.tgz" "$pack_dir/skill-family-engineering-kit-0.39.1.tgz")
+(cd "$pack_dir/consumer" && npm install "$pack_dir/skill-family-contracts-0.39.2.tgz" "$pack_dir/skill-family-harness-node-0.39.2.tgz" "$pack_dir/skill-family-engineering-kit-0.39.2.tgz")
 ```
 
-This process verifies the local candidate without requiring the three 0.39.1 packages to be published in the registry. Installing third-party dependencies may still contact the registry.
+This process verifies the local candidate without requiring the three 0.39.2 packages to be published in the registry. Installing third-party dependencies may still contact the registry.
 
-Only after the exact version 0.39.1 is formally available in the registry do the following installation and help commands apply:
+Only after the exact version 0.39.2 is formally available in the registry do the following installation and help commands apply:
 
 ```sh
-npm install skill-family-contracts@0.39.1
+npm install skill-family-contracts@0.39.2
 npm info skill-family-contracts --help
 ```
 
@@ -215,6 +219,8 @@ The capability remains **candidate** and its schemas stay outside `src/registry.
 | `internal-dependency-resolution-receipt` | `https://contracts.skill-family.example/v1/internal-dependency-resolution-receipt.json` | `src/schemas/internal-dependency-resolution-receipt.schema.json` |
 | `task-handoff-envelope` | `https://contracts.skill-family.example/v1/task-handoff-envelope.json` | `src/schemas/task-handoff-envelope.schema.json` |
 | `consumer-contract-vector` | `https://contracts.skill-family.example/v1/consumer-contract-vector.json` | `src/schemas/consumer-contract-vector.schema.json` |
+| `session-trace-bundle` | `https://contracts.skill-family.example/v1/session-trace-bundle.json` | `src/schemas/session-trace-bundle.schema.json` |
+| `orchestration-blueprint` | `https://contracts.skill-family.example/v1/orchestration-blueprint.json` | `src/schemas/orchestration-blueprint.schema.json` |
 
 Host descriptor/probe/plan contracts remain the same registered object identities, while Contracts 1.10.0 extends their stable semantics. Version 0.10.0 adds optional maturity and finite source-alias fields, permits `manual` host support, and binds update/uninstall plans to prior member digests. The nine probe facts are always represented independently; an unavailable or unknown fact is not inferred from the CLI or version fact.
 
